@@ -1,8 +1,10 @@
+import os
 import types
 import torch
 import numpy as np
 from abc import ABC, abstractmethod
 from typing import List, Tuple, Optional
+from omegaconf import open_dict
 from nemo.collections.asr.parts.utils.streaming_utils import ContextSize, StreamingBatchedAudioBuffer
 from nemo.collections.asr.parts.utils.transcribe_utils import setup_model, get_inference_device, get_inference_dtype
 
@@ -139,6 +141,15 @@ class BaseStreamingModel():
         return " ".join([t for _, _, t in committed_results])
 
 class StreamingParakeet(BaseStreamingModel):
+    def __init__(self, cfg):
+        super().__init__(cfg)
+
+        with open_dict(self.asr_model.cfg.decoding):
+            self.asr_model.cfg.decoding.greedy.preserve_alignments = True
+            self.asr_model.cfg.decoding.tdt_include_token_duration = True
+        
+        self.asr_model.change_decoding_strategy(self.asr_model.cfg.decoding)
+
     def process_chunk(self, buffer, current_offset):
         # Forward pass through encoder
         encoder_output, encoder_output_len = self.asr_model(
@@ -152,6 +163,7 @@ class StreamingParakeet(BaseStreamingModel):
         )
 
         unbatched_hyp = batched_hyps_to_hypotheses(chunk_batched_hyps)[0]
+        print(unbatched_hyp)
         timestamped_hyp = self.asr_model.decoding.compute_rnnt_timestamps(unbatched_hyp)
         toks = self.asr_model.decoding.decode_ids_to_tokens(timestamped_hyp.y_sequence.tolist())
 
