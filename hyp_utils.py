@@ -16,6 +16,16 @@ class ABSHypothesisBuffer:
     
     def complete(self):
         return self.buffer
+    
+    @staticmethod
+    def reset(self):
+        self.buffer = []
+        self.commited_in_buffer = []
+        self.new = []
+
+        self.last_commited_time = 0
+        self.last_commited_word = None
+
 
 class LCPHypothesisBuffer(ABSHypothesisBuffer):
     def __init__(self, uncased=True, debug=False):
