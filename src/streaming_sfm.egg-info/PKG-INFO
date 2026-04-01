@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: streaming_sfm
+Version: 0.1
+Summary: Small toolkit for streaming ASR with SFMs
+Author-email: Gerard Mas Mollà <gemamol@upv.es>
+Project-URL: Homepage, https://github.com/TheMuiaio/streaming_sfm
+Keywords: Automatic Speech Recognition,ASR,Foundation Models,SFM
+Classifier: Development Status :: 1 - Planning
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.10.12
+Description-Content-Type: text/markdown
+Requires-Dist: transformers
+Requires-Dist: accelerate
+Requires-Dist: omegaconf
+Requires-Dist: torch
+Requires-Dist: nemo
+Requires-Dist: levenshtein
+Requires-Dist: tqdm
+Requires-Dist: evaluate
+
+# streaming_sfm

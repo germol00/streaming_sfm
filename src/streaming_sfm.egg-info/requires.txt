@@ -1,0 +1,8 @@
+transformers
+accelerate
+omegaconf
+torch
+nemo
+levenshtein
+tqdm
+evaluate
