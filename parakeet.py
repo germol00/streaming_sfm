@@ -3,8 +3,8 @@ from simuleval.agents.states import AgentStates
 from simuleval.agents.actions import ReadAction, WriteAction
 from simuleval.utils import entrypoint
 
-from streaming_model import StreamingParakeet, StreamingBatchedAudioBufferWithOffset
-from hyp_utils import (
+from streaming_sfm.streaming_model import StreamingParakeet, StreamingBatchedAudioBufferWithOffset
+from streaming_sfm.hyp_utils import (
     ABSHypothesisBuffer,
     LCPHypothesisBuffer,
     LACPHypothesisBuffer,
@@ -18,7 +18,7 @@ from omegaconf import OmegaConf, open_dict
 from dataclasses import dataclass
 from argparse import Namespace, ArgumentParser
 
-from typing import Optional, override
+from typing import Optional
 
 @dataclass
 class ParakeetStreamingStates(AgentStates):
@@ -63,19 +63,19 @@ class ParakeetStreamingStates(AgentStates):
 @entrypoint
 class ParakeetAgent(SpeechToTextAgent):
     def __init__(self, args: Namespace):
-        super().__init__(args)
-
         self.cfg = OmegaConf.create(vars(args))
         with open_dict(self.cfg):
             self.cfg.cuda = 0 if args.device == "cuda" else -1
             self.cfg.allow_mps = True if args.device == "mps" else False
 
         model_id = args.model_path or args.pretrained_name
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
         if not model_id:
             raise ValueError("Neither of --model_path or --pretrained_name were provided")
-        else:
-            print(f"--- Initializing Streaming Parakeet ---")
-            self.model = StreamingParakeet(self.cfg)
+        print(f"--- Initializing Streaming Parakeet ---")
+        self.model = StreamingParakeet(self.cfg)
+
+        super().__init__(args)
 
     @staticmethod
     def add_args(parser):
@@ -129,7 +129,6 @@ class ParakeetAgent(SpeechToTextAgent):
             device=self.model.device,
         )
 
-    @override
     def reset(self):
         super().reset(self.model)
     
