@@ -146,6 +146,7 @@ class ParakeetAgent(SpeechToTextAgent):
     def reset(self):
         self.states.reset(self.cfg, self.model)
     
+    @torch.no_grad()
     def policy(self, states: Optional[AgentStates] = None):
         if not states.buffer.samples.shape[1]:
             return ReadAction()
@@ -167,5 +168,7 @@ class ParakeetAgent(SpeechToTextAgent):
             return ReadAction()
         
         ## Gestionar paraules incompletes !!!!!!!!!
-        out_text = ' '.join([t for _, _, t in out])
+        #out_text = ' '.join([t for _, _, t in out])
+        out_toks = [t for _, _, t in out]
+        out_text = self.model.asr_model.tokenizer.tokens_to_text(out_toks)
         return WriteAction(out_text, finished=states.source_finished)
