@@ -28,7 +28,7 @@ class ABSHypothesisBuffer:
 
 
 class LCPHypothesisBuffer(ABSHypothesisBuffer):
-    def __init__(self, uncased=True, debug=True):
+    def __init__(self, uncased=True, debug=False):
         super(LCPHypothesisBuffer, self).__init__(debug=debug)
         self.commited_in_buffer = [] # Paraules del buffer que ja s'han consolidat
         self.new = [] # Buffer de paraules noves a afegir al buffer
@@ -166,7 +166,7 @@ class LCPHypothesisBuffer(ABSHypothesisBuffer):
 
 
 class LACPHypothesisBuffer(ABSHypothesisBuffer):
-    def __init__(self, threshold: int = 2, uncased=True, debug=True):
+    def __init__(self, threshold: int = 2, uncased=True, debug=False):
         super(LACPHypothesisBuffer, self).__init__(debug=debug)
         self.commited_in_buffer = [] # Paraules del buffer que ja s'han consolidat
         self.new = [] # Buffer de paraules noves a afegir al buffer
