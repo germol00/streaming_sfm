@@ -164,7 +164,6 @@ class StreamingParakeet(BaseStreamingModel):
         )
 
         unbatched_hyp = batched_hyps_to_hypotheses(chunk_batched_hyps)[0]
-        print(unbatched_hyp)
         timestamped_hyp = self.asr_model.decoding.compute_rnnt_timestamps(unbatched_hyp)
         toks = self.asr_model.decoding.decode_ids_to_tokens(timestamped_hyp.y_sequence.tolist())
 
