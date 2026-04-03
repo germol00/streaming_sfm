@@ -17,11 +17,9 @@ from .utils import _transcribe_output_processing2
 
 import logging
 logger = logging.getLogger(__name__)
-try:
-    from segfreetk import LOG_LEVEL
-    logger.setLevel(LOG_LEVEL)
-except:
-    logger.info("Segfreetk not installed.")
+
+from streaming_sfm import LOG_LEVEL
+logger.setLevel(LOG_LEVEL)
 
 
 class StreamingBatchedAudioBufferWithOffset(StreamingBatchedAudioBuffer):
@@ -89,16 +87,16 @@ class BaseStreamingModel():
             right=encoder_frames.right * self.encoder_frame2audio_samples,
         )
 
-    def _init_policy_buffer(self):
+    def _init_policy_buffer(self, debug=False):
         """Initializes the emission policy based on config."""
         if self.cfg.policy == 'WaitK':
             return WaitKHypothesisBuffer(K=self.cfg.K, features_per_second=self.features_per_sec,
-                                        subsampling_factor=self.subsampling_factor)
+                                        subsampling_factor=self.subsampling_factor, debug=debug)
         elif self.cfg.policy == 'HoldN':
-            return HoldNHypothesisBuffer(N=self.cfg.N)
+            return HoldNHypothesisBuffer(N=self.cfg.N, debug=debug)
         elif self.cfg.policy == 'LACP':
-            return LACPHypothesisBuffer(threshold=self.cfg.lacp_threshold, uncased=True)
-        return LCPHypothesisBuffer(uncased=True)
+            return LACPHypothesisBuffer(threshold=self.cfg.lacp_threshold, uncased=True, debug=debug)
+        return LCPHypothesisBuffer(uncased=True, debug=debug)
 
     @abstractmethod
     def process_chunk(self, buffer, current_offset) -> List[Tuple[float, float, str]]:
@@ -113,7 +111,7 @@ class BaseStreamingModel():
             batch_size=1, context_samples=self.context_samples,
             dtype=audio_signal.dtype, device=self.device
         )
-        hyp_buffer = self._init_policy_buffer()
+        hyp_buffer = self._init_policy_buffer(debug= True if logger.level == logging.DEBUG else False)
 
         committed_results = []
         current_offset = 0
@@ -180,7 +178,7 @@ class StreamingParakeet(BaseStreamingModel):
             unbatched_hyp = batched_hyps_to_hypotheses(chunk_batched_hyps)[0]
             timestamped_hyp = self.asr_model.decoding.compute_rnnt_timestamps(unbatched_hyp)
         elif self.asr_model.cfg.decoding.strategy == "malsd_batch":
-            #need this pull request: pip install "nemo_toolkit[all] @ git+https://github.com/NVIDIA/NeMo.git@refs/pull/15411/head"
+            #need this pull request: pip install "nemo_toolkit[asr] @ git+https://github.com/NVIDIA/NeMo.git@refs/pull/15411/head"
             chunk_batched_hyps = self.asr_model.decoding.decoding._decoding_computer(
                 x=encoder_output, out_len=encoder_output_len
             )

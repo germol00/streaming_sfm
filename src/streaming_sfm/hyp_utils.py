@@ -1,6 +1,14 @@
 import sys
 import Levenshtein
 
+
+import logging
+logger = logging.getLogger(__name__)
+
+from streaming_sfm import LOG_LEVEL
+logger.setLevel(LOG_LEVEL)
+
+
 class ABSHypothesisBuffer:
     def __init__(self, debug=False):
         self.buffer = []
@@ -43,11 +51,11 @@ class LCPHypothesisBuffer(ABSHypothesisBuffer):
         """
 
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> insert] Recieved hypothesis: {new}')
+            logger.debug(f'[LCPHypothesisBuffer -> insert] Recieved hypothesis: {new}')
         new = [(a+offset, b+offset, t) for a, b, t in new]
         self.new = [(a, b, t) for a, b, t in new if a > self.last_commited_time-0.1]
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> insert] Processed hypothesis: {self.new}')
+            logger.debug(f'[LCPHypothesisBuffer -> insert] Processed hypothesis: {self.new}')
 
         if len(self.new) >= 1:
             a, b, t = self.new[0]
@@ -67,7 +75,7 @@ class LCPHypothesisBuffer(ABSHypothesisBuffer):
                                 words.append(repr(self.new.pop(0)))
                             words_msg = ' '.join(words)
                             if self.debug:
-                                print(f'[LCPHypothesisBuffer -> insert] Removing last {i} words: {words_msg}')
+                                logger.debug(f'[LCPHypothesisBuffer -> insert] Removing last {i} words: {words_msg}')
                             break
 
     def flush(self):
@@ -82,8 +90,8 @@ class LCPHypothesisBuffer(ABSHypothesisBuffer):
         """
 
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> flush] Buffer n-1 is {self.buffer}')
-            print(f'[LCPHypothesisBuffer -> flush] Buffer n is {self.new}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n-1 is {self.buffer}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n is {self.new}')
         commit = []
         while self.new:
             na, nb, nt = self.new[0]
@@ -117,7 +125,7 @@ class LCPHypothesisBuffer(ABSHypothesisBuffer):
 
         self.commited_in_buffer.extend(commit)
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> flush] Committing {commit}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Committing {commit}')
         return commit
 
     def flush_cased(self):
@@ -126,8 +134,8 @@ class LCPHypothesisBuffer(ABSHypothesisBuffer):
         """
 
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> flush] Buffer n-1 is {self.buffer}')
-            print(f'[LCPHypothesisBuffer -> flush] Buffer n is {self.new}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n-1 is {self.buffer}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n is {self.new}')
         commit = []
         while self.new:
             na, nb, nt = self.new[0]
@@ -148,7 +156,7 @@ class LCPHypothesisBuffer(ABSHypothesisBuffer):
         self.new = []
         self.commited_in_buffer.extend(commit)
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> flush] Committing {commit}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Committing {commit}')
         return commit
 
     def pop_commited(self, time_limit):
@@ -182,11 +190,11 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
         """
 
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> insert] Recieved hypothesis: {new}')
+            logger.debug(f'[LCPHypothesisBuffer -> insert] Recieved hypothesis: {new}')
         new = [(a+offset, b+offset, t) for a, b, t in new]
         self.new = [(a, b, t) for a, b, t in new if a > self.last_commited_time-0.1]
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> insert] Processed hypothesis: {self.new}')
+            logger.debug(f'[LCPHypothesisBuffer -> insert] Processed hypothesis: {self.new}')
 
         if len(self.new) >= 1:
             a, b, t = self.new[0]
@@ -206,7 +214,7 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
                                 words.append(repr(self.new.pop(0)))
                             words_msg = ' '.join(words)
                             if self.debug:
-                                print(f'[LCPHypothesisBuffer -> insert] Removing last {i} words: {words_msg}')
+                                logger.debug(f'[LCPHypothesisBuffer -> insert] Removing last {i} words: {words_msg}')
                             break
 
     def flush(self):
@@ -221,8 +229,8 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
         """
 
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> flush] Buffer n-1 is {self.buffer}')
-            print(f'[LCPHypothesisBuffer -> flush] Buffer n is {self.new}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n-1 is {self.buffer}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n is {self.new}')
         punct = [',', '.', '!', '?']
         commit = []
         past = []
@@ -257,7 +265,7 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
         self.commited_in_buffer.extend(commit)
 
         if self.debug:
-            print(f'[LACPHypothesisBuffer -> flush] Committing {commit}')
+            logger.debug(f'[LACPHypothesisBuffer -> flush] Committing {commit}')
         return commit
 
     def flush_cased(self):
@@ -266,8 +274,8 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
         """
 
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> flush] Buffer n-1 is {self.buffer}')
-            print(f'[LCPHypothesisBuffer -> flush] Buffer n is {self.new}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n-1 is {self.buffer}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n is {self.new}')
         commit = []
         while self.new:
             na, nb, nt = self.new[0]
@@ -288,7 +296,7 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
         self.new = []
         self.commited_in_buffer.extend(commit)
         if self.debug:
-            print(f'[LCPHypothesisBuffer -> flush] Committing {commit}')
+            logger.debug(f'[LCPHypothesisBuffer -> flush] Committing {commit}')
         return commit
 
     def pop_commited(self, time_limit):
@@ -322,7 +330,7 @@ class WaitKHypothesisBuffer(ABSHypothesisBuffer):
         #   - Represente directament el número de frames de les timestamps que representa
         self.K = int(K * features_per_second / subsampling_factor)
         if self.debug:
-            print(f'[WaitKHypothesisBuffer -> __init__] K initially set to {K} seconds has changed to {self.K} encoder frames')
+            logger.debug(f'[WaitKHypothesisBuffer -> __init__] K initially set to {K} seconds has changed to {self.K} encoder frames')
     
     def insert(self, new, offset=0):
         """
@@ -332,11 +340,11 @@ class WaitKHypothesisBuffer(ABSHypothesisBuffer):
         """
 
         if self.debug:
-            print(f'[WaitKHypothesisBuffer -> insert] Recieved hypothesis: {new}')
+            logger.debug(f'[WaitKHypothesisBuffer -> insert] Recieved hypothesis: {new}')
         new = [(a+offset, b+offset, t) for a, b, t in new]
         self.new = [(a, b, t) for a, b, t in new if a > self.last_commited_time-0.1]
         if self.debug:
-            print(f'[WaitKHypothesisBuffer -> insert] Processed hypothesis: {self.new}')
+            logger.debug(f'[WaitKHypothesisBuffer -> insert] Processed hypothesis: {self.new}')
 
         if len(self.new) >= 1:
             a, b, t = self.new[0]
@@ -356,7 +364,7 @@ class WaitKHypothesisBuffer(ABSHypothesisBuffer):
                                 words.append(repr(self.new.pop(0)))
                             words_msg = ' '.join(words)
                             if self.debug:
-                                print(f'[WaitKHypothesisBuffer -> insert] Removing last {i} words: {words_msg}')
+                                logger.debug(f'[WaitKHypothesisBuffer -> insert] Removing last {i} words: {words_msg}')
                             break
 
     def flush(self, last_instant):
@@ -367,9 +375,9 @@ class WaitKHypothesisBuffer(ABSHypothesisBuffer):
         last_valid_instant = last_instant - self.K
 
         if self.debug:
-            print(f'[WaitKHypothesisBuffer -> flush] Last valid emission instant is {last_valid_instant}')
-            print(f'[WaitKHypothesisBuffer -> flush] Commited buffer is {self.buffer}')
-            print(f'[WaitKHypothesisBuffer -> flush] New buffer is {self.new}')
+            logger.debug(f'[WaitKHypothesisBuffer -> flush] Last valid emission instant is {last_valid_instant}')
+            logger.debug(f'[WaitKHypothesisBuffer -> flush] Commited buffer is {self.buffer}')
+            logger.debug(f'[WaitKHypothesisBuffer -> flush] New buffer is {self.new}')
         commit = []
 
 
@@ -389,7 +397,7 @@ class WaitKHypothesisBuffer(ABSHypothesisBuffer):
             commit = []
 
         if self.debug:
-            print(f'[WaitKHypothesisBuffer -> flush] Committing {commit}')
+            logger.debug(f'[WaitKHypothesisBuffer -> flush] Committing {commit}')
         return commit
 
     def pop_commited(self):
@@ -416,7 +424,7 @@ class HoldNHypothesisBuffer(ABSHypothesisBuffer):
         new = [(a+offset, b+offset, t) for a, b, t in new]
         self.new = [(a, b, t) for a, b, t in new if a > self.last_commited_time-0.1]
         if self.debug:
-            print(f'[HoldNHypothesisBuffer -> insert] Recieved hypothesis: {self.new}')
+            logger.debug(f'[HoldNHypothesisBuffer -> insert] Recieved hypothesis: {self.new}')
 
         if len(self.new) >= 1:
             a, b, t = self.new[0]
@@ -436,7 +444,7 @@ class HoldNHypothesisBuffer(ABSHypothesisBuffer):
                                 words.append(repr(self.new.pop(0)))
                             words_msg = ' '.join(words)
                             if self.debug:
-                                print(f'[HoldNHypothesisBuffer -> insert] Removing last {i} words: {words_msg}')
+                                logger.debug(f'[HoldNHypothesisBuffer -> insert] Removing last {i} words: {words_msg}')
                             break
 
     def flush(self):
@@ -445,8 +453,8 @@ class HoldNHypothesisBuffer(ABSHypothesisBuffer):
         """
 
         if self.debug:
-            print(f'[HoldNHypothesisBuffer -> flush] New buffer is: {self.new}')
-            print(f'[HoldNHypothesisBuffer -> flush] Commited buffer is: {self.buffer}')
+            logger.debug(f'[HoldNHypothesisBuffer -> flush] New buffer is: {self.new}')
+            logger.debug(f'[HoldNHypothesisBuffer -> flush] Commited buffer is: {self.buffer}')
         if len(self.new) > self.N:
             commit = self.new[:-self.N]
             self.new = self.new[-self.N:]
@@ -457,7 +465,7 @@ class HoldNHypothesisBuffer(ABSHypothesisBuffer):
             commit = []
 
         if self.debug:
-            print(f'[HoldNHypothesisBuffer -> flush] Committing {commit}')
+            logger.debug(f'[HoldNHypothesisBuffer -> flush] Committing {commit}')
         return commit
     
     def pop_commited(self, time_limit):

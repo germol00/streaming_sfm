@@ -20,6 +20,12 @@ from argparse import Namespace, ArgumentParser
 
 from typing import Optional
 
+import logging
+logger = logging.getLogger(__name__)
+
+from streaming_sfm import LOG_LEVEL
+logger.setLevel(LOG_LEVEL)
+
 @dataclass
 class ParakeetStreamingStates(AgentStates):
     buffer: StreamingBatchedAudioBufferWithOffset
@@ -31,6 +37,7 @@ class ParakeetStreamingStates(AgentStates):
     incomplete_buffer: list
     dtype: torch.dtype
     device: torch.device
+    debug: False
 
     def reset(self, cfg, asr_model):
         super().reset()
@@ -54,17 +61,18 @@ class ParakeetStreamingStates(AgentStates):
 
     def reset_hyp_buffer(self, cfg, model):
         if cfg.policy == 'LCP':
-            hyp_buffer = LCPHypothesisBuffer()
+            hyp_buffer = LCPHypothesisBuffer(debug=self.debug)
         elif cfg.policy == 'LACP':
-            hyp_buffer = LACPHypothesisBuffer(cfg.lacp_threshold)
+            hyp_buffer = LACPHypothesisBuffer(cfg.lacp_threshold, debug=self.debug)
         elif cfg.policy == 'WaitK':
             hyp_buffer = WaitKHypothesisBuffer(
                 cfg.K,
                 features_per_second=model.features_per_sec,
                 subsampling_factor=model.subsampling_factor,
+                debug=self.debug
             )
         else:
-            hyp_buffer = HoldNHypothesisBuffer(cfg.N)
+            hyp_buffer = HoldNHypothesisBuffer(cfg.N, debug=self.debug)
         return hyp_buffer
 
     def update_source(self, segment):
@@ -146,6 +154,7 @@ class ParakeetAgent(SpeechToTextAgent):
         #        #self.cfg.rnnt_decoding.beam.boosting_tree.key_phrases_file = word_boost_tmp.name
         #        self.model = StreamingParakeet(self.cfg)
         #else:
+        print(self.cfg)
         self.model = StreamingParakeet(self.cfg)
         super().__init__(args)
 
@@ -179,6 +188,7 @@ class ParakeetAgent(SpeechToTextAgent):
 
 
     def build_states(self) -> ParakeetStreamingStates:
+        do_debug = True if logger.level == logging.DEBUG else False
         audio_buffer = StreamingBatchedAudioBufferWithOffset(
             batch_size = 1,
             context_samples = self.model.context_samples,
@@ -187,17 +197,18 @@ class ParakeetAgent(SpeechToTextAgent):
         )
 
         if self.cfg.policy == 'LCP':
-            hyp_buffer = LCPHypothesisBuffer()
+            hyp_buffer = LCPHypothesisBuffer(debug=do_debug)
         elif self.cfg.policy == 'LACP':
-            hyp_buffer = LACPHypothesisBuffer(self.cfg.lacp_threshold)
+            hyp_buffer = LACPHypothesisBuffer(self.cfg.lacp_threshold, debug=do_debug)
         elif self.cfg.policy == 'WaitK':
             hyp_buffer = WaitKHypothesisBuffer(
                 self.cfg.K,
                 features_per_second=self.model.features_per_sec,
                 subsampling_factor=self.model.subsampling_factor,
+                debug=do_debug
             )
         else:
-            hyp_buffer = HoldNHypothesisBuffer(self.cfg.N)
+            hyp_buffer = HoldNHypothesisBuffer(self.cfg.N, debug=do_debug)
         return ParakeetStreamingStates(
             buffer=audio_buffer,
             hyp_buffer=hyp_buffer,
@@ -208,6 +219,7 @@ class ParakeetAgent(SpeechToTextAgent):
             incomplete_buffer=[],
             dtype=self.model.dtype,
             device=self.model.device,
+            debug = do_debug
         )
 
     def reset(self):
