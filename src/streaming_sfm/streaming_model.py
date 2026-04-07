@@ -73,8 +73,8 @@ class BaseStreamingModel():
 
         self.context_samples = self._compute_context(cfg)
 
-        try:
-            if mbr:
+        if mbr:
+            try:
                 from streaming_sfm import mbr
                 from mbrs.decoders import get_decoder
                 from mbrs.metrics import get_metric
@@ -86,11 +86,12 @@ class BaseStreamingModel():
                 decoder_cfg = decoder_class.Config()
                 self.mbr = decoder_class(decoder_cfg, metric)
                 logger.debug("MBR: Active")
-            else:
-                logger.debug("MBR: Deactivated")
+            except Exception as e:
                 self.mbr = None
-        except:
-            logger.warning("MBR: Deactivated (could not import)")
+                logger.error(f"MBR: Not found (could not import) {e}")
+                exit(-1)
+        else:
+            logger.debug("MBR: Deactivated")
             self.mbr = None
 
     def _compute_context(self, cfg):
@@ -193,7 +194,7 @@ class StreamingParakeet(BaseStreamingModel):
 
         logger.debug(self.asr_model.cfg.decoding.strategy)
         if self.asr_model.cfg.decoding.strategy == "greedy_batch":
-            logger.error("Decoding strategy: greedy_batch")
+            logger.debug("Decoding strategy: greedy_batch")
             chunk_batched_hyps, _, _ = self.asr_model.decoding.decoding.decoding_computer(
                 x=encoder_output, out_len=encoder_output_len, prev_batched_state=None
             )
@@ -211,9 +212,6 @@ class StreamingParakeet(BaseStreamingModel):
                 hyps = []
                 hyps_toks = []
                 timestamp_hyps = []
-                logger.debug("ALKALOIDE")
-                logger.debug(len(chunk_batched_hyps.to_nbest_hyps_list()))
-                logger.debug(len(chunk_batched_hyps.to_nbest_hyps_list()[0].n_best_hypotheses))
                 for hyp in chunk_batched_hyps.to_nbest_hyps_list()[0].n_best_hypotheses:
                     unbatched_hyp = hyp
                     timestamped_hyp = self.asr_model.decoding.compute_rnnt_timestamps(unbatched_hyp)
