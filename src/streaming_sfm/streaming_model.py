@@ -41,6 +41,11 @@ class StreamingBatchedAudioBufferWithOffset(StreamingBatchedAudioBuffer):
         """
         added_chunk_length = audio_batch.shape[1]
 
+        if added_chunk_length > self.expected_context.chunk:
+            logger.warning(f'added chunk length {added_chunk_length} is greater than expected context {self.expected_context.chunk}. Trimming')
+            added_chunk_length = self.expected_context.chunk
+            audio_batch = audio_batch[:, :added_chunk_length]
+
         self.samples = torch.cat((self.samples, audio_batch), dim=1)
         extra_samples_in_buffer = self.context_size.add_frames_get_removed_(
             added_chunk_length, is_last_chunk=is_last_chunk, expected_context=self.expected_context
@@ -68,6 +73,7 @@ class BaseStreamingModel():
         self.sample_rate = self.asr_model._cfg.preprocessor['sample_rate']
         self.feature_stride_sec = self.asr_model._cfg.preprocessor['window_stride']
         self.subsampling_factor = self.asr_model.encoder.subsampling_factor
+        print(self.subsampling_factor)
         self.features_per_sec = 1.0 / self.feature_stride_sec
         self.encoder_frame2audio_samples = int(self.sample_rate * self.feature_stride_sec) * self.subsampling_factor
 
