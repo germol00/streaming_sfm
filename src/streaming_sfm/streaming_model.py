@@ -60,6 +60,9 @@ class StreamingBatchedAudioBufferWithOffset(StreamingBatchedAudioBuffer):
             self.samples = self.samples[:, extra_samples_in_buffer:]
         return extra_samples_in_buffer
 
+    def get_buffer_len(self):
+        return (len(self.samples), len(self.samples[0]))
+
 class BaseStreamingModel():
     def __init__(self, cfg, mbr):
         self.cfg = cfg
