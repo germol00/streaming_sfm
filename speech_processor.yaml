@@ -2,11 +2,11 @@ type: "agent_simulstream.CascadeSpeechProcessor"
 speech_chunk_size: 0.96
 latency_unit: "word"         # "char" for zh, "word" for de/it
 detokenizer_type: "simuleval"
-# MT (Qwen-3.5)
-llm_model_name: "Qwen/Qwen3-4B-Instruct-2507"   # adjust to your exact checkpoint
+# MT (Qwen3.5-4B; unified instruct/chat checkpoint)
+llm_model_name: "Qwen/Qwen3.5-4B"
+llm_enable_thinking: false   # required for translation; true emits "Thinking Process:" only
 llm_gpu_memory_utilization: 0.62
-llm_max_model_len: 1024
-max_new_tokens: 80
+llm_max_model_len: 8192
 # llm_base_url: "http://localhost:8000/v1"    # optional if using remote vLLM server
 # Languages
 source_lang: "English"
@@ -20,12 +20,12 @@ top_k: 20
 repetition_penalty: 1.05
 # ASR (streaming_sfm + Parakeet)
 sfm_pretrained_name: "nvidia/parakeet-tdt-0.6b-v3"
-sfm_chunk_secs: 1.0
+sfm_chunk_secs: 0.96
 sfm_left_context_secs: 20.0
 sfm_right_context_secs: 0.0
 sfm_policy: "LACP"           # LCP / LACP / SLCP / WaitK / HoldN
 sfm_lacp_threshold: 2.0
-sfm_word_level: false
+sfm_word_level: true
 sfm_emit_incomplete: false
 sfm_device: "cuda"
 sfm_compute_dtype: "bfloat16"

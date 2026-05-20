@@ -1,4 +1,5 @@
 import logging
+import re
 from dataclasses import dataclass, field
 from types import SimpleNamespace
 from typing import List, Optional
@@ -25,6 +26,9 @@ from streaming_sfm.streaming_model import (
 
 logger = logging.getLogger(__name__)
 logging.getLogger("fbk_fairseq.simultaneous.metrics").setLevel(logging.INFO)
+
+# Default MT checkpoint when `llm_model_name` is omitted from config (vLLM / OpenAI-compatible).
+DEFAULT_LLM_MODEL_NAME = "Qwen/Qwen3.5-4B"
 
 
 def longest_common_prefix(s1: str, s2: str) -> str:
@@ -54,7 +58,7 @@ class CascadeSpeechProcessor(SpeechProcessor):
     """
     SimulStream processor with:
     - ASR: Streaming SFM + Parakeet
-    - MT: Qwen-3.5 via vLLM (local or OpenAI-compatible endpoint)
+    - MT: Qwen3.5-4B via vLLM (local or OpenAI-compatible endpoint)
     """
 
     @classmethod
@@ -79,13 +83,33 @@ class CascadeSpeechProcessor(SpeechProcessor):
                 },
             }
 
+            # Simulstream controls the audio chunk size via `speech_chunk_size` (seconds).
+            # To keep Nemo's internal streaming buffer consistent, default our SFM `chunk_secs`
+            # to `speech_chunk_size` when `sfm_chunk_secs` isn't explicitly provided.
+            speech_chunk_size = getattr(config, "speech_chunk_size", None)
+            chunk_secs_default = speech_chunk_size if speech_chunk_size is not None else 1.0
+
+            # Accept both `sfm_*` keys (this agent's convention) and legacy/non-prefixed keys
+            # to reduce chances of misconfiguration.
+            left_context_secs = getattr(
+                config,
+                "sfm_left_context_secs",
+                getattr(config, "left_context_secs", 20.0),
+            )
+            right_context_secs = getattr(
+                config,
+                "sfm_right_context_secs",
+                getattr(config, "right_context_secs", 0.0),
+            )
+            chunk_secs = getattr(config, "sfm_chunk_secs", chunk_secs_default)
+
             cfg_args = SimpleNamespace(
                 model_path=getattr(config, "sfm_model_path", None),
                 pretrained_name=getattr(config, "sfm_pretrained_name", "nvidia/parakeet-tdt-0.6b-v3"),
                 manifest_path=getattr(config, "sfm_manifest_path", "vp.jsonl"),
-                chunk_secs=getattr(config, "sfm_chunk_secs", 1.0),
-                left_context_secs=getattr(config, "sfm_left_context_secs", 20.0),
-                right_context_secs=getattr(config, "sfm_right_context_secs", 0.0),
+                chunk_secs=chunk_secs,
+                left_context_secs=left_context_secs,
+                right_context_secs=right_context_secs,
                 max_empty_chunks=getattr(config, "sfm_max_empty_chunks", 0),
                 policy=getattr(config, "sfm_policy", "LACP"),
                 lacp_threshold=getattr(config, "sfm_lacp_threshold", 2.0),
@@ -106,20 +130,27 @@ class CascadeSpeechProcessor(SpeechProcessor):
                 asr_cfg.allow_mps = True if cfg_args.device == "mps" else False
             cls.asr_cfg = asr_cfg
             cls.asr = StreamingParakeet(asr_cfg, mbr=getattr(config, "sfm_mbr", False))
+            logger.info(
+                "ASR streaming context samples (left/chunk/right): %s/%s/%s",
+                cls.asr.context_samples.left,
+                cls.asr.context_samples.chunk,
+                cls.asr.context_samples.right,
+            )
 
+        llm_model_name = getattr(config, "llm_model_name", DEFAULT_LLM_MODEL_NAME)
         llm_base_url = getattr(config, "llm_base_url", None)
         if llm_base_url is not None:
             if not hasattr(cls, "llm_client") or cls.llm_client is None:
                 cls.llm_client = OpenAI(base_url=llm_base_url, api_key="EMPTY")
                 from transformers import AutoTokenizer
 
-                cls.tokenizer = AutoTokenizer.from_pretrained(config.llm_model_name)
+                cls.tokenizer = AutoTokenizer.from_pretrained(llm_model_name)
             cls.llm = None
         else:
             cls.llm_client = None
             if not hasattr(cls, "llm") or cls.llm is None:
                 cls.llm = LLM(
-                    model=config.llm_model_name,
+                    model=llm_model_name,
                     trust_remote_code=True,
                     gpu_memory_utilization=getattr(config, "llm_gpu_memory_utilization", 0.75),
                     tensor_parallel_size=getattr(config, "llm_tensor_parallel_size", 1),
@@ -144,7 +175,10 @@ class CascadeSpeechProcessor(SpeechProcessor):
         self._top_k = getattr(config, "top_k", 20)
         self._max_tokens = getattr(config, "max_new_tokens", 256)
         self._repetition_penalty = getattr(config, "repetition_penalty", 1.05)
-        self._llm_model_name = config.llm_model_name
+        self._llm_model_name = getattr(config, "llm_model_name", DEFAULT_LLM_MODEL_NAME)
+        self._llm_max_model_len = getattr(config, "llm_max_model_len", 8192)
+        # Qwen3.5 defaults to thinking mode; disable for direct translation output.
+        self._llm_enable_thinking = getattr(config, "llm_enable_thinking", False)
 
         self.sampling_params = SamplingParams(
             temperature=self._temperature,
@@ -152,10 +186,54 @@ class CascadeSpeechProcessor(SpeechProcessor):
             top_k=self._top_k,
             max_tokens=self._max_tokens,
             repetition_penalty=self._repetition_penalty,
-            stop=["\n"],
         )
 
         self._state = self._fresh_state(speech_id=0)
+
+        # ---- Audio I/O sanity checks ---------------------------------------
+        # SimulStream provides audio chunks at `simulstream`'s SAMPLE_RATE.
+        # NeMo/Parakeet may expect a different sample rate; if so, the internal
+        # streaming context bookkeeping can drift and trigger assertions.
+        self._input_sample_rate = SAMPLE_RATE
+        self._asr_sample_rate = self.asr.sample_rate
+        self._needs_resample = self._input_sample_rate != self._asr_sample_rate
+
+        speech_chunk_size = getattr(config, "speech_chunk_size", None)
+        self._expected_input_chunk_samples = None
+        if speech_chunk_size is not None:
+            # Expected samples for a "full" SimulStream chunk. The final chunk
+            # is often shorter; we use this to better set NeMo's last-chunk flag.
+            self._expected_input_chunk_samples = int(round(float(speech_chunk_size) * self._input_sample_rate))
+
+        self._saw_last_nonempty_chunk = False
+        logger.info(
+            "Audio sample rates: simulstream=%s Hz, asr=%s Hz, resample=%s",
+            self._input_sample_rate,
+            self._asr_sample_rate,
+            self._needs_resample,
+        )
+
+    def _maybe_resample(self, waveform: np.ndarray) -> np.ndarray:
+        if waveform is None or len(waveform) == 0:
+            return waveform
+        if not self._needs_resample:
+            return waveform
+
+        # Ensure 1D float32
+        w = np.asarray(waveform).reshape(-1).astype(np.float32)
+
+        try:
+            import librosa
+
+            return librosa.resample(w, orig_sr=self._input_sample_rate, target_sr=self._asr_sample_rate).astype(
+                np.float32
+            )
+        except Exception as e:
+            raise RuntimeError(
+                "Sample-rate mismatch between SimulStream and ASR, and resampling failed. "
+                f"simulstream SAMPLE_RATE={self._input_sample_rate}, asr sample_rate={self._asr_sample_rate}. "
+                "Install librosa or fix the sample rates."
+            ) from e
 
     def _fresh_state(self, speech_id: int) -> CascadeState:
         asr_buffer = StreamingBatchedAudioBufferWithOffset(
@@ -198,9 +276,11 @@ class CascadeSpeechProcessor(SpeechProcessor):
 
     def _asr_step(self, state: CascadeState, waveform: np.ndarray, is_last_chunk: bool) -> str:
         if (waveform is None or len(waveform) == 0) and not is_last_chunk:
+            logging.warning(f"[ASR] Received empty waveform. Returning empty string.")
             return ""
 
         if waveform is not None and len(waveform) > 0:
+            waveform = self._maybe_resample(waveform)
             chunk = np.asarray(waveform, dtype=np.float32)
             chunk_t = torch.tensor([chunk], device=self.asr.device)
             stride = state.asr_buffer.add_audio_batch_get_stride(
@@ -234,58 +314,183 @@ class CascadeSpeechProcessor(SpeechProcessor):
                 state.nchunks_no_output = 0
 
         if not out:
+            logging.info(f"[ASR] {self.asr_cfg.policy} policy generated no transcription. Emitting empty string")
             return ""
         toks = [t for _, _, t in out]
-        return self._tokens_to_text(toks)
+        res = self._tokens_to_text(toks)
+        logging.info(f"[ASR] Emitting {res}")
+        return res
 
-    def _prepare_llm_inputs(self, asr_segment: str, prev_translation: str) -> str:
-        instruction = f"""You are a professional simultaneous speech translator.
+    def _count_prompt_tokens(self, prompt: str) -> int:
+        return len(self.tokenizer.encode(prompt, add_special_tokens=False))
 
-[TASK]
-Translate the input text from {self.source_lang} into {self.target_lang}.
-Preserve named entities exactly as in the source text.
-Return only the translated text, with no explanation.
+    def _apply_chat_template(self, messages: list[dict]) -> str:
+        # transformers>=5 uses positional `conversation`; older builds also accepted `messages=`.
+        common = {
+            "add_generation_prompt": True,
+            "tokenize": False,
+        }
+        try:
+            return self.tokenizer.apply_chat_template(
+                messages,
+                **common,
+                enable_thinking=self._llm_enable_thinking,
+            )
+        except TypeError:
+            try:
+                return self.tokenizer.apply_chat_template(
+                    messages=messages,
+                    **common,
+                    enable_thinking=self._llm_enable_thinking,
+                )
+            except TypeError:
+                return self.tokenizer.apply_chat_template(messages, **common)
 
-[INPUT]
-{asr_segment}"""
-        messages = [{"role": "user", "content": instruction}]
-        prompt = self.tokenizer.apply_chat_template(
-            messages,
-            add_generation_prompt=True,
-            tokenize=False,
-        )
+    def _build_llm_prompt(self, asr_segment: str, prev_translation: str) -> str:
+        messages = [
+            {
+                "role": "system",
+                "content": (
+                    f"You are a professional simultaneous speech translator. "
+                    f"Translate from {self.source_lang} into {self.target_lang}. "
+                    "Preserve named entities exactly as in the source text. "
+                    "Output only the translation with no explanation, preamble, or reasoning."
+                ),
+            },
+            {"role": "user", "content": asr_segment},
+        ]
+        prompt = self._apply_chat_template(messages)
         return prompt + prev_translation
 
+    def _sanitize_llm_output(self, text: str) -> str:
+        """Drop Qwen thinking/reasoning prefixes if the model emits them anyway."""
+        if not text:
+            return ""
+        cleaned = text.replace("…", "").replace("\.{3}", "")
+        think_close = "</" + "think" + ">"
+        if think_close in cleaned:
+            cleaned = cleaned.split(think_close, 1)[-1]
+        cleaned = re.sub(
+            r"(?is)^\s*thinking\s*process\s*:\s*.*?(?=\n\n|\Z)",
+            "",
+            cleaned,
+            count=1,
+        )
+        return cleaned.lstrip()
+
+    def _truncate_text_from_left(self, text: str, max_tokens: int) -> str:
+        if max_tokens <= 0 or not text:
+            return ""
+        token_ids = self.tokenizer.encode(text, add_special_tokens=False)
+        if len(token_ids) <= max_tokens:
+            return text
+        return self.tokenizer.decode(token_ids[-max_tokens:], skip_special_tokens=True)
+
+    def _fit_llm_prompt(self, asr_segment: str, prev_translation: str) -> tuple[str, str, str]:
+        """
+        Build an LLM prompt that fits within the configured context window.
+
+        Long ACL segments can exceed ``llm_max_model_len`` once ASR and the committed
+        translation prefix grow; drop older ASR first, then older translation prefix.
+        """
+        reserve_tokens = self._max_tokens + 32
+        max_input_tokens = max(64, self._llm_max_model_len - reserve_tokens)
+
+        asr_words = asr_segment.split()
+        prev = prev_translation
+        prompt = self._build_llm_prompt(asr_segment, prev)
+        prompt_tokens = self._count_prompt_tokens(prompt)
+
+        if prompt_tokens > max_input_tokens and len(asr_words) > 1:
+            lo, hi = 0, len(asr_words)
+            best_asr = asr_segment
+            while lo < hi:
+                mid = (lo + hi) // 2
+                candidate = " ".join(asr_words[mid:])
+                candidate_prompt = self._build_llm_prompt(candidate, prev)
+                if self._count_prompt_tokens(candidate_prompt) <= max_input_tokens:
+                    best_asr = candidate
+                    hi = mid
+                else:
+                    lo = mid + 1
+            asr_segment = best_asr
+            prompt = self._build_llm_prompt(asr_segment, prev)
+            prompt_tokens = self._count_prompt_tokens(prompt)
+            if lo > 0:
+                logger.warning(
+                    "Truncated ASR prompt from %d to %d words to fit %d input tokens",
+                    len(asr_words),
+                    len(asr_segment.split()),
+                    max_input_tokens,
+                )
+
+        if prompt_tokens > max_input_tokens and prev:
+            template = self._build_llm_prompt(asr_segment, "")
+            template_tokens = self._count_prompt_tokens(template)
+            prev_budget = max(0, max_input_tokens - template_tokens)
+            prev = self._truncate_text_from_left(prev, prev_budget)
+            prompt = self._build_llm_prompt(asr_segment, prev)
+            prompt_tokens = self._count_prompt_tokens(prompt)
+            logger.warning(
+                "Truncated committed translation prefix to %d tokens to fit context window",
+                self._count_prompt_tokens(prev),
+            )
+
+        if prompt_tokens > max_input_tokens:
+            prompt = self._truncate_text_from_left(prompt, max_input_tokens)
+            prev = ""
+            logger.warning(
+                "Prompt still exceeded context after truncation; dropped translation prefix"
+            )
+
+        return prompt, asr_segment, prev
+
     def _llm_generate(self, prompt: str) -> str:
+        prompt_tokens = self._count_prompt_tokens(prompt)
+        max_tokens = min(self._max_tokens, max(1, self._llm_max_model_len - prompt_tokens - 1))
+
         if self.llm_client is not None:
             response = self.llm_client.completions.create(
                 model=self._llm_model_name,
                 prompt=prompt,
-                max_tokens=self._max_tokens,
+                max_tokens=max_tokens,
                 temperature=self._temperature,
                 top_p=self._top_p,
-                stop=["\n"],
-                extra_body={"repetition_penalty": self._repetition_penalty},
+                extra_body={
+                    "repetition_penalty": self._repetition_penalty,
+                    "chat_template_kwargs": {"enable_thinking": self._llm_enable_thinking},
+                },
             )
-            return response.choices[0].text.replace("…", "")
+            return self._sanitize_llm_output(response.choices[0].text)
+        sampling_params = SamplingParams(
+            temperature=self._temperature,
+            top_p=self._top_p,
+            top_k=self._top_k,
+            max_tokens=max_tokens,
+            repetition_penalty=self._repetition_penalty,
+        )
         llm_outputs = self.llm.generate(
             [prompt],
-            sampling_params=self.sampling_params,
+            sampling_params=sampling_params,
             use_tqdm=False,
         )
-        return llm_outputs[0].outputs[0].text.replace("…", "")
+        return self._sanitize_llm_output(llm_outputs[0].outputs[0].text)
 
     def _translate_from_asr(self, state: CascadeState, force_final: bool) -> str:
         asr_text = state.asr_committed_text.strip()
         if not asr_text:
             return ""
 
-        prompt = self._prepare_llm_inputs(asr_text, state.prev_translation)
+        prompt, _, prev_prefix = self._fit_llm_prompt(asr_text, state.prev_translation)
+        if prev_prefix != state.prev_translation:
+            state.prev_translation = prev_prefix
+            state.translation_hypotheses = [prev_prefix]
+
         hypothesis = self._llm_generate(prompt)
-        full_hypothesis = state.prev_translation + hypothesis
+        full_hypothesis = prev_prefix + hypothesis
 
         if force_final:
-            increment = full_hypothesis[len(state.prev_translation) :]
+            increment = full_hypothesis[len(prev_prefix) :]
             state.prev_translation = full_hypothesis
             return increment.strip() if self.target_lang not in ["Chinese", "Japanese"] else increment
 
@@ -294,7 +499,7 @@ Return only the translated text, with no explanation.
             state.translation_hypotheses[-2],
             state.translation_hypotheses[-1],
         )
-        increment = stable[len(state.prev_translation) :]
+        increment = stable[len(prev_prefix) :]
         state.prev_translation = stable
         if self.target_lang not in ["Chinese", "Japanese"]:
             increment = increment.strip()
@@ -335,7 +540,14 @@ Return only the translated text, with no explanation.
         if total_duration < self.min_start_seconds and self._state.asr_committed_text == "":
             return IncrementalOutput([], "", [], "")
 
-        asr_increment = self._asr_step(self._state, waveform, is_last_chunk=False)
+        # Best-effort "last chunk" detection:
+        # SimulStream often sends a final shorter chunk right before end_of_stream().
+        is_last_chunk = False
+        if self._expected_input_chunk_samples is not None and len(waveform) < self._expected_input_chunk_samples:
+            is_last_chunk = True
+            self._saw_last_nonempty_chunk = True
+
+        asr_increment = self._asr_step(self._state, waveform, is_last_chunk=is_last_chunk)
         if asr_increment:
             if self._state.asr_committed_text:
                 self._state.asr_committed_text = f"{self._state.asr_committed_text} {asr_increment}".strip()
@@ -347,7 +559,13 @@ Return only the translated text, with no explanation.
 
     @torch.inference_mode()
     def end_of_stream(self) -> IncrementalOutput:
-        asr_increment = self._asr_step(self._state, np.zeros(0, dtype=np.float32), is_last_chunk=True)
+        # If we already treated the last non-empty chunk as `is_last_chunk=True`,
+        # avoid double "end" notifications to NeMo.
+        asr_increment = self._asr_step(
+            self._state,
+            np.zeros(0, dtype=np.float32),
+            is_last_chunk=not self._saw_last_nonempty_chunk,
+        )
         if asr_increment:
             if self._state.asr_committed_text:
                 self._state.asr_committed_text = f"{self._state.asr_committed_text} {asr_increment}".strip()
