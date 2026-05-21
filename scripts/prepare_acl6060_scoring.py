@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare per-talk reference files and segment timing YAML for SimulStream metrics."""
+"""Prepare ACL 60-60 scoring inputs for OmniSTEval (and legacy SimulStream tools)."""
 
 from __future__ import annotations
 
@@ -183,7 +183,14 @@ def main() -> None:
             src_out,
             ".txt",
         )
-        print(f"{tag}: {len(ref_files)} reference files under {scoring_dir / f'refs_{tag}'}")
+        merged_ref = scoring_dir / f"refs_{tag}_merged.txt"
+        merged_src = scoring_dir / f"sources_{tag}_merged.txt"
+        merged_ref.write_text(ref_path.read_text(encoding="utf-8"), encoding="utf-8")
+        merged_src.write_text(src_path.read_text(encoding="utf-8"), encoding="utf-8")
+        print(
+            f"{tag}: {len(ref_files)} per-talk refs, merged refs/sources for OmniSTEval "
+            f"({merged_ref.name}, {merged_src.name})"
+        )
 
 
 if __name__ == "__main__":

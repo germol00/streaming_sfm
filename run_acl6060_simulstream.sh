@@ -11,8 +11,9 @@
 #   PYTHON         Python interpreter (default: python3; auto-falls back to conda envs with mweralign)
 #   SKIP_COMET=1   Skip COMET scoring
 #
-# After inference, scores BLEU / COMET / LAAL via score_acl6060_metrics.sh.
-# Requires: pip install mweralign sacrebleu unbabel-comet  (or pip install 'simulstream[eval]')
+# After inference, scores with OmniSTEval (BLEU, chrF, LongYAAL, phrase HTML report).
+# Requires: pip install 'OmniSTEval[simulstream]' simulstream
+#   optional COMET: pip install unbabel-comet  (or pip install 'OmniSTEval[comet]')
 
 set -euo pipefail
 
@@ -88,7 +89,7 @@ mkdir -p "$OUTPUT_DIR"
 run_direction "en-pt" "English" "Portuguese"
 
 echo ""
-echo "Scoring BLEU, COMET, and LAAL..."
+echo "Scoring with OmniSTEval (BLEU, chrF, LongYAAL, phrase report)..."
 "${REPO_ROOT}/score_acl6060_metrics.sh"
 
 echo "Done. Wav list (for SimulStream): $WAV_LIST_FILE"

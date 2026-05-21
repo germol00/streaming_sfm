@@ -1,16 +1,23 @@
 #!/usr/bin/env bash
-# Score SimulStream metrics logs (BLEU, COMET, LAAL) for ACL 60-60 en-de / en-fr runs.
+# Score SimulStream metrics logs with OmniSTEval (IWSLT-style longform resegmentation).
+#
+# Produces corpus metrics (BLEU, chrF, LongYAAL, …), per-segment instances.resegmented.jsonl,
+# and an HTML phrase-level diff report.
 #
 # Usage:
 #   ./score_acl6060_metrics.sh
-#   ./score_acl6060_metrics.sh en-de
+#   ./score_acl6060_metrics.sh en-de en-pt
 #
 # Env:
-#   OUTPUT_DIR   Directory with metrics_en-*.jsonl (default: output/simulstream_acl6060)
-#   ACL6060_ROOT Dataset cache (default: ~/.cache/simuleval/acl_6060)
-#   SPEECH_CFG   speech_processor.yaml for detokenizer settings
-#   PYTHON       Python interpreter
-#   SKIP_COMET=1 Skip COMET (no GPU / model download)
+#   OUTPUT_DIR        Directory with metrics_en-*.jsonl (default: output/simulstream_acl6060)
+#   ACL6060_ROOT      Dataset cache (default: ~/.cache/simuleval/acl_6060)
+#   SPEECH_CFG        speech_processor.yaml (SimulStream eval config for LogReader)
+#   PYTHON            Python interpreter
+#   BLEU_TOKENIZER    SacreBLEU tokenizer (default: intl)
+#   SKIP_COMET=1      Skip COMET (no GPU / model download)
+#   HTML_MAX_SEGS=0   Limit segments in HTML report (0 = all)
+#
+# Requires: pip install 'OmniSTEval[simulstream]'   # optional: OmniSTEval[comet]
 
 set -euo pipefail
 
@@ -23,6 +30,14 @@ SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor.yaml}"
 PYTHON="${PYTHON:-python3}"
 SCORING_DIR="${OUTPUT_DIR}/scoring_data"
 RESULTS_TSV="${OUTPUT_DIR}/scores.tsv"
+BLEU_TOKENIZER="${BLEU_TOKENIZER:-intl}"
+HTML_MAX_SEGS="${HTML_MAX_SEGS:-0}"
+
+declare -A TARGET_LANG=(
+  [en-de]=de
+  [en-fr]=fr
+  [en-pt]=pt
+)
 
 if [[ $# -gt 0 ]]; then
   DIRECTIONS=("$@")
@@ -32,32 +47,44 @@ fi
 
 export PYTHONPATH="${REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
 
-if ! "$PYTHON" -c "import mweralign" 2>/dev/null; then
+find_python_with_omnisteval() {
+  if "$PYTHON" -c "import omnisteval" 2>/dev/null; then
+    return 0
+  fi
+  local candidate
   for candidate in \
-    "${HOME}/miniconda3/envs/evaluation/bin/python" \
     "${HOME}/miniconda3/envs/iwslt/bin/python" \
+    "${HOME}/miniconda3/envs/evaluation/bin/python" \
     "${HOME}/miniconda3/envs/simuleval/bin/python"; do
-    if [[ -x "$candidate" ]] && "$candidate" -c "import mweralign" 2>/dev/null; then
+    if [[ -x "$candidate" ]] && "$candidate" -c "import omnisteval" 2>/dev/null; then
       PYTHON="$candidate"
-      echo "Using PYTHON=$PYTHON (has mweralign)"
-      break
+      echo "Using PYTHON=$PYTHON (has omnisteval)"
+      return 0
     fi
   done
-fi
-if ! "$PYTHON" -c "import mweralign" 2>/dev/null; then
-  echo "error: mweralign is required for SimulStream BLEU/COMET/LAAL scoring." >&2
-  echo "Install with: pip install mweralign   # or: pip install 'simulstream[eval]'" >&2
+  return 1
+}
+
+if ! find_python_with_omnisteval; then
+  echo "error: OmniSTEval is required for scoring." >&2
+  echo "Install with: pip install 'OmniSTEval[simulstream]'" >&2
+  echo "  optional COMET: pip install 'OmniSTEval[comet]'" >&2
   exit 1
 fi
 
-echo "Preparing per-talk references and audio definition..."
+if ! "$PYTHON" -c "import simulstream" 2>/dev/null; then
+  echo "error: simulstream is required to read metrics logs (OmniSTEval[simulstream])." >&2
+  exit 1
+fi
+
+echo "Preparing ACL 60-60 references, sources, and speech segmentation..."
 "$PYTHON" "${REPO_ROOT}/scripts/prepare_acl6060_scoring.py" \
   --acl-root "$ACL6060_ROOT" \
   --output-dir "$OUTPUT_DIR"
 
-AUDIO_DEF="${SCORING_DIR}/audio_definition.yaml"
-if [[ ! -f "$AUDIO_DEF" ]]; then
-  echo "error: missing $AUDIO_DEF" >&2
+SEG_YAML="${SCORING_DIR}/audio_definition.yaml"
+if [[ ! -f "$SEG_YAML" ]]; then
+  echo "error: missing $SEG_YAML" >&2
   exit 1
 fi
 
@@ -65,76 +92,84 @@ mkdir -p "$OUTPUT_DIR"
 : >"$RESULTS_TSV"
 printf "direction\tmetric\tvalue\tdetails\n" >>"$RESULTS_TSV"
 
+append_scores_from_tsv() {
+  local tag="$1"
+  local scores_tsv="$2"
+  [[ -f "$scores_tsv" ]] || return 0
+  tail -n +2 "$scores_tsv" | while IFS=$'\t' read -r metric value _; do
+    printf "%s\t%s\t%s\tOmniSTEval longform\n" "$tag" "$metric" "$value" >>"$RESULTS_TSV"
+  done
+}
+
 score_direction() {
   local tag="$1"
+  local lang="${TARGET_LANG[$tag]:-}"
   local metrics_log="${OUTPUT_DIR}/metrics_${tag}.jsonl"
-  local refs_dir="${SCORING_DIR}/refs_${tag}"
-  local src_dir="${SCORING_DIR}/transcripts_${tag}"
+  local ref_merged="${SCORING_DIR}/refs_${tag}_merged.txt"
+  local src_merged="${SCORING_DIR}/sources_${tag}_merged.txt"
+  local out_dir="${OUTPUT_DIR}/omnisteval_${tag}"
 
+  if [[ -z "$lang" ]]; then
+    echo "error: unknown direction '$tag' (supported: ${!TARGET_LANG[*]})" >&2
+    return 1
+  fi
   if [[ ! -f "$metrics_log" ]]; then
     echo "error: metrics log not found: $metrics_log (run inference first)" >&2
     return 1
   fi
-
-  mapfile -t REF_FILES < <(find "$refs_dir" -name '*.txt' | sort)
-  mapfile -t SRC_FILES < <(find "$src_dir" -name '*.txt' | sort)
-
-  if [[ ${#REF_FILES[@]} -eq 0 ]]; then
-    echo "error: no reference files in $refs_dir" >&2
+  if [[ ! -f "$ref_merged" ]]; then
+    echo "error: merged references not found: $ref_merged" >&2
     return 1
   fi
 
   echo ""
-  echo "========== ${tag} =========="
+  echo "========== ${tag} (OmniSTEval longform, lang=${lang}) =========="
 
-  echo "--- SacreBLEU ---"
-  local bleu_out
-  bleu_out=$("$PYTHON" -m simulstream.metrics.score_quality \
-    --eval-config "$SPEECH_CFG" \
-    --log-file "$metrics_log" \
-    --scorer sacrebleu \
-    --tokenizer intl \
-    --references "${REF_FILES[@]}" 2>&1 | tee /dev/stderr)
-  local bleu
-  bleu=$(echo "$bleu_out" | awk -F': ' '/sacrebleu score:/ {print $2; exit}')
-  printf "%s\tBLEU\t%s\tintl tokenizer\n" "$tag" "$bleu" >>"$RESULTS_TSV"
+  local omnisteval_cmd=("$PYTHON" -m omnisteval.cli)
+  if command -v omnisteval >/dev/null 2>&1; then
+    omnisteval_cmd=(omnisteval)
+  fi
+
+  local -a cmd=(
+    "${omnisteval_cmd[@]}" longform
+    --speech_segmentation "$SEG_YAML"
+    --ref_sentences_file "$ref_merged"
+    --hypothesis_file "$metrics_log"
+    --hypothesis_format simulstream
+    --simulstream_config_file "$SPEECH_CFG"
+    --lang "$lang"
+    --bleu_tokenizer "$BLEU_TOKENIZER"
+    --word_level
+    --output_folder "$out_dir"
+  )
 
   if [[ "${SKIP_COMET:-0}" != "1" ]]; then
-  if "$PYTHON" -c "import comet" 2>/dev/null; then
-    echo "--- COMET ---"
-    local comet_out comet
-    comet_out=$("$PYTHON" -m simulstream.metrics.score_quality \
-      --eval-config "$SPEECH_CFG" \
-      --log-file "$metrics_log" \
-      --scorer comet \
-      --references "${REF_FILES[@]}" \
-      --transcripts "${SRC_FILES[@]}" 2>&1 | tee /dev/stderr)
-    comet=$(echo "$comet_out" | awk -F': ' '/comet score:/ {print $2; exit}')
-    printf "%s\tCOMET\t%s\twmt22-comet-da\n" "$tag" "$comet" >>"$RESULTS_TSV"
-  else
-    echo "Skipping COMET (install with: pip install unbabel-comet)" >&2
-  fi
+    if [[ -f "$src_merged" ]] && "$PYTHON" -c "import comet" 2>/dev/null; then
+      cmd+=(--comet --source_sentences_file "$src_merged")
+    elif [[ ! -f "$src_merged" ]]; then
+      echo "Skipping COMET (missing $src_merged)" >&2
+    else
+      echo "Skipping COMET (install with: pip install unbabel-comet)" >&2
+    fi
   else
     echo "Skipping COMET (SKIP_COMET=1)" >&2
   fi
 
-  echo "--- LAAL (stream_laal) ---"
-  # LAAL uses one line-per-segment reference file aligned with audio_definition (all talks).
-  local merged_ref="${SCORING_DIR}/refs_${tag}_merged.txt"
-  cat "${REF_FILES[@]}" >"$merged_ref"
+  "${cmd[@]}"
 
-  local laal_out laal_ideal laal_ca
-  laal_out=$("$PYTHON" -m simulstream.metrics.score_latency \
-    --eval-config "$SPEECH_CFG" \
-    --log-file "$metrics_log" \
-    --scorer stream_laal \
-    --audio-definition "$AUDIO_DEF" \
-    --reference "$merged_ref" \
-    --latency-unit word 2>&1 | tee /dev/stderr)
-  laal_ideal=$(echo "$laal_out" | sed -n 's/.*ideal_latency=\([0-9.eE+-]*\).*/\1/p')
-  laal_ca=$(echo "$laal_out" | sed -n 's/.*computational_aware_latency=\([0-9.eE+-]*\).*/\1/p')
-  printf "%s\tLAAL\t%s\tideal (seconds)\n" "$tag" "$laal_ideal" >>"$RESULTS_TSV"
-  printf "%s\tLAAL-CA\t%s\tcomputation-aware (seconds)\n" "$tag" "$laal_ca" >>"$RESULTS_TSV"
+  append_scores_from_tsv "$tag" "${out_dir}/scores.tsv"
+
+  local instances="${out_dir}/instances.resegmented.jsonl"
+  if [[ -f "$instances" ]]; then
+    "$PYTHON" "${REPO_ROOT}/scripts/build_omnisteval_html_report.py" \
+      --instances "$instances" \
+      --output "${out_dir}/phrase_report.html" \
+      --title "ACL 60-60 ${tag} — phrase-level errors" \
+      --max-instances "$HTML_MAX_SEGS"
+    echo "Phrase report: ${out_dir}/phrase_report.html"
+  fi
+
+  echo "OmniSTEval outputs: ${out_dir}/"
 }
 
 for tag in "${DIRECTIONS[@]}"; do
