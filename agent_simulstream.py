@@ -1,5 +1,6 @@
 import logging
 import re
+import zlib
 from dataclasses import dataclass, field
 from types import SimpleNamespace
 from typing import List, Optional
@@ -52,6 +53,7 @@ class CascadeState:
     asr_hyp_buffer: Optional[object] = None
     current_offset: int = 0
     nchunks_no_output: int = 0
+    consecutive_empty_mt: int = 0
 
 
 class CascadeSpeechProcessor(SpeechProcessor):
@@ -176,6 +178,16 @@ class CascadeSpeechProcessor(SpeechProcessor):
         self._top_k = getattr(config, "top_k", 20)
         self._max_tokens = getattr(config, "max_new_tokens", 256)
         self._repetition_penalty = getattr(config, "repetition_penalty", 1.05)
+        temp_fall = getattr(config, "temp_fall", False)
+        if temp_fall is True:
+            self._temp_fall = [0.2, 0.4, 0.6, 0.8, 1.0]
+        elif temp_fall:
+            self._temp_fall = list(temp_fall)
+        else:
+            self._temp_fall = None
+        self._compression_ratio_threshold = getattr(config, "compression_ratio_threshold", 2.4)
+        self._iters_till_fallback = getattr(config, "iters_till_fallback", 4)
+        self._fallback_word_rollback = getattr(config, "fallback_word_rollback", 2)
         self._llm_model_name = getattr(config, "llm_model_name", DEFAULT_LLM_MODEL_NAME)
         self._llm_max_model_len = getattr(config, "llm_max_model_len", 8192)
         # Qwen3.5 defaults to thinking mode; disable for direct translation output.
@@ -446,16 +458,50 @@ class CascadeSpeechProcessor(SpeechProcessor):
 
         return prompt, asr_segment, prev
 
-    def _llm_generate(self, prompt: str) -> str:
+    @staticmethod
+    def _compression_ratio(text: str) -> float:
+        """zlib ratio; values above ~2.4 often indicate repetitive / collapsed generation."""
+        if not text:
+            return 0.0
+        text_bytes = text.encode("utf-8")
+        compressed = zlib.compress(text_bytes)
+        return len(text_bytes) / len(compressed)
+
+    def _rollback_translation(self, state: CascadeState, n_units: int) -> None:
+        prev = state.prev_translation
+        if not prev:
+            return
+        if self.target_lang in ["Chinese", "Japanese"]:
+            state.prev_translation = prev[:-n_units] if len(prev) >= n_units else ""
+        else:
+            words = prev.split()
+            if len(words) >= n_units:
+                state.prev_translation = self.target_sep.join(words[:-n_units])
+            else:
+                state.prev_translation = ""
+        state.translation_hypotheses = [state.prev_translation]
+        logger.warning(
+            "[BAD STATE] Rolled back last %d translation unit(s); committed prefix is now %r",
+            n_units,
+            state.prev_translation,
+        )
+
+    def _reset_translation_state(self, state: CascadeState) -> None:
+        state.prev_translation = ""
+        state.translation_hypotheses = [""]
+        state.consecutive_empty_mt = 0
+
+    def _llm_generate(self, prompt: str, temperature: Optional[float] = None) -> str:
         prompt_tokens = self._count_prompt_tokens(prompt)
         max_tokens = min(self._max_tokens, max(1, self._llm_max_model_len - prompt_tokens - 1))
+        temp = self._temperature if temperature is None else temperature
 
         if self.llm_client is not None:
             response = self.llm_client.completions.create(
                 model=self._llm_model_name,
                 prompt=prompt,
                 max_tokens=max_tokens,
-                temperature=self._temperature,
+                temperature=temp,
                 top_p=self._top_p,
                 extra_body={
                     "repetition_penalty": self._repetition_penalty,
@@ -464,7 +510,7 @@ class CascadeSpeechProcessor(SpeechProcessor):
             )
             return self._sanitize_llm_output(response.choices[0].text)
         sampling_params = SamplingParams(
-            temperature=self._temperature,
+            temperature=temp,
             top_p=self._top_p,
             top_k=self._top_k,
             max_tokens=max_tokens,
@@ -477,17 +523,79 @@ class CascadeSpeechProcessor(SpeechProcessor):
         )
         return self._sanitize_llm_output(llm_outputs[0].outputs[0].text)
 
-    def _translate_from_asr(self, state: CascadeState, force_final: bool) -> str:
-        asr_text = state.asr_committed_text.strip()
-        if not asr_text:
-            return ""
-
-        prompt, _, prev_prefix = self._fit_llm_prompt(asr_text, state.prev_translation)
+    def _llm_generate_with_fallback(self, state: CascadeState, asr_text: str, prev_prefix: str) -> str:
+        """
+        MT generation with Whisper-style fallbacks (segfreetk vllm.py):
+        - empty output: after N consecutive empties, roll back committed translation and retry
+        - repetition loop: retry with rising temperature until compression ratio drops
+        """
+        prompt, asr_text, prev_prefix = self._fit_llm_prompt(asr_text, prev_prefix)
         if prev_prefix != state.prev_translation:
             state.prev_translation = prev_prefix
             state.translation_hypotheses = [prev_prefix]
 
         hypothesis = self._llm_generate(prompt)
+
+        if not hypothesis.strip():
+            state.consecutive_empty_mt += 1
+            if (
+                self._temp_fall
+                and state.consecutive_empty_mt >= self._iters_till_fallback
+            ):
+                self._rollback_translation(state, self._fallback_word_rollback)
+                state.consecutive_empty_mt = 0
+                prompt, _, prev_prefix = self._fit_llm_prompt(asr_text, state.prev_translation)
+                hypothesis = self._llm_generate(prompt)
+                if not hypothesis.strip():
+                    logger.warning(
+                        "[BAD STATE] No MT output after empty-generation rollback; "
+                        "keeping previous translation prefix"
+                    )
+            return hypothesis
+
+        state.consecutive_empty_mt = 0
+
+        if not self._temp_fall:
+            return hypothesis
+
+        cs = self._compression_ratio(hypothesis)
+        if cs <= self._compression_ratio_threshold:
+            return hypothesis
+
+        logger.warning(
+            "[BAD GENERATION] Detected repetition (compression_ratio=%.2f); "
+            "retrying with temperature fallback. Output was %r",
+            cs,
+            hypothesis,
+        )
+        for temp in self._temp_fall:
+            candidate = self._llm_generate(prompt, temperature=temp)
+            candidate_cs = self._compression_ratio(candidate)
+            if candidate.strip() and candidate_cs < self._compression_ratio_threshold:
+                logger.warning(
+                    "Temperature fallback succeeded at temperature=%s (compression_ratio=%.2f)",
+                    temp,
+                    candidate_cs,
+                )
+                return candidate
+
+        final_cs = self._compression_ratio(hypothesis)
+        logger.error(
+            "[BAD STATE] Temperature fallback did not recover (compression_ratio=%.2f); "
+            "resetting translation state",
+            final_cs,
+        )
+        self._reset_translation_state(state)
+        return ""
+
+    def _translate_from_asr(self, state: CascadeState, force_final: bool) -> str:
+        asr_text = state.asr_committed_text.strip()
+        if not asr_text:
+            return ""
+
+        prev_prefix = state.prev_translation
+        hypothesis = self._llm_generate_with_fallback(state, asr_text, prev_prefix)
+        prev_prefix = state.prev_translation
         full_hypothesis = prev_prefix + hypothesis
 
         if force_final:

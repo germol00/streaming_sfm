@@ -19,6 +19,11 @@ temperature: 0.0
 top_p: 0.9
 top_k: 20
 repetition_penalty: 1.05
+# Whisper-style MT fallbacks (segfreetk): zlib compression ratio + temperature ladder
+temp_fall: true
+compression_ratio_threshold: 2.4
+iters_till_fallback: 4
+fallback_word_rollback: 2
 # ASR (streaming_sfm + Parakeet)
 sfm_pretrained_name: "nvidia/parakeet-tdt-0.6b-v3"
 sfm_chunk_secs: 0.96
