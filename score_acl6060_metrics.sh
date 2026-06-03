@@ -8,31 +8,13 @@
 #   ./score_acl6060_metrics.sh
 #   ./score_acl6060_metrics.sh en-de en-pt
 #
-# Env:
-#   OUTPUT_DIR        Directory with metrics_en-*.jsonl (default: output/simulstream_acl6060)
-#   ACL6060_ROOT      Dataset cache (default: ~/.cache/simuleval/acl_6060)
-#   SPEECH_CFG        speech_processor.yaml (SimulStream eval config for LogReader)
-#   PYTHON            Python interpreter
-#   BLEU_TOKENIZER    SacreBLEU tokenizer (default: intl)
-#   SKIP_COMET=1      Skip COMET (no GPU / model download)
-#   HTML_MAX_SEGS=0   Limit segments in HTML report (0 = all)
+# Configuration: edit set_config.sh (or override env vars documented there).
 #
 # Requires: pip install 'OmniSTEval[simulstream]'   # optional: OmniSTEval[comet]
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$SCRIPT_DIR"
-
-OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/output/simulstream_acl6060}"
-ACL6060_ROOT="${ACL6060_ROOT:-${HOME}/.cache/simuleval/acl_6060}"
-SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor.yaml}"
-PYTHON="${PYTHON:-python3}"
-SCORING_DIR="${OUTPUT_DIR}/scoring_data"
-RESULTS_TSV="${OUTPUT_DIR}/scores.tsv"
-PREDICTS="${OUTPUT_DIR}/preds.txt"
-BLEU_TOKENIZER="${BLEU_TOKENIZER:-intl}"
-HTML_MAX_SEGS="${HTML_MAX_SEGS:-0}"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/set_config.sh"
 
 declare -A TARGET_LANG=(
   [en-de]=de
@@ -131,18 +113,23 @@ score_direction() {
     omnisteval_cmd=(omnisteval)
   fi
 
+  #SEG_YAML=${ACL6060_ROOT}/${tag}_eval_refs.yaml
+  refs=${ACL6060_ROOT}/${tag}_eval_refs.${lang}
+  refs_src=${ACL6060_ROOT}/${tag}_eval_refs.en
   local -a cmd=(
     "${omnisteval_cmd[@]}" longform
     --speech_segmentation "$SEG_YAML"
     --ref_sentences_file "$ref_merged"
     --hypothesis_file "$metrics_log"
+    --source_sentences_file ${refs_src}
+    --lang "$lang"
+    --bleu_tokenizer ${BLEU_TOKENIZER}
+    --output_folder "$out_dir"
     --hypothesis_format simulstream
     --simulstream_config_file "$SPEECH_CFG"
-    --lang "$lang"
-    --bleu_tokenizer "$BLEU_TOKENIZER"
     --word_level
-    --output_folder "$out_dir"
   )
+    #--comet --comet_model Unbabel/XCOMET-XL 
 
   if [[ "${SKIP_COMET:-0}" != "1" ]]; then
     if [[ -f "$src_merged" ]] && "$PYTHON" -c "import comet" 2>/dev/null; then

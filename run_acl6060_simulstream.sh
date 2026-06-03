@@ -4,12 +4,7 @@
 #
 # Usage:
 #   ./run_acl6060_simulstream.sh
-# Optional env:
-#   ACL6060_ROOT   Dataset root (default: ~/.cache/simuleval/acl_6060)
-#   SPEECH_CFG     speech_processor YAML (default: repo/speech_processor.yaml)
-#   OUTPUT_DIR     Where metrics logs and wav list link farm go
-#   PYTHON         Python interpreter (default: python3; auto-falls back to conda envs with mweralign)
-#   SKIP_COMET=1   Skip COMET scoring
+# Configuration: edit set_config.sh (or override env vars documented there).
 #
 # After inference, scores with OmniSTEval (BLEU, chrF, LongYAAL, phrase HTML report).
 # Requires: pip install 'OmniSTEval[simulstream]' simulstream
@@ -17,14 +12,7 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$SCRIPT_DIR"
-
-ACL6060_ROOT="${ACL6060_ROOT:-${HOME}/.cache/simuleval/acl_6060}"
-#SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor_qwen35_9b.yaml}"
-SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor.yaml}"
-OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/output/simulstream_acl6060}"
-PYTHON="${PYTHON:-python3}"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/set_config.sh"
 
 # SimulStream's wav list loader resolves paths as: dirname(list_file) + "/" + line
 # The cache FILE_ORDER lists utterance IDs without extension; wavs live in eval/full_wavs/.
