@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import wave
 from pathlib import Path
@@ -38,6 +39,78 @@ def _load_yaml_entries(path: Path) -> list[dict]:
     return data
 
 
+def _split_ref_lines_by_talk(
+    ref_path: Path,
+    file_order: list[str],
+    seg_counts: dict[str, int],
+) -> dict[str, list[str]]:
+    lines = [line.rstrip("\n") for line in ref_path.read_text(encoding="utf-8").splitlines()]
+    expected = sum(seg_counts[talk] for talk in file_order)
+    if len(lines) != expected:
+        raise ValueError(
+            f"{ref_path} has {len(lines)} lines, expected {expected} from XML segment counts"
+        )
+    by_talk: dict[str, list[str]] = {}
+    idx = 0
+    for talk in file_order:
+        n = seg_counts[talk]
+        by_talk[talk] = lines[idx : idx + n]
+        idx += n
+    return by_talk
+
+
+def _load_metrics_delays_by_talk(metrics_path: Path) -> dict[str, tuple[list[float], float | None]]:
+    """
+    Read SimulStream metrics JSONL and return per-talk emitted-token delays.
+
+    Returns:
+      talk_stem -> (delays_ms_per_emitted_token, source_length_ms_or_None)
+    """
+    out: dict[str, tuple[list[float], float | None]] = {}
+    if not metrics_path.is_file():
+        return out
+
+    current_id: int | None = None
+    id_to_talk: dict[int, str] = {}
+    delays_by_talk: dict[str, list[float]] = {}
+    source_len_by_talk: dict[str, float] = {}
+
+    with metrics_path.open(encoding="utf-8") as f:
+        for raw in f:
+            raw = raw.strip()
+            if not raw:
+                continue
+            row = json.loads(raw)
+            if "id" not in row:
+                continue
+            rid = int(row["id"])
+            current_id = rid
+
+            metadata = row.get("metadata")
+            if isinstance(metadata, dict):
+                wav_name = metadata.get("wav_name")
+                if isinstance(wav_name, str):
+                    talk = Path(wav_name).stem
+                    id_to_talk[rid] = talk
+                    delays_by_talk.setdefault(talk, [])
+
+            talk = id_to_talk.get(rid)
+            if talk is None:
+                continue
+
+            generated_tokens = row.get("generated_tokens", [])
+            if generated_tokens:
+                delay_ms = float(row["total_audio_processed"]) * 1000.0
+                delays_by_talk[talk].extend([delay_ms] * len(generated_tokens))
+
+            if "source_length" in row:
+                source_len_by_talk[talk] = float(row["source_length"])
+
+    for talk, delays in delays_by_talk.items():
+        out[talk] = (delays, source_len_by_talk.get(talk))
+    return out
+
+
 def _try_existing_audio_definition(candidates: list[Path], expected_segments: int) -> Path | None:
     for candidate in candidates:
         candidate = _resolve(candidate)
@@ -54,11 +127,12 @@ def _try_existing_audio_definition(candidates: list[Path], expected_segments: in
 
 def build_audio_definition(
     acl_root: Path,
+    output_dir: Path,
     eval_dir: Path,
     file_order: list[str],
     seg_counts: dict[str, int],
     out_yaml: Path,
-) -> str:
+) -> tuple[str, str]:
     expected_segments = sum(seg_counts[talk] for talk in file_order)
     candidates = [
         acl_root / "en-de_eval_refs.yaml",
@@ -67,32 +141,104 @@ def build_audio_definition(
     existing = _try_existing_audio_definition(candidates, expected_segments)
     if existing is not None:
         out_yaml.write_text(existing.read_text(encoding="utf-8"), encoding="utf-8")
-        return f"copied gold segments from {existing}"
+        return f"copied gold segments from {existing}", "gold"
+
+    metrics_path = output_dir / "metrics_en-de.jsonl"
+    src_refs_path = acl_root / "en-de_eval_refs.en"
+    metrics_delays = _load_metrics_delays_by_talk(metrics_path)
+    ref_lines_by_talk = (
+        _split_ref_lines_by_talk(src_refs_path, file_order, seg_counts)
+        if src_refs_path.is_file()
+        else {}
+    )
 
     full_wavs = eval_dir / "full_wavs"
     entries: list[dict] = []
+    used_metrics_offsets = False
     for talk in file_order:
         wav_name = f"{talk}.wav"
-        duration = _wav_duration_seconds(full_wavs / wav_name)
+        duration_ms = _wav_duration_seconds(full_wavs / wav_name) * 1000.0
         n_segs = seg_counts[talk]
-        seg_dur = duration / n_segs
-        offset = 0.0
-        for _ in range(n_segs):
-            entries.append(
-                {
-                    "wav": wav_name,
-                    "offset": round(offset, 4),
-                    "duration": round(seg_dur, 4),
-                }
-            )
-            offset += seg_dur
+        talk_delays, source_len_ms = metrics_delays.get(talk, ([], None))
+        seg_refs = ref_lines_by_talk.get(talk)
+
+        if talk_delays and seg_refs and len(seg_refs) == n_segs:
+            ref_word_counts = [max(1, len(seg.strip().split())) for seg in seg_refs]
+            total_ref_words = sum(ref_word_counts)
+            total_hyp_words = len(talk_delays)
+            starts_ms: list[float] = [0.0]
+            cum_ref_words = 0
+            for i in range(1, n_segs):
+                cum_ref_words += ref_word_counts[i - 1]
+                frac = cum_ref_words / total_ref_words if total_ref_words > 0 else i / n_segs
+                hyp_idx = int(round(frac * (total_hyp_words - 1)))
+                hyp_idx = min(max(hyp_idx, 0), total_hyp_words - 1)
+                starts_ms.append(talk_delays[hyp_idx])
+
+            rec_end_ms = duration_ms if source_len_ms is None else min(duration_ms, source_len_ms)
+            starts_ms = [min(max(x, 0.0), rec_end_ms) for x in starts_ms]
+            for i in range(1, len(starts_ms)):
+                if starts_ms[i] < starts_ms[i - 1]:
+                    starts_ms[i] = starts_ms[i - 1]
+
+            # Ensure strictly positive segment durations for OmniSTEval latency scorers.
+            # Repeated emission delays can collapse adjacent boundaries to the same value.
+            eps_ms = 1.0
+            if n_segs > 1 and rec_end_ms <= eps_ms * (n_segs - 1):
+                eps_ms = max(1e-3, rec_end_ms / (2.0 * n_segs))
+
+            # Forward pass: enforce minimum spacing.
+            for i in range(1, len(starts_ms)):
+                min_allowed = starts_ms[i - 1] + eps_ms
+                if starts_ms[i] < min_allowed:
+                    starts_ms[i] = min_allowed
+
+            # Backward pass: keep room before recording end.
+            latest_start = rec_end_ms - eps_ms * (n_segs - 1)
+            if starts_ms[0] > latest_start:
+                starts_ms[0] = max(0.0, latest_start)
+            for i in range(len(starts_ms) - 2, -1, -1):
+                max_allowed = starts_ms[i + 1] - eps_ms
+                if starts_ms[i] > max_allowed:
+                    starts_ms[i] = max_allowed
+
+            for i in range(n_segs):
+                start = starts_ms[i]
+                end = starts_ms[i + 1] if i + 1 < n_segs else rec_end_ms
+                if end < start:
+                    end = start
+                entries.append(
+                    {
+                        "wav": wav_name,
+                        "offset": round(start / 1000.0, 4),
+                        "duration": round((end - start) / 1000.0, 4),
+                    }
+                )
+            used_metrics_offsets = True
+        else:
+            seg_dur_ms = duration_ms / n_segs
+            offset_ms = 0.0
+            for _ in range(n_segs):
+                entries.append(
+                    {
+                        "wav": wav_name,
+                        "offset": round(offset_ms / 1000.0, 4),
+                        "duration": round(seg_dur_ms / 1000.0, 4),
+                    }
+                )
+                offset_ms += seg_dur_ms
 
     with out_yaml.open("w", encoding="utf-8") as f:
         yaml.dump(entries, f, allow_unicode=True, sort_keys=False)
+    if used_metrics_offsets:
+        return (
+            f"built metrics-informed segment timings ({expected_segments} segments) "
+            f"using {metrics_path.name}"
+        ), "metrics_inferred"
     return (
         f"built proportional segment timings ({expected_segments} segments) "
         "(set ACL6060_ROOT/.../en-de_eval_refs.yaml for gold timings)"
-    )
+    ), "proportional"
 
 
 def split_reference_file(
@@ -150,9 +296,17 @@ def main() -> None:
     seg_counts = _seg_counts_from_xml(xml_path)
 
     audio_yaml = scoring_dir / "audio_definition.yaml"
-    note = build_audio_definition(acl_root, eval_dir, file_order, seg_counts, audio_yaml)
+    note, timing_source = build_audio_definition(
+        acl_root, output_dir, eval_dir, file_order, seg_counts, audio_yaml
+    )
     print(note)
     print(f"Wrote {audio_yaml}")
+    timing_meta = scoring_dir / "audio_definition.meta.json"
+    timing_meta.write_text(
+        json.dumps({"timing_source": timing_source}, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print(f"Wrote {timing_meta}")
 
     directions = {
         "en-de": (acl_root / "en-de_eval_refs.de", acl_root / "en-de_eval_refs.en"),
