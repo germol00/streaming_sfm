@@ -27,7 +27,7 @@ pip install -r requirements-eval.txt
 **Environment**
 
 - `ACL6060_ROOT` — ACL 60-60 cache (default `~/.cache/simuleval/acl_6060`)
-- `SPEECH_CFG` — `speech_processor.yaml` (must match inference; used as SimulStream eval config). For **Qwen3.5-9B**, use `speech_processor_qwen35_9b.yaml` (sets `llm_model_name`, `llm_enforce_eager`, and lower GPU memory utilization).
+- `SPEECH_CFG` — `speech_processor.yaml` (must match inference; used as SimulStream eval config). Presets: `speech_processor_qwen35_9b.yaml` (fp16 9B), `speech_processor_qwen35_9b_bnb4.yaml` / `speech_processor_qwen35_27b_bnb4.yaml` (4-bit via vLLM bitsandbytes; `pip install 'bitsandbytes>=0.49.2'`).
 - `BLEU_TOKENIZER` — SacreBLEU tokenizer (default `intl`)
 - `SKIP_COMET=1` — skip COMET
 - `HTML_MAX_SEGS=N` — cap segments in the HTML report (0 = all)
