@@ -22,6 +22,7 @@ from streaming_sfm.hyp_utils import (
 )
 from streaming_sfm.parakeet import _build_slcp_buffer
 from streaming_sfm import LOG_LEVEL
+from streaming_sfm.aligners import AlignmentResult, WordAligner
 from streaming_sfm.streaming_model import (
     StreamingBatchedAudioBufferWithOffset,
     StreamingParakeet,
@@ -34,7 +35,27 @@ logging.getLogger("fbk_fairseq.simultaneous.metrics").setLevel(logging.INFO)
 # Default MT checkpoint when `llm_model_name` is omitted from config (vLLM / OpenAI-compatible).
 QWEN35_4B_MODEL_NAME = "Qwen/Qwen3.5-4B"
 QWEN35_9B_MODEL_NAME = "Qwen/Qwen3.5-9B"
+QWEN35_27B_MODEL_NAME = "Qwen/Qwen3.5-27B"
 DEFAULT_LLM_MODEL_NAME = QWEN35_4B_MODEL_NAME
+
+# vLLM ``quantization`` values we accept via ``llm_quantization`` (plus aliases below).
+_LLM_QUANT_ALIASES = {
+    "4bit": "bitsandbytes",
+    "bnb4": "bitsandbytes",
+    "bnb_4bit": "bitsandbytes",
+    "bitsandbytes": "bitsandbytes",
+    "bnb": "bitsandbytes",
+    "8bit": "bitsandbytes",
+    "bnb8": "bitsandbytes",
+    "bnb_8bit": "bitsandbytes",
+    "awq": "awq",
+    "gptq": "gptq",
+    "gptq_marlin": "gptq_marlin",
+    "awq_marlin": "awq_marlin",
+    "compressed-tensors": "compressed-tensors",
+    "compressed_tensors": "compressed-tensors",
+}
+_LLM_QUANT_8BIT_ALIASES = frozenset({"8bit", "bnb8", "bnb_8bit"})
 
 
 def _is_qwen35_model(model_name: str) -> bool:
@@ -63,11 +84,87 @@ def _normalize_llm_dtype(dtype: str) -> str:
     return aliases[key]
 
 
-def _resolve_llm_dtype(config: SimpleNamespace, llm_model_name: str) -> Optional[str]:
-    """Return vLLM dtype, defaulting Qwen3.5-9B to fp16 when VRAM is tight."""
+def _normalize_llm_quantization(quant: str) -> str:
+    """Map config aliases to vLLM ``quantization`` method names."""
+    key = quant.lower().strip()
+    if key not in _LLM_QUANT_ALIASES:
+        raise ValueError(
+            f"Unsupported llm_quantization={quant!r}; "
+            f"use one of {sorted(_LLM_QUANT_ALIASES)}"
+        )
+    return _LLM_QUANT_ALIASES[key]
+
+
+# vLLM EngineArgs ``quantization_config`` is only for online quant schemes (v0.20+).
+# Bitsandbytes inflight 4-bit uses ``quantization="bitsandbytes"`` alone; vLLM applies
+# BitsAndBytesConfig defaults (load_in_4bit=True) via the model loader.
+_LLM_ONLINE_QUANTIZATION = frozenset(
+    {
+        "fp8_per_block",
+        "fp8_per_tensor",
+        "int8_per_channel_weight_only",
+        "mxfp8",
+        "online",
+    }
+)
+
+
+def _resolve_llm_quantization(
+    config: SimpleNamespace,
+) -> tuple[Optional[str], Optional[dict]]:
+    """
+    Return (vLLM quantization method, optional EngineArgs quantization_config).
+
+    ``llm_quantization_config`` is only forwarded for online vLLM quant schemes.
+    Bitsandbytes (``4bit`` / ``bitsandbytes``) must not use EngineArgs
+    ``quantization_config`` — vLLM 0.20 rejects it and uses loader defaults instead.
+    """
+    explicit = getattr(config, "llm_quantization", None)
+    if explicit is None:
+        return None, None
+
+    method = _normalize_llm_quantization(explicit)
+    raw_cfg = getattr(config, "llm_quantization_config", None)
+    if raw_cfg is not None:
+        if method == "bitsandbytes":
+            logger.warning(
+                "llm_quantization_config is ignored for bitsandbytes in vLLM; "
+                "use a pre-quantized HF checkpoint or hf_overrides instead."
+            )
+        elif method in _LLM_ONLINE_QUANTIZATION:
+            if hasattr(raw_cfg, "items"):
+                return method, dict(raw_cfg)
+            raise TypeError(
+                "llm_quantization_config must be a mapping (dict / OmegaConf DictConfig)"
+            )
+        else:
+            logger.warning(
+                "llm_quantization_config is not passed to vLLM for quantization=%s",
+                method,
+            )
+    if method == "bitsandbytes" and (
+        getattr(config, "llm_load_in_8bit", False)
+        or explicit.lower().strip() in _LLM_QUANT_8BIT_ALIASES
+    ):
+        logger.warning(
+            "8-bit bitsandbytes is not configurable via EngineArgs in this vLLM "
+            "version; inflight loading defaults to 4-bit."
+        )
+    return method, None
+
+
+def _resolve_llm_dtype(
+    config: SimpleNamespace,
+    llm_model_name: str,
+    llm_quantization: Optional[str],
+) -> Optional[str]:
+    """Return vLLM dtype; fp16 default for 9B only when not using weight quantization."""
     explicit = getattr(config, "llm_dtype", None)
     if explicit is not None:
         return _normalize_llm_dtype(explicit)
+    if llm_quantization is not None:
+        # vLLM bitsandbytes recipe uses bf16 activations; weights are 4/8-bit.
+        return "bfloat16"
     if "9b" in llm_model_name.lower():
         return "float16"
     return None
@@ -117,10 +214,25 @@ def longest_common_prefix(s1: str, s2: str) -> str:
     return ' '.join(t1[: min(len(t1), len(t2))])
 
 
+def word_lcp_len(a: List[str], b: List[str]) -> int:
+    for i, (x, y) in enumerate(zip(a, b)):
+        if x != y:
+            return i
+    return min(len(a), len(b))
+
+
 @dataclass
 class CascadeState:
     speech_id: int = 0
     asr_committed_text: str = ""
+    speculative_text: str = ""
+    last_alignment: Optional[AlignmentResult] = None
+    first_speculative_word_idx: Optional[int] = None
+    current_speculative_tokens: List[str] = field(default_factory=list)
+    last_emitted_speculative_tokens: List[str] = field(default_factory=list)
+    last_emitted_tokens: List[str] = field(default_factory=list)
+    cumulative_emitted_tokens: List[str] = field(default_factory=list)
+    stream_speculative_suffix_len: int = 0
     prev_translation: str = ""
     translation_hypotheses: List[str] = field(default_factory=lambda: [""])
     emission_started: bool = False
@@ -138,12 +250,13 @@ class CascadeSpeechProcessor(SpeechProcessor):
     """
     SimulStream processor with:
     - ASR: Streaming SFM + Parakeet
-    - MT: Qwen3.5 (e.g. 4B / 9B) via vLLM (local or OpenAI-compatible endpoint)
+    - MT: Qwen3.5 (e.g. 4B / 9B / 27B) via vLLM (local or OpenAI-compatible endpoint)
     """
 
     @staticmethod
     def _build_vllm_llm_kwargs(config: SimpleNamespace, llm_model_name: str) -> dict:
         """vLLM EngineArgs for Qwen3.5 text-only MT (see vLLM Qwen3.5 recipe)."""
+        llm_quantization, llm_quantization_config = _resolve_llm_quantization(config)
         kwargs = {
             "model": llm_model_name,
             "trust_remote_code": True,
@@ -154,7 +267,11 @@ class CascadeSpeechProcessor(SpeechProcessor):
             "max_model_len": getattr(config, "llm_max_model_len", 8192),
             "enable_prefix_caching": True,
         }
-        if getattr(config, "llm_enforce_eager", False):
+        enforce_eager = getattr(config, "llm_enforce_eager", False)
+        if llm_quantization == "bitsandbytes":
+            # Required by vLLM for bitsandbytes (CUDA graphs not supported yet).
+            enforce_eager = True
+        if enforce_eager:
             kwargs["enforce_eager"] = True
         reasoning_parser = getattr(config, "llm_reasoning_parser", None)
         if reasoning_parser is None and _is_qwen35_model(llm_model_name):
@@ -164,7 +281,14 @@ class CascadeSpeechProcessor(SpeechProcessor):
         max_cudagraph = getattr(config, "llm_max_cudagraph_capture_size", None)
         if max_cudagraph is not None:
             kwargs["max_cudagraph_capture_size"] = max_cudagraph
-        llm_dtype = _resolve_llm_dtype(config, llm_model_name)
+        if llm_quantization is not None:
+            kwargs["quantization"] = llm_quantization
+            if (
+                llm_quantization_config is not None
+                and llm_quantization in _LLM_ONLINE_QUANTIZATION
+            ):
+                kwargs["quantization_config"] = llm_quantization_config
+        llm_dtype = _resolve_llm_dtype(config, llm_model_name, llm_quantization)
         if llm_dtype is not None:
             kwargs["dtype"] = llm_dtype
         return kwargs
@@ -230,6 +354,7 @@ class CascadeSpeechProcessor(SpeechProcessor):
                 device=getattr(config, "sfm_device", "cuda"),
                 compute_dtype=getattr(config, "sfm_compute_dtype", "bfloat16"),
                 emit_incomplete=getattr(config, "sfm_emit_incomplete", False),
+                speculative=getattr(config, "sfm_speculative", False),
                 rnnt_decoding=decoding_cfg,
             )
             asr_cfg = OmegaConf.create(vars(cfg_args))
@@ -262,6 +387,12 @@ class CascadeSpeechProcessor(SpeechProcessor):
 
                 cls.tokenizer = cls.llm.get_tokenizer()
                 #cls.tokenizer = AutoTokenzier.from_pretrained(llm_model_name)
+
+        if getattr(config, "sfm_speculative", False):
+            if not hasattr(cls, "word_aligner") or cls.word_aligner is None:
+                cls.word_aligner = WordAligner(device="cpu", alignment_model="xlmr")
+        else:
+            cls.word_aligner = None
 
     def __init__(self, config: SimpleNamespace):
         super().__init__(config)
@@ -388,10 +519,14 @@ class CascadeSpeechProcessor(SpeechProcessor):
             return "".join(t.replace("▁", " ") for t in toks).strip()
         return self.asr.asr_model.tokenizer.tokens_to_text(toks)
 
-    def _asr_step(self, state: CascadeState, waveform: np.ndarray, is_last_chunk: bool) -> str:
+    def _asr_step(
+        self, state: CascadeState, waveform: np.ndarray, is_last_chunk: bool
+    ) -> tuple[str, str]:
+        speculative = getattr(self.asr_cfg, "speculative", False)
+
         if (waveform is None or len(waveform) == 0) and not is_last_chunk:
             logger.warning(f"[ASR] Received empty waveform. Returning empty string.")
-            return ""
+            return "", ""
 
         if waveform is not None and len(waveform) > 0:
             waveform = self._maybe_resample(waveform)
@@ -410,16 +545,24 @@ class CascadeSpeechProcessor(SpeechProcessor):
 
         max_empty_chunks = getattr(self.asr_cfg, "max_empty_chunks", 0)
         if self.asr_cfg.policy == "WaitK":
-            out = state.asr_hyp_buffer.flush(last_instant=0)
+            flush_result = state.asr_hyp_buffer.flush(last_instant=0, speculative=speculative)
         elif self.asr_cfg.policy == "LACP":
-            out = state.asr_hyp_buffer.flush(forced=True)
+            flush_result = state.asr_hyp_buffer.flush(forced=True, speculative=speculative)
         elif self.asr_cfg.policy == "LCP" and state.nchunks_no_output >= max_empty_chunks:
-            out = state.asr_hyp_buffer.flush(forced=True)
+            flush_result = state.asr_hyp_buffer.flush(forced=True, speculative=speculative)
         else:
-            out = state.asr_hyp_buffer.flush()
+            flush_result = state.asr_hyp_buffer.flush(speculative=speculative)
+
+        if speculative:
+            logger.debug(f"[ASR] Speculative flush result with policy {self.asr_cfg.policy}: {flush_result}")
+            out, spec_out = flush_result
+        else:
+            out = flush_result
+            spec_out = []
 
         if is_last_chunk:
             out.extend(state.asr_hyp_buffer.complete())
+            spec_out = []
 
         if max_empty_chunks:
             if not out:
@@ -427,13 +570,14 @@ class CascadeSpeechProcessor(SpeechProcessor):
             else:
                 state.nchunks_no_output = 0
 
-        if not out:
+        if not out and not spec_out:
             logger.info(f"[ASR] {self.asr_cfg.policy} policy generated no transcription. Emitting empty string")
-            return ""
-        toks = [t for _, _, t in out]
-        res = self._tokens_to_text(toks)
-        logger.info(f"[ASR] Emitting '{res}'")
-        return res
+            return "", ""
+
+        res = self._tokens_to_text([t for _, _, t in out]) if out else ""
+        spec = self._tokens_to_text([t for _, _, t in spec_out]) if spec_out else ""
+        logger.info(f"[ASR] Emitting committed '{res}', speculative '{spec}'")
+        return res, spec
 
     def _count_prompt_tokens(self, prompt: str) -> int:
         return len(self.tokenizer.encode(prompt, add_special_tokens=False))
@@ -716,15 +860,222 @@ class CascadeSpeechProcessor(SpeechProcessor):
         self._reset_translation_state(state)
         return ""
 
+    def _align_translation_to_source(
+        self, state: CascadeState, source_text: str, translation_text: str
+    ) -> Optional[AlignmentResult]:
+        if self.word_aligner is None:
+            return None
+        alignment = self.word_aligner.align_text(source_text, translation_text)
+        state.last_alignment = alignment
+        logger.debug(
+            "[Align] method=%s pairs=%s",
+            alignment.alignment_method,
+            alignment.alignments,
+        )
+        return alignment
+
+    def _first_speculative_tgt_word_idx(
+        self, committed_text: str, alignment: AlignmentResult
+    ) -> Optional[int]:
+        """Return the first target-word index aligned to speculative source tokens."""
+        committed_count = len(WordAligner.tokenize(committed_text)) if committed_text else 0
+        speculative_tgt_idxs = [
+            tgt_idx for src_idx, tgt_idx in alignment.alignments if src_idx >= committed_count
+        ]
+        if not speculative_tgt_idxs:
+            return None
+        return min(speculative_tgt_idxs)
+
+    @staticmethod
+    def _split_translation_at_word_idx(text: str, word_idx: Optional[int]) -> tuple[str, str]:
+        tokens = WordAligner.tokenize(text)
+        if word_idx is None or word_idx >= len(tokens):
+            return text, ""
+        stable = " ".join(tokens[:word_idx])
+        speculative = " ".join(tokens[word_idx:])
+        return stable, speculative
+
+    def _update_speculative_translation_boundary(
+        self,
+        state: CascadeState,
+        committed_text: str,
+        translation_text: str,
+        alignment: Optional[AlignmentResult],
+    ) -> None:
+        if alignment is None or not state.speculative_text.strip():
+            state.first_speculative_word_idx = None
+            state.current_speculative_tokens = []
+            return
+
+        state.first_speculative_word_idx = self._first_speculative_tgt_word_idx(
+            committed_text, alignment
+        )
+        stable_part, speculative_part = self._split_translation_at_word_idx(
+            translation_text, state.first_speculative_word_idx
+        )
+        state.current_speculative_tokens = WordAligner.tokenize(speculative_part)
+        logger.info(
+            "[MT] Speculative boundary at word %s: speculative=%r",
+            state.first_speculative_word_idx,
+            speculative_part,
+        )
+
+    @staticmethod
+    def _strip_reemitted_speculative_stable(
+        stable_increment_tokens: List[str], last_spec: List[str]
+    ) -> List[str]:
+        """Drop stable tokens that were already emitted as speculative."""
+        if not stable_increment_tokens or not last_spec:
+            return stable_increment_tokens
+
+        validated = word_lcp_len(last_spec, stable_increment_tokens)
+        stable_tokens = stable_increment_tokens[validated:]
+        if not stable_tokens:
+            return stable_tokens
+
+        if stable_tokens == last_spec:
+            return []
+        if len(stable_tokens) <= len(last_spec) and stable_tokens == last_spec[-len(stable_tokens) :]:
+            return []
+        if len(stable_tokens) >= len(last_spec) and stable_tokens[-len(last_spec) :] == last_spec:
+            return stable_tokens[: -len(last_spec)]
+
+        return stable_tokens
+
+    @staticmethod
+    def _strip_overlap_with_last_emission(
+        stable_tokens: List[str], last_emitted: List[str]
+    ) -> List[str]:
+        """Drop a stable prefix that repeats the tail of the previous chunk emission."""
+        if not stable_tokens or not last_emitted:
+            return stable_tokens
+
+        max_overlap = min(len(stable_tokens), len(last_emitted))
+        for size in range(max_overlap, 0, -1):
+            if stable_tokens[:size] == last_emitted[-size:]:
+                return stable_tokens[size:]
+        return stable_tokens
+
+    def _filter_stable_increment_tokens(
+        self,
+        state: CascadeState,
+        stable_increment_tokens: List[str],
+    ) -> List[str]:
+        filtered = self._strip_reemitted_speculative_stable(
+            stable_increment_tokens, state.last_emitted_speculative_tokens
+        )
+        filtered = self._strip_overlap_with_last_emission(filtered, state.last_emitted_tokens)
+        if filtered != stable_increment_tokens:
+            logger.info(
+                "[MT] Skipping re-emitted stable tokens: %r -> %r",
+                stable_increment_tokens,
+                filtered,
+            )
+        return filtered
+
+    def _speculative_stream_tail(self, state: CascadeState) -> List[str]:
+        n = state.stream_speculative_suffix_len
+        if n <= 0:
+            return []
+        return state.cumulative_emitted_tokens[-n:]
+
+    def _update_cumulative_emission(
+        self,
+        state: CascadeState,
+        deleted_tokens: List[str],
+        new_tokens: List[str],
+        new_spec_len: int,
+    ) -> None:
+        if deleted_tokens:
+            n = len(deleted_tokens)
+            stream_tail = state.cumulative_emitted_tokens[-n:]
+            if stream_tail != deleted_tokens:
+                logger.warning(
+                    "[MT] Stream tail mismatch during update: deleted=%r tail=%r",
+                    deleted_tokens,
+                    stream_tail,
+                )
+            state.cumulative_emitted_tokens = state.cumulative_emitted_tokens[:-n]
+        state.cumulative_emitted_tokens.extend(new_tokens)
+        state.stream_speculative_suffix_len = new_spec_len
+
+    def _compute_speculative_emission_delta(
+        self,
+        state: CascadeState,
+        stable_increment_tokens: List[str],
+    ) -> tuple[List[str], List[str], int]:
+        """
+        Compare the current speculative translation with the stream tail.
+
+        Stable increments can promote a prefix of the speculative stream suffix to
+        committed text. Promoted tokens stay on the cumulative stream; only the
+        remaining unvalidated speculative suffix may be deleted.
+        """
+        spec_tokens = state.current_speculative_tokens
+        stable_to_emit = self._filter_stable_increment_tokens(state, stable_increment_tokens)
+        stream_spec_tail = self._speculative_stream_tail(state)
+
+        promoted_len = word_lcp_len(stream_spec_tail, stable_increment_tokens)
+        if promoted_len:
+            logger.info(
+                "[MT] Promoted %d speculative token(s) to stable: %r",
+                promoted_len,
+                stream_spec_tail[:promoted_len],
+            )
+        unvalidated_stream_spec = stream_spec_tail[promoted_len:]
+
+        if unvalidated_stream_spec == spec_tokens:
+            if stable_to_emit:
+                deleted_tokens = list(unvalidated_stream_spec)
+                new_spec_tokens = list(spec_tokens)
+            else:
+                deleted_tokens = []
+                new_spec_tokens = []
+        elif (
+            not stable_to_emit
+            and word_lcp_len(unvalidated_stream_spec, spec_tokens) == len(unvalidated_stream_spec)
+            and len(spec_tokens) >= len(unvalidated_stream_spec)
+        ):
+            deleted_tokens = []
+            new_spec_tokens = spec_tokens[len(unvalidated_stream_spec) :]
+        else:
+            deleted_tokens = list(unvalidated_stream_spec)
+            new_spec_tokens = list(spec_tokens)
+
+        if deleted_tokens:
+            new_spec_len = len(new_spec_tokens)
+        elif new_spec_tokens:
+            new_spec_len = len(unvalidated_stream_spec) + len(new_spec_tokens)
+        else:
+            new_spec_len = len(unvalidated_stream_spec)
+
+        state.last_emitted_speculative_tokens = list(spec_tokens)
+        new_tokens = stable_to_emit + new_spec_tokens
+        return new_tokens, deleted_tokens, new_spec_len
+
     def _translate_from_asr(self, state: CascadeState, force_final: bool) -> str:
         asr_text = state.asr_committed_text.strip()
-        if not asr_text:
+        speculative_text = state.speculative_text.strip()
+        if not asr_text and not speculative_text:
             return ""
 
+        speculative = bool(speculative_text)
+        asr_context = f"{asr_text} {speculative_text}".strip() if speculative else asr_text
+
         prev_prefix = self._normalize_translation_text(state.prev_translation)
-        hypothesis = self._llm_generate_with_fallback(state, asr_text, prev_prefix)
+        hypothesis = self._llm_generate_with_fallback(state, asr_context, prev_prefix)
         prev_prefix = self._normalize_translation_text(state.prev_translation)
         full_hypothesis = self._normalize_translation_text(f'{prev_prefix.strip()} {hypothesis}'.strip())
+
+        if speculative:
+            alignment = self._align_translation_to_source(state, asr_context, full_hypothesis)
+            self._update_speculative_translation_boundary(
+                state, asr_text, full_hypothesis, alignment
+            )
+        else:
+            state.last_alignment = None
+            state.first_speculative_word_idx = None
+            state.current_speculative_tokens = []
 
         logger.debug(f"[LLM] Prev prefix: {prev_prefix}")
         logger.debug(f"[LLM] Hypothesis: {hypothesis}")
@@ -734,6 +1085,7 @@ class CascadeSpeechProcessor(SpeechProcessor):
             logger.debug(f"[LLM] Force final")
             increment = full_hypothesis[len(prev_prefix) :]
             state.prev_translation = full_hypothesis
+            state.current_speculative_tokens = []
             return self._trim_translation_increment(increment)
 
         state.translation_hypotheses.append(full_hypothesis)
@@ -758,21 +1110,57 @@ class CascadeSpeechProcessor(SpeechProcessor):
             return list(text.strip())
         raise NotImplementedError(f"Unsupported latency_unit: {self.latency_unit}")
 
-    def _build_incremental_output(self, text: str) -> IncrementalOutput:
-        if text == "":
+    def _build_incremental_output(self, stable_increment: str) -> IncrementalOutput:
+        stable_increment = self._trim_translation_increment(
+            self._normalize_translation_text(stable_increment or "")
+        )
+        stable_tokens = self._text_to_tokens(stable_increment)
+
+        if getattr(self.asr_cfg, "speculative", False):
+            new_tokens, deleted_tokens, new_spec_len = self._compute_speculative_emission_delta(
+                self._state, stable_tokens
+            )
+        else:
+            new_tokens = stable_tokens
+            deleted_tokens = []
+            new_spec_len = 0
+
+        if not new_tokens and not deleted_tokens:
             return IncrementalOutput([], "", [], "")
 
-        text = self._trim_translation_increment(self._normalize_translation_text(text))
-        out_text = text
-        if self.latency_unit == "word" and self._state.emission_started and not out_text.startswith(" "):
-            out_text = " " + out_text
-        self._state.emission_started = True
+        new_string = self.tokens_to_string(new_tokens)
+        if (
+            self.latency_unit == "word"
+            and self._state.emission_started
+            and new_string
+            and not new_string.startswith(" ")
+        ):
+            new_string = " " + new_string
+
+        deleted_string = self.tokens_to_string(deleted_tokens) if deleted_tokens else ""
+        if new_tokens:
+            self._state.emission_started = True
+
+        if deleted_tokens:
+            logger.info(
+                "[MT] Retracting speculative tokens %r (stream tail %r); emitting %r",
+                deleted_string,
+                self._speculative_stream_tail(self._state),
+                new_string,
+            )
+            logger.info(f"[MT] Cummulative emitted tokens is now: {self._state.cumulative_emitted_tokens}")
+
+        self._update_cumulative_emission(
+            self._state, deleted_tokens, new_tokens, new_spec_len
+        )
+        if new_tokens or deleted_tokens:
+            self._state.last_emitted_tokens = list(new_tokens)
 
         return IncrementalOutput(
-            new_tokens=self._text_to_tokens(out_text),
-            new_string=out_text,
-            deleted_tokens=[],
-            deleted_string="",
+            new_tokens=new_tokens,
+            new_string=new_string,
+            deleted_tokens=deleted_tokens,
+            deleted_string=deleted_string,
         )
 
     @torch.inference_mode()
@@ -793,7 +1181,10 @@ class CascadeSpeechProcessor(SpeechProcessor):
             is_last_chunk = True
             self._saw_last_nonempty_chunk = True
 
-        asr_increment = self._asr_step(self._state, waveform, is_last_chunk=is_last_chunk)
+        asr_increment, asr_speculative = self._asr_step(
+            self._state, waveform, is_last_chunk=is_last_chunk
+        )
+        self._state.speculative_text = asr_speculative.strip()
         if asr_increment:
             if self._state.asr_committed_text:
                 self._state.asr_committed_text = f"{self._state.asr_committed_text} {asr_increment}".strip()
@@ -807,11 +1198,12 @@ class CascadeSpeechProcessor(SpeechProcessor):
     def end_of_stream(self) -> IncrementalOutput:
         # If we already treated the last non-empty chunk as `is_last_chunk=True`,
         # avoid double "end" notifications to NeMo.
-        asr_increment = self._asr_step(
+        asr_increment, asr_speculative = self._asr_step(
             self._state,
             np.zeros(0, dtype=np.float32),
             is_last_chunk=not self._saw_last_nonempty_chunk,
         )
+        self._state.speculative_text = asr_speculative.strip()
         if asr_increment:
             if self._state.asr_committed_text:
                 self._state.asr_committed_text = f"{self._state.asr_committed_text} {asr_increment}".strip()

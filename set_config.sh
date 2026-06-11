@@ -21,7 +21,7 @@ REPO_ROOT="$SCRIPT_DIR"
 ACL6060_ROOT="${ACL6060_ROOT:-${HOME}/.cache/simuleval/acl_6060}"
 
 # Default speech processor config (change this line to switch experiments).
-SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor_qwen35_9b.yaml}"
+SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor_qwen35_9b_bnb4_spec.yaml}"
 #SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor.yaml}"
 
 speechp_name="$(basename "${SPEECH_CFG}" .yaml)"
