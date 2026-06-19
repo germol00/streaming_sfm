@@ -21,7 +21,8 @@ REPO_ROOT="$SCRIPT_DIR"
 ACL6060_ROOT="${ACL6060_ROOT:-${HOME}/.cache/simuleval/acl_6060}"
 
 # Default speech processor config (change this line to switch experiments).
-SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor_qwen35_9b_bnb4_spec.yaml}"
+#SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor_qwen35_27b_bnb4_spec.yaml}"
+SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor_qwen35_9b_bnb4_lacp.yaml}"
 #SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor.yaml}"
 
 speechp_name="$(basename "${SPEECH_CFG}" .yaml)"
@@ -31,6 +32,7 @@ OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/output/${speechp_name}}"
 PYTHON="${PYTHON:-python3}"
 BLEU_TOKENIZER="${BLEU_TOKENIZER:-13a}"
 HTML_MAX_SEGS="${HTML_MAX_SEGS:-0}"
+LATENCY_UNIT="${LATENCY_UNIT:-word}"
 
 SCORING_DIR="${OUTPUT_DIR}/scoring_data"
 RESULTS_TSV="${OUTPUT_DIR}/scores.tsv"

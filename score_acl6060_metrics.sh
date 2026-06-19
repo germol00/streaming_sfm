@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Score SimulStream metrics logs with OmniSTEval (IWSLT-style longform resegmentation).
 #
-# Produces corpus metrics (BLEU, chrF, LongYAAL, …), per-segment instances.resegmented.jsonl,
-# and an HTML phrase-level diff report.
+# Produces corpus metrics (BLEU, chrF, LongYAAL, …), flickering stats (normalized erasure, RTF),
+# per-segment instances.resegmented.jsonl, and an HTML phrase-level diff report.
 #
 # Usage:
 #   ./score_acl6060_metrics.sh
@@ -19,13 +19,16 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/set_config.sh"
 declare -A TARGET_LANG=(
   [en-de]=de
   [en-fr]=fr
+  [en-nl]=nl
   [en-pt]=pt
+  [en-ru]=ru
+  [en-tr]=tr
 )
 
 if [[ $# -gt 0 ]]; then
   DIRECTIONS=("$@")
 else
-  DIRECTIONS=(en-de en-fr en-pt)
+  DIRECTIONS=(en-de en-fr en-nl en-pt en-ru en-tr)
 fi
 
 export PYTHONPATH="${REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
@@ -82,6 +85,112 @@ append_scores_from_tsv() {
   tail -n +2 "$scores_tsv" | while IFS=$'\t' read -r metric value _; do
     printf "%s\t%s\t%s\tOmniSTEval longform\n" "$tag" "$metric" "$value" >>"$RESULTS_TSV"
   done
+}
+
+append_simulstream_stats() {
+  local tag="$1"
+  local metrics_log="$2"
+  local out_dir="$3"
+  local stats_json="${out_dir}/stats.json"
+
+  echo "Computing SimulStream stats (normalized erasure, RTF) from ${metrics_log}..."
+  "$PYTHON" - <<'PY' "$SPEECH_CFG" "$metrics_log" "$LATENCY_UNIT" "$stats_json" "$RESULTS_TSV" "$tag"
+import json
+import statistics
+import sys
+from pathlib import Path
+
+from simulstream.config import yaml_config
+from simulstream.metrics.readers import LogReader
+from simulstream.metrics.stats import NormalizedErasure, RealTimeFactor
+
+eval_config_path, metrics_log, latency_unit, stats_path, results_tsv, tag = sys.argv[1:7]
+eval_config = yaml_config(eval_config_path)
+log_reader = LogReader(eval_config, metrics_log, latency_unit=latency_unit)
+stats = {
+    stat.name(): {"description": stat.description(), "value": stat.compute(log_reader)}
+    for stat in (NormalizedErasure(), RealTimeFactor())
+}
+rows = []
+with open(metrics_log, encoding="utf-8") as f:
+    for line in f:
+        line = line.strip()
+        if not line:
+            continue
+        row = json.loads(line)
+        if "total_audio_processed" in row:
+            rows.append(row)
+
+generated_counts = [len(row.get("generated_tokens", [])) for row in rows]
+deleted_counts = [len(row.get("deleted_tokens", [])) for row in rows]
+compute_times = [float(row.get("computation_time", 0.0) or 0.0) for row in rows]
+generated_total = sum(generated_counts)
+deleted_total = sum(deleted_counts)
+emitting_steps = sum(1 for n in generated_counts if n)
+revision_steps = sum(1 for n in deleted_counts if n)
+max_audio = max((float(row.get("total_audio_processed", 0.0) or 0.0) for row in rows), default=0.0)
+
+def percentile(values, pct):
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    idx = min(len(ordered) - 1, round((pct / 100.0) * (len(ordered) - 1)))
+    return ordered[idx]
+
+extra_stats = {
+    "chunks": {
+        "description": "Number of streaming chunks in the metrics log.",
+        "value": len(rows),
+    },
+    "generated_tokens_total": {
+        "description": "Total generated target tokens, including tokens later deleted.",
+        "value": generated_total,
+    },
+    "deleted_tokens_total": {
+        "description": "Total deleted target tokens.",
+        "value": deleted_total,
+    },
+    "deletion_ratio": {
+        "description": "Deleted target tokens divided by generated target tokens.",
+        "value": deleted_total / generated_total if generated_total else 0.0,
+    },
+    "revision_step_rate": {
+        "description": "Fraction of chunks that delete at least one target token.",
+        "value": revision_steps / len(rows) if rows else 0.0,
+    },
+    "emission_step_rate": {
+        "description": "Fraction of chunks that emit at least one target token.",
+        "value": emitting_steps / len(rows) if rows else 0.0,
+    },
+    "mean_computation_time_s": {
+        "description": "Mean wall-clock computation time per streaming chunk.",
+        "value": statistics.fmean(compute_times) if compute_times else 0.0,
+    },
+    "p95_computation_time_s": {
+        "description": "95th percentile wall-clock computation time per streaming chunk.",
+        "value": percentile(compute_times, 95),
+    },
+    "max_computation_time_s": {
+        "description": "Maximum wall-clock computation time for a streaming chunk.",
+        "value": max(compute_times, default=0.0),
+    },
+    "total_computation_time_s": {
+        "description": "Total wall-clock computation time across streaming chunks.",
+        "value": sum(compute_times),
+    },
+    "metrics_log_rtf": {
+        "description": "Total computation time divided by processed audio duration.",
+        "value": sum(compute_times) / max_audio if max_audio else 0.0,
+    },
+}
+stats.update(extra_stats)
+Path(stats_path).write_text(json.dumps(stats, indent=2) + "\n", encoding="utf-8")
+with open(results_tsv, "a", encoding="utf-8") as f:
+    for name, payload in stats.items():
+        f.write(f"{tag}\t{name}\t{payload['value']}\tsimulstream.metrics.stats\n")
+for name, payload in stats.items():
+    print(f"  {name}: {payload['value']:.6f}")
+PY
 }
 
 score_direction() {
@@ -146,6 +255,7 @@ score_direction() {
   "${cmd[@]}"
 
   append_scores_from_tsv "$tag" "${out_dir}/scores.tsv"
+  append_simulstream_stats "$tag" "$metrics_log" "$out_dir"
 
   local instances="${out_dir}/instances.resegmented.jsonl"
   if [[ -f "$instances" ]]; then

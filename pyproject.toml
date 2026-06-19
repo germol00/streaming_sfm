@@ -14,6 +14,9 @@ dependencies = [
 		"levenshtein",
 		"tqdm",
 		"evaluate",
+		"scipy",
+		"scikit-learn",
+		"networkx",
 ]
 
 description = "Small toolkit for streaming ASR with SFMs"

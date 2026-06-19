@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Run SimulStream offline inference (python -m simulstream.inference) with
-# agent_simulstream.CascadeSpeechProcessor on ACL 60-60 eval audio for en-de and en-fr.
+# agent_simulstream.CascadeSpeechProcessor on ACL 60-60 eval audio.
 #
 # Usage:
 #   ./run_acl6060_simulstream.sh
+#   ./run_acl6060_simulstream.sh en-de en-pt
 # Configuration: edit set_config.sh (or override env vars documented there).
 #
 # After inference, scores with OmniSTEval (BLEU, chrF, LongYAAL, phrase HTML report).
@@ -13,6 +14,30 @@
 set -euo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/set_config.sh"
+
+declare -A SOURCE_LANG=(
+  [en-de]=English
+  [en-fr]=English
+  [en-nl]=English
+  [en-pt]=English
+  [en-ru]=English
+  [en-tr]=English
+)
+
+declare -A TARGET_LANG=(
+  [en-de]=German
+  [en-fr]=French
+  [en-nl]=Dutch
+  [en-pt]=Portuguese
+  [en-ru]=Russian
+  [en-tr]=Turkish
+)
+
+if [[ $# -gt 0 ]]; then
+  DIRECTIONS=("$@")
+else
+  DIRECTIONS=(en-de en-fr en-nl en-pt en-ru en-tr)
+fi
 
 # SimulStream's wav list loader resolves paths as: dirname(list_file) + "/" + line
 # The cache FILE_ORDER lists utterance IDs without extension; wavs live in eval/full_wavs/.
@@ -73,14 +98,16 @@ run_direction() {
 
 mkdir -p "$OUTPUT_DIR"
 
-run_direction "en-de" "English" "German"
-run_direction "en-fr" "English" "French"
-#run_direction "en-pt" "English" "Portuguese"
+for tag in "${DIRECTIONS[@]}"; do
+  if [[ -z "${SOURCE_LANG[$tag]:-}" || -z "${TARGET_LANG[$tag]:-}" ]]; then
+    echo "error: unknown direction '$tag' (supported: ${!TARGET_LANG[*]})" >&2
+    exit 1
+  fi
+  run_direction "$tag" "${SOURCE_LANG[$tag]}" "${TARGET_LANG[$tag]}"
+done
 
 echo ""
-echo "Scoring with OmniSTEval (BLEU, chrF, LongYAAL, phrase report)..."
-"${REPO_ROOT}/score_acl6060_metrics.sh" en-de
-"${REPO_ROOT}/score_acl6060_metrics.sh" en-fr
-#"${REPO_ROOT}/score_acl6060_metrics.sh" en-pt
+echo "Scoring with OmniSTEval (BLEU, chrF, LongYAAL, normalized erasure, phrase report)..."
+"${REPO_ROOT}/score_acl6060_metrics.sh" "${DIRECTIONS[@]}"
 
 echo "Done. Wav list (for SimulStream): $WAV_LIST_FILE"

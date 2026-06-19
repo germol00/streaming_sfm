@@ -8,7 +8,8 @@ llm_language_model_only: true  # vLLM: skip audio/video/image encoders; text-onl
 llm_enable_thinking: false   # required for translation; true emits "Thinking Process:" only
 # llm_reasoning_parser: "qwen3"  # auto-set for Qwen3.5 when omitted
 # llm_dtype: "fp16"              # float16 weights; default for 9B if omitted (see speech_processor_qwen35_9b.yaml)
-# llm_enforce_eager: true        # recommended for Qwen3.5-9B (see speech_processor_qwen35_9b.yaml)
+# llm_quantization: "4bit"       # bitsandbytes 4-bit via vLLM (see *_bnb4.yaml presets)
+# llm_enforce_eager: true        # required for 9B / bitsandbytes (see speech_processor_qwen35_9b.yaml)
 llm_gpu_memory_utilization: 0.62
 llm_max_model_len: 8192
 # llm_base_url: "http://localhost:8000/v1"    # optional if using remote vLLM server
@@ -27,6 +28,12 @@ temp_fall: true
 compression_ratio_threshold: 2.4
 iters_till_fallback: 4
 fallback_word_rollback: 2
+# MT emission policy (independent of ASR ``sfm_policy``)
+mt_policy: "LCP"              # LCP / LACP / SLCP
+mt_lacp_threshold: 2.0
+mt_slcp_semantic_threshold: 0.65
+mt_slcp_max_gap: 3
+mt_slcp_use_spacy: false
 # ASR (streaming_sfm + Parakeet)
 sfm_pretrained_name: "nvidia/parakeet-tdt-0.6b-v3"
 sfm_chunk_secs: 0.96

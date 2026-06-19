@@ -1,8 +1,12 @@
-El fallback de whisper (https://github.com/jorirsan/segfreetk/blob/main/src/segfreetk/models/vllm.py#L318)
-Comprovar si estic carregant el model de llenguatge soles (sense encoders extra)
-Revisar les tècniques de Jorge per evitar casos de no emitir
-Implementar el incremental ouptut
+Gestionar el cas de les comes ("Commit-Nachrichten ,", "obtenir ceci , ce").
+Gestionar els valors de latència negatius.
 
-Quan ja estiga tot implementat:
-- Provar Qwen3.5-{9B,27B} quantitzat
-- Provar algun altre model per contrastar
+Quan acabe la array de pac_experiments:
+    - Resetejar pac_experiment_manifest.yaml i posar les tres direccions
+    - ./run_pac_experiments.sh --score-only; ./run_pac_experiments.sh --report-only
+
+- Fer experimentació as follows:
+    - Experiments ASR-MT on decidim la política d'ASR (LACP segons IWSLT)
+    - Experiments ASR-MT on re-fem la array de pac_experiments per a les altres polítiques d'emissió.
+    
+    - Repetir tot amb MCIF :)

@@ -311,7 +311,10 @@ def main() -> None:
     directions = {
         "en-de": (acl_root / "en-de_eval_refs.de", acl_root / "en-de_eval_refs.en"),
         "en-fr": (acl_root / "en-fr_eval_refs.fr", acl_root / "en-fr_eval_refs.en"),
+        "en-nl": (acl_root / "en-nl_eval_refs.nl", acl_root / "en-nl_eval_refs.en"),
         "en-pt": (acl_root / "en-pt_eval_refs.pt", acl_root / "en-pt_eval_refs.en"),
+        "en-ru": (acl_root / "en-ru_eval_refs.ru", acl_root / "en-ru_eval_refs.en"),
+        "en-tr": (acl_root / "en-tr_eval_refs.tr", acl_root / "en-tr_eval_refs.en"),
     }
     for tag, (ref_path, src_path) in directions.items():
         ref_path = _resolve(ref_path)

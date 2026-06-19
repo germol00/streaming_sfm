@@ -1,13 +1,19 @@
 import logging
 import re
+import os
 import unicodedata
 import zlib
 from dataclasses import dataclass, field
 from types import SimpleNamespace
 from typing import List, Optional
 
+# CUDA allocator tuning; must be set before the first `import torch`.
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+os.environ.setdefault("PYTORCH_ALLOC_CONF", "expandable_segments:True")
+
 import numpy as np
 import torch
+from rapidfuzz.distance import Levenshtein
 from omegaconf import OmegaConf, open_dict
 from openai import OpenAI
 from simulstream.server.speech_processors import SAMPLE_RATE, SpeechProcessor
@@ -27,6 +33,15 @@ from streaming_sfm.streaming_model import (
     StreamingBatchedAudioBufferWithOffset,
     StreamingParakeet,
 )
+
+try:
+    from segfreetk.states.sclp import _LinguisticChecks, _slcp_stable_flags
+
+    _MT_SLCP_AVAILABLE = True
+except ImportError:
+    _LinguisticChecks = None  # type: ignore[misc, assignment]
+    _slcp_stable_flags = None  # type: ignore[misc, assignment]
+    _MT_SLCP_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 logger.setLevel(LOG_LEVEL)
@@ -221,6 +236,27 @@ def word_lcp_len(a: List[str], b: List[str]) -> int:
     return min(len(a), len(b))
 
 
+def word_lacp_prefix_tokens(
+    prev_tokens: List[str], curr_tokens: List[str], threshold: float, uncased: bool = True
+) -> List[str]:
+    """Longest prefix of ``curr_tokens`` stable under the LACP Levenshtein threshold."""
+    commit: List[str] = []
+    past: List[str] = []
+    present: List[str] = []
+    for i in range(min(len(prev_tokens), len(curr_tokens))):
+        past.append(prev_tokens[i])
+        present.append(curr_tokens[i])
+        past_s = " ".join(past)
+        present_s = " ".join(present)
+        if uncased:
+            past_s = past_s.lower()
+            present_s = present_s.lower()
+        if Levenshtein.distance(past_s, present_s) > threshold:
+            break
+        commit.append(curr_tokens[i])
+    return commit
+
+
 @dataclass
 class CascadeState:
     speech_id: int = 0
@@ -235,6 +271,7 @@ class CascadeState:
     stream_speculative_suffix_len: int = 0
     prev_translation: str = ""
     translation_hypotheses: List[str] = field(default_factory=lambda: [""])
+    mt_slcp_prev_hyp: List[str] = field(default_factory=list)
     emission_started: bool = False
     total_samples: int = 0
 
@@ -292,6 +329,71 @@ class CascadeSpeechProcessor(SpeechProcessor):
         if llm_dtype is not None:
             kwargs["dtype"] = llm_dtype
         return kwargs
+
+    @classmethod
+    def _run_asr_warmup_pass(cls, asr: StreamingParakeet, *, num_chunks: int) -> None:
+        """Drive ASR through ``num_chunks`` streaming forwards on dummy audio."""
+        chunk_samples = asr.context_samples.chunk
+        if chunk_samples <= 0:
+            return
+
+        buffer = StreamingBatchedAudioBufferWithOffset(
+            batch_size=1,
+            context_samples=asr.context_samples,
+            dtype=asr.dtype,
+            device=asr.device,
+        )
+        # Low-amplitude noise avoids RNNT decoder edge cases with all-zero frames.
+        chunk_audio = (
+            torch.randn((1, chunk_samples), dtype=asr.dtype, device=asr.device) * 1e-3
+        )
+        offset = 0
+        for i in range(num_chunks):
+            is_last = i == num_chunks - 1
+            stride = buffer.add_audio_batch_get_stride(
+                chunk_audio,
+                audio_lengths=torch.tensor([chunk_samples], device=asr.device),
+                is_last_chunk=is_last,
+                is_last_chunk_batch=torch.tensor([is_last], device=asr.device),
+            )
+            offset += stride // asr.encoder_frame2audio_samples
+            asr.process_chunk(buffer, offset)
+
+    @classmethod
+    def _warmup_asr_model(cls, config: SimpleNamespace, *, phase: str = "pre_llm") -> None:
+        """Run ASR streaming warmup on CUDA.
+
+        ``pre_llm``: settle Parakeet allocations (~5 GiB -> ~2 GiB) before vLLM init.
+        ``post_llm``: one more pass after local vLLM spawns EngineCore so the parent
+        process CUDA context is valid again before real inference.
+        """
+        if getattr(config, "sfm_device", "cuda") != "cuda":
+            return
+        if cls.asr is None:
+            return
+
+        if phase == "pre_llm":
+            if getattr(config, "sfm_warmup", True) is False:
+                return
+            num_chunks = 2
+            label = "Warming up ASR before LLM load"
+        elif phase == "post_llm":
+            if getattr(config, "sfm_warmup_after_llm", True) is False:
+                return
+            if getattr(config, "llm_base_url", None) is not None:
+                return
+            num_chunks = 1
+            label = "Re-syncing ASR after vLLM init"
+        else:
+            raise ValueError(f"Unknown ASR warmup phase: {phase!r}")
+
+        asr = cls.asr
+        logger.info("%s on %s (%d chunk(s))...", label, asr.device, num_chunks)
+        with torch.inference_mode():
+            cls._run_asr_warmup_pass(asr, num_chunks=num_chunks)
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
+        logger.info("%s complete", label)
 
     @classmethod
     def load_model(cls, config: SimpleNamespace):
@@ -355,6 +457,9 @@ class CascadeSpeechProcessor(SpeechProcessor):
                 compute_dtype=getattr(config, "sfm_compute_dtype", "bfloat16"),
                 emit_incomplete=getattr(config, "sfm_emit_incomplete", False),
                 speculative=getattr(config, "sfm_speculative", False),
+                speculative_max_words=getattr(config, "sfm_speculative_max_words", 0),
+                pac_use_alignment_boundary=getattr(config, "pac_use_alignment_boundary", True),
+                pac_emit_provisional_target=getattr(config, "pac_emit_provisional_target", True),
                 rnnt_decoding=decoding_cfg,
             )
             asr_cfg = OmegaConf.create(vars(cfg_args))
@@ -369,6 +474,7 @@ class CascadeSpeechProcessor(SpeechProcessor):
                 cls.asr.context_samples.chunk,
                 cls.asr.context_samples.right,
             )
+            cls._warmup_asr_model(config, phase="pre_llm")
 
         llm_model_name = getattr(config, "llm_model_name", DEFAULT_LLM_MODEL_NAME)
         llm_base_url = getattr(config, "llm_base_url", None)
@@ -387,6 +493,7 @@ class CascadeSpeechProcessor(SpeechProcessor):
 
                 cls.tokenizer = cls.llm.get_tokenizer()
                 #cls.tokenizer = AutoTokenzier.from_pretrained(llm_model_name)
+            cls._warmup_asr_model(config, phase="post_llm")
 
         if getattr(config, "sfm_speculative", False):
             if not hasattr(cls, "word_aligner") or cls.word_aligner is None:
@@ -410,6 +517,13 @@ class CascadeSpeechProcessor(SpeechProcessor):
         self._top_k = getattr(config, "top_k", 20)
         self._max_tokens = getattr(config, "max_new_tokens", 256)
         self._repetition_penalty = getattr(config, "repetition_penalty", 1.05)
+        # MT decoding strategy. "beam" fixes a deterministic beam search (recommended
+        # for PAC experiments); "sampling" keeps the legacy temperature/top-p sampling.
+        self._llm_decoding = str(getattr(config, "llm_decoding", "sampling")).lower()
+        self._llm_beam_size = int(getattr(config, "llm_beam_size", 5))
+        self._llm_beam_length_penalty = float(
+            getattr(config, "llm_beam_length_penalty", 1.0)
+        )
         temp_fall = getattr(config, "temp_fall", False)
         if temp_fall is True:
             self._temp_fall = [0.2, 0.4, 0.6, 0.8, 1.0]
@@ -424,6 +538,44 @@ class CascadeSpeechProcessor(SpeechProcessor):
         self._llm_max_model_len = getattr(config, "llm_max_model_len", 8192)
         # Qwen3.5 defaults to thinking mode; disable for direct translation output.
         self._llm_enable_thinking = getattr(config, "llm_enable_thinking", False)
+        # PAC variant: expose committed vs provisional ASR to the LLM as a tagged
+        # prompt instead of a single flat source string.
+        self._pac_tagged_prompt = bool(getattr(config, "pac_tagged_prompt", False))
+        self._audio_noise_snr_db = getattr(config, "audio_noise_snr_db", None)
+        self._audio_noise_rng = np.random.default_rng(
+            int(getattr(config, "audio_noise_seed", 13))
+        )
+
+        # MT emission policy (LCP / LACP / SLCP), independent of ASR ``sfm_policy``.
+        self._mt_policy = str(getattr(config, "mt_policy", "LCP")).upper()
+        if self._mt_policy not in {"LCP", "LACP", "SLCP"}:
+            raise ValueError(
+                f"Unsupported mt_policy={self._mt_policy!r}; expected LCP, LACP, or SLCP"
+            )
+        self._mt_lacp_threshold = float(getattr(config, "mt_lacp_threshold", 2.0))
+        self._mt_slcp_semantic_threshold = float(
+            getattr(config, "mt_slcp_semantic_threshold", 0.65)
+        )
+        self._mt_slcp_max_gap = int(getattr(config, "mt_slcp_max_gap", 3))
+        self._mt_slcp_use_spacy = bool(getattr(config, "mt_slcp_use_spacy", False))
+        self._mt_slcp_nlp = None
+        self._mt_slcp_linguistic_checks = None
+        if self._mt_policy == "SLCP":
+            if not _MT_SLCP_AVAILABLE:
+                raise ImportError(
+                    "mt_policy=SLCP requires segfreetk.states.sclp (_slcp_stable_flags); "
+                    "install segfreetk and its SLCP dependencies"
+                )
+            self._ensure_mt_slcp_nlp()
+        logger.info(
+            "MT emission policy: %s (lacp_threshold=%s, slcp_semantic_threshold=%s, "
+            "slcp_max_gap=%s, slcp_use_spacy=%s)",
+            self._mt_policy,
+            self._mt_lacp_threshold,
+            self._mt_slcp_semantic_threshold,
+            self._mt_slcp_max_gap,
+            self._mt_slcp_use_spacy,
+        )
 
         self.sampling_params = SamplingParams(
             temperature=self._temperature,
@@ -457,6 +609,18 @@ class CascadeSpeechProcessor(SpeechProcessor):
             self._asr_sample_rate,
             self._needs_resample,
         )
+
+    def _maybe_add_audio_noise(self, waveform: np.ndarray) -> np.ndarray:
+        if self._audio_noise_snr_db is None or waveform is None or len(waveform) == 0:
+            return waveform
+        waveform64 = waveform.astype(np.float64, copy=False)
+        signal_power = float(np.mean(np.square(waveform64)))
+        if signal_power <= 0.0:
+            return waveform
+        snr_linear = 10.0 ** (float(self._audio_noise_snr_db) / 10.0)
+        noise_std = np.sqrt(signal_power / snr_linear)
+        noise = self._audio_noise_rng.normal(0.0, noise_std, size=waveform.shape)
+        return (waveform + noise).astype(np.float32)
 
     def _maybe_resample(self, waveform: np.ndarray) -> np.ndarray:
         if waveform is None or len(waveform) == 0:
@@ -529,6 +693,7 @@ class CascadeSpeechProcessor(SpeechProcessor):
             return "", ""
 
         if waveform is not None and len(waveform) > 0:
+            waveform = self._maybe_add_audio_noise(waveform)
             waveform = self._maybe_resample(waveform)
             chunk = np.asarray(waveform, dtype=np.float32)
             chunk_t = torch.tensor([chunk], device=self.asr.device)
@@ -576,6 +741,16 @@ class CascadeSpeechProcessor(SpeechProcessor):
 
         res = self._tokens_to_text([t for _, _, t in out]) if out else ""
         spec = self._tokens_to_text([t for _, _, t in spec_out]) if spec_out else ""
+        max_spec_words = int(getattr(self.asr_cfg, "speculative_max_words", 0) or 0)
+        if spec and max_spec_words > 0:
+            spec_words = spec.split()
+            if len(spec_words) > max_spec_words:
+                spec = " ".join(spec_words[:max_spec_words])
+                logger.info(
+                    "[ASR] Capped provisional ASR context to %d word(s): %r",
+                    max_spec_words,
+                    spec,
+                )
         logger.info(f"[ASR] Emitting committed '{res}', speculative '{spec}'")
         return res, spec
 
@@ -604,18 +779,44 @@ class CascadeSpeechProcessor(SpeechProcessor):
             except TypeError:
                 return self.tokenizer.apply_chat_template(messages, **common)
 
-    def _build_llm_prompt(self, asr_segment: str, prev_translation: str) -> str:
+    def _build_llm_prompt(
+        self,
+        asr_segment: str,
+        prev_translation: str,
+        speculative_segment: Optional[str] = None,
+    ) -> str:
+        use_tagged = (
+            self._pac_tagged_prompt
+            and speculative_segment is not None
+            and speculative_segment.strip() != ""
+        )
+        if use_tagged:
+            system_content = (
+                f"You are a professional simultaneous speech translator. "
+                f"Translate from {self.source_lang} into {self.target_lang}. "
+                "The source is given in two parts: a COMMITTED section that is final, "
+                "and a TENTATIVE section transcribed from partial audio that may still "
+                "change. Translate the committed section faithfully and use the tentative "
+                "section as additional context to produce a coherent, well-ordered "
+                "translation of the whole source. "
+                "Preserve named entities exactly as in the source text. "
+                "Output only the translation with no explanation, preamble, or reasoning."
+            )
+            user_content = (
+                f"COMMITTED:\n{asr_segment.strip()}\n\n"
+                f"TENTATIVE:\n{speculative_segment.strip()}"
+            )
+        else:
+            system_content = (
+                f"You are a professional simultaneous speech translator. "
+                f"Translate from {self.source_lang} into {self.target_lang}. "
+                "Preserve named entities exactly as in the source text. "
+                "Output only the translation with no explanation, preamble, or reasoning."
+            )
+            user_content = asr_segment
         messages = [
-            {
-                "role": "system",
-                "content": (
-                    f"You are a professional simultaneous speech translator. "
-                    f"Translate from {self.source_lang} into {self.target_lang}. "
-                    "Preserve named entities exactly as in the source text. "
-                    "Output only the translation with no explanation, preamble, or reasoning."
-                ),
-            },
-            {"role": "user", "content": asr_segment},
+            {"role": "system", "content": system_content},
+            {"role": "user", "content": user_content},
         ]
         prompt = self._apply_chat_template(messages)
         return prompt + prev_translation
@@ -660,19 +861,27 @@ class CascadeSpeechProcessor(SpeechProcessor):
         decoded = self.tokenizer.decode(token_ids[-max_tokens:], skip_special_tokens=True)
         return self._normalize_translation_text(decoded)
 
-    def _fit_llm_prompt(self, asr_segment: str, prev_translation: str) -> tuple[str, str, str]:
+    def _fit_llm_prompt(
+        self,
+        asr_segment: str,
+        prev_translation: str,
+        speculative_segment: Optional[str] = None,
+    ) -> tuple[str, str, str]:
         """
         Build an LLM prompt that fits within the configured context window.
 
         Long ACL segments can exceed ``llm_max_model_len`` once ASR and the committed
         translation prefix grow; drop older ASR first, then older translation prefix.
+
+        When ``speculative_segment`` is provided (tagged PAC), only the committed
+        ``asr_segment`` is truncated; the short provisional suffix is kept intact.
         """
         reserve_tokens = self._max_tokens + 32
         max_input_tokens = max(64, self._llm_max_model_len - reserve_tokens)
 
         asr_words = asr_segment.split()
         prev = self._normalize_translation_text(prev_translation)
-        prompt = self._build_llm_prompt(asr_segment, prev)
+        prompt = self._build_llm_prompt(asr_segment, prev, speculative_segment)
         prompt_tokens = self._count_prompt_tokens(prompt)
 
         if prompt_tokens > max_input_tokens and len(asr_words) > 1:
@@ -681,14 +890,14 @@ class CascadeSpeechProcessor(SpeechProcessor):
             while lo < hi:
                 mid = (lo + hi) // 2
                 candidate = " ".join(asr_words[mid:])
-                candidate_prompt = self._build_llm_prompt(candidate, prev)
+                candidate_prompt = self._build_llm_prompt(candidate, prev, speculative_segment)
                 if self._count_prompt_tokens(candidate_prompt) <= max_input_tokens:
                     best_asr = candidate
                     hi = mid
                 else:
                     lo = mid + 1
             asr_segment = best_asr
-            prompt = self._build_llm_prompt(asr_segment, prev)
+            prompt = self._build_llm_prompt(asr_segment, prev, speculative_segment)
             prompt_tokens = self._count_prompt_tokens(prompt)
             if lo > 0:
                 logger.warning(
@@ -699,13 +908,13 @@ class CascadeSpeechProcessor(SpeechProcessor):
                 )
 
         if prompt_tokens > max_input_tokens and prev:
-            template = self._build_llm_prompt(asr_segment, "")
+            template = self._build_llm_prompt(asr_segment, "", speculative_segment)
             template_tokens = self._count_prompt_tokens(template)
             prev_budget = max(0, max_input_tokens - template_tokens)
             prev = self._normalize_translation_text(
                 self._truncate_text_from_left(prev, prev_budget)
             )
-            prompt = self._build_llm_prompt(asr_segment, prev)
+            prompt = self._build_llm_prompt(asr_segment, prev, speculative_segment)
             prompt_tokens = self._count_prompt_tokens(prompt)
             logger.warning(
                 "Truncated committed translation prefix to %d tokens to fit context window",
@@ -745,6 +954,7 @@ class CascadeSpeechProcessor(SpeechProcessor):
             else:
                 state.prev_translation = ""
         state.translation_hypotheses = [state.prev_translation]
+        state.mt_slcp_prev_hyp = self._text_to_tokens(state.prev_translation)
         logger.warning(
             "[BAD STATE] Rolled back last %d translation unit(s); committed prefix is now %r",
             n_units,
@@ -754,12 +964,128 @@ class CascadeSpeechProcessor(SpeechProcessor):
     def _reset_translation_state(self, state: CascadeState) -> None:
         state.prev_translation = ""
         state.translation_hypotheses = [""]
+        state.mt_slcp_prev_hyp = []
         state.consecutive_empty_mt = 0
+
+    def _ensure_mt_slcp_nlp(self) -> None:
+        """Lazily load spacy for SLCP Pass 3 linguistic checks (segfreetk-compatible)."""
+        if self._mt_slcp_nlp is not None or not self._mt_slcp_use_spacy:
+            return
+        try:
+            import spacy
+
+            self._mt_slcp_nlp = spacy.load("en_core_web_sm")
+            self._mt_slcp_linguistic_checks = _LinguisticChecks(
+                lemma=True, pos_dep=True, ner=True, fine_tag=True
+            )
+            logger.info("[MT/SLCP] spacy model loaded (en_core_web_sm)")
+        except ImportError:
+            logger.warning(
+                "[MT/SLCP] spacy unavailable; falling back to morphological similarity"
+            )
+        except OSError as exc:
+            logger.warning(
+                "[MT/SLCP] spacy model unavailable (%s); falling back to morphological similarity",
+                exc,
+            )
+
+    def _mt_slcp_stable_prefix(
+        self, state: CascadeState, curr_hypothesis: str, prev_prefix: str
+    ) -> str:
+        """Stable-LCP emission for MT (segfreetk TranslationState.SLCP)."""
+        assert _slcp_stable_flags is not None
+
+        prev_hyp_tokens = state.mt_slcp_prev_hyp
+        curr_tokens = self._text_to_tokens(curr_hypothesis)
+        cursor = len(self._text_to_tokens(prev_prefix))
+
+        if not prev_hyp_tokens:
+            return prev_prefix
+
+        stable_flags = _slcp_stable_flags(
+            prev_tokens=prev_hyp_tokens,
+            curr_tokens=curr_tokens,
+            semantic_threshold=self._mt_slcp_semantic_threshold,
+            nlp=self._mt_slcp_nlp,
+            linguistic_checks=self._mt_slcp_linguistic_checks if self._mt_slcp_nlp else None,
+            max_gap=self._mt_slcp_max_gap,
+        )
+
+        new_tokens: List[str] = []
+        for i in range(cursor, len(curr_tokens)):
+            if i < len(stable_flags) and stable_flags[i]:
+                new_tokens.append(curr_tokens[i])
+            else:
+                break
+
+        if not new_tokens:
+            return prev_prefix
+
+        committed_tokens = self._text_to_tokens(prev_prefix) + new_tokens
+        return self._normalize_translation_text(self.tokens_to_string(committed_tokens))
+
+    def _compute_mt_stable_prefix(
+        self,
+        state: CascadeState,
+        prev_hypothesis: str,
+        curr_hypothesis: str,
+        prev_prefix: str,
+    ) -> str:
+        if self._mt_policy == "LCP":
+            return self._normalize_translation_text(
+                longest_common_prefix(prev_hypothesis, curr_hypothesis)
+            )
+        if self._mt_policy == "LACP":
+            prev_tokens = self._text_to_tokens(prev_hypothesis)
+            curr_tokens = self._text_to_tokens(curr_hypothesis)
+            stable_tokens = word_lacp_prefix_tokens(
+                prev_tokens, curr_tokens, self._mt_lacp_threshold
+            )
+            return self._normalize_translation_text(self.tokens_to_string(stable_tokens))
+        if self._mt_policy == "SLCP":
+            return self._mt_slcp_stable_prefix(state, curr_hypothesis, prev_prefix)
+        raise ValueError(f"Unsupported mt_policy: {self._mt_policy}")
+
+    def _llm_beam_search(self, prompt: str, max_tokens: int) -> str:
+        """Deterministic beam search decoding for both local and remote vLLM backends."""
+        if self.llm_client is not None:
+            response = self.llm_client.completions.create(
+                model=self._llm_model_name,
+                prompt=prompt,
+                max_tokens=max_tokens,
+                temperature=0.0,
+                extra_body={
+                    "use_beam_search": True,
+                    "best_of": self._llm_beam_size,
+                    "length_penalty": self._llm_beam_length_penalty,
+                    "chat_template_kwargs": {"enable_thinking": self._llm_enable_thinking},
+                },
+            )
+            logger.info(f"[LLM] Beam response: '{response.choices[0].text}'")
+            return self._sanitize_llm_output(response.choices[0].text)
+
+        from vllm.sampling_params import BeamSearchParams
+
+        beam_params = BeamSearchParams(
+            beam_width=self._llm_beam_size,
+            max_tokens=max_tokens,
+            length_penalty=self._llm_beam_length_penalty,
+        )
+        outputs = self.llm.beam_search([prompt], beam_params)
+        sequences = outputs[0].sequences
+        best = sequences[0].text if sequences else ""
+        llm_out = self._sanitize_llm_output(best)
+        logger.info(f"[LLM] Beam response: '{llm_out}'")
+        return llm_out
 
     def _llm_generate(self, prompt: str, temperature: Optional[float] = None) -> str:
         #logger.debug(f"[LLM] Prompt: '{prompt}'")
         prompt_tokens = self._count_prompt_tokens(prompt)
         max_tokens = min(self._max_tokens, max(1, self._llm_max_model_len - prompt_tokens - 1))
+
+        if self._llm_decoding == "beam":
+            return self._llm_beam_search(prompt, max_tokens)
+
         temp = self._temperature if temperature is None else temperature
 
         if self.llm_client is not None:
@@ -793,13 +1119,21 @@ class CascadeSpeechProcessor(SpeechProcessor):
         logger.info(f"[LLM] Response: '{llm_out}'")
         return llm_out
 
-    def _llm_generate_with_fallback(self, state: CascadeState, asr_text: str, prev_prefix: str) -> str:
+    def _llm_generate_with_fallback(
+        self,
+        state: CascadeState,
+        asr_text: str,
+        prev_prefix: str,
+        speculative_segment: Optional[str] = None,
+    ) -> str:
         """
         MT generation with Whisper-style fallbacks (segfreetk vllm.py):
         - empty output: after N consecutive empties, roll back committed translation and retry
         - repetition loop: retry with rising temperature until compression ratio drops
         """
-        prompt, asr_text, prev_prefix = self._fit_llm_prompt(asr_text, prev_prefix)
+        prompt, asr_text, prev_prefix = self._fit_llm_prompt(
+            asr_text, prev_prefix, speculative_segment
+        )
         if prev_prefix != state.prev_translation:
             state.prev_translation = prev_prefix
             state.translation_hypotheses = [prev_prefix]
@@ -816,7 +1150,9 @@ class CascadeSpeechProcessor(SpeechProcessor):
             ):
                 self._rollback_translation(state, self._fallback_word_rollback)
                 state.consecutive_empty_mt = 0
-                prompt, _, prev_prefix = self._fit_llm_prompt(asr_text, state.prev_translation)
+                prompt, _, prev_prefix = self._fit_llm_prompt(
+                    asr_text, state.prev_translation, speculative_segment
+                )
                 hypothesis = self._llm_generate(prompt)
                 if not hypothesis.strip():
                     logger.warning(
@@ -827,7 +1163,9 @@ class CascadeSpeechProcessor(SpeechProcessor):
 
         state.consecutive_empty_mt = 0
 
-        if not self._temp_fall:
+        # Beam search is deterministic; rising-temperature retries would re-run the
+        # identical decode, so skip the repetition fallback loop under beam decoding.
+        if not self._temp_fall or self._llm_decoding == "beam":
             return hypothesis
 
         cs = self._compression_ratio(hypothesis)
@@ -1063,15 +1401,38 @@ class CascadeSpeechProcessor(SpeechProcessor):
         asr_context = f"{asr_text} {speculative_text}".strip() if speculative else asr_text
 
         prev_prefix = self._normalize_translation_text(state.prev_translation)
-        hypothesis = self._llm_generate_with_fallback(state, asr_context, prev_prefix)
+        if speculative and self._pac_tagged_prompt:
+            hypothesis = self._llm_generate_with_fallback(
+                state, asr_text, prev_prefix, speculative_segment=speculative_text
+            )
+        else:
+            hypothesis = self._llm_generate_with_fallback(state, asr_context, prev_prefix)
         prev_prefix = self._normalize_translation_text(state.prev_translation)
         full_hypothesis = self._normalize_translation_text(f'{prev_prefix.strip()} {hypothesis}'.strip())
 
-        if speculative:
+        use_boundary = bool(getattr(self.asr_cfg, "pac_use_alignment_boundary", True))
+        emit_provisional_target = bool(
+            getattr(self.asr_cfg, "pac_emit_provisional_target", True)
+        )
+
+        if speculative and use_boundary:
             alignment = self._align_translation_to_source(state, asr_context, full_hypothesis)
             self._update_speculative_translation_boundary(
                 state, asr_text, full_hypothesis, alignment
             )
+            if not emit_provisional_target:
+                stable_part, _ = self._split_translation_at_word_idx(
+                    full_hypothesis, state.first_speculative_word_idx
+                )
+                stable_part = self._normalize_translation_text(stable_part)
+                if prev_prefix and not stable_part.startswith(prev_prefix):
+                    stable_part = prev_prefix
+                full_hypothesis = stable_part
+                state.current_speculative_tokens = []
+        elif speculative:
+            state.last_alignment = None
+            state.first_speculative_word_idx = None
+            state.current_speculative_tokens = []
         else:
             state.last_alignment = None
             state.first_speculative_word_idx = None
@@ -1089,13 +1450,17 @@ class CascadeSpeechProcessor(SpeechProcessor):
             return self._trim_translation_increment(increment)
 
         state.translation_hypotheses.append(full_hypothesis)
-        stable = self._normalize_translation_text(
-            longest_common_prefix(
-                state.translation_hypotheses[-2],
-                state.translation_hypotheses[-1],
-            )
+        stable = self._compute_mt_stable_prefix(
+            state,
+            state.translation_hypotheses[-2],
+            state.translation_hypotheses[-1],
+            prev_prefix,
         )
-        logger.info(f"[LLM] Stable: {' '.join(stable[len(prev_prefix):].strip().split())}")
+        if self._mt_policy == "SLCP":
+            state.mt_slcp_prev_hyp = self._text_to_tokens(full_hypothesis)
+        logger.info(
+            f"[MT/{self._mt_policy}] Stable: {' '.join(stable[len(prev_prefix):].strip().split())}"
+        )
         increment = stable[len(prev_prefix) :]
         state.prev_translation = stable
         return self._trim_translation_increment(increment)
@@ -1116,7 +1481,9 @@ class CascadeSpeechProcessor(SpeechProcessor):
         )
         stable_tokens = self._text_to_tokens(stable_increment)
 
-        if getattr(self.asr_cfg, "speculative", False):
+        if getattr(self.asr_cfg, "speculative", False) and getattr(
+            self.asr_cfg, "pac_emit_provisional_target", True
+        ):
             new_tokens, deleted_tokens, new_spec_len = self._compute_speculative_emission_delta(
                 self._state, stable_tokens
             )
