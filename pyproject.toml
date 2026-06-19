@@ -11,6 +11,8 @@ dependencies = [
 		"accelerate",
 		"omegaconf",
 		"torch",
+		"vllm==0.20.1",
+		"bitsandbytes>=0.48.1",
 		"levenshtein",
 		"tqdm",
 		"evaluate",
