@@ -128,15 +128,16 @@ def _try_existing_audio_definition(candidates: list[Path], expected_segments: in
 def build_audio_definition(
     acl_root: Path,
     output_dir: Path,
-    eval_dir: Path,
+    split_dir: Path,
+    acl_set: str,
     file_order: list[str],
     seg_counts: dict[str, int],
     out_yaml: Path,
 ) -> tuple[str, str]:
     expected_segments = sum(seg_counts[talk] for talk in file_order)
     candidates = [
-        acl_root / "en-de_eval_refs.yaml",
-        acl_root / "en-fr_eval_refs.yaml",
+        acl_root / f"en-de_{acl_set}_refs.yaml",
+        acl_root / f"en-fr_{acl_set}_refs.yaml",
     ]
     existing = _try_existing_audio_definition(candidates, expected_segments)
     if existing is not None:
@@ -144,7 +145,7 @@ def build_audio_definition(
         return f"copied gold segments from {existing}", "gold"
 
     metrics_path = output_dir / "metrics_en-de.jsonl"
-    src_refs_path = acl_root / "en-de_eval_refs.en"
+    src_refs_path = acl_root / f"en-de_{acl_set}_refs.en"
     metrics_delays = _load_metrics_delays_by_talk(metrics_path)
     ref_lines_by_talk = (
         _split_ref_lines_by_talk(src_refs_path, file_order, seg_counts)
@@ -152,7 +153,7 @@ def build_audio_definition(
         else {}
     )
 
-    full_wavs = eval_dir / "full_wavs"
+    full_wavs = split_dir / "full_wavs"
     entries: list[dict] = []
     used_metrics_offsets = False
     for talk in file_order:
@@ -237,7 +238,7 @@ def build_audio_definition(
         ), "metrics_inferred"
     return (
         f"built proportional segment timings ({expected_segments} segments) "
-        "(set ACL6060_ROOT/.../en-de_eval_refs.yaml for gold timings)"
+        f"(set ACL6060_ROOT/.../en-de_{acl_set}_refs.yaml for gold timings)"
     ), "proportional"
 
 
@@ -276,45 +277,54 @@ def main() -> None:
         default=Path.home() / ".cache/simuleval/acl_6060",
     )
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--set",
+        dest="acl_set",
+        choices=("eval", "dev"),
+        default="eval",
+        help="ACL 60-60 split to score (default: eval).",
+    )
     args = parser.parse_args()
 
     acl_root = _resolve(args.acl_root)
     output_dir = _resolve(args.output_dir)
+    acl_set = args.acl_set
     scoring_dir = output_dir / "scoring_data"
     scoring_dir.mkdir(parents=True, exist_ok=True)
 
-    file_order_path = acl_root / "en-de_eval_wavs_list.txt"
+    file_order_path = acl_root / f"en-de_{acl_set}_wavs_list.txt"
     file_order_path = _resolve(file_order_path)
-    eval_dir = file_order_path.parent
+    split_dir = file_order_path.parent
     file_order = [
         line.strip()
         for line in file_order_path.read_text(encoding="utf-8").splitlines()
         if line.strip()
     ]
 
-    xml_path = eval_dir / "text/xml/ACL.6060.eval.en-xx.de.xml"
+    xml_path = split_dir / f"text/xml/ACL.6060.{acl_set}.en-xx.de.xml"
     seg_counts = _seg_counts_from_xml(xml_path)
 
     audio_yaml = scoring_dir / "audio_definition.yaml"
     note, timing_source = build_audio_definition(
-        acl_root, output_dir, eval_dir, file_order, seg_counts, audio_yaml
+        acl_root, output_dir, split_dir, acl_set, file_order, seg_counts, audio_yaml
     )
     print(note)
     print(f"Wrote {audio_yaml}")
     timing_meta = scoring_dir / "audio_definition.meta.json"
     timing_meta.write_text(
-        json.dumps({"timing_source": timing_source}, ensure_ascii=False, indent=2) + "\n",
+        json.dumps({"timing_source": timing_source, "acl_set": acl_set}, ensure_ascii=False, indent=2)
+        + "\n",
         encoding="utf-8",
     )
     print(f"Wrote {timing_meta}")
 
     directions = {
-        "en-de": (acl_root / "en-de_eval_refs.de", acl_root / "en-de_eval_refs.en"),
-        "en-fr": (acl_root / "en-fr_eval_refs.fr", acl_root / "en-fr_eval_refs.en"),
-        "en-nl": (acl_root / "en-nl_eval_refs.nl", acl_root / "en-nl_eval_refs.en"),
-        "en-pt": (acl_root / "en-pt_eval_refs.pt", acl_root / "en-pt_eval_refs.en"),
-        "en-ru": (acl_root / "en-ru_eval_refs.ru", acl_root / "en-ru_eval_refs.en"),
-        "en-tr": (acl_root / "en-tr_eval_refs.tr", acl_root / "en-tr_eval_refs.en"),
+        "en-de": (acl_root / f"en-de_{acl_set}_refs.de", acl_root / f"en-de_{acl_set}_refs.en"),
+        "en-fr": (acl_root / f"en-fr_{acl_set}_refs.fr", acl_root / f"en-fr_{acl_set}_refs.en"),
+        "en-nl": (acl_root / f"en-nl_{acl_set}_refs.nl", acl_root / f"en-nl_{acl_set}_refs.en"),
+        "en-pt": (acl_root / f"en-pt_{acl_set}_refs.pt", acl_root / f"en-pt_{acl_set}_refs.en"),
+        "en-ru": (acl_root / f"en-ru_{acl_set}_refs.ru", acl_root / f"en-ru_{acl_set}_refs.en"),
+        "en-tr": (acl_root / f"en-tr_{acl_set}_refs.tr", acl_root / f"en-tr_{acl_set}_refs.en"),
     }
     for tag, (ref_path, src_path) in directions.items():
         ref_path = _resolve(ref_path)

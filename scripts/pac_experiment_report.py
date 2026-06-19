@@ -42,12 +42,28 @@ def resolve_repo_path(repo_root: Path, value: str | Path) -> Path:
     return repo_root / path
 
 
-def experiment_output_dir(repo_root: Path, manifest: dict[str, Any], experiment: dict[str, Any]) -> Path:
+def experiment_output_dir(
+    repo_root: Path,
+    manifest: dict[str, Any],
+    experiment: dict[str, Any],
+    acl_set: str = "eval",
+) -> Path:
     output_dir = experiment.get("output_dir")
     if output_dir:
-        return resolve_repo_path(repo_root, output_dir)
-    output_root = resolve_repo_path(repo_root, manifest.get("output_root", "output/pac_experiments"))
-    return output_root / experiment["id"]
+        base = resolve_repo_path(repo_root, output_dir)
+    else:
+        output_root = resolve_repo_path(repo_root, manifest.get("output_root", "output/pac_experiments"))
+        base = output_root / experiment["id"]
+    if acl_set != "eval":
+        base = base / acl_set
+    return base
+
+
+def resolve_acl_set(cli_value: str | None, manifest: dict[str, Any]) -> str:
+    acl_set = cli_value or manifest.get("acl_set", manifest.get("set", "eval"))
+    if acl_set not in {"eval", "dev"}:
+        raise SystemExit(f"ACL 60-60 set must be 'eval' or 'dev' (got: {acl_set!r})")
+    return acl_set
 
 
 def read_scores(path: Path) -> list[dict[str, str]]:
@@ -109,6 +125,7 @@ def collect_results(
     repo_root: Path,
     manifest: dict[str, Any],
     selected_ids: set[str] | None,
+    acl_set: str,
 ) -> tuple[list[dict[str, str]], dict[str, Any]]:
     summary_rows: list[dict[str, str]] = []
     diagnostics: dict[str, Any] = {}
@@ -121,7 +138,7 @@ def collect_results(
         exp_id = experiment["id"]
         if selected_ids and exp_id not in selected_ids:
             continue
-        out_dir = experiment_output_dir(repo_root, manifest, experiment)
+        out_dir = experiment_output_dir(repo_root, manifest, experiment, acl_set)
         label = experiment.get("label", exp_id)
         group = experiment.get("group", "")
 
@@ -318,14 +335,20 @@ def write_figures(output_dir: Path, manifest: dict[str, Any], rows: list[dict[st
     )
 
 
-def write_trace_tables(output_dir: Path, repo_root: Path, manifest: dict[str, Any], docids: set[int]) -> None:
+def write_trace_tables(
+    output_dir: Path,
+    repo_root: Path,
+    manifest: dict[str, Any],
+    docids: set[int],
+    acl_set: str,
+) -> None:
     traces_dir = output_dir / "traces"
     traces_dir.mkdir(parents=True, exist_ok=True)
     for experiment in manifest.get("experiments", []):
         if not experiment.get("enabled", True):
             continue
         exp_id = experiment["id"]
-        out_dir = experiment_output_dir(repo_root, manifest, experiment)
+        out_dir = experiment_output_dir(repo_root, manifest, experiment, acl_set)
         for direction in manifest.get(
             "directions", ["en-de", "en-fr", "en-nl", "en-pt", "en-ru", "en-tr"]
         ):
@@ -404,6 +427,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--manifest", default="pac_experiment_manifest.yaml", type=Path)
     parser.add_argument("--output-dir", type=Path, help="Aggregate report directory.")
     parser.add_argument("--experiments", nargs="*", help="Optional experiment IDs to include.")
+    parser.add_argument(
+        "--set",
+        dest="acl_set",
+        choices=("eval", "dev"),
+        help="ACL 60-60 split to aggregate (default: manifest acl_set/set, else eval).",
+    )
     parser.add_argument("--trace-docids", nargs="*", type=int, default=[0, 1, 2])
     return parser.parse_args()
 
@@ -413,17 +442,20 @@ def main() -> None:
     manifest_path = args.manifest.resolve()
     repo_root = repo_root_from_manifest(manifest_path)
     manifest = load_manifest(manifest_path)
+    acl_set = resolve_acl_set(args.acl_set, manifest)
     output_root = resolve_repo_path(repo_root, manifest.get("output_root", "output/pac_experiments"))
-    report_dir = args.output_dir or (output_root / "report")
+    report_dir = args.output_dir or (
+        output_root / "report" if acl_set == "eval" else output_root / f"report_{acl_set}"
+    )
     selected_ids = set(args.experiments) if args.experiments else None
 
-    rows, diagnostics = collect_results(repo_root, manifest, selected_ids)
+    rows, diagnostics = collect_results(repo_root, manifest, selected_ids, acl_set)
     write_summary_tsv(report_dir / "pac_experiment_summary.tsv", rows)
     (report_dir / "pac_diagnostics.json").write_text(
         json.dumps(diagnostics, indent=2) + "\n", encoding="utf-8"
     )
     write_figures(report_dir, manifest, rows)
-    write_trace_tables(report_dir, repo_root, manifest, set(args.trace_docids))
+    write_trace_tables(report_dir, repo_root, manifest, set(args.trace_docids), acl_set)
     write_markdown_report(report_dir, rows)
     print(f"Wrote PAC report: {report_dir}")
 

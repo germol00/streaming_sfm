@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # Run SimulStream offline inference (python -m simulstream.inference) with
-# agent_simulstream.CascadeSpeechProcessor on ACL 60-60 eval audio.
+# agent_simulstream.CascadeSpeechProcessor on ACL 60-60 audio.
 #
 # Usage:
 #   ./run_acl6060_simulstream.sh
+#   ./run_acl6060_simulstream.sh dev
+#   ./run_acl6060_simulstream.sh dev en-de en-pt
 #   ./run_acl6060_simulstream.sh en-de en-pt
 # Configuration: edit set_config.sh (or override env vars documented there).
 #
@@ -33,16 +35,13 @@ declare -A TARGET_LANG=(
   [en-tr]=Turkish
 )
 
-if [[ $# -gt 0 ]]; then
-  DIRECTIONS=("$@")
-else
-  DIRECTIONS=(en-de en-fr en-nl en-pt en-ru en-tr)
-fi
+declare -a DIRECTIONS
+acl6060_parse_split_and_directions DIRECTIONS "$@"
 
 # SimulStream's wav list loader resolves paths as: dirname(list_file) + "/" + line
-# The cache FILE_ORDER lists utterance IDs without extension; wavs live in eval/full_wavs/.
-LINKFARM="${OUTPUT_DIR}/eval_wav_linkfarm"
-FILE_ORDER="${ACL6060_ROOT}/en-de_eval_wavs_list.txt"
+# The cache FILE_ORDER lists utterance IDs without extension; wavs live in <set>/full_wavs/.
+LINKFARM="${OUTPUT_DIR}/${ACL6060_SET}_wav_linkfarm"
+FILE_ORDER="${ACL6060_ROOT}/en-de_${ACL6060_SET}_wavs_list.txt"
 
 if [[ ! -f "$FILE_ORDER" ]]; then
   echo "error: missing wav list / FILE_ORDER at: $FILE_ORDER" >&2
@@ -55,8 +54,8 @@ if [[ ! -f "$SPEECH_CFG" ]]; then
   exit 1
 fi
 
-EVAL_DIR="$(cd "$(dirname "$(readlink -f "$FILE_ORDER" 2>/dev/null || realpath "$FILE_ORDER")")" && pwd)"
-FULL_WAVS="${EVAL_DIR}/full_wavs"
+SPLIT_DIR="$(cd "$(dirname "$(readlink -f "$FILE_ORDER" 2>/dev/null || realpath "$FILE_ORDER")")" && pwd)"
+FULL_WAVS="${SPLIT_DIR}/full_wavs"
 
 if [[ ! -d "$FULL_WAVS" ]]; then
   echo "error: expected wav directory not found: $FULL_WAVS" >&2
@@ -86,7 +85,7 @@ run_direction() {
   local tgt_lang="$3"
   local metrics="${OUTPUT_DIR}/metrics_${tag}.jsonl"
 
-  echo "=== ${tag} (${src_lang} -> ${tgt_lang}) ==="
+  echo "=== ${tag} (${src_lang} -> ${tgt_lang}, set=${ACL6060_SET}) ==="
   "$PYTHON" -m simulstream.inference \
     --speech-processor-config "$SPEECH_CFG" \
     --wav-list-file "$WAV_LIST_FILE" \
@@ -108,6 +107,6 @@ done
 
 echo ""
 echo "Scoring with OmniSTEval (BLEU, chrF, LongYAAL, normalized erasure, phrase report)..."
-"${REPO_ROOT}/score_acl6060_metrics.sh" "${DIRECTIONS[@]}"
+"${REPO_ROOT}/score_acl6060_metrics.sh" "$ACL6060_SET" "${DIRECTIONS[@]}"
 
 echo "Done. Wav list (for SimulStream): $WAV_LIST_FILE"

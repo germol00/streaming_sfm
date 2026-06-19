@@ -6,6 +6,8 @@
 #
 # Usage:
 #   ./score_acl6060_metrics.sh
+#   ./score_acl6060_metrics.sh dev
+#   ./score_acl6060_metrics.sh dev en-de en-pt
 #   ./score_acl6060_metrics.sh en-de en-pt
 #
 # Configuration: edit set_config.sh (or override env vars documented there).
@@ -25,11 +27,8 @@ declare -A TARGET_LANG=(
   [en-tr]=tr
 )
 
-if [[ $# -gt 0 ]]; then
-  DIRECTIONS=("$@")
-else
-  DIRECTIONS=(en-de en-fr en-nl en-pt en-ru en-tr)
-fi
+declare -a DIRECTIONS
+acl6060_parse_split_and_directions DIRECTIONS "$@"
 
 export PYTHONPATH="${REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
 
@@ -63,10 +62,11 @@ if ! "$PYTHON" -c "import simulstream" 2>/dev/null; then
   exit 1
 fi
 
-echo "Preparing ACL 60-60 references, sources, and speech segmentation..."
+echo "Preparing ACL 60-60 references, sources, and speech segmentation (set=${ACL6060_SET})..."
 "$PYTHON" "${REPO_ROOT}/scripts/prepare_acl6060_scoring.py" \
   --acl-root "$ACL6060_ROOT" \
-  --output-dir "$OUTPUT_DIR"
+  --output-dir "$OUTPUT_DIR" \
+  --set "$ACL6060_SET"
 
 SEG_YAML="${SCORING_DIR}/audio_definition.yaml"
 if [[ ! -f "$SEG_YAML" ]]; then
@@ -215,16 +215,16 @@ score_direction() {
   fi
 
   echo ""
-  echo "========== ${tag} (OmniSTEval longform, lang=${lang}) =========="
+  echo "========== ${tag} (OmniSTEval longform, set=${ACL6060_SET}, lang=${lang}) =========="
 
   local omnisteval_cmd=("$PYTHON" -m omnisteval.cli)
   if command -v omnisteval >/dev/null 2>&1; then
     omnisteval_cmd=(omnisteval)
   fi
 
-  #SEG_YAML=${ACL6060_ROOT}/${tag}_eval_refs.yaml
-  refs=${ACL6060_ROOT}/${tag}_eval_refs.${lang}
-  refs_src=${ACL6060_ROOT}/${tag}_eval_refs.en
+  #SEG_YAML=${ACL6060_ROOT}/${tag}_${ACL6060_SET}_refs.yaml
+  refs=${ACL6060_ROOT}/${tag}_${ACL6060_SET}_refs.${lang}
+  refs_src=${ACL6060_ROOT}/${tag}_${ACL6060_SET}_refs.en
   local -a cmd=(
     "${omnisteval_cmd[@]}" longform
     --speech_segmentation "$SEG_YAML"
@@ -262,7 +262,7 @@ score_direction() {
     "$PYTHON" "${REPO_ROOT}/scripts/build_omnisteval_html_report.py" \
       --instances "$instances" \
       --output "${out_dir}/phrase_report.html" \
-      --title "ACL 60-60 ${tag} — phrase-level errors" \
+      --title "ACL 60-60 ${ACL6060_SET} ${tag} — phrase-level errors" \
       --max-instances "$HTML_MAX_SEGS"
     echo "Phrase report: ${out_dir}/phrase_report.html"
   fi

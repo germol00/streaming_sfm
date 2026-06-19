@@ -42,12 +42,28 @@ def resolve_repo_path(repo_root: Path, value: str | Path) -> Path:
     return repo_root / path
 
 
-def experiment_output_dir(repo_root: Path, manifest: dict[str, Any], experiment: dict[str, Any]) -> Path:
+def experiment_output_dir(
+    repo_root: Path,
+    manifest: dict[str, Any],
+    experiment: dict[str, Any],
+    acl_set: str = "eval",
+) -> Path:
     output_dir = experiment.get("output_dir")
     if output_dir:
-        return resolve_repo_path(repo_root, output_dir)
-    output_root = resolve_repo_path(repo_root, manifest.get("output_root", "output/pac_experiments"))
-    return output_root / experiment["id"]
+        base = resolve_repo_path(repo_root, output_dir)
+    else:
+        output_root = resolve_repo_path(repo_root, manifest.get("output_root", "output/pac_experiments"))
+        base = output_root / experiment["id"]
+    if acl_set != "eval":
+        base = base / acl_set
+    return base
+
+
+def resolve_acl_set(cli_value: str | None, manifest: dict[str, Any]) -> str:
+    acl_set = cli_value or manifest.get("acl_set", manifest.get("set", "eval"))
+    if acl_set not in {"eval", "dev"}:
+        raise SystemExit(f"ACL 60-60 set must be 'eval' or 'dev' (got: {acl_set!r})")
+    return acl_set
 
 
 def generated_config_path(repo_root: Path, manifest: dict[str, Any], experiment: dict[str, Any]) -> Path:
@@ -100,17 +116,19 @@ def run_experiment(
     experiment: dict[str, Any],
     config_path: Path,
     directions: list[str],
+    acl_set: str,
     args: argparse.Namespace,
 ) -> None:
-    out_dir = experiment_output_dir(repo_root, manifest, experiment)
+    out_dir = experiment_output_dir(repo_root, manifest, experiment, acl_set)
     env = os.environ.copy()
     env["SPEECH_CFG"] = str(config_path)
     env["OUTPUT_DIR"] = str(out_dir)
+    env["ACL6060_SET"] = acl_set
 
     if args.score_only:
-        cmd = [str(repo_root / "score_acl6060_metrics.sh"), *directions]
+        cmd = [str(repo_root / "score_acl6060_metrics.sh"), acl_set, *directions]
     else:
-        cmd = [str(repo_root / "run_acl6060_simulstream.sh"), *directions]
+        cmd = [str(repo_root / "run_acl6060_simulstream.sh"), acl_set, *directions]
     run_command(cmd, env, args.dry_run)
 
 
@@ -119,6 +137,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--manifest", default="pac_experiment_manifest.yaml", type=Path)
     parser.add_argument("--experiments", nargs="*", help="Optional experiment IDs to run.")
     parser.add_argument("--directions", nargs="*", help="Override manifest directions.")
+    parser.add_argument(
+        "--set",
+        dest="acl_set",
+        choices=("eval", "dev"),
+        help="ACL 60-60 split to run (default: manifest acl_set/set, else eval).",
+    )
     parser.add_argument("--generate-only", action="store_true", help="Only write generated YAML configs.")
     parser.add_argument("--score-only", action="store_true", help="Score existing metrics logs without inference.")
     parser.add_argument("--report-only", action="store_true", help="Only regenerate the aggregate PAC report.")
@@ -132,11 +156,14 @@ def main() -> None:
     manifest_path = args.manifest.resolve()
     repo_root = repo_root_from_manifest(manifest_path)
     manifest = load_yaml(manifest_path)
+    acl_set = resolve_acl_set(args.acl_set, manifest)
     selected_ids = set(args.experiments) if args.experiments else None
     experiments = selected_experiments(manifest, selected_ids)
     directions = args.directions or manifest.get(
         "directions", ["en-de", "en-fr", "en-nl", "en-pt", "en-ru", "en-tr"]
     )
+
+    print(f"Using ACL 60-60 set: {acl_set}")
 
     generated: dict[str, Path] = {}
     for experiment in experiments:
@@ -152,7 +179,7 @@ def main() -> None:
             config_path = generated.get(experiment["id"])
             if config_path is None:
                 continue
-            run_experiment(repo_root, manifest, experiment, config_path, directions, args)
+            run_experiment(repo_root, manifest, experiment, config_path, directions, acl_set, args)
 
     if not args.skip_report and not args.generate_only:
         report_cmd = [
@@ -160,6 +187,8 @@ def main() -> None:
             str(repo_root / "scripts" / "pac_experiment_report.py"),
             "--manifest",
             str(manifest_path),
+            "--set",
+            acl_set,
         ]
         if selected_ids:
             report_cmd.extend(["--experiments", *sorted(selected_ids)])
