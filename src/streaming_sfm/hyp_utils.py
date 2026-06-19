@@ -163,10 +163,10 @@ class LCPHypothesisBuffer(ABSHypothesisBuffer):
                                 )
                             break
 
-    def flush(self, forced=False):
-        return self.flush_uncased(forced=forced) if self.uncased else self.flush_cased(forced=forced)
+    def flush(self, forced=False, speculative=False):
+        return self.flush_uncased(forced=forced, speculative=speculative) if self.uncased else self.flush_cased(forced=forced, speculative=speculative)
 
-    def flush_uncased(self, forced):
+    def flush_uncased(self, forced, speculative=False):
         if self.debug:
             logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n-1: {self.buffer}')
             logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n  : {self.new}')
@@ -205,14 +205,19 @@ class LCPHypothesisBuffer(ABSHypothesisBuffer):
                 commit = commit[1:]
 
         if not commit:
-            return commit
+            if speculative:
+                return commit, self.buffer
+            else:
+                return commit
 
         self.commited_in_buffer.extend(commit)
         if self.debug:
             logger.debug(f'[LCPHypothesisBuffer -> flush] Committing {commit}')
+        if speculative:
+            return commit, self.buffer
         return commit
 
-    def flush_cased(self, forced):
+    def flush_cased(self, forced, speculative=False):
         if self.debug:
             logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n-1: {self.buffer}')
             logger.debug(f'[LCPHypothesisBuffer -> flush] Buffer n  : {self.new}')
@@ -238,6 +243,8 @@ class LCPHypothesisBuffer(ABSHypothesisBuffer):
         self.commited_in_buffer.extend(commit)
         if self.debug:
             logger.debug(f'[LCPHypothesisBuffer -> flush] Committing {commit}')
+        if speculative:
+            return commit, self.buffer
         return commit
 
     def pop_commited(self, time_limit):
@@ -338,10 +345,10 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
                                 )
                             break
 
-    def flush(self, forced=False):
-        return self.flush_uncased(forced=forced) if self.uncased else self.flush_cased(forced=forced)
+    def flush(self, forced=False, speculative=False):
+        return self.flush_uncased(forced=forced, speculative=speculative) if self.uncased else self.flush_cased(forced=forced, speculative=speculative)
 
-    def flush_uncased(self, forced):
+    def flush_uncased(self, forced, speculative=False):
         if self.debug:
             logger.debug(f'[LACPHypothesisBuffer -> flush] Buffer n-1: {self.buffer}')
             logger.debug(f'[LACPHypothesisBuffer -> flush] Buffer n  : {self.new}')
@@ -352,7 +359,10 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
 
         # if forced, returning commit early maintains the n-1 buffer for the next iteration
         if forced and not self.new:
-            return commit
+            if speculative:
+                return commit, []
+            else:
+                return commit
 
         # BUG FIX #4: use a proper for-loop. `while i in range(...)` works
         # but recomputes membership each iteration and is semantically misleading.
@@ -377,7 +387,10 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
                 commit = commit[1:]
 
         if not commit:
-            return commit
+            if speculative:
+                return commit, self.buffer
+            else:
+                return commit
 
         self.last_commited_word = commit[-1][2]
         self.last_commited_time = commit[-1][1]
@@ -385,9 +398,11 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
 
         if self.debug:
             logger.debug(f'[LACPHypothesisBuffer -> flush] Committing {commit}')
+        if speculative:
+            return commit, self.buffer
         return commit
 
-    def flush_cased(self, forced):
+    def flush_cased(self, forced, speculative=False):
         """
         BUG FIX #5: The original flush_cased was an exact-match copy of
         LCPHypothesisBuffer.flush_cased, completely ignoring the Levenshtein
@@ -420,7 +435,10 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
         self.new = []
 
         if not commit:
-            return commit
+            if speculative:
+                return commit, self.buffer
+            else:
+                return commit
 
         self.last_commited_word = commit[-1][2]
         self.last_commited_time = commit[-1][1]
@@ -428,6 +446,8 @@ class LACPHypothesisBuffer(ABSHypothesisBuffer):
 
         if self.debug:
             logger.debug(f'[LACPHypothesisBuffer -> flush] Committing {commit}')
+        if speculative:
+            return commit, self.buffer
         return commit
 
     def pop_commited(self, time_limit):
@@ -496,7 +516,7 @@ class WaitKHypothesisBuffer(ABSHypothesisBuffer):
                                 )
                             break
 
-    def flush(self, last_instant):
+    def flush(self, last_instant, speculative=False):
         last_valid_instant = last_instant - self.K
 
         if self.debug:
@@ -518,6 +538,8 @@ class WaitKHypothesisBuffer(ABSHypothesisBuffer):
 
         if self.debug:
             logger.debug(f'[WaitKHypothesisBuffer -> flush] Committing {commit}')
+        if speculative:
+            return commit, self.new
         return commit
 
     def pop_commited(self):
@@ -576,7 +598,7 @@ class HoldNHypothesisBuffer(ABSHypothesisBuffer):
                                 )
                             break
 
-    def flush(self):
+    def flush(self, speculative=False):
         if self.debug:
             logger.debug(f'[HoldNHypothesisBuffer -> flush] New buffer: {self.new}')
             logger.debug(f'[HoldNHypothesisBuffer -> flush] Committed buffer: {self.buffer}')
@@ -592,6 +614,8 @@ class HoldNHypothesisBuffer(ABSHypothesisBuffer):
 
         if self.debug:
             logger.debug(f'[HoldNHypothesisBuffer -> flush] Committing {commit}')
+        if speculative:
+            return commit, self.new
         return commit
 
     def pop_commited(self, time_limit):
@@ -700,11 +724,6 @@ class SLCPHypothesisBuffer(ABSHypothesisBuffer):
         self.new = [(a, b, t) for a, b, t in new if a > self.last_commited_time - 0.1]
         logger.debug(f'[SLCPHypothesisBuffer -> insert] Processed: {self.new}')
         
-        #if self.new[0] == SequenceMatcher(None, self.new[0], ).ratio() > 0.6:
-        #    logger.warning(f"Found {self.new[0]=}, ")
-        #    self.new[0].pop()
-        #logger.debug(f'[SLCPHypothesisBuffer -> insert] Processed: {self.new}')
-
         # Overlap deduplication: remove tokens from self.new that are already
         # in the committed tail — same pattern as all other buffers.
         #(1113, 1117, '▁output,'), (1118, 1119, '▁that'), (1119, 1120, '▁is'), (1121, 1123, '▁the'), (1123, 1134, '▁cross-attention'), (1134, 1137, '▁mechanism.')
@@ -732,11 +751,11 @@ class SLCPHypothesisBuffer(ABSHypothesisBuffer):
                         break
 
 
-        # ------------------------------------------------------------------
-        # flush
-        # ------------------------------------------------------------------
+    # ------------------------------------------------------------------
+    # flush
+    # ------------------------------------------------------------------
 
-    def flush(self):
+    def flush(self, speculative=False):
             """
             Calculates stability using a sliding window and commits stable tokens.
             """
@@ -762,7 +781,10 @@ class SLCPHypothesisBuffer(ABSHypothesisBuffer):
 
             if not prev_tokens:
                 logger.debug('[SLCPHypothesisBuffer -> flush] First hypothesis, emitting nothing')
-                return []
+                if speculative:
+                    return [], []
+                else:
+                    return []
 
             # 3. Compute stable flags
             # This calls the helper that runs the Levenshtein-based stability passes
@@ -810,75 +832,9 @@ class SLCPHypothesisBuffer(ABSHypothesisBuffer):
             logger.debug(f'[SLCPHypothesisBuffer -> flush] stable flags: {stable}')
             logger.debug(f'[SLCPHypothesisBuffer -> flush] Committing {k} tokens: {commit}')
 
+            if speculative:
+                return commit, self.new
             return commit
-
-
-    #def flush(self):
-    #        """
-    #        Calculates stability using a sliding window to keep memory and CPU usage low.
-    #        """
-    #        # 1. TRIMMING LOGIC
-    #        # Keep only the last N tokens to ensure Levenshtein doesn't slow down.
-    #        if len(self._committed_tokens) > self.max_history:
-    #            trim_size = len(self._committed_tokens) - self.max_history
-    #            self._committed_tokens = self._committed_tokens[trim_size:]
-    #            # We must trim prev_hyp by the SAME amount to keep them aligned for the diff
-    #            self._prev_hyp_tokens = self._prev_hyp_tokens[trim_size:]
-
-    #        # 2. Construct curr_tokens based on the (now trimmed) committed history
-    #        curr_tokens = self._committed_tokens + [t for _, _, t in self.new]
-    #        prev_tokens = self._prev_hyp_tokens
-    #        
-    #        # The cursor is now relative to the start of our window
-    #        cursor = len(self._committed_tokens)
-
-    #        if self.debug:
-    #            logger.debug(f'[SLCPHypothesisBuffer -> flush] prev_hyp : {prev_tokens}')
-    #            logger.debug(f'[SLCPHypothesisBuffer -> flush] curr_hyp : {curr_tokens}')
-    #            logger.debug(f'[SLCP] Window Size: {len(curr_tokens)}, Cursor: {cursor}')
-
-    #        # Update previous hypothesis for the next step
-    #        self._prev_hyp_tokens = curr_tokens
-
-    #        if not prev_tokens:
-    #            if self.debug:
-    #                logger.debug('[SLCPHypothesisBuffer -> flush] First hypothesis, emitting nothing')
-    #            return []
-
-    #        # 3. Compute stable flags (only processes the window)
-    #        stable = _slcp_stable_flags(
-    #            prev_tokens=prev_tokens,
-    #            curr_tokens=curr_tokens,
-    #            semantic_threshold=self.semantic_threshold,
-    #            nlp=self.nlp,
-    #            linguistic_checks=self.linguistic_checks,
-    #            max_gap=self.max_gap,
-    #        )
-
-    #        if self.debug:
-    #            logger.debug(f'[SLCPHypothesisBuffer -> flush] stable   : {stable}')
-
-
-    #        # 4. Standard SLCP Logic: Find the longest stable prefix starting at cursor
-    #        k = 0
-    #        for i in range(cursor, len(curr_tokens)):
-    #            if stable[i]:
-    #                k += 1
-    #            else:
-    #                break
-
-    #        commit = self.new[:k]
-    #        self.new = self.new[k:]
-
-    #        if commit:
-    #            self.last_commited_word = commit[-1][2]
-    #            self.last_commited_time = commit[-1][1]
-    #            self._committed_tokens.extend(t for _, _, t in commit)
-    #            self.commited_in_buffer.extend(commit)
-    #        if self.debug:
-    #            logger.debug(f'[SLCPHypothesisBuffer -> flush] Committing {commit}')
-
-    #        return commit
 
     # ------------------------------------------------------------------
     # helpers
@@ -896,118 +852,3 @@ class SLCPHypothesisBuffer(ABSHypothesisBuffer):
 
     def complete(self):
         return self.new
-
-
-
-    #def insert(self, new, offset=0):
-    #    logger.debug(f'[SLCPHypothesisBuffer -> insert] Received: {new}')
-    #    new = [(a + offset, b + offset, t) for a, b, t in new]
-    #    new = self._maybe_to_words(new)
-    #    
-    #    # 1. Filter by time (keep this as a first pass)
-    #    self.new = [(a, b, t) for a, b, t in new if a > self.last_commited_time - 0.5]
-
-    #    logger.debug(f'[SLCPHypothesisBuffer -> insert] Processed: {self.new}')
-
-    #    if not self.new or not self._committed_tokens:
-    #        return
-
-    #    # 2. Robust Overlap Removal
-    #    # We want to find the longest suffix of _committed_tokens 
-    #    # that matches the prefix of self.new.
-    #    max_overlap = 0
-    #    c_tail = [t for t in self._committed_tokens[-20:]] # Look at last 20 tokens
-    #    n_head = [t for _, _, t in self.new]
-
-    #    for i in range(1, min(len(c_tail), len(n_head)) + 1):
-    #        if c_tail[-i:] == n_head[:i]:
-    #            max_overlap = i
-    #    
-    #    if max_overlap > 0:
-    #        if self.debug:
-    #            logger.debug(f"Removing {max_overlap} overlapping tokens.")
-    #        self.new = self.new[max_overlap:]
-
-    #def insert(self, new, offset=0):
-    #        """
-    #        Robustly finds the continuation point in a sliding window hypothesis.
-    #        """
-    #        # 1. Standardize timestamps and level
-    #        logger.debug(f'[SLCPHypothesisBuffer -> insert] Received: {new}')
-    #        new = [(a + offset, b + offset, t) for a, b, t in new]
-    #        new = self._maybe_to_words(new)
-
-    #        if not new:
-    #            return
-    #        if not self._committed_tokens:
-    #            self.new = new
-    #            return
-
-    #        # 2. Find the Anchor
-    #        # We look for the last few committed tokens anywhere in the new window.
-    #        # This is more robust than matching prefixes.
-    #        anchor_size = min(len(self._committed_tokens), 5)
-    #        anchor_text = self._committed_tokens[-anchor_size:]
-    #        new_text_list = [t for _, _, t in new]
-
-    #        # Search backwards from the end of the new hypothesis to find the match
-    #        match_idx = -1
-    #        for i in range(len(new_text_list) - anchor_size, -1, -1):
-    #            if new_text_list[i : i + anchor_size] == anchor_text:
-    #                match_idx = i + anchor_size
-    #                break
-
-    #        if match_idx != -1:
-    #            if self.debug:
-    #                logger.debug(f"[SLCP] Found anchor at index {match_idx}. Stripping history.")
-    #            self.new = new[match_idx:]
-    #        else:
-    #            # Fallback: strict time-based filter if text matching fails
-    #            # Using a smaller epsilon (0.05s) to prevent double emissions
-    #            if self.debug:
-    #                logger.warn("[SLCP] Anchor not found! Falling back to time filter.")
-    #            self.new = [(a, b, t) for a, b, t in new if a > self.last_commited_time - 0.05]
-
-    #def insert(self, new, offset=0):
-    #    """
-    #    Receive the latest hypothesis and strip away tokens that 
-    #    have already been committed by matching text content.
-    #    """
-    #    if self.debug:
-    #        logger.debug(f'[SLCPHypothesisBuffer -> insert] Received: {new}')
-
-    #    # 1. Apply offset and convert to word list if necessary
-    #    new = [(a + offset, b + offset, t) for a, b, t in new]
-    #    new = self._maybe_to_words(new)
-
-    #    if not new or not self._committed_tokens:
-    #        self.new = new
-    #        return
-
-    #    # 2. Robust Deduplication
-    #    # We find the longest overlap between the END of committed tokens 
-    #    # and the START of the new hypothesis.
-    #    
-    #    # Take a generous slice of the tail (last 20 tokens) to ensure we find the match
-    #    committed_tail = self._committed_tokens[-20:]
-    #    new_tokens = [t for _, _, t in new]
-    #    
-    #    max_overlap = 0
-    #    # Try to find the longest matching sequence
-    #    for i in range(1, min(len(committed_tail), len(new_tokens)) + 1):
-    #        # Compare the last 'i' committed tokens with the first 'i' new tokens
-    #        if committed_tail[-i:] == new_tokens[:i]:
-    #            max_overlap = i
-
-    #    if max_overlap > 0:
-    #        if self.debug:
-    #            logger.debug(f'Deduplicated: stripping first {max_overlap} tokens: {new_tokens[:max_overlap]}')
-    #        # Remove the overlapping tokens from the new list
-    #        self.new = new[max_overlap:]
-    #    else:
-    #        # No overlap found, but we should still respect a loose time filter 
-    #        # to prevent ancient hypothesis fragments from re-entering.
-    #        self.new = [(a, b, t) for a, b, t in new if a > self.last_commited_time - 0.5]
-
-    #    if self.debug:
-    #        logger.debug(f'[SLCPHypothesisBuffer -> insert] Cleaned: {self.new}')
