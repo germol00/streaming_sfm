@@ -28,7 +28,7 @@ fi
 
 # Default speech processor config (change this line to switch experiments).
 #SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor_qwen35_27b_bnb4_spec.yaml}"
-SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor_qwen35_9b_bnb4_lacp.yaml}"
+SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor_qwen35_9b_bnb4_smallerW.yaml}"
 #SPEECH_CFG="${SPEECH_CFG:-${REPO_ROOT}/speech_processor.yaml}"
 
 speechp_name="$(basename "${SPEECH_CFG}" .yaml)"
