@@ -46,7 +46,7 @@ def experiment_output_dir(
     repo_root: Path,
     manifest: dict[str, Any],
     experiment: dict[str, Any],
-    acl_set: str = "eval",
+    eval_split: str = "eval",
 ) -> Path:
     output_dir = experiment.get("output_dir")
     if output_dir:
@@ -54,16 +54,17 @@ def experiment_output_dir(
     else:
         output_root = resolve_repo_path(repo_root, manifest.get("output_root", "output/pac_experiments"))
         base = output_root / experiment["id"]
-    if acl_set != "eval":
-        base = base / acl_set
+    if eval_split not in {"eval", "test"}:
+        base = base / eval_split
     return base
 
 
+def resolve_eval_split(cli_value: str | None, manifest: dict[str, Any]) -> str:
+    return cli_value or manifest.get("mcif_set") or manifest.get("acl_set") or manifest.get("set", "eval")
+
+
 def resolve_acl_set(cli_value: str | None, manifest: dict[str, Any]) -> str:
-    acl_set = cli_value or manifest.get("acl_set", manifest.get("set", "eval"))
-    if acl_set not in {"eval", "dev"}:
-        raise SystemExit(f"ACL 60-60 set must be 'eval' or 'dev' (got: {acl_set!r})")
-    return acl_set
+    return resolve_eval_split(cli_value, manifest)
 
 
 def read_scores(path: Path) -> list[dict[str, str]]:
@@ -125,7 +126,7 @@ def collect_results(
     repo_root: Path,
     manifest: dict[str, Any],
     selected_ids: set[str] | None,
-    acl_set: str,
+    eval_split: str,
 ) -> tuple[list[dict[str, str]], dict[str, Any]]:
     summary_rows: list[dict[str, str]] = []
     diagnostics: dict[str, Any] = {}
@@ -138,7 +139,7 @@ def collect_results(
         exp_id = experiment["id"]
         if selected_ids and exp_id not in selected_ids:
             continue
-        out_dir = experiment_output_dir(repo_root, manifest, experiment, acl_set)
+        out_dir = experiment_output_dir(repo_root, manifest, experiment, eval_split)
         label = experiment.get("label", exp_id)
         group = experiment.get("group", "")
 
@@ -340,7 +341,7 @@ def write_trace_tables(
     repo_root: Path,
     manifest: dict[str, Any],
     docids: set[int],
-    acl_set: str,
+    eval_split: str,
 ) -> None:
     traces_dir = output_dir / "traces"
     traces_dir.mkdir(parents=True, exist_ok=True)
@@ -348,7 +349,7 @@ def write_trace_tables(
         if not experiment.get("enabled", True):
             continue
         exp_id = experiment["id"]
-        out_dir = experiment_output_dir(repo_root, manifest, experiment, acl_set)
+        out_dir = experiment_output_dir(repo_root, manifest, experiment, eval_split)
         for direction in manifest.get(
             "directions", ["en-de", "en-fr", "en-nl", "en-pt", "en-ru", "en-tr"]
         ):
@@ -395,15 +396,33 @@ def write_markdown_report(output_dir: Path, rows: list[dict[str, str]]) -> None:
         "|---|---:|---:|---:|---:|",
     ]
     for exp_id in experiments:
-        quality = choose_metric(lookup, exp_id, QUALITY_METRICS)
-        latency = choose_metric(lookup, exp_id, LATENCY_METRICS)
+        quality_primary = choose_metric(lookup, exp_id, QUALITY_METRICS)
+        bleu = mean_metric(lookup, exp_id, "BLEU")
+        quality_parts: list[str] = []
+        if quality_primary:
+            quality_parts.append(f"{quality_primary[0]}={quality_primary[1]:.4f}")
+        if bleu is not None:
+            quality_parts.append(f"BLEU={bleu:.4f}")
+        quality_str = ", ".join(quality_parts)
+
+        latency_primary = choose_metric(lookup, exp_id, LATENCY_METRICS)
+        # Always surface LongYAAL explicitly when available so the report
+        # shows both LongLAAL and LongYAAL instead of only a single latency metric.
+        longyaal = mean_metric(lookup, exp_id, "LongYAAL (CA)")
+        latency_parts: list[str] = []
+        if latency_primary:
+            latency_parts.append(f"{latency_primary[0]}={latency_primary[1]:.2f}")
+        if longyaal is not None:
+            latency_parts.append(f"LongYAAL (CA)={longyaal:.2f}")
+        latency_str = ", ".join(latency_parts)
+
         stability = choose_metric(lookup, exp_id, STABILITY_METRICS)
         compute = choose_metric(lookup, exp_id, COMPUTE_METRICS)
         lines.append(
             "| {exp} | {quality} | {latency} | {stability} | {compute} |".format(
                 exp=exp_id,
-                quality=f"{quality[0]}={quality[1]:.4f}" if quality else "",
-                latency=f"{latency[0]}={latency[1]:.2f}" if latency else "",
+                quality=quality_str,
+                latency=latency_str,
                 stability=f"{stability[0]}={stability[1]:.4f}" if stability else "",
                 compute=f"{compute[0]}={compute[1]:.4f}" if compute else "",
             )
@@ -429,9 +448,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--experiments", nargs="*", help="Optional experiment IDs to include.")
     parser.add_argument(
         "--set",
-        dest="acl_set",
-        choices=("eval", "dev"),
-        help="ACL 60-60 split to aggregate (default: manifest acl_set/set, else eval).",
+        dest="eval_split",
+        help="Dataset split to aggregate (default: manifest mcif_set/acl_set/set).",
     )
     parser.add_argument("--trace-docids", nargs="*", type=int, default=[0, 1, 2])
     return parser.parse_args()
@@ -442,20 +460,22 @@ def main() -> None:
     manifest_path = args.manifest.resolve()
     repo_root = repo_root_from_manifest(manifest_path)
     manifest = load_manifest(manifest_path)
-    acl_set = resolve_acl_set(args.acl_set, manifest)
+    eval_split = resolve_eval_split(args.eval_split, manifest)
     output_root = resolve_repo_path(repo_root, manifest.get("output_root", "output/pac_experiments"))
     report_dir = args.output_dir or (
-        output_root / "report" if acl_set == "eval" else output_root / f"report_{acl_set}"
+        output_root / "report"
+        if eval_split in {"eval", "test"}
+        else output_root / f"report_{eval_split}"
     )
     selected_ids = set(args.experiments) if args.experiments else None
 
-    rows, diagnostics = collect_results(repo_root, manifest, selected_ids, acl_set)
+    rows, diagnostics = collect_results(repo_root, manifest, selected_ids, eval_split)
     write_summary_tsv(report_dir / "pac_experiment_summary.tsv", rows)
     (report_dir / "pac_diagnostics.json").write_text(
         json.dumps(diagnostics, indent=2) + "\n", encoding="utf-8"
     )
     write_figures(report_dir, manifest, rows)
-    write_trace_tables(report_dir, repo_root, manifest, set(args.trace_docids), acl_set)
+    write_trace_tables(report_dir, repo_root, manifest, set(args.trace_docids), eval_split)
     write_markdown_report(report_dir, rows)
     print(f"Wrote PAC report: {report_dir}")
 

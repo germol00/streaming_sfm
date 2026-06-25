@@ -220,13 +220,20 @@ def strip_ellipsis(text: str) -> str:
     return _ELLIPSIS_RE.sub("", text)
 
 
-def longest_common_prefix(s1: str, s2: str) -> str:
+def longest_common_prefix(s1: str, s2: str, *, word_level: bool = True) -> str:
+    if not word_level:
+        limit = min(len(s1), len(s2))
+        for i in range(limit):
+            if s1[i] != s2[i]:
+                return s1[:i]
+        return s1[:limit]
+
     t1 = s1.split()
     t2 = s2.split()
     for i in range(min(len(t1), len(t2))):
         if t1[i] != t2[i]:
-            return ' '.join(t1[:i])
-    return ' '.join(t1[: min(len(t1), len(t2))])
+            return " ".join(t1[:i])
+    return " ".join(t1[: min(len(t1), len(t2))])
 
 
 def word_lcp_len(a: List[str], b: List[str]) -> int:
@@ -237,17 +244,23 @@ def word_lcp_len(a: List[str], b: List[str]) -> int:
 
 
 def word_lacp_prefix_tokens(
-    prev_tokens: List[str], curr_tokens: List[str], threshold: float, uncased: bool = True
+    prev_tokens: List[str],
+    curr_tokens: List[str],
+    threshold: float,
+    uncased: bool = True,
+    *,
+    word_level: bool = True,
 ) -> List[str]:
     """Longest prefix of ``curr_tokens`` stable under the LACP Levenshtein threshold."""
+    joiner = " " if word_level else ""
     commit: List[str] = []
     past: List[str] = []
     present: List[str] = []
     for i in range(min(len(prev_tokens), len(curr_tokens))):
         past.append(prev_tokens[i])
         present.append(curr_tokens[i])
-        past_s = " ".join(past)
-        present_s = " ".join(present)
+        past_s = joiner.join(past)
+        present_s = joiner.join(present)
         if uncased:
             past_s = past_s.lower()
             present_s = present_s.lower()
@@ -255,6 +268,21 @@ def word_lacp_prefix_tokens(
             break
         commit.append(curr_tokens[i])
     return commit
+
+
+_CHAR_BASED_TARGET_LANGS = frozenset(
+    {"Chinese", "Japanese", "Mandarin", "Cantonese", "Korean"}
+)
+
+
+def _is_char_based_target_lang(language: str) -> bool:
+    if language in _CHAR_BASED_TARGET_LANGS:
+        return True
+    lowered = language.lower()
+    return any(
+        token in lowered
+        for token in ("chinese", "japanese", "mandarin", "cantonese", "korean")
+    )
 
 
 @dataclass
@@ -507,9 +535,24 @@ class CascadeSpeechProcessor(SpeechProcessor):
 
         self.source_lang = getattr(config, "source_lang", "English")
         self.target_lang = getattr(config, "target_lang", "German")
-        self.target_sep = "" if self.target_lang in ["Chinese", "Japanese"] else " "
-        self._spaced_target = self.target_lang not in ["Chinese", "Japanese"]
-        self.latency_unit = getattr(config, "latency_unit", "word")
+        self._mt_emission_unit_locked = (
+            getattr(config, "mt_word_level", None) is not None
+            or getattr(config, "latency_unit", None) is not None
+        )
+        self._resolve_mt_emission_unit(config, self.target_lang)
+        explicit_latency = getattr(config, "latency_unit", None)
+        if explicit_latency is not None:
+            self.latency_unit = explicit_latency
+            if explicit_latency == "char":
+                self._mt_word_level = False
+                self._spaced_target = False
+                self.target_sep = ""
+            elif explicit_latency in {"word", "spm"}:
+                self._mt_word_level = True
+                self._spaced_target = True
+                self.target_sep = " "
+        else:
+            self.latency_unit = "word" if self._mt_word_level else "char"
 
         self.min_start_seconds = getattr(config, "min_start_seconds", 1.0)
         self._temperature = getattr(config, "temperature", 0.7)
@@ -568,6 +611,12 @@ class CascadeSpeechProcessor(SpeechProcessor):
                 )
             self._ensure_mt_slcp_nlp()
         logger.info(
+            "MT emission unit: %s (mt_word_level=%s, latency_unit=%s)",
+            "word" if self._mt_word_level else "character",
+            self._mt_word_level,
+            self.latency_unit,
+        )
+        logger.info(
             "MT emission policy: %s (lacp_threshold=%s, slcp_semantic_threshold=%s, "
             "slcp_max_gap=%s, slcp_use_spacy=%s)",
             self._mt_policy,
@@ -609,6 +658,52 @@ class CascadeSpeechProcessor(SpeechProcessor):
             self._asr_sample_rate,
             self._needs_resample,
         )
+
+    def _resolve_mt_emission_unit(self, config: SimpleNamespace, target_lang: str) -> None:
+        """Resolve MT emission granularity (word vs character) from config / target language."""
+        explicit = getattr(config, "mt_word_level", None)
+        if explicit is not None:
+            mt_word_level = bool(explicit)
+        else:
+            latency_unit = getattr(config, "latency_unit", None)
+            if latency_unit == "char":
+                mt_word_level = False
+            elif latency_unit in {"word", "spm"}:
+                mt_word_level = True
+            else:
+                mt_word_level = not _is_char_based_target_lang(target_lang)
+
+        self._mt_word_level = mt_word_level
+        self._spaced_target = mt_word_level
+        self.target_sep = " " if mt_word_level else ""
+
+    def _apply_mt_emission_unit_for_language(self, target_lang: str) -> None:
+        if self._mt_emission_unit_locked:
+            return
+        self._mt_word_level = not _is_char_based_target_lang(target_lang)
+        self._spaced_target = self._mt_word_level
+        self.target_sep = " " if self._mt_word_level else " "
+        self.latency_unit = "word" if self._mt_word_level else "char"
+
+    def _join_translation_parts(self, prev_prefix: str, hypothesis: str) -> str:
+        prev = prev_prefix.strip()
+        hyp = hypothesis.strip()
+        if not prev:
+            return hyp
+        if not hyp:
+            return prev
+        if self._mt_word_level:
+            return f"{prev} {hyp}"
+        return f"{prev}{hyp}"
+
+    def _format_mt_tokens_for_log(self, text: str) -> str:
+        tokens = self._text_to_tokens(text)
+        if not tokens:
+            return ""
+        return self.tokens_to_string(tokens)
+
+    def _mt_tokenize(self, text: str) -> List[str]:
+        return self._text_to_tokens(text)
 
     def _maybe_add_audio_noise(self, waveform: np.ndarray) -> np.ndarray:
         if self._audio_noise_snr_db is None or waveform is None or len(waveform) == 0:
@@ -943,7 +1038,7 @@ class CascadeSpeechProcessor(SpeechProcessor):
         prev = state.prev_translation
         if not prev:
             return
-        if self.target_lang in ["Chinese", "Japanese"]:
+        if not self._mt_word_level:
             state.prev_translation = prev[:-n_units] if len(prev) >= n_units else ""
         else:
             words = prev.split()
@@ -1033,13 +1128,18 @@ class CascadeSpeechProcessor(SpeechProcessor):
     ) -> str:
         if self._mt_policy == "LCP":
             return self._normalize_translation_text(
-                longest_common_prefix(prev_hypothesis, curr_hypothesis)
+                longest_common_prefix(
+                    prev_hypothesis, curr_hypothesis, word_level=self._mt_word_level
+                )
             )
         if self._mt_policy == "LACP":
             prev_tokens = self._text_to_tokens(prev_hypothesis)
             curr_tokens = self._text_to_tokens(curr_hypothesis)
             stable_tokens = word_lacp_prefix_tokens(
-                prev_tokens, curr_tokens, self._mt_lacp_threshold
+                prev_tokens,
+                curr_tokens,
+                self._mt_lacp_threshold,
+                word_level=self._mt_word_level,
             )
             return self._normalize_translation_text(self.tokens_to_string(stable_tokens))
         if self._mt_policy == "SLCP":
@@ -1203,7 +1303,10 @@ class CascadeSpeechProcessor(SpeechProcessor):
     ) -> Optional[AlignmentResult]:
         if self.word_aligner is None:
             return None
-        alignment = self.word_aligner.align_text(source_text, translation_text)
+        alignment = self.word_aligner.align(
+            WordAligner.tokenize(source_text),
+            self._mt_tokenize(translation_text),
+        )
         state.last_alignment = alignment
         logger.debug(
             "[Align] method=%s pairs=%s",
@@ -1224,13 +1327,12 @@ class CascadeSpeechProcessor(SpeechProcessor):
             return None
         return min(speculative_tgt_idxs)
 
-    @staticmethod
-    def _split_translation_at_word_idx(text: str, word_idx: Optional[int]) -> tuple[str, str]:
-        tokens = WordAligner.tokenize(text)
+    def _split_translation_at_word_idx(self, text: str, word_idx: Optional[int]) -> tuple[str, str]:
+        tokens = self._mt_tokenize(text)
         if word_idx is None or word_idx >= len(tokens):
             return text, ""
-        stable = " ".join(tokens[:word_idx])
-        speculative = " ".join(tokens[word_idx:])
+        stable = self.tokens_to_string(tokens[:word_idx])
+        speculative = self.tokens_to_string(tokens[word_idx:])
         return stable, speculative
 
     def _update_speculative_translation_boundary(
@@ -1408,7 +1510,9 @@ class CascadeSpeechProcessor(SpeechProcessor):
         else:
             hypothesis = self._llm_generate_with_fallback(state, asr_context, prev_prefix)
         prev_prefix = self._normalize_translation_text(state.prev_translation)
-        full_hypothesis = self._normalize_translation_text(f'{prev_prefix.strip()} {hypothesis}'.strip())
+        full_hypothesis = self._normalize_translation_text(
+            self._join_translation_parts(prev_prefix, hypothesis)
+        )
 
         use_boundary = bool(getattr(self.asr_cfg, "pac_use_alignment_boundary", True))
         emit_provisional_target = bool(
@@ -1459,7 +1563,9 @@ class CascadeSpeechProcessor(SpeechProcessor):
         if self._mt_policy == "SLCP":
             state.mt_slcp_prev_hyp = self._text_to_tokens(full_hypothesis)
         logger.info(
-            f"[MT/{self._mt_policy}] Stable: {' '.join(stable[len(prev_prefix):].strip().split())}"
+            "[MT/%s] Stable: %r",
+            self._mt_policy,
+            self._format_mt_tokens_for_log(stable[len(prev_prefix) :]),
         )
         increment = stable[len(prev_prefix) :]
         state.prev_translation = stable
@@ -1469,11 +1575,9 @@ class CascadeSpeechProcessor(SpeechProcessor):
         if text == "":
             return []
         text = self._normalize_translation_text(text)
-        if self.latency_unit in ["word", "spm"]:
+        if self._mt_word_level:
             return [tok for tok in text.strip().split() if tok]
-        if self.latency_unit == "char":
-            return list(text.strip())
-        raise NotImplementedError(f"Unsupported latency_unit: {self.latency_unit}")
+        return list(text.strip())
 
     def _build_incremental_output(self, stable_increment: str) -> IncrementalOutput:
         stable_increment = self._trim_translation_increment(
@@ -1497,7 +1601,7 @@ class CascadeSpeechProcessor(SpeechProcessor):
 
         new_string = self.tokens_to_string(new_tokens)
         if (
-            self.latency_unit == "word"
+            self._mt_word_level
             and self._state.emission_started
             and new_string
             and not new_string.startswith(" ")
@@ -1587,15 +1691,12 @@ class CascadeSpeechProcessor(SpeechProcessor):
 
     def set_target_language(self, language: str) -> None:
         self.target_lang = language
-        self.target_sep = "" if language in ["Chinese", "Japanese"] else " "
-        self._spaced_target = language not in ["Chinese", "Japanese"]
+        self._apply_mt_emission_unit_for_language(language)
 
     def tokens_to_string(self, tokens: List[str]) -> str:
-        if self.latency_unit in ["word", "spm"]:
+        if self._mt_word_level:
             return " ".join(tokens)
-        if self.latency_unit == "char":
-            return "".join(tokens)
-        raise NotImplementedError(f"Unsupported latency_unit: {self.latency_unit}")
+        return "".join(tokens)
 
     def clear(self) -> None:
         self._state = self._fresh_state(speech_id=self._state.speech_id)

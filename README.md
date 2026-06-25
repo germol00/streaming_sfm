@@ -39,6 +39,35 @@ pip install -r requirements-eval.txt
 
 Gold segment timings are used when `en-de_<set>_refs.yaml` / `en-fr_<set>_refs.yaml` exist in the ACL cache; otherwise proportional splits are built from wav duration.
 
+## MCIF evaluation (OmniSTEval)
+
+MCIF uses the same SimulStream + OmniSTEval toolchain as ACL 60-60. The cache layout mirrors SimulEval (`en-de_test_wavs_list.txt`, `en-de_test_refs.*`, gold `audio-segments.yaml`).
+
+```bash
+./run_mcif_simulstream.sh              # inference + scoring (en-de, en-it)
+./run_mcif_simulstream.sh en-de        # one direction
+./score_mcif_metrics.sh en-de en-it    # score existing logs only
+```
+
+**Environment**
+
+- `MCIF_ROOT` — MCIF cache (default `~/.cache/simuleval/mcif_iwslt26`)
+- `MCIF_SET` — split name (default `test`)
+- Other knobs match ACL (`SPEECH_CFG`, `OUTPUT_DIR`, `SKIP_COMET`, …)
+
+## Provisional ASR Context experiments (MCIF)
+
+`mcif_pac_experiment_manifest.yaml` mirrors the ACL PAC suite for MCIF directions **en-de** and **en-it** (word-level Roman-alphabet targets).
+
+```bash
+./run_mcif_pac_experiments.sh --generate-only
+./run_mcif_pac_experiments.sh --experiments committed_asr_lacp096 pac_lacp096
+./run_mcif_pac_experiments.sh --score-only
+python3 scripts/pac_experiment_report.py --manifest mcif_pac_experiment_manifest.yaml --set test
+```
+
+Generated configs: `output/mcif_pac_experiments/configs/`. Per-experiment outputs: `output/mcif_pac_experiments/<experiment_id>/`. Aggregate report: `output/mcif_pac_experiments/report/`.
+
 ## Provisional ASR Context experiments
 
 `pac_experiment_manifest.yaml` defines the paper-oriented experiment suite for Provisional ASR Context (PAC) decoding: committed-ASR baselines, PAC runs, an aggressive low-latency baseline, chunk-size sweeps, and PAC ablations.
