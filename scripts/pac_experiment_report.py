@@ -94,6 +94,40 @@ def percentile(values: list[float], pct: float) -> float:
     return ordered[idx]
 
 
+def segment_latency_stdevs(instances_path: Path) -> dict[str, float]:
+    """Per-direction segment-level stdev of LongYAAL/LAAL (CA) from OmniSTEval resegmentation."""
+    if not instances_path.exists():
+        return {}
+    try:
+        from omnisteval.data import Instance
+        from omnisteval.scoring import LAALScorer, YAALScorer
+    except ImportError:
+        return {}
+
+    rows = read_jsonl(instances_path)
+    if not rows:
+        return {}
+
+    instances = [Instance.from_dict(row) for row in rows]
+    scorers = (
+        ("LongYAAL (CA) seg_stdev", YAALScorer(computation_aware=True, is_longform=True)),
+        ("LongLAAL (CA) seg_stdev", LAALScorer(computation_aware=True)),
+    )
+    result: dict[str, float] = {}
+    for metric_name, scorer in scorers:
+        values: list[float] = []
+        for ins in instances:
+            delays = getattr(ins, "emission_ca", None)
+            if not delays:
+                continue
+            score = scorer.compute(ins)
+            if score is not None:
+                values.append(score)
+        if len(values) >= 2:
+            result[metric_name] = statistics.stdev(values)
+    return result
+
+
 def metrics_log_diagnostics(metrics_log: Path) -> dict[str, float]:
     rows = [row for row in read_jsonl(metrics_log) if "total_audio_processed" in row]
     generated_counts = [len(row.get("generated_tokens", [])) for row in rows]
@@ -165,7 +199,10 @@ def collect_results(
         }
         for direction in directions:
             diag = metrics_log_diagnostics(out_dir / f"metrics_{direction}.jsonl")
-            diagnostics[exp_id]["directions"][direction] = diag
+            seg_stdevs = segment_latency_stdevs(
+                out_dir / f"omnisteval_{direction}" / "instances.resegmented.jsonl"
+            )
+            diagnostics[exp_id]["directions"][direction] = {**diag, **seg_stdevs}
             for metric, value in diag.items():
                 summary_rows.append(
                     {
@@ -176,6 +213,19 @@ def collect_results(
                         "metric": metric,
                         "value": f"{value:.6f}",
                         "details": "metrics_log_diagnostics",
+                        "output_dir": str(out_dir),
+                    }
+                )
+            for metric, value in seg_stdevs.items():
+                summary_rows.append(
+                    {
+                        "experiment": exp_id,
+                        "label": label,
+                        "group": group,
+                        "direction": direction,
+                        "metric": metric,
+                        "value": f"{value:.6f}",
+                        "details": "segment_latency_stdev",
                         "output_dir": str(out_dir),
                     }
                 )
@@ -391,6 +441,7 @@ def write_markdown_report(output_dir: Path, rows: list[dict[str, str]]) -> None:
         "# PAC Experiment Summary",
         "",
         "This report aggregates quality, latency, computation, and stability metrics from the experiment manifest.",
+        "Latency values show corpus means; ± is the mean segment-level standard deviation across directions.",
         "",
         "| Experiment | Quality | Latency | Stability | Compute |",
         "|---|---:|---:|---:|---:|",
@@ -405,15 +456,25 @@ def write_markdown_report(output_dir: Path, rows: list[dict[str, str]]) -> None:
             quality_parts.append(f"BLEU={bleu:.4f}")
         quality_str = ", ".join(quality_parts)
 
-        latency_primary = choose_metric(lookup, exp_id, LATENCY_METRICS)
-        # Always surface LongYAAL explicitly when available so the report
-        # shows both LongLAAL and LongYAAL instead of only a single latency metric.
+        longlaal = mean_metric(lookup, exp_id, "LongLAAL (CA)")
         longyaal = mean_metric(lookup, exp_id, "LongYAAL (CA)")
+        longlaal_stdev = mean_metric(lookup, exp_id, "LongLAAL (CA) seg_stdev")
+        longyaal_stdev = mean_metric(lookup, exp_id, "LongYAAL (CA) seg_stdev")
         latency_parts: list[str] = []
-        if latency_primary:
-            latency_parts.append(f"{latency_primary[0]}={latency_primary[1]:.2f}")
+        if longlaal is not None:
+            part = f"LongLAAL (CA)={longlaal:.2f}"
+            if longlaal_stdev is not None:
+                part += f"±{longlaal_stdev:.2f}"
+            latency_parts.append(part)
         if longyaal is not None:
-            latency_parts.append(f"LongYAAL (CA)={longyaal:.2f}")
+            part = f"LongYAAL (CA)={longyaal:.2f}"
+            if longyaal_stdev is not None:
+                part += f"±{longyaal_stdev:.2f}"
+            latency_parts.append(part)
+        if not latency_parts:
+            latency_primary = choose_metric(lookup, exp_id, LATENCY_METRICS)
+            if latency_primary:
+                latency_parts.append(f"{latency_primary[0]}={latency_primary[1]:.2f}")
         latency_str = ", ".join(latency_parts)
 
         stability = choose_metric(lookup, exp_id, STABILITY_METRICS)
