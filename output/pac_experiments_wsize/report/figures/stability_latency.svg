@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450.0" y="28" text-anchor="middle" font-family="sans-serif" font-size="20">Stability-Latency Tradeoff</text>
+<line x1="90" y1="470" x2="870" y2="470" stroke="black"/>
+<line x1="90" y1="50" x2="90" y2="470" stroke="black"/>
+<text x="480.0" y="535" text-anchor="middle" font-family="sans-serif" font-size="14">Latency (mean across directions)</text>
+<text x="24" y="260.0" text-anchor="middle" transform="rotate(-90 24 260.0)" font-family="sans-serif" font-size="14">Revision / Erasure Metric</text>
+<circle cx="90.00" cy="170.43" r="5" fill="black"/>
+<text x="98.00" y="162.43" font-family="sans-serif" font-size="12">pac_lacp064</text>
+<circle cx="182.91" cy="382.08" r="5" fill="black"/>
+<text x="190.91" y="374.08" font-family="sans-serif" font-size="12">pac_lacp072</text>
+<circle cx="250.73" cy="289.20" r="5" fill="black"/>
+<text x="258.73" y="281.20" font-family="sans-serif" font-size="12">pac_lacp080</text>
+<circle cx="339.32" cy="320.27" r="5" fill="black"/>
+<text x="347.32" y="312.27" font-family="sans-serif" font-size="12">pac_lacp088</text>
+<circle cx="375.10" cy="315.08" r="5" fill="black"/>
+<text x="383.10" y="307.08" font-family="sans-serif" font-size="12">pac_lacp096</text>
+<circle cx="481.93" cy="427.60" r="5" fill="black"/>
+<text x="489.93" y="419.60" font-family="sans-serif" font-size="12">pac_lacp104</text>
+<circle cx="515.00" cy="446.92" r="5" fill="black"/>
+<text x="523.00" y="438.92" font-family="sans-serif" font-size="12">pac_lacp112</text>
+<circle cx="617.84" cy="313.80" r="5" fill="black"/>
+<text x="625.84" y="305.80" font-family="sans-serif" font-size="12">pac_lacp120</text>
+<circle cx="646.80" cy="462.90" r="5" fill="black"/>
+<text x="654.80" y="454.90" font-family="sans-serif" font-size="12">pac_lacp128</text>
+<circle cx="732.81" cy="470.00" r="5" fill="black"/>
+<text x="740.81" y="462.00" font-family="sans-serif" font-size="12">pac_lacp136</text>
+<circle cx="829.83" cy="391.65" r="5" fill="black"/>
+<text x="837.83" y="383.65" font-family="sans-serif" font-size="12">pac_lacp144</text>
+<circle cx="123.42" cy="205.01" r="5" fill="black"/>
+<text x="131.42" y="197.01" font-family="sans-serif" font-size="12">pac_lacp064_10</text>
+<circle cx="164.44" cy="50.00" r="5" fill="black"/>
+<text x="172.44" y="42.00" font-family="sans-serif" font-size="12">pac_lacp072_10</text>
+<circle cx="224.11" cy="301.78" r="5" fill="black"/>
+<text x="232.11" y="293.78" font-family="sans-serif" font-size="12">pac_lacp080_10</text>
+<circle cx="308.79" cy="269.67" r="5" fill="black"/>
+<text x="316.79" y="261.67" font-family="sans-serif" font-size="12">pac_lacp088_10</text>
+<circle cx="364.02" cy="304.38" r="5" fill="black"/>
+<text x="372.02" y="296.38" font-family="sans-serif" font-size="12">pac_lacp096_10</text>
+<circle cx="490.86" cy="299.14" r="5" fill="black"/>
+<text x="498.86" y="291.14" font-family="sans-serif" font-size="12">pac_lacp104_10</text>
+<circle cx="577.37" cy="339.11" r="5" fill="black"/>
+<text x="585.37" y="331.11" font-family="sans-serif" font-size="12">pac_lacp112_10</text>
+<circle cx="644.86" cy="187.40" r="5" fill="black"/>
+<text x="652.86" y="179.40" font-family="sans-serif" font-size="12">pac_lacp120_10</text>
+<circle cx="685.26" cy="363.26" r="5" fill="black"/>
+<text x="693.26" y="355.26" font-family="sans-serif" font-size="12">pac_lacp128_10</text>
+<circle cx="777.75" cy="404.14" r="5" fill="black"/>
+<text x="785.75" y="396.14" font-family="sans-serif" font-size="12">pac_lacp136_10</text>
+<circle cx="870.00" cy="349.77" r="5" fill="black"/>
+<text x="878.00" y="341.77" font-family="sans-serif" font-size="12">pac_lacp144_10</text>
+</svg>

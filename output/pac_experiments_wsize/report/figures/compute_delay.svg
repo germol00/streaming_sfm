@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="490.0" y="28" text-anchor="middle" font-family="sans-serif" font-size="20">Computation Cost</text>
+<line x1="90" y1="410" x2="950" y2="410" stroke="black"/>
+<line x1="90" y1="50" x2="90" y2="410" stroke="black"/>
+<text x="24" y="230.0" text-anchor="middle" transform="rotate(-90 24 230.0)" font-family="sans-serif" font-size="14">RTF or Mean Chunk Compute</text>
+<rect x="96.84" y="52.54" width="25.41" height="357.46" fill="black"/>
+<text x="109.55" y="47.54" text-anchor="middle" font-family="sans-serif" font-size="11">0.993</text>
+<text x="109.55" y="428.00" text-anchor="end" transform="rotate(-35 109.55 428.00)" font-family="sans-serif" font-size="11">pac_lacp064</text>
+<rect x="135.93" y="76.66" width="25.41" height="333.34" fill="black"/>
+<text x="148.64" y="71.66" text-anchor="middle" font-family="sans-serif" font-size="11">0.926</text>
+<text x="148.64" y="428.00" text-anchor="end" transform="rotate(-35 148.64 428.00)" font-family="sans-serif" font-size="11">pac_lacp072</text>
+<rect x="175.02" y="97.83" width="25.41" height="312.17" fill="black"/>
+<text x="187.73" y="92.83" text-anchor="middle" font-family="sans-serif" font-size="11">0.867</text>
+<text x="187.73" y="428.00" text-anchor="end" transform="rotate(-35 187.73 428.00)" font-family="sans-serif" font-size="11">pac_lacp080</text>
+<rect x="214.11" y="114.50" width="25.41" height="295.50" fill="black"/>
+<text x="226.82" y="109.50" text-anchor="middle" font-family="sans-serif" font-size="11">0.821</text>
+<text x="226.82" y="428.00" text-anchor="end" transform="rotate(-35 226.82 428.00)" font-family="sans-serif" font-size="11">pac_lacp088</text>
+<rect x="253.20" y="129.46" width="25.41" height="280.54" fill="black"/>
+<text x="265.91" y="124.46" text-anchor="middle" font-family="sans-serif" font-size="11">0.779</text>
+<text x="265.91" y="428.00" text-anchor="end" transform="rotate(-35 265.91 428.00)" font-family="sans-serif" font-size="11">pac_lacp096</text>
+<rect x="292.30" y="140.68" width="25.41" height="269.32" fill="black"/>
+<text x="305.00" y="135.68" text-anchor="middle" font-family="sans-serif" font-size="11">0.748</text>
+<text x="305.00" y="428.00" text-anchor="end" transform="rotate(-35 305.00 428.00)" font-family="sans-serif" font-size="11">pac_lacp104</text>
+<rect x="331.39" y="155.31" width="25.41" height="254.69" fill="black"/>
+<text x="344.09" y="150.31" text-anchor="middle" font-family="sans-serif" font-size="11">0.707</text>
+<text x="344.09" y="428.00" text-anchor="end" transform="rotate(-35 344.09 428.00)" font-family="sans-serif" font-size="11">pac_lacp112</text>
+<rect x="370.48" y="166.46" width="25.41" height="243.54" fill="black"/>
+<text x="383.18" y="161.46" text-anchor="middle" font-family="sans-serif" font-size="11">0.676</text>
+<text x="383.18" y="428.00" text-anchor="end" transform="rotate(-35 383.18 428.00)" font-family="sans-serif" font-size="11">pac_lacp120</text>
+<rect x="409.57" y="176.08" width="25.41" height="233.92" fill="black"/>
+<text x="422.27" y="171.08" text-anchor="middle" font-family="sans-serif" font-size="11">0.650</text>
+<text x="422.27" y="428.00" text-anchor="end" transform="rotate(-35 422.27 428.00)" font-family="sans-serif" font-size="11">pac_lacp128</text>
+<rect x="448.66" y="181.28" width="25.41" height="228.72" fill="black"/>
+<text x="461.36" y="176.28" text-anchor="middle" font-family="sans-serif" font-size="11">0.635</text>
+<text x="461.36" y="428.00" text-anchor="end" transform="rotate(-35 461.36 428.00)" font-family="sans-serif" font-size="11">pac_lacp136</text>
+<rect x="487.75" y="184.88" width="25.41" height="225.12" fill="black"/>
+<text x="500.45" y="179.88" text-anchor="middle" font-family="sans-serif" font-size="11">0.625</text>
+<text x="500.45" y="428.00" text-anchor="end" transform="rotate(-35 500.45 428.00)" font-family="sans-serif" font-size="11">pac_lacp144</text>
+<rect x="526.84" y="50.00" width="25.41" height="360.00" fill="black"/>
+<text x="539.55" y="45.00" text-anchor="middle" font-family="sans-serif" font-size="11">1.000</text>
+<text x="539.55" y="428.00" text-anchor="end" transform="rotate(-35 539.55 428.00)" font-family="sans-serif" font-size="11">pac_lacp064_10</text>
+<rect x="565.93" y="78.82" width="25.41" height="331.18" fill="black"/>
+<text x="578.64" y="73.82" text-anchor="middle" font-family="sans-serif" font-size="11">0.920</text>
+<text x="578.64" y="428.00" text-anchor="end" transform="rotate(-35 578.64 428.00)" font-family="sans-serif" font-size="11">pac_lacp072_10</text>
+<rect x="605.02" y="101.87" width="25.41" height="308.13" fill="black"/>
+<text x="617.73" y="96.87" text-anchor="middle" font-family="sans-serif" font-size="11">0.856</text>
+<text x="617.73" y="428.00" text-anchor="end" transform="rotate(-35 617.73 428.00)" font-family="sans-serif" font-size="11">pac_lacp080_10</text>
+<rect x="644.11" y="116.85" width="25.41" height="293.15" fill="black"/>
+<text x="656.82" y="111.85" text-anchor="middle" font-family="sans-serif" font-size="11">0.814</text>
+<text x="656.82" y="428.00" text-anchor="end" transform="rotate(-35 656.82 428.00)" font-family="sans-serif" font-size="11">pac_lacp088_10</text>
+<rect x="683.20" y="132.03" width="25.41" height="277.97" fill="black"/>
+<text x="695.91" y="127.03" text-anchor="middle" font-family="sans-serif" font-size="11">0.772</text>
+<text x="695.91" y="428.00" text-anchor="end" transform="rotate(-35 695.91 428.00)" font-family="sans-serif" font-size="11">pac_lacp096_10</text>
+<rect x="722.30" y="136.18" width="25.41" height="273.82" fill="black"/>
+<text x="735.00" y="131.18" text-anchor="middle" font-family="sans-serif" font-size="11">0.760</text>
+<text x="735.00" y="428.00" text-anchor="end" transform="rotate(-35 735.00 428.00)" font-family="sans-serif" font-size="11">pac_lacp104_10</text>
+<rect x="761.39" y="146.40" width="25.41" height="263.60" fill="black"/>
+<text x="774.09" y="141.40" text-anchor="middle" font-family="sans-serif" font-size="11">0.732</text>
+<text x="774.09" y="428.00" text-anchor="end" transform="rotate(-35 774.09 428.00)" font-family="sans-serif" font-size="11">pac_lacp112_10</text>
+<rect x="800.48" y="162.59" width="25.41" height="247.41" fill="black"/>
+<text x="813.18" y="157.59" text-anchor="middle" font-family="sans-serif" font-size="11">0.687</text>
+<text x="813.18" y="428.00" text-anchor="end" transform="rotate(-35 813.18 428.00)" font-family="sans-serif" font-size="11">pac_lacp120_10</text>
+<rect x="839.57" y="172.15" width="25.41" height="237.85" fill="black"/>
+<text x="852.27" y="167.15" text-anchor="middle" font-family="sans-serif" font-size="11">0.660</text>
+<text x="852.27" y="428.00" text-anchor="end" transform="rotate(-35 852.27 428.00)" font-family="sans-serif" font-size="11">pac_lacp128_10</text>
+<rect x="878.66" y="179.09" width="25.41" height="230.91" fill="black"/>
+<text x="891.36" y="174.09" text-anchor="middle" font-family="sans-serif" font-size="11">0.641</text>
+<text x="891.36" y="428.00" text-anchor="end" transform="rotate(-35 891.36 428.00)" font-family="sans-serif" font-size="11">pac_lacp136_10</text>
+<rect x="917.75" y="183.84" width="25.41" height="226.16" fill="black"/>
+<text x="930.45" y="178.84" text-anchor="middle" font-family="sans-serif" font-size="11">0.628</text>
+<text x="930.45" y="428.00" text-anchor="end" transform="rotate(-35 930.45 428.00)" font-family="sans-serif" font-size="11">pac_lacp144_10</text>
+</svg>

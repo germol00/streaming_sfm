@@ -1,0 +1,1080 @@
+{
+  "pac_lacp064": {
+    "label": "PAC, LCP 0.64s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp064",
+    "directions": {
+      "en-de": {
+        "chunks": 5328.0,
+        "generated_tokens_total": 21562.0,
+        "deleted_tokens_total": 15004.0,
+        "deletion_ratio": 0.6958538169001021,
+        "revision_step_rate": 0.16685435435435436,
+        "emission_step_rate": 0.6392642642642643,
+        "mean_computation_time_s": 0.6453785695829191,
+        "p50_computation_time_s": 0.6850759983062744,
+        "p95_computation_time_s": 0.9868357181549072,
+        "max_computation_time_s": 1.4667203426361084,
+        "total_computation_time_s": 3438.577018737793,
+        "metrics_log_rtf": 4.75583393056303
+      },
+      "en-fr": {
+        "chunks": 5328.0,
+        "generated_tokens_total": 34597.0,
+        "deleted_tokens_total": 27057.0,
+        "deletion_ratio": 0.7820620284995808,
+        "revision_step_rate": 0.15990990990990991,
+        "emission_step_rate": 0.6580330330330331,
+        "mean_computation_time_s": 0.6424647608587334,
+        "p50_computation_time_s": 0.6842353343963623,
+        "p95_computation_time_s": 0.9728639125823975,
+        "max_computation_time_s": 1.362550973892212,
+        "total_computation_time_s": 3423.0522458553314,
+        "metrics_log_rtf": 4.73436189685945
+      },
+      "en-pt": {
+        "chunks": 5328.0,
+        "generated_tokens_total": 13847.0,
+        "deleted_tokens_total": 6808.0,
+        "deletion_ratio": 0.49165884307070123,
+        "revision_step_rate": 0.17267267267267267,
+        "emission_step_rate": 0.6576576576576577,
+        "mean_computation_time_s": 0.6169150953625774,
+        "p50_computation_time_s": 0.6592555046081543,
+        "p95_computation_time_s": 0.9309182167053223,
+        "max_computation_time_s": 1.394989013671875,
+        "total_computation_time_s": 3286.923628091812,
+        "metrics_log_rtf": 4.54608485791209
+      }
+    }
+  },
+  "pac_lacp072": {
+    "label": "PAC, LCP 0.72s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp072",
+    "directions": {
+      "en-de": {
+        "chunks": 4736.0,
+        "generated_tokens_total": 19506.0,
+        "deleted_tokens_total": 13144.0,
+        "deletion_ratio": 0.6738439454526812,
+        "revision_step_rate": 0.17229729729729729,
+        "emission_step_rate": 0.6587837837837838,
+        "mean_computation_time_s": 0.6741996351126078,
+        "p50_computation_time_s": 0.7092247009277344,
+        "p95_computation_time_s": 1.0182507038116455,
+        "max_computation_time_s": 1.4934356212615967,
+        "total_computation_time_s": 3193.0094718933105,
+        "metrics_log_rtf": 4.4161938802850695
+      },
+      "en-fr": {
+        "chunks": 4736.0,
+        "generated_tokens_total": 27968.0,
+        "deleted_tokens_total": 20500.0,
+        "deletion_ratio": 0.7329805491990846,
+        "revision_step_rate": 0.16976351351351351,
+        "emission_step_rate": 0.6913006756756757,
+        "mean_computation_time_s": 0.6787267615263527,
+        "p50_computation_time_s": 0.7235474586486816,
+        "p95_computation_time_s": 1.0130479335784912,
+        "max_computation_time_s": 1.527376413345337,
+        "total_computation_time_s": 3214.449942588806,
+        "metrics_log_rtf": 4.445847809065849
+      },
+      "en-pt": {
+        "chunks": 4736.0,
+        "generated_tokens_total": 13920.0,
+        "deleted_tokens_total": 6871.0,
+        "deletion_ratio": 0.4936063218390805,
+        "revision_step_rate": 0.17820945945945946,
+        "emission_step_rate": 0.6980574324324325,
+        "mean_computation_time_s": 0.645286793191288,
+        "p50_computation_time_s": 0.6861026287078857,
+        "p95_computation_time_s": 0.9685630798339844,
+        "max_computation_time_s": 1.5107154846191406,
+        "total_computation_time_s": 3056.07825255394,
+        "metrics_log_rtf": 4.226806777556579
+      }
+    }
+  },
+  "pac_lacp080": {
+    "label": "PAC, LCP 0.80s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp080",
+    "directions": {
+      "en-de": {
+        "chunks": 4262.0,
+        "generated_tokens_total": 18962.0,
+        "deleted_tokens_total": 12528.0,
+        "deletion_ratio": 0.6606898006539395,
+        "revision_step_rate": 0.18019709056780855,
+        "emission_step_rate": 0.684185828249648,
+        "mean_computation_time_s": 0.7055429290684665,
+        "p50_computation_time_s": 0.7332711219787598,
+        "p95_computation_time_s": 1.0684828758239746,
+        "max_computation_time_s": 1.786285638809204,
+        "total_computation_time_s": 3007.023963689804,
+        "metrics_log_rtf": 4.158960674314475
+      },
+      "en-fr": {
+        "chunks": 4262.0,
+        "generated_tokens_total": 31803.0,
+        "deleted_tokens_total": 24379.0,
+        "deletion_ratio": 0.7665629028707983,
+        "revision_step_rate": 0.17925856405443455,
+        "emission_step_rate": 0.7041295166588456,
+        "mean_computation_time_s": 0.7096373298704093,
+        "p50_computation_time_s": 0.7493617534637451,
+        "p95_computation_time_s": 1.0487713813781738,
+        "max_computation_time_s": 1.6664512157440186,
+        "total_computation_time_s": 3024.4742999076843,
+        "metrics_log_rtf": 4.18309591997932
+      },
+      "en-pt": {
+        "chunks": 4262.0,
+        "generated_tokens_total": 14137.0,
+        "deleted_tokens_total": 7135.0,
+        "deletion_ratio": 0.5047039683101082,
+        "revision_step_rate": 0.18535898639136555,
+        "emission_step_rate": 0.7151572031909902,
+        "mean_computation_time_s": 0.6642860783371551,
+        "p50_computation_time_s": 0.701157808303833,
+        "p95_computation_time_s": 0.992659330368042,
+        "max_computation_time_s": 1.3904657363891602,
+        "total_computation_time_s": 2831.1872658729553,
+        "metrics_log_rtf": 3.915764105164343
+      }
+    }
+  },
+  "pac_lacp088": {
+    "label": "PAC, LCP 0.88s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp088",
+    "directions": {
+      "en-de": {
+        "chunks": 3876.0,
+        "generated_tokens_total": 19109.0,
+        "deleted_tokens_total": 12633.0,
+        "deletion_ratio": 0.6611020984876236,
+        "revision_step_rate": 0.184984520123839,
+        "emission_step_rate": 0.707172342621259,
+        "mean_computation_time_s": 0.7434422836338157,
+        "p50_computation_time_s": 0.7675659656524658,
+        "p95_computation_time_s": 1.1231670379638672,
+        "max_computation_time_s": 2.114368200302124,
+        "total_computation_time_s": 2881.58229136467,
+        "metrics_log_rtf": 3.9854645570835476
+      },
+      "en-fr": {
+        "chunks": 3876.0,
+        "generated_tokens_total": 31275.0,
+        "deleted_tokens_total": 23803.0,
+        "deletion_ratio": 0.7610871302957634,
+        "revision_step_rate": 0.18163054695562436,
+        "emission_step_rate": 0.7249742002063984,
+        "mean_computation_time_s": 0.7241231246137274,
+        "p50_computation_time_s": 0.7603552341461182,
+        "p95_computation_time_s": 1.0656113624572754,
+        "max_computation_time_s": 1.5822656154632568,
+        "total_computation_time_s": 2806.7012310028076,
+        "metrics_log_rtf": 3.881897911437727
+      },
+      "en-pt": {
+        "chunks": 3876.0,
+        "generated_tokens_total": 13730.0,
+        "deleted_tokens_total": 6719.0,
+        "deletion_ratio": 0.48936635105608156,
+        "revision_step_rate": 0.1891124871001032,
+        "emission_step_rate": 0.7371001031991744,
+        "mean_computation_time_s": 0.6968853562855007,
+        "p50_computation_time_s": 0.7287819385528564,
+        "p95_computation_time_s": 1.0303659439086914,
+        "max_computation_time_s": 1.6649143695831299,
+        "total_computation_time_s": 2701.1276409626007,
+        "metrics_log_rtf": 3.7358809809026465
+      }
+    }
+  },
+  "pac_lacp096": {
+    "label": "PAC, LCP 0.96s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp096",
+    "directions": {
+      "en-de": {
+        "chunks": 3553.0,
+        "generated_tokens_total": 19890.0,
+        "deleted_tokens_total": 13382.0,
+        "deletion_ratio": 0.672800402212167,
+        "revision_step_rate": 0.18688432310723332,
+        "emission_step_rate": 0.7255840135097101,
+        "mean_computation_time_s": 0.764607192629195,
+        "p50_computation_time_s": 0.7812399864196777,
+        "p95_computation_time_s": 1.1642117500305176,
+        "max_computation_time_s": 1.9416894912719727,
+        "total_computation_time_s": 2716.6493554115295,
+        "metrics_log_rtf": 3.75734878454187
+      },
+      "en-fr": {
+        "chunks": 3553.0,
+        "generated_tokens_total": 29906.0,
+        "deleted_tokens_total": 22347.0,
+        "deletion_ratio": 0.747241356249582,
+        "revision_step_rate": 0.18575851393188855,
+        "emission_step_rate": 0.755699408950183,
+        "mean_computation_time_s": 0.7609217246753748,
+        "p50_computation_time_s": 0.7926664352416992,
+        "p95_computation_time_s": 1.1189370155334473,
+        "max_computation_time_s": 1.7646574974060059,
+        "total_computation_time_s": 2703.5548877716064,
+        "metrics_log_rtf": 3.739238062238647
+      },
+      "en-pt": {
+        "chunks": 3553.0,
+        "generated_tokens_total": 14689.0,
+        "deleted_tokens_total": 7721.0,
+        "deletion_ratio": 0.5256314248757574,
+        "revision_step_rate": 0.1933577258654658,
+        "emission_step_rate": 0.7481001970166057,
+        "mean_computation_time_s": 0.7161644033871669,
+        "p50_computation_time_s": 0.7453393936157227,
+        "p95_computation_time_s": 1.0596544742584229,
+        "max_computation_time_s": 1.8349978923797607,
+        "total_computation_time_s": 2544.532125234604,
+        "metrics_log_rtf": 3.5192965440803774
+      }
+    }
+  },
+  "pac_lacp104": {
+    "label": "PAC, LCP 1.04s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp104",
+    "directions": {
+      "en-de": {
+        "chunks": 3279.0,
+        "generated_tokens_total": 18529.0,
+        "deleted_tokens_total": 12051.0,
+        "deletion_ratio": 0.6503858815910195,
+        "revision_step_rate": 0.19365660262275083,
+        "emission_step_rate": 0.7429094236047575,
+        "mean_computation_time_s": 0.7961100189014702,
+        "p50_computation_time_s": 0.8069279193878174,
+        "p95_computation_time_s": 1.1851253509521484,
+        "max_computation_time_s": 1.9011051654815674,
+        "total_computation_time_s": 2610.4447519779205,
+        "metrics_log_rtf": 3.6104591107497632
+      },
+      "en-fr": {
+        "chunks": 3279.0,
+        "generated_tokens_total": 28090.0,
+        "deleted_tokens_total": 20559.0,
+        "deletion_ratio": 0.7318974724101104,
+        "revision_step_rate": 0.18847209515096067,
+        "emission_step_rate": 0.7544983226593474,
+        "mean_computation_time_s": 0.7864517222529833,
+        "p50_computation_time_s": 0.8083648681640625,
+        "p95_computation_time_s": 1.140031099319458,
+        "max_computation_time_s": 1.8999347686767578,
+        "total_computation_time_s": 2578.7751972675323,
+        "metrics_log_rtf": 3.566657520139246
+      },
+      "en-pt": {
+        "chunks": 3279.0,
+        "generated_tokens_total": 13633.0,
+        "deleted_tokens_total": 6706.0,
+        "deletion_ratio": 0.49189466735127996,
+        "revision_step_rate": 0.19945105215004574,
+        "emission_step_rate": 0.7602927721866423,
+        "mean_computation_time_s": 0.7493084839619889,
+        "p50_computation_time_s": 0.7697079181671143,
+        "p95_computation_time_s": 1.111602544784546,
+        "max_computation_time_s": 1.7917773723602295,
+        "total_computation_time_s": 2456.9825189113617,
+        "metrics_log_rtf": 3.3982082607322153
+      }
+    }
+  },
+  "pac_lacp112": {
+    "label": "PAC, LCP 1.12s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp112",
+    "directions": {
+      "en-de": {
+        "chunks": 3044.0,
+        "generated_tokens_total": 17154.0,
+        "deleted_tokens_total": 10774.0,
+        "deletion_ratio": 0.6280750845283899,
+        "revision_step_rate": 0.19842312746386334,
+        "emission_step_rate": 0.7578843626806833,
+        "mean_computation_time_s": 0.8041756882304117,
+        "p50_computation_time_s": 0.8182485103607178,
+        "p95_computation_time_s": 1.182739019393921,
+        "max_computation_time_s": 1.7675416469573975,
+        "total_computation_time_s": 2447.9107949733734,
+        "metrics_log_rtf": 3.3856613227756203
+      },
+      "en-fr": {
+        "chunks": 3044.0,
+        "generated_tokens_total": 27214.0,
+        "deleted_tokens_total": 19753.0,
+        "deletion_ratio": 0.7258396413610642,
+        "revision_step_rate": 0.19842312746386334,
+        "emission_step_rate": 0.7779237844940867,
+        "mean_computation_time_s": 0.8107394187585126,
+        "p50_computation_time_s": 0.826258659362793,
+        "p95_computation_time_s": 1.1735985279083252,
+        "max_computation_time_s": 1.9182381629943848,
+        "total_computation_time_s": 2467.8907907009125,
+        "metrics_log_rtf": 3.413295294937864
+      },
+      "en-pt": {
+        "chunks": 3044.0,
+        "generated_tokens_total": 14915.0,
+        "deleted_tokens_total": 7898.0,
+        "deletion_ratio": 0.529534026148173,
+        "revision_step_rate": 0.20006570302233903,
+        "emission_step_rate": 0.78580814717477,
+        "mean_computation_time_s": 0.76046177584301,
+        "p50_computation_time_s": 0.7801468372344971,
+        "p95_computation_time_s": 1.1081843376159668,
+        "max_computation_time_s": 1.9118869304656982,
+        "total_computation_time_s": 2314.8456456661224,
+        "metrics_log_rtf": 3.2016213118634482
+      }
+    }
+  },
+  "pac_lacp120": {
+    "label": "PAC, LCP 1.20s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp120",
+    "directions": {
+      "en-de": {
+        "chunks": 2843.0,
+        "generated_tokens_total": 18970.0,
+        "deleted_tokens_total": 12643.0,
+        "deletion_ratio": 0.6664733790195044,
+        "revision_step_rate": 0.20365810763278228,
+        "emission_step_rate": 0.7608160393950053,
+        "mean_computation_time_s": 0.8272849007303599,
+        "p50_computation_time_s": 0.8318462371826172,
+        "p95_computation_time_s": 1.2339613437652588,
+        "max_computation_time_s": 2.025803327560425,
+        "total_computation_time_s": 2351.970972776413,
+        "metrics_log_rtf": 3.2529686829975546
+      },
+      "en-fr": {
+        "chunks": 2843.0,
+        "generated_tokens_total": 29060.0,
+        "deleted_tokens_total": 21648.0,
+        "deletion_ratio": 0.7449415003441157,
+        "revision_step_rate": 0.20189940204009849,
+        "emission_step_rate": 0.7840309532184312,
+        "mean_computation_time_s": 0.8196858764323726,
+        "p50_computation_time_s": 0.8379545211791992,
+        "p95_computation_time_s": 1.19209623336792,
+        "max_computation_time_s": 2.270272731781006,
+        "total_computation_time_s": 2330.366946697235,
+        "metrics_log_rtf": 3.2230885437119627
+      },
+      "en-pt": {
+        "chunks": 2843.0,
+        "generated_tokens_total": 15565.0,
+        "deleted_tokens_total": 8516.0,
+        "deletion_ratio": 0.5471249598458079,
+        "revision_step_rate": 0.20612029546253957,
+        "emission_step_rate": 0.7907140344706296,
+        "mean_computation_time_s": 0.7850373530949751,
+        "p50_computation_time_s": 0.7959282398223877,
+        "p95_computation_time_s": 1.1526055335998535,
+        "max_computation_time_s": 2.0095865726470947,
+        "total_computation_time_s": 2231.8611948490143,
+        "metrics_log_rtf": 3.086847012857044
+      }
+    }
+  },
+  "pac_lacp128": {
+    "label": "PAC, LCP 1.28s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp128",
+    "directions": {
+      "en-de": {
+        "chunks": 2665.0,
+        "generated_tokens_total": 17466.0,
+        "deleted_tokens_total": 11086.0,
+        "deletion_ratio": 0.6347188824000916,
+        "revision_step_rate": 0.20412757973733583,
+        "emission_step_rate": 0.7782363977485929,
+        "mean_computation_time_s": 0.8488880470590788,
+        "p50_computation_time_s": 0.8524661064147949,
+        "p95_computation_time_s": 1.2509469985961914,
+        "max_computation_time_s": 2.1363046169281006,
+        "total_computation_time_s": 2262.286645412445,
+        "metrics_log_rtf": 3.1289279054338097
+      },
+      "en-fr": {
+        "chunks": 2665.0,
+        "generated_tokens_total": 26646.0,
+        "deleted_tokens_total": 19200.0,
+        "deletion_ratio": 0.7205584327854087,
+        "revision_step_rate": 0.20075046904315197,
+        "emission_step_rate": 0.800375234521576,
+        "mean_computation_time_s": 0.8412649167187889,
+        "p50_computation_time_s": 0.8543362617492676,
+        "p95_computation_time_s": 1.2127573490142822,
+        "max_computation_time_s": 1.9265110492706299,
+        "total_computation_time_s": 2241.9710030555725,
+        "metrics_log_rtf": 3.100829706465021
+      },
+      "en-pt": {
+        "chunks": 2665.0,
+        "generated_tokens_total": 14210.0,
+        "deleted_tokens_total": 7331.0,
+        "deletion_ratio": 0.5159042927515833,
+        "revision_step_rate": 0.2048780487804878,
+        "emission_step_rate": 0.8048780487804879,
+        "mean_computation_time_s": 0.801856209949973,
+        "p50_computation_time_s": 0.820784330368042,
+        "p95_computation_time_s": 1.141761302947998,
+        "max_computation_time_s": 1.6316940784454346,
+        "total_computation_time_s": 2136.946799516678,
+        "metrics_log_rtf": 2.955572622503012
+      }
+    }
+  },
+  "pac_lacp136": {
+    "label": "PAC, LCP 1.36s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp136",
+    "directions": {
+      "en-de": {
+        "chunks": 2508.0,
+        "generated_tokens_total": 18169.0,
+        "deleted_tokens_total": 11972.0,
+        "deletion_ratio": 0.6589245418019704,
+        "revision_step_rate": 0.20933014354066987,
+        "emission_step_rate": 0.7787081339712919,
+        "mean_computation_time_s": 0.8790708601569825,
+        "p50_computation_time_s": 0.8773746490478516,
+        "p95_computation_time_s": 1.2961745262145996,
+        "max_computation_time_s": 2.055576801300049,
+        "total_computation_time_s": 2204.709717273712,
+        "metrics_log_rtf": 3.0492942933414118
+      },
+      "en-fr": {
+        "chunks": 2508.0,
+        "generated_tokens_total": 25394.0,
+        "deleted_tokens_total": 17930.0,
+        "deletion_ratio": 0.7060723005434355,
+        "revision_step_rate": 0.20374800637958532,
+        "emission_step_rate": 0.8074162679425837,
+        "mean_computation_time_s": 0.8820423335549934,
+        "p50_computation_time_s": 0.8860325813293457,
+        "p95_computation_time_s": 1.2981171607971191,
+        "max_computation_time_s": 2.373006820678711,
+        "total_computation_time_s": 2212.1621725559235,
+        "metrics_log_rtf": 3.059601649990399
+      },
+      "en-pt": {
+        "chunks": 2508.0,
+        "generated_tokens_total": 14046.0,
+        "deleted_tokens_total": 7066.0,
+        "deletion_ratio": 0.5030613697849922,
+        "revision_step_rate": 0.21012759170653908,
+        "emission_step_rate": 0.8133971291866029,
+        "mean_computation_time_s": 0.8280065792599364,
+        "p50_computation_time_s": 0.8359260559082031,
+        "p95_computation_time_s": 1.207366943359375,
+        "max_computation_time_s": 1.9929139614105225,
+        "total_computation_time_s": 2076.6405007839203,
+        "metrics_log_rtf": 2.8721640671101163
+      }
+    }
+  },
+  "pac_lacp144": {
+    "label": "PAC, LCP 1.44s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp144",
+    "directions": {
+      "en-de": {
+        "chunks": 2370.0,
+        "generated_tokens_total": 17737.0,
+        "deleted_tokens_total": 11506.0,
+        "deletion_ratio": 0.6487004566724925,
+        "revision_step_rate": 0.21434599156118145,
+        "emission_step_rate": 0.7814345991561181,
+        "mean_computation_time_s": 0.9212219839860618,
+        "p50_computation_time_s": 0.9157657623291016,
+        "p95_computation_time_s": 1.363166332244873,
+        "max_computation_time_s": 2.4317431449890137,
+        "total_computation_time_s": 2183.2961020469666,
+        "metrics_log_rtf": 3.0196775078756675
+      },
+      "en-fr": {
+        "chunks": 2370.0,
+        "generated_tokens_total": 29721.0,
+        "deleted_tokens_total": 22337.0,
+        "deletion_ratio": 0.7515561387571078,
+        "revision_step_rate": 0.21434599156118145,
+        "emission_step_rate": 0.8067510548523207,
+        "mean_computation_time_s": 0.9138958669412991,
+        "p50_computation_time_s": 0.9141838550567627,
+        "p95_computation_time_s": 1.3336560726165771,
+        "max_computation_time_s": 2.496746778488159,
+        "total_computation_time_s": 2165.933204650879,
+        "metrics_log_rtf": 2.9956631972700825
+      },
+      "en-pt": {
+        "chunks": 2370.0,
+        "generated_tokens_total": 12859.0,
+        "deleted_tokens_total": 5969.0,
+        "deletion_ratio": 0.46418850610467377,
+        "revision_step_rate": 0.21265822784810126,
+        "emission_step_rate": 0.8126582278481013,
+        "mean_computation_time_s": 0.861653671787761,
+        "p50_computation_time_s": 0.8655533790588379,
+        "p95_computation_time_s": 1.246462106704712,
+        "max_computation_time_s": 3.2709062099456787,
+        "total_computation_time_s": 2042.1192021369934,
+        "metrics_log_rtf": 2.8244182808335494
+      }
+    }
+  },
+  "pac_lacp064_10": {
+    "label": "PAC, LCP 0.64s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp064_10",
+    "directions": {
+      "en-de": {
+        "chunks": 5328.0,
+        "generated_tokens_total": 20698.0,
+        "deleted_tokens_total": 14047.0,
+        "deletion_ratio": 0.678664605275872,
+        "revision_step_rate": 0.16478978978978978,
+        "emission_step_rate": 0.6347597597597597,
+        "mean_computation_time_s": 0.6484738778065633,
+        "p50_computation_time_s": 0.686448335647583,
+        "p95_computation_time_s": 0.9968414306640625,
+        "max_computation_time_s": 1.5377922058105469,
+        "total_computation_time_s": 3455.068820953369,
+        "metrics_log_rtf": 4.778643445116746
+      },
+      "en-fr": {
+        "chunks": 5328.0,
+        "generated_tokens_total": 32900.0,
+        "deleted_tokens_total": 25266.0,
+        "deletion_ratio": 0.7679635258358662,
+        "revision_step_rate": 0.15521771771771772,
+        "emission_step_rate": 0.6437687687687688,
+        "mean_computation_time_s": 0.6530446426288502,
+        "p50_computation_time_s": 0.6930756568908691,
+        "p95_computation_time_s": 0.992340087890625,
+        "max_computation_time_s": 1.5864782333374023,
+        "total_computation_time_s": 3479.4218559265137,
+        "metrics_log_rtf": 4.8123256890817165
+      },
+      "en-pt": {
+        "chunks": 5328.0,
+        "generated_tokens_total": 15795.0,
+        "deleted_tokens_total": 8772.0,
+        "deletion_ratio": 0.5553656220322887,
+        "revision_step_rate": 0.16910660660660662,
+        "emission_step_rate": 0.6413288288288288,
+        "mean_computation_time_s": 0.6167483031749725,
+        "p50_computation_time_s": 0.6548218727111816,
+        "p95_computation_time_s": 0.9475045204162598,
+        "max_computation_time_s": 1.3549129962921143,
+        "total_computation_time_s": 3286.0349593162537,
+        "metrics_log_rtf": 4.544855756137489
+      }
+    }
+  },
+  "pac_lacp072_10": {
+    "label": "PAC, LCP 0.72s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp072_10",
+    "directions": {
+      "en-de": {
+        "chunks": 4736.0,
+        "generated_tokens_total": 22603.0,
+        "deleted_tokens_total": 16028.0,
+        "deletion_ratio": 0.7091094102552759,
+        "revision_step_rate": 0.17419763513513514,
+        "emission_step_rate": 0.6566722972972973,
+        "mean_computation_time_s": 0.6814609364782637,
+        "p50_computation_time_s": 0.7118022441864014,
+        "p95_computation_time_s": 1.0445835590362549,
+        "max_computation_time_s": 1.6569101810455322,
+        "total_computation_time_s": 3227.3989951610565,
+        "metrics_log_rtf": 4.463757410408545
+      },
+      "en-fr": {
+        "chunks": 4736.0,
+        "generated_tokens_total": 35534.0,
+        "deleted_tokens_total": 28016.0,
+        "deletion_ratio": 0.7884279844655823,
+        "revision_step_rate": 0.17081925675675674,
+        "emission_step_rate": 0.6765202702702703,
+        "mean_computation_time_s": 0.6725082361718288,
+        "p50_computation_time_s": 0.7100851535797119,
+        "p95_computation_time_s": 1.0108733177185059,
+        "max_computation_time_s": 1.7223248481750488,
+        "total_computation_time_s": 3184.999006509781,
+        "metrics_log_rtf": 4.40511474991719
+      },
+      "en-pt": {
+        "chunks": 4736.0,
+        "generated_tokens_total": 15943.0,
+        "deleted_tokens_total": 8954.0,
+        "deletion_ratio": 0.5616257918835853,
+        "revision_step_rate": 0.17820945945945946,
+        "emission_step_rate": 0.6881334459459459,
+        "mean_computation_time_s": 0.6313282193465007,
+        "p50_computation_time_s": 0.6615266799926758,
+        "p95_computation_time_s": 0.9571535587310791,
+        "max_computation_time_s": 1.5840013027191162,
+        "total_computation_time_s": 2989.9704468250275,
+        "metrics_log_rtf": 4.135374262348289
+      }
+    }
+  },
+  "pac_lacp080_10": {
+    "label": "PAC, LCP 0.80s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp080_10",
+    "directions": {
+      "en-de": {
+        "chunks": 4262.0,
+        "generated_tokens_total": 19346.0,
+        "deleted_tokens_total": 12887.0,
+        "deletion_ratio": 0.6661325338571281,
+        "revision_step_rate": 0.17714687939934304,
+        "emission_step_rate": 0.6787893007977476,
+        "mean_computation_time_s": 0.6981865923374486,
+        "p50_computation_time_s": 0.7200772762298584,
+        "p95_computation_time_s": 1.0583093166351318,
+        "max_computation_time_s": 1.8235065937042236,
+        "total_computation_time_s": 2975.671256542206,
+        "metrics_log_rtf": 4.115597309860219
+      },
+      "en-fr": {
+        "chunks": 4262.0,
+        "generated_tokens_total": 31221.0,
+        "deleted_tokens_total": 23783.0,
+        "deletion_ratio": 0.7617629159860351,
+        "revision_step_rate": 0.17925856405443455,
+        "emission_step_rate": 0.6982637259502581,
+        "mean_computation_time_s": 0.6991297637056935,
+        "p50_computation_time_s": 0.7292120456695557,
+        "p95_computation_time_s": 1.037865161895752,
+        "max_computation_time_s": 1.6326770782470703,
+        "total_computation_time_s": 2979.6910529136658,
+        "metrics_log_rtf": 4.12115701780719
+      },
+      "en-pt": {
+        "chunks": 4262.0,
+        "generated_tokens_total": 13901.0,
+        "deleted_tokens_total": 6931.0,
+        "deletion_ratio": 0.49859722322135097,
+        "revision_step_rate": 0.19028625058657908,
+        "emission_step_rate": 0.7132801501642422,
+        "mean_computation_time_s": 0.6552272719544796,
+        "p50_computation_time_s": 0.6886575222015381,
+        "p95_computation_time_s": 0.9777328968048096,
+        "max_computation_time_s": 1.3951220512390137,
+        "total_computation_time_s": 2792.578633069992,
+        "metrics_log_rtf": 3.862365200647619
+      }
+    }
+  },
+  "pac_lacp088_10": {
+    "label": "PAC, LCP 0.88s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp088_10",
+    "directions": {
+      "en-de": {
+        "chunks": 3876.0,
+        "generated_tokens_total": 20630.0,
+        "deleted_tokens_total": 14186.0,
+        "deletion_ratio": 0.687639360155114,
+        "revision_step_rate": 0.18472652218782248,
+        "emission_step_rate": 0.6940144478844169,
+        "mean_computation_time_s": 0.73178056070064,
+        "p50_computation_time_s": 0.7522635459899902,
+        "p95_computation_time_s": 1.1141808032989502,
+        "max_computation_time_s": 1.8478546142578125,
+        "total_computation_time_s": 2836.3814532756805,
+        "metrics_log_rtf": 3.9229480921906346
+      },
+      "en-fr": {
+        "chunks": 3876.0,
+        "generated_tokens_total": 31584.0,
+        "deleted_tokens_total": 24122.0,
+        "deletion_ratio": 0.7637411347517731,
+        "revision_step_rate": 0.17930856553147576,
+        "emission_step_rate": 0.7110423116615067,
+        "mean_computation_time_s": 0.7232207313287615,
+        "p50_computation_time_s": 0.7489147186279297,
+        "p95_computation_time_s": 1.0720317363739014,
+        "max_computation_time_s": 1.7312846183776855,
+        "total_computation_time_s": 2803.2035546302795,
+        "metrics_log_rtf": 3.877060338255579
+      },
+      "en-pt": {
+        "chunks": 3876.0,
+        "generated_tokens_total": 13632.0,
+        "deleted_tokens_total": 6508.0,
+        "deletion_ratio": 0.477406103286385,
+        "revision_step_rate": 0.18859649122807018,
+        "emission_step_rate": 0.7316821465428277,
+        "mean_computation_time_s": 0.6921999353004313,
+        "p50_computation_time_s": 0.7189123630523682,
+        "p95_computation_time_s": 1.023592472076416,
+        "max_computation_time_s": 1.649888277053833,
+        "total_computation_time_s": 2682.966949224472,
+        "metrics_log_rtf": 3.710763255314406
+      }
+    }
+  },
+  "pac_lacp096_10": {
+    "label": "PAC, LCP 0.96s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp096_10",
+    "directions": {
+      "en-de": {
+        "chunks": 3553.0,
+        "generated_tokens_total": 20094.0,
+        "deleted_tokens_total": 13759.0,
+        "deletion_ratio": 0.6847317607245944,
+        "revision_step_rate": 0.1933577258654658,
+        "emission_step_rate": 0.7174218969884605,
+        "mean_computation_time_s": 0.7455100754835288,
+        "p50_computation_time_s": 0.764350175857544,
+        "p95_computation_time_s": 1.1210944652557373,
+        "max_computation_time_s": 1.7431886196136475,
+        "total_computation_time_s": 2648.797298192978,
+        "metrics_log_rtf": 3.66350382651998
+      },
+      "en-fr": {
+        "chunks": 3553.0,
+        "generated_tokens_total": 29246.0,
+        "deleted_tokens_total": 21707.0,
+        "deletion_ratio": 0.7422211584490187,
+        "revision_step_rate": 0.18069237264283705,
+        "emission_step_rate": 0.7359977483816493,
+        "mean_computation_time_s": 0.7546373396700884,
+        "p50_computation_time_s": 0.7812185287475586,
+        "p95_computation_time_s": 1.1238853931427002,
+        "max_computation_time_s": 1.742682933807373,
+        "total_computation_time_s": 2681.226467847824,
+        "metrics_log_rtf": 3.7083560268761353
+      },
+      "en-pt": {
+        "chunks": 3553.0,
+        "generated_tokens_total": 15058.0,
+        "deleted_tokens_total": 7965.0,
+        "deletion_ratio": 0.528954708460619,
+        "revision_step_rate": 0.19504643962848298,
+        "emission_step_rate": 0.7509147199549676,
+        "mean_computation_time_s": 0.7209618428442601,
+        "p50_computation_time_s": 0.7463867664337158,
+        "p95_computation_time_s": 1.0633289813995361,
+        "max_computation_time_s": 2.5332694053649902,
+        "total_computation_time_s": 2561.577427625656,
+        "metrics_log_rtf": 3.5428715947557956
+      }
+    }
+  },
+  "pac_lacp104_10": {
+    "label": "PAC, LCP 1.04s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp104_10",
+    "directions": {
+      "en-de": {
+        "chunks": 3279.0,
+        "generated_tokens_total": 19986.0,
+        "deleted_tokens_total": 13550.0,
+        "deletion_ratio": 0.6779745822075453,
+        "revision_step_rate": 0.19579139981701738,
+        "emission_step_rate": 0.7319304666056725,
+        "mean_computation_time_s": 0.8129092978791298,
+        "p50_computation_time_s": 0.8249976634979248,
+        "p95_computation_time_s": 1.2246854305267334,
+        "max_computation_time_s": 2.162065029144287,
+        "total_computation_time_s": 2665.5295877456665,
+        "metrics_log_rtf": 3.6866459547774415
+      },
+      "en-fr": {
+        "chunks": 3279.0,
+        "generated_tokens_total": 30062.0,
+        "deleted_tokens_total": 22594.0,
+        "deletion_ratio": 0.7515800678597565,
+        "revision_step_rate": 0.19304666056724612,
+        "emission_step_rate": 0.7368100030497102,
+        "mean_computation_time_s": 0.7962759183870288,
+        "p50_computation_time_s": 0.8113553524017334,
+        "p95_computation_time_s": 1.192035436630249,
+        "max_computation_time_s": 2.036311149597168,
+        "total_computation_time_s": 2610.9887363910675,
+        "metrics_log_rtf": 3.61121148579201
+      },
+      "en-pt": {
+        "chunks": 3279.0,
+        "generated_tokens_total": 14404.0,
+        "deleted_tokens_total": 7444.0,
+        "deletion_ratio": 0.5168008886420439,
+        "revision_step_rate": 0.20097590728880757,
+        "emission_step_rate": 0.7517535834095761,
+        "mean_computation_time_s": 0.7616478082936652,
+        "p50_computation_time_s": 0.780585765838623,
+        "p95_computation_time_s": 1.1271531581878662,
+        "max_computation_time_s": 1.7798032760620117,
+        "total_computation_time_s": 2497.443163394928,
+        "metrics_log_rtf": 3.45416864924142
+      }
+    }
+  },
+  "pac_lacp112_10": {
+    "label": "PAC, LCP 1.12s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp112_10",
+    "directions": {
+      "en-de": {
+        "chunks": 3044.0,
+        "generated_tokens_total": 18569.0,
+        "deleted_tokens_total": 12215.0,
+        "deletion_ratio": 0.6578167914265711,
+        "revision_step_rate": 0.20532194480946123,
+        "emission_step_rate": 0.7401445466491459,
+        "mean_computation_time_s": 0.8449802342288284,
+        "p50_computation_time_s": 0.8438611030578613,
+        "p95_computation_time_s": 1.2955458164215088,
+        "max_computation_time_s": 4.614072322845459,
+        "total_computation_time_s": 2572.1198329925537,
+        "metrics_log_rtf": 3.557452605703183
+      },
+      "en-fr": {
+        "chunks": 3044.0,
+        "generated_tokens_total": 29334.0,
+        "deleted_tokens_total": 21891.0,
+        "deletion_ratio": 0.7462671302924934,
+        "revision_step_rate": 0.20203679369250985,
+        "emission_step_rate": 0.7611695137976346,
+        "mean_computation_time_s": 0.8272129344250934,
+        "p50_computation_time_s": 0.8399229049682617,
+        "p95_computation_time_s": 1.223816156387329,
+        "max_computation_time_s": 1.8842442035675049,
+        "total_computation_time_s": 2518.036172389984,
+        "metrics_log_rtf": 3.4826504690108466
+      },
+      "en-pt": {
+        "chunks": 3044.0,
+        "generated_tokens_total": 14897.0,
+        "deleted_tokens_total": 7926.0,
+        "deletion_ratio": 0.5320534335772303,
+        "revision_step_rate": 0.20795006570302235,
+        "emission_step_rate": 0.7723390275952694,
+        "mean_computation_time_s": 0.7862841878551378,
+        "p50_computation_time_s": 0.8016915321350098,
+        "p95_computation_time_s": 1.1600239276885986,
+        "max_computation_time_s": 1.7799134254455566,
+        "total_computation_time_s": 2393.4490678310394,
+        "metrics_log_rtf": 3.3103362890627945
+      }
+    }
+  },
+  "pac_lacp120_10": {
+    "label": "PAC, LCP 1.20s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp120_10",
+    "directions": {
+      "en-de": {
+        "chunks": 2843.0,
+        "generated_tokens_total": 19635.0,
+        "deleted_tokens_total": 13298.0,
+        "deletion_ratio": 0.6772599949070537,
+        "revision_step_rate": 0.20928596552937037,
+        "emission_step_rate": 0.7523742525501231,
+        "mean_computation_time_s": 0.8523949323051042,
+        "p50_computation_time_s": 0.8531701564788818,
+        "p95_computation_time_s": 1.2657456398010254,
+        "max_computation_time_s": 1.8671023845672607,
+        "total_computation_time_s": 2423.3587925434113,
+        "metrics_log_rtf": 3.3517038905054046
+      },
+      "en-fr": {
+        "chunks": 2843.0,
+        "generated_tokens_total": 33406.0,
+        "deleted_tokens_total": 26015.0,
+        "deletion_ratio": 0.7787523199425253,
+        "revision_step_rate": 0.2117481533591277,
+        "emission_step_rate": 0.7791065775589167,
+        "mean_computation_time_s": 0.8218113842708227,
+        "p50_computation_time_s": 0.8304946422576904,
+        "p95_computation_time_s": 1.2060248851776123,
+        "max_computation_time_s": 1.9505658149719238,
+        "total_computation_time_s": 2336.409765481949,
+        "metrics_log_rtf": 3.2314462575150795
+      },
+      "en-pt": {
+        "chunks": 2843.0,
+        "generated_tokens_total": 14906.0,
+        "deleted_tokens_total": 7942.0,
+        "deletion_ratio": 0.5328055816449752,
+        "revision_step_rate": 0.21456208230742174,
+        "emission_step_rate": 0.7794583186774534,
+        "mean_computation_time_s": 0.7964546724058481,
+        "p50_computation_time_s": 0.806084156036377,
+        "p95_computation_time_s": 1.159165382385254,
+        "max_computation_time_s": 1.879216194152832,
+        "total_computation_time_s": 2264.320633649826,
+        "metrics_log_rtf": 3.1317410779237025
+      }
+    }
+  },
+  "pac_lacp128_10": {
+    "label": "PAC, LCP 1.28s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp128_10",
+    "directions": {
+      "en-de": {
+        "chunks": 2665.0,
+        "generated_tokens_total": 18337.0,
+        "deleted_tokens_total": 12003.0,
+        "deletion_ratio": 0.6545781752740361,
+        "revision_step_rate": 0.2075046904315197,
+        "emission_step_rate": 0.7636022514071295,
+        "mean_computation_time_s": 0.8764351930671964,
+        "p50_computation_time_s": 0.8685002326965332,
+        "p95_computation_time_s": 1.3281688690185547,
+        "max_computation_time_s": 2.2760183811187744,
+        "total_computation_time_s": 2335.6997895240784,
+        "metrics_log_rtf": 3.2304643025576345
+      },
+      "en-fr": {
+        "chunks": 2665.0,
+        "generated_tokens_total": 29627.0,
+        "deleted_tokens_total": 22191.0,
+        "deletion_ratio": 0.749012724879333,
+        "revision_step_rate": 0.20562851782363978,
+        "emission_step_rate": 0.7883677298311444,
+        "mean_computation_time_s": 0.8544603159906269,
+        "p50_computation_time_s": 0.8569586277008057,
+        "p95_computation_time_s": 1.2570233345031738,
+        "max_computation_time_s": 2.154230833053589,
+        "total_computation_time_s": 2277.1367421150208,
+        "metrics_log_rtf": 3.1494668066669065
+      },
+      "en-pt": {
+        "chunks": 2665.0,
+        "generated_tokens_total": 13890.0,
+        "deleted_tokens_total": 6947.0,
+        "deletion_ratio": 0.5001439884809216,
+        "revision_step_rate": 0.2048780487804878,
+        "emission_step_rate": 0.7947467166979362,
+        "mean_computation_time_s": 0.8029388254176385,
+        "p50_computation_time_s": 0.8093822002410889,
+        "p95_computation_time_s": 1.1775224208831787,
+        "max_computation_time_s": 1.9788694381713867,
+        "total_computation_time_s": 2139.8319697380066,
+        "metrics_log_rtf": 2.9595630494613943
+      }
+    }
+  },
+  "pac_lacp136_10": {
+    "label": "PAC, LCP 1.36s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp136_10",
+    "directions": {
+      "en-de": {
+        "chunks": 2508.0,
+        "generated_tokens_total": 18284.0,
+        "deleted_tokens_total": 12085.0,
+        "deletion_ratio": 0.6609604025377379,
+        "revision_step_rate": 0.21291866028708134,
+        "emission_step_rate": 0.768341307814992,
+        "mean_computation_time_s": 0.8771739961427935,
+        "p50_computation_time_s": 0.8689548969268799,
+        "p95_computation_time_s": 1.3225595951080322,
+        "max_computation_time_s": 2.2181825637817383,
+        "total_computation_time_s": 2199.952382326126,
+        "metrics_log_rtf": 3.0427145090761494
+      },
+      "en-fr": {
+        "chunks": 2508.0,
+        "generated_tokens_total": 27861.0,
+        "deleted_tokens_total": 20435.0,
+        "deletion_ratio": 0.7334625462115502,
+        "revision_step_rate": 0.21291866028708134,
+        "emission_step_rate": 0.7970494417862839,
+        "mean_computation_time_s": 0.8918534903244919,
+        "p50_computation_time_s": 0.8930995464324951,
+        "p95_computation_time_s": 1.2986841201782227,
+        "max_computation_time_s": 2.0850276947021484,
+        "total_computation_time_s": 2236.7685537338257,
+        "metrics_log_rtf": 3.0936342925272786
+      },
+      "en-pt": {
+        "chunks": 2508.0,
+        "generated_tokens_total": 13802.0,
+        "deleted_tokens_total": 6811.0,
+        "deletion_ratio": 0.49347920591218664,
+        "revision_step_rate": 0.21371610845295055,
+        "emission_step_rate": 0.8141945773524721,
+        "mean_computation_time_s": 0.8448598144347208,
+        "p50_computation_time_s": 0.8480410575866699,
+        "p95_computation_time_s": 1.2355248928070068,
+        "max_computation_time_s": 3.4495186805725098,
+        "total_computation_time_s": 2118.9084146022797,
+        "metrics_log_rtf": 2.9306240572793203
+      }
+    }
+  },
+  "pac_lacp144_10": {
+    "label": "PAC, LCP 1.44s 10s",
+    "group": "main",
+    "output_dir": "/home/gemamol/tools/streaming_sfm/output/pac_experiments_wsize/pac_lacp144_10",
+    "directions": {
+      "en-de": {
+        "chunks": 2370.0,
+        "generated_tokens_total": 19141.0,
+        "deleted_tokens_total": 12917.0,
+        "deletion_ratio": 0.6748341256987618,
+        "revision_step_rate": 0.21814345991561182,
+        "emission_step_rate": 0.7746835443037975,
+        "mean_computation_time_s": 0.9290494985218289,
+        "p50_computation_time_s": 0.9243123531341553,
+        "p95_computation_time_s": 1.3719191551208496,
+        "max_computation_time_s": 2.23480224609375,
+        "total_computation_time_s": 2201.8473114967346,
+        "metrics_log_rtf": 3.045335351475917
+      },
+      "en-fr": {
+        "chunks": 2370.0,
+        "generated_tokens_total": 28294.0,
+        "deleted_tokens_total": 20905.0,
+        "deletion_ratio": 0.7388492259843076,
+        "revision_step_rate": 0.2160337552742616,
+        "emission_step_rate": 0.7983122362869198,
+        "mean_computation_time_s": 0.9176515353882866,
+        "p50_computation_time_s": 0.9163315296173096,
+        "p95_computation_time_s": 1.3577005863189697,
+        "max_computation_time_s": 3.808335542678833,
+        "total_computation_time_s": 2174.8341388702393,
+        "metrics_log_rtf": 3.0079739190434984
+      },
+      "en-pt": {
+        "chunks": 2370.0,
+        "generated_tokens_total": 14291.0,
+        "deleted_tokens_total": 7295.0,
+        "deletion_ratio": 0.5104611293821286,
+        "revision_step_rate": 0.21729957805907174,
+        "emission_step_rate": 0.809282700421941,
+        "mean_computation_time_s": 0.8625137612789492,
+        "p50_computation_time_s": 0.871192216873169,
+        "p95_computation_time_s": 1.252389669418335,
+        "max_computation_time_s": 1.766577959060669,
+        "total_computation_time_s": 2044.1576142311096,
+        "metrics_log_rtf": 2.827237571880061
+      }
+    }
+  }
+}

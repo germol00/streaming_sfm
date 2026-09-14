@@ -1,0 +1,1575 @@
+docid	audio_s	compute_s	generated	deleted
+0	1.28	0.0392003059387207		
+0	2.56	0.38263368606567383	Hallo an alle.	
+0	3.84	0.36617255210876465	Heute werde ich	an alle.
+0	5.12	0.48572564125061035	zusammen. unsere Forschungsarbeit vorstellen.	Heute werde ich
+0	6.4	0.5420260429382324	"Forschungsarbeit „Learning to Raisin Detail"" vorstellen."	vorstellen.
+0	7.680000000000001	0.4706542491912842	"„Deduktives Lernen"" vorstellen."	"Forschungsarbeit „Learning to Raisin Detail"" vorstellen."
+0	8.96	0.77565598487854	"„Deduktives Lernen als komplexes Problemlösen im Metro-System"" vorstellen."	"Lernen"" vorstellen."
+0	10.24	0.9886224269866943	"Lernen komplexes Schlussfolgerungs-Extrahieren"" vorstellen."	"„Deduktives Lernen als komplexes Problemlösen im Metro-System"" vorstellen."
+0	11.52	0.9347827434539795	Ich bin Alan von Bidens	"komplexes Schlussfolgerungs-Extrahieren"" vorstellen."
+0	12.799999999999999	1.2619521617889404	: Metro-Problem als komplexes AI-Labor von Biden, und dies ist ein Journal.	Ich bin Alan von Bidens
+0	14.079999999999998	1.1499922275543213	gemeinsame Arbeit mit Thierry aus dem	AI-Labor von Biden, und dies ist ein Journal.
+0	15.359999999999998	1.271336317062378	"räumliches Extrahieren"" vorstellen. Ich bin Alan aus dem AI-Labor von Biden, und dies ist eine gemeinsame Arbeit mit Thierry Universität Texas."	gemeinsame Arbeit mit Thierry aus dem
+0	16.639999999999997	0.4042949676513672	von der Universität Texas an Austin.	Universität Texas.
+0	17.919999999999998	0.5081727504730225	Austin und Weiru von SUDD.	Austin.
+0	19.2	0.6613113880157471	Zuerst möchte ich	
+0	20.48	0.5249359607696533	über unsere Motivation sprechen.	
+0	21.76	0.4926474094390869	Motivation für das Reasoning sprechen.	sprechen.
+0	23.040000000000003	0.5576035976409912	Hier zeigen wir ein Beispiel.	Motivation für das Reasoning sprechen.
+0	24.320000000000004	0.5822384357452393	"Metro-Problem als komplexes räumliches Extrahieren"" vorstellen. Ich bin Alan aus dem AI-Labor von Biden, und dies ist eine gemeinsame Arbeit mit Thierry von der Universität Texas an Austin und Weiru von SUDD. Zuerst möchte ich über unsere Motivation für das Reasoning sprechen. Hier zeigen wir ein Beispiel, bei dem mehrstufige"	Beispiel.
+0	25.600000000000005	0.5981175899505615	Beispiel, bei dem Reasoning hilfreich ist.	"Metro-Problem als komplexes räumliches Extrahieren"" vorstellen. Ich bin Alan aus dem AI-Labor von Biden, und dies ist eine gemeinsame Arbeit mit Thierry von der Universität Texas an Austin und Weiru von SUDD. Zuerst möchte ich über unsere Motivation für das Reasoning sprechen. Hier zeigen wir ein Beispiel, bei dem mehrstufige"
+0	26.880000000000006	0.6787762641906738	mehrstufiges Diese Abbildung stammt aus	Reasoning hilfreich ist.
+0	28.160000000000007	0.5962390899658203	dem PELM-Paper.	
+0	29.44000000000001	0.5248327255249023	PELM-Paper, in dem sie durchführen	PELM-Paper.
+0	30.72000000000001	0.6216702461242676	Prompting zur Lösung des	durchführen
+0	32.00000000000001	0.5064127445220947	Methodenproblems durchführen.	
+0	33.28000000000001	0.5214817523956299	Methodenproblems in wenigen kurzen Lernsystemen durchführen.	durchführen.
+0	34.56000000000001	0.4851257801055908	in wenigen kurzen Lernszenarien durchführen.	Methodenproblems in wenigen kurzen Lernsystemen durchführen.
+0	35.84000000000001	0.6273939609527588	Auf der NetPen-Seite	
+0	37.12000000000001	0.6073215007781982	können wir sehen, ob wir	
+0	38.40000000000001	0.45971226692199707	einige Samples mit	können wir sehen, ob wir
+0	39.680000000000014	0.6803271770477295	sehen wir, ob wir einige Lernszenarien durchführen. Auf der NetPen-Seite sehen wir, ob wir einige Proben mit nur Fragen und Antworten geben.	einige Samples mit
+0	40.960000000000015	0.8258984088897705	Proben mit nur Fragen und Antworten Fragen und Antworten geben, ob wir möglicherweise nicht in der Lage sind.	Lernszenarien durchführen. Auf der NetPen-Seite sehen wir, ob wir einige Proben mit nur Fragen und Antworten geben.
+0	42.240000000000016	0.6466643810272217	geben, die korrekten Antworten nicht erhalten.	Fragen und Antworten geben, ob wir möglicherweise nicht in der Lage sind.
+0	43.52000000000002	0.6804466247558594	können wir möglicherweise Aber wenn wir einige	die korrekten Antworten nicht erhalten.
+0	44.80000000000002	0.8017010688781738	keine korrekten Antworten erhalten. Aber wenn wir mehr Reasoning hinzufügen, diese Frage	Aber wenn wir einige
+0	46.08000000000002	0.7397050857543945	etwas mehr Reasoning-Beschreibung geben, ist das Modell in der Lage,	mehr Reasoning hinzufügen, diese Frage
+0	47.36000000000002	0.8717043399810791	die Reasoning-Beschreibung vorhersagen.	ist das Modell in der Lage,
+0	48.64000000000002	0.681812047958374	kann das Modell die Reasoning-Beschreibung Reasoning-Beschreibung vorhersagen und auch	die Reasoning-Beschreibung vorhersagen.
+0	49.92000000000002	0.516646146774292	eine korrekte	Reasoning-Beschreibung vorhersagen und auch
+0	51.200000000000024	0.556382417678833	hier eine korrekte Vorhersage treffen.	eine korrekte
+0	52.480000000000025	0.47707653045654297		
+0	53.760000000000026	0.40708017349243164	Also ist es gut,	hier eine korrekte Vorhersage treffen.
+0	55.04000000000003	0.6732466220855713	Mehrbeschreibungen zu haben.	Also ist es gut,
+0	56.32000000000003	0.8056442737579346	Es ist gut, NetPen-Seite sehen wir, ob wir einige Proben mit nur Fragen und Antworten geben, können wir möglicherweise keine korrekten Antworten erhalten. Aber wenn wir etwas mehr Reasoning-Beschreibung geben, kann das Modell die Reasoning-Beschreibung vorhersagen und auch hier eine korrekte Vorhersage treffen. Es ist gut, interpretierbares mehrstufiges Reasoning als Ausgabe zu haben.	Mehrbeschreibungen zu haben.
+0	57.60000000000003	0.8405146598815918	interpretierbares mehrstufiges Reasoning als Ausgabe zu Ausgabe zu haben, und wir haben auch	NetPen-Seite sehen wir, ob wir einige Proben mit nur Fragen und Antworten geben, können wir möglicherweise keine korrekten Antworten erhalten. Aber wenn wir etwas mehr Reasoning-Beschreibung geben, kann das Modell die Reasoning-Beschreibung vorhersagen und auch hier eine korrekte Vorhersage treffen. Es ist gut, interpretierbares mehrstufiges Reasoning als Ausgabe zu haben.
+0	58.88000000000003	0.5112872123718262	Ausgabe zu haben. Und wir denken auch Methode.	Ausgabe zu haben, und wir haben auch
+0	60.16000000000003	0.7114460468292236	haben. Und wir denken das Methodenproblem einfach ist.	Ausgabe zu haben. Und wir denken auch Methode.
+0	61.44000000000003	0.6858079433441162	auch, dass das Methodenproblem mehrstufiges Reasoning als Ausgabe zu haben. Und wir denken auch, dass das Methodenproblem eine einfache Anwendung auf EVEN ist.	das Methodenproblem einfach ist.
+0	62.720000000000034	0.688025951385498	eine einfache Anwendung interpretierbares mehrstufiges Reasoning als Ausgabe zu haben. Und wir denken auch, dass das Methodenproblem eine einfache Anwendung ist, um solches Reasoning zu bewerten.	mehrstufiges Reasoning als Ausgabe zu haben. Und wir denken auch, dass das Methodenproblem eine einfache Anwendung auf EVEN ist.
+0	64.00000000000003	0.6369292736053467	ist, um Reasoning-Fähigkeiten zu bewerten.	interpretierbares mehrstufiges Reasoning als Ausgabe zu haben. Und wir denken auch, dass das Methodenproblem eine einfache Anwendung ist, um solches Reasoning zu bewerten.
+0	65.28000000000003	0.46274471282958984	solche	Reasoning-Fähigkeiten zu bewerten.
+0	66.56000000000003	0.41202402114868164	Also hier in unserem	
+0	67.84000000000003	0.48802852630615234	Problemsetup,	
+0	69.12000000000003	0.5385129451751709	gegeben die Fragen, müssen wir	
+0	70.40000000000003	0.5757308006286621	diese Frage lösen und	
+0	71.68000000000004	0.4570913314819336	das Ergebnis	
+0	72.96000000000004	0.4732491970062256	Reasoning-Fähigkeiten zu bewerten. Also hier in unserem Problemsetup, gegeben die Fragen, müssen wir diese Frage lösen und numerische Antworten erhalten.	das Ergebnis
+0	74.24000000000004	0.635591983795166	Also hier in unserem Problemsetup, gegeben die Fragen, müssen wir diese Frage lösen und numerische Antworten erhalten. In unserer Datensatz,	Reasoning-Fähigkeiten zu bewerten. Also hier in unserem Problemsetup, gegeben die Fragen, müssen wir diese Frage lösen und numerische Antworten erhalten.
+0	75.52000000000004	0.5402414798736572	In Problemsetup, gegeben die Fragen, müssen wir diese Frage lösen und numerische Antworten erhalten. In unseren Datensätzen werden uns auch	Also hier in unserem Problemsetup, gegeben die Fragen, müssen wir diese Frage lösen und numerische Antworten erhalten. In unserer Datensatz,
+0	76.80000000000004	0.8087112903594971	die mathematischen Ausdrücke gegeben.	
+0	78.08000000000004	0.6795222759246826	die mathematischen Ausdrücke Problemsetup, gegeben die Fragen, müssen wir diese Frage lösen und numerische Antworten erhalten. In unseren Datensätzen werden uns auch die mathematischen Ausdrücke gegeben, die zu	Problemsetup, gegeben die Fragen, müssen wir diese Frage lösen und numerische Antworten erhalten. In unseren Datensätzen werden uns auch die mathematischen Ausdrücke gegeben.
+0	79.36000000000004	0.5566732883453369	diesem führen.	
+0	80.64000000000004	0.5054576396942139	bestimmten Antwort führen.	Problemsetup, gegeben die Fragen, müssen wir diese Frage lösen und numerische Antworten erhalten. In unseren Datensätzen werden uns auch die mathematischen Ausdrücke gegeben, die zu diesem führen.
+0	81.92000000000004	0.49558186531066895	Antwort führen.	bestimmten Antwort führen.
+0	83.20000000000005	0.6448938846588135	Also gewisse Annahmen.	Antwort führen.
+0	84.48000000000005	0.7264800071716309	einer bestimmten Antwort führen. Annahmen sind auch	Also gewisse Annahmen.
+0	85.76000000000005	0.6992604732513428	Bestimmte Annahmen auch die mathematischen Ausdrücke gegeben, die zu einer bestimmten Antwort führen. Bestimmte Annahmen gelten auch wie in früheren Arbeiten.	Annahmen sind auch
+0	87.04000000000005	0.8099958896636963	gelten gelten ebenfalls wie in früheren Arbeiten. Wir gehen davon aus, dass	auch die mathematischen Ausdrücke gegeben, die zu einer bestimmten Antwort führen. Bestimmte Annahmen gelten auch wie in früheren Arbeiten.
+0	88.32000000000005	0.9873142242431641	früheren Arbeiten. Wir gehen davon aus, dass die Genauigkeit der Größen bekannt ist.	gelten ebenfalls wie in früheren Arbeiten. Wir gehen davon aus, dass
+0	89.60000000000005	0.7047774791717529	die bekannt ist und wir nur	früheren Arbeiten. Wir gehen davon aus, dass die Genauigkeit der Größen bekannt ist.
+0	90.88000000000005	0.8303840160369873	Präzision der Größen grundlegende betrachten.	bekannt ist und wir nur
+0	92.16000000000005	0.6442320346832275	Annahmen gelten ebenfalls wie in früheren Arbeiten. Wir gehen davon aus, dass die Präzision der Größen bekannt ist und wir nur grundlegende Operatoren wie Addition betrachten.	betrachten.
+0	93.44000000000005	0.7133448123931885	Operatoren wie grundlegende Operatoren wie Addition, Subtraktion betrachten,	Annahmen gelten ebenfalls wie in früheren Arbeiten. Wir gehen davon aus, dass die Präzision der Größen bekannt ist und wir nur grundlegende Operatoren wie Addition betrachten.
+0	94.72000000000006	0.9236068725585938	Addition, Größen bekannt ist und wir nur grundlegende Operatoren wie Addition, Subtraktion, Multiplikation, Division und die Division betrachten.	grundlegende Operatoren wie Addition, Subtraktion betrachten,
+0	96.00000000000006	0.8878834247589111	Subtraktion, Multiplikation, Division und Exponentiation betrachten.	Größen bekannt ist und wir nur grundlegende Operatoren wie Addition, Subtraktion, Multiplikation, Division und die Division betrachten.
+0	97.28000000000006	0.35394930839538574		
+0	98.56000000000006	0.5404703617095947	komplizierte Operatoren	Exponentiation betrachten.
+0	99.84000000000006	0.6099481582641602	Darüber hinaus können komplizierte Operatoren tatsächlich	komplizierte Operatoren
+0	101.12000000000006	0.8484485149383545	diese grundlegenden zerlegt werden.	
+0	102.40000000000006	0.7784082889556885	in diese grundlegenden grundlegende Operatoren wie Addition, Subtraktion, Multiplikation, Division und Exponentiation betrachten. Darüber hinaus können komplizierte Operatoren tatsächlich in diese grundlegenden Operatoren zerlegt werden.	diese grundlegenden zerlegt werden.
+0	103.68000000000006	0.6922063827514648	Also frühere Arbeiten	grundlegende Operatoren wie Addition, Subtraktion, Multiplikation, Division und Exponentiation betrachten. Darüber hinaus können komplizierte Operatoren tatsächlich in diese grundlegenden Operatoren zerlegt werden.
+0	104.96000000000006	0.5879988670349121	Methodenproblem	
+0	106.24000000000007	0.6987771987915039	im tatsächlich in diese grundlegenden Operatoren zerlegt werden. Also frühere Arbeiten im Bereich des Methodenproblem-Lösens tatsächlich.	Methodenproblem
+0	107.52000000000007	0.6914539337158203	Bereich des Methodenproblem-Lösens können komplizierte Operatoren tatsächlich in diese grundlegenden Operatoren zerlegt werden. Also frühere Arbeiten im Bereich des Methodenproblem-Lösens können tatsächlich	tatsächlich in diese grundlegenden Operatoren zerlegt werden. Also frühere Arbeiten im Bereich des Methodenproblem-Lösens tatsächlich.
+0	108.80000000000007	0.4577901363372803	zerlegt werden. Also frühere Arbeiten im Bereich des Methodenproblem-Lösens können tatsächlich in	komplizierte Operatoren tatsächlich in diese grundlegenden Operatoren zerlegt werden. Also frühere Arbeiten im Bereich des Methodenproblem-Lösens können tatsächlich
+0	110.08000000000007	0.8408772945404053	Sequenz-zu-Sequenz und Sequenz-zu-	zerlegt werden. Also frühere Arbeiten im Bereich des Methodenproblem-Lösens können tatsächlich in
+0	111.36000000000007	0.9948482513427734	Methodenproblem-Lösens können tatsächlich in sequenz-zu-sequenz und sequenz-zu-baum Modelle kategorisiert werden.	Sequenz-zu-Sequenz und Sequenz-zu-
+0	112.64000000000007	0.7834961414337158		Methodenproblem-Lösens können tatsächlich in sequenz-zu-sequenz und sequenz-zu-baum Modelle kategorisiert werden.
+0	113.92000000000007	0.7186582088470459	sequenz-zu-sequenz und sequenz-zu-baum Modelle kategorisiert werden. Also traditionelle sequenz-zu-sequenz	
+0	115.20000000000007	0.9951179027557373	sequenz-zu-sequenz und sequenz-zu-baum Modelle kategorisiert werden. Traditionelle sequenz-zu-sequenz-Modelle konvertieren die Exponential	sequenz-zu-sequenz und sequenz-zu-baum Modelle kategorisiert werden. Also traditionelle sequenz-zu-sequenz
+0	116.48000000000008	1.1853551864624023	Traditionelle sequenz-zu-sequenz-Modelle konvertieren Ausdruck in eine spezifische Sequenz.	sequenz-zu-sequenz und sequenz-zu-baum Modelle kategorisiert werden. Traditionelle sequenz-zu-sequenz-Modelle konvertieren die Exponential
+0	117.76000000000008	0.8079631328582764	den Ausdruck in eine spezifische für die Generierung.	Ausdruck in eine spezifische Sequenz.
+0	119.04000000000008	0.8208713531494141	Sequenz für die Generierung, und es ist ziemlich einfach,	für die Generierung.
+0	120.32000000000008	0.7955453395843506	implementieren.	einfach,
+0	121.60000000000008	0.8189327716827393	einfach zu implementieren und es kann verallgemeinern auf	implementieren.
+0	122.88000000000008	0.9103052616119385	viele verschiedene verallgemeinern.	verallgemeinern auf
+0	124.16000000000008	0.8059649467468262	sich auf viele verschiedene verallgemeinern.	viele verschiedene verallgemeinern.
+0	125.44000000000008	0.709395170211792	Probleme verallgemeinern.	verallgemeinern.
+0	126.72000000000008	0.8946125507354736	komplizierte Aber die Nachteile sind die Leistung	Probleme verallgemeinern.
+0	128.00000000000009	0.7168238162994385	die Generierung, und es ist ziemlich einfach zu implementieren und es kann sich auf viele verschiedene komplizierte Probleme verallgemeinern. Aber die Nachteile der Leistung sind eigentlich gener	sind die Leistung
+0	129.2800000000001	0.740246057510376	der Leistung sind nicht besser als.	die Generierung, und es ist ziemlich einfach zu implementieren und es kann sich auf viele verschiedene komplizierte Probleme verallgemeinern. Aber die Nachteile der Leistung sind eigentlich gener
+0	130.5600000000001	0.8440275192260742	tatsächlich im Allgemeinen nicht besser als die strukturellen Modelle.	nicht besser als.
+0	131.8400000000001	0.8146002292633057	und es kann sich auf viele verschiedene komplizierte Probleme verallgemeinern. Aber die Nachteile der Leistung sind tatsächlich im Allgemeinen nicht besser als die strukturellen Modelle und es fehlt an der	Modelle.
+0	133.1200000000001	0.7506089210510254	interpretierbares mehrstufiges Reasoning als Ausgabe zu haben. Und wir denken auch, dass das Methodenproblem eine einfache Anwendung ist, um solche Reasoning-Fähigkeiten zu bewerten. Also hier in unserem Problemsetup, gegeben die Fragen, müssen wir diese Frage lösen und numerische Antworten erhalten. In unseren Datensätzen werden uns auch die mathematischen Ausdrücke gegeben, die zu einer bestimmten Antwort führen. Bestimmte Annahmen gelten ebenfalls wie in früheren Arbeiten. Wir gehen davon aus, dass die Präzision der Größen bekannt ist und wir nur grundlegende Operatoren wie Addition, Subtraktion, Multiplikation, Division und Exponentiation betrachten. Darüber hinaus können komplizierte Operatoren tatsächlich in diese grundlegenden Operatoren zerlegt werden. Also frühere Arbeiten im Bereich des Methodenproblem-Lösens können tatsächlich in sequenz-zu-sequenz und sequenz-zu-baum Modelle kategorisiert werden. Traditionelle sequenz-zu-sequenz-Modelle konvertieren den Ausdruck in eine spezifische Sequenz für die Generierung, und es ist ziemlich einfach zu implementieren und es kann sich auf viele verschiedene komplizierte Probleme verallgemeinern. Aber die Nachteile der Leistung sind tatsächlich im Allgemeinen nicht besser als die strukturellen Modelle, und es fehlt an Interpretierbarkeit für	und es kann sich auf viele verschiedene komplizierte Probleme verallgemeinern. Aber die Nachteile der Leistung sind tatsächlich im Allgemeinen nicht besser als die strukturellen Modelle und es fehlt an der
+0	134.4000000000001	0.9202711582183838	implementieren und es kann sich auf viele verschiedene komplizierte Probleme verallgemeinern. Aber die Nachteile der Leistung sind tatsächlich im Allgemeinen nicht besser als die strukturellen Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage.	interpretierbares mehrstufiges Reasoning als Ausgabe zu haben. Und wir denken auch, dass das Methodenproblem eine einfache Anwendung ist, um solche Reasoning-Fähigkeiten zu bewerten. Also hier in unserem Problemsetup, gegeben die Fragen, müssen wir diese Frage lösen und numerische Antworten erhalten. In unseren Datensätzen werden uns auch die mathematischen Ausdrücke gegeben, die zu einer bestimmten Antwort führen. Bestimmte Annahmen gelten ebenfalls wie in früheren Arbeiten. Wir gehen davon aus, dass die Präzision der Größen bekannt ist und wir nur grundlegende Operatoren wie Addition, Subtraktion, Multiplikation, Division und Exponentiation betrachten. Darüber hinaus können komplizierte Operatoren tatsächlich in diese grundlegenden Operatoren zerlegt werden. Also frühere Arbeiten im Bereich des Methodenproblem-Lösens können tatsächlich in sequenz-zu-sequenz und sequenz-zu-baum Modelle kategorisiert werden. Traditionelle sequenz-zu-sequenz-Modelle konvertieren den Ausdruck in eine spezifische Sequenz für die Generierung, und es ist ziemlich einfach zu implementieren und es kann sich auf viele verschiedene komplizierte Probleme verallgemeinern. Aber die Nachteile der Leistung sind tatsächlich im Allgemeinen nicht besser als die strukturellen Modelle, und es fehlt an Interpretierbarkeit für
+0	135.6800000000001	0.7579097747802734	Richtung.	implementieren und es kann sich auf viele verschiedene komplizierte Probleme verallgemeinern. Aber die Nachteile der Leistung sind tatsächlich im Allgemeinen nicht besser als die strukturellen Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage.
+0	136.9600000000001	0.8019914627075195	Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil	Richtung.
+0	138.2400000000001	0.7415497303009033		
+0	139.5200000000001	0.6302509307861328	die strukturellen Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells.	ist diese Richtung immer noch sehr beliebt, weil
+0	140.8000000000001	0.34464263916015625		die strukturellen Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells.
+0	142.0800000000001	0.5062084197998047		
+0	143.3600000000001	0.7148559093475342	Also in Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baum-basierten Modellen	
+0	144.6400000000001	0.7734987735748291	Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baumbasierten Modellen strukturieren wir tatsächlich	Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baum-basierten Modellen
+0	145.9200000000001	0.9386003017425537	baumbasierten Modellen strukturieren wir Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baumbasierten Modellen strukturieren wir diese Ausdrücke in einem	Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baumbasierten Modellen strukturieren wir tatsächlich
+0	147.2000000000001	0.7325069904327393	diese Ausdrücke Transformer-Modells. Also in baumbasierten Modellen strukturieren wir diese Ausdrücke tatsächlich in Baumform und	Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baumbasierten Modellen strukturieren wir diese Ausdrücke in einem
+0	148.4800000000001	0.802361249923706	Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baumbasierten Modellen strukturieren wir diese Ausdrücke in Baumform und folgen einer vorwärts Reihenfolge.	Transformer-Modells. Also in baumbasierten Modellen strukturieren wir diese Ausdrücke tatsächlich in Baumform und
+0	149.7600000000001	0.9632267951965332	in Baumform und folgen einer Generierung, und es ist ziemlich einfach zu implementieren und es kann sich auf viele verschiedene komplizierte Probleme verallgemeinern. Aber die Nachteile der Leistung sind tatsächlich im Allgemeinen nicht besser als die strukturellen Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baumbasierten Modellen strukturieren wir diese Ausdrücke in Baumform und folgen einer vorortiger Durchlauf in Baumgenerierung.	Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baumbasierten Modellen strukturieren wir diese Ausdrücke in Baumform und folgen einer vorwärts Reihenfolge.
+0	151.0400000000001	0.8222558498382568	vorortiger Durchlauf in Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baumbasierten Modellen strukturieren wir diese Ausdrücke in Baumform und folgen einer vorortiger Durchlauf in Baumgenerierungen. Also hier	Generierung, und es ist ziemlich einfach zu implementieren und es kann sich auf viele verschiedene komplizierte Probleme verallgemeinern. Aber die Nachteile der Leistung sind tatsächlich im Allgemeinen nicht besser als die strukturellen Modelle, und es fehlt an Interpretierbarkeit für die Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baumbasierten Modellen strukturieren wir diese Ausdrücke in Baumform und folgen einer vorortiger Durchlauf in Baumgenerierung.
+0	152.3200000000001	0.9013144969940186	Baumgenerierungen.	Vorhersage. Aber eigentlich ist diese Richtung immer noch sehr beliebt, weil des Transformer-Modells. Also in baumbasierten Modellen strukturieren wir diese Ausdrücke in Baumform und folgen einer vorortiger Durchlauf in Baumgenerierungen. Also hier
+0	153.6000000000001	0.8928470611572266		
+0	154.8800000000001	1.1535563468933105		
+0	156.1600000000001	1.3126797676086426		
+0	157.4400000000001	1.3595211505889893		
+0	158.7200000000001	1.460904836654663	Hier generieren wir	
+0	160.0000000000001	1.463493824005127	die Operatoren weiter, bis wir die Blätter erreichen, die die Größen sind. Hier ist das Gute, dass es uns tatsächlich	
+0	161.28000000000011	0.6911580562591553		
+0	162.56000000000012	0.7443339824676514	diese binäre Baumstruktur gibt und es	
+0	163.84000000000012	0.6220982074737549	ist aber	
+0	165.12000000000012	0.7669236660003662	aber eigentlich ziemlich	
+0	166.40000000000012	0.7326231002807617	kontraintuitiv, weil	
+0	167.68000000000012	0.6566438674926758	wir	
+0	168.96000000000012	0.7987287044525146	zuerst den Operator generieren	
+0	170.24000000000012	0.7634787559509277	und dann am Ende	
+0	171.52000000000012	0.6233370304107666		
+0	172.80000000000013	0.8359763622283936	die Größen generieren.	
+0	174.08000000000013	0.7820231914520264	Und die zweite Sache ist, dass	
+0	175.36000000000013	0.7673699855804443	es auch	
+0	176.64000000000013	0.7865471839904785	einige	
+0	177.92000000000013	0.9347014427185059	wiederholte Berechnungen enthält. Also	
+0	179.20000000000013	0.7825937271118164	hier, wenn wir diesen Ausdruck	
+0	180.48000000000013	0.7570526599884033	a mal drei plus	
+0	181.76000000000013	0.8184497356414795	drei ansehen,	
+0	183.04000000000013	0.7528209686279297	wird er tatsächlich zweimal generiert.	
+0	184.32000000000014	0.6560070514678955	Aber	
+0	185.60000000000014	0.7210564613342285	eigentlich sollten wir	
+0	186.88000000000014	0.34126830101013184	die Ergebnisse wiederverwenden.	
+0	188.16000000000014	0.5398859977722168		
+0	189.44000000000014	0.8139708042144775	Also in unserem	
+0	190.72000000000014	0.7159771919250488	vorgeschlagenen Ansatz wollen wir lösen	
+0	192.00000000000014	0.5823574066162109		
+0	193.28000000000014	0.636345624923706	diese Probleme	
+0	194.56000000000014	0.6738526821136475		
+0	195.84000000000015	0.8722190856933594		
+0	197.12000000000015	0.9655153751373291		
+0	198.40000000000015	1.0934278964996338	in einer schrittweisen und interpretierbaren Weise. Also hier im zweiten	
+0	199.68000000000015	0.6751308441162109		
+0	200.96000000000015	0.8099710941314697	Schritt können wir	
+0	202.24000000000015	0.7775449752807617		
+0	203.52000000000015	1.0306363105773926	dieses Divisor erhalten, was 27	
+0	204.80000000000015	0.9253506660461426		
+0	206.08000000000015	1.0309062004089355	ist. Und wir können auch	
+0	207.36000000000016	1.0134565830230713		
+0	208.64000000000016	1.0919272899627686	zurückverweisen auf die ursprünglichen Fragen, um	
+0	209.92000000000016	0.9059634208679199	die relevanten Inhalte zu finden. Und in	
+0	211.20000000000016	0.7497982978820801	diesen Schritten erhalten wir	
+0	212.48000000000016	0.5991742610931396	die Divisoren.	
+0	213.76000000000016	0.14885807037353516		
+0	215.04000000000016	0.6633539199829102		
+0	216.32000000000016	0.9112310409545898		
+0	217.60000000000016	0.9763224124908447	Und dann in diesem dritten Schritt erhalten wir tatsächlich den	
+0	218.88000000000017	0.7256176471710205	Quotienten,	
+0	220.16000000000017	0.7646551132202148	okay, und	
+0	221.44000000000017	0.8973195552825928	nach diesen drei Schritten können wir	
+0	222.72000000000017	0.760530948638916		
+0	224.00000000000017	0.792442798614502	tatsächlich die Ergebnisse vom zweiten Schritt	
+0	225.28000000000017	0.6303954124450684	wiederverwenden und dann	
+0	226.56000000000017	0.5427868366241455		
+0	227.84000000000017	0.7747857570648193	die Ergebnisse	
+0	229.12000000000018	0.8005154132843018	des vierten Schritts	
+0	230.40000000000018	0.7788956165313721	erhalten und schließlich können wir	
+0	231.68000000000018	0.6435205936431885		
+0	232.96000000000018	0.6404855251312256	die Dividenden erhalten.	
+0	234.24000000000018	0.656174898147583		
+0	235.52000000000018	0.7330532073974609		
+0	236.80000000000018	0.806466817855835	Hier generieren wir tatsächlich den gesamten	
+0	238.08000000000018	0.6675293445587158	Ausdruck	
+0	239.36000000000018	0.640650749206543		
+0	240.64000000000019	0.7391750812530518	direkt statt	
+0	241.9200000000002	0.823188066482544	einzelner Operatoren oder Größen.	
+0	243.2000000000002	0.6404716968536377	Das macht den Prozess	
+0	244.4800000000002	0.6050364971160889	genauer.	
+0	245.7600000000002	0.6996722221374512	Also	
+0	247.0400000000002	0.7787201404571533	in unserem deduktiven	
+0	248.3200000000002	0.7529430389404297	System beginnen wir	
+0	249.6000000000002	0.9014477729797363	zunächst mit einer Reihe von	
+0	250.8800000000002	0.8103866577148438	Größen, die in	
+0	252.1600000000002	0.8704590797424316	den Fragen präsentiert	
+0	253.4400000000002	0.8191432952880859	werden, und auch einige Konstanten als unsere	
+0	254.7200000000002	0.6302225589752197		
+0	256.00000000000017	0.8498067855834961		
+0	257.28000000000014	0.9655349254608154		
+0	258.5600000000001	0.9318931102752686	Anfangszustand. Der Ausdruck wird durch	
+0	259.8400000000001	0.8342375755310059	Eij OP	
+0	261.12000000000006	0.746284008026123	dargestellt, wo wir	
+0	262.40000000000003	0.7991225719451904	Operatoren	
+0	263.68	0.8638710975646973	von QI zu	
+0	264.96	0.8639378547668457	QJ durchführen, und solcher Ausdruck ist	
+0	266.23999999999995	0.7495546340942383	tatsächlich gerichtet.	
+0	267.5199999999999	0.8017299175262451	Also haben wir auch	
+0	268.7999999999999	0.7687602043151855		
+0	270.07999999999987	0.9823708534240723	hier Subtraktion Reverse, um	
+0	271.35999999999984	0.9437110424041748	die entgegengesetzte Richtung darzustellen.	
+0	272.6399999999998	0.7903132438659668		
+0	273.9199999999998	0.912710428237915		
+0	275.19999999999976	1.112867832183838		
+0	276.47999999999973	1.3200194835662842	Das ist ziemlich ähnlich zur Relationsextraktion. Also in einem formellen deduktiven	
+0	277.7599999999997	0.7106878757476807	System,	
+0	279.0399999999997	0.8117203712463379	zum Zeitpunkt t,	
+0	280.31999999999965	0.7410194873809814	wenden wir den Operator	
+0	281.5999999999996	0.7653336524963379	zwischen	
+0	282.8799999999996	0.9692399501800537	dem qi und qj Paar	
+0	284.15999999999957	0.8024022579193115	an, und dann erhalten wir	
+0	285.43999999999954	0.7822549343109131	diesen neuen Ausdruck.	
+0	286.7199999999995	0.7848303318023682	Wir fügen ihn zum	
+0	287.9999999999995	0.8504340648651123	nächsten Zustand	
+0	289.27999999999946	0.5182499885559082	hinzu, um eine neue Größe zu werden.	
+0	290.55999999999943	0.674229621887207		
+0	291.8399999999994	0.6403899192810059		
+0	293.1199999999994	0.8808431625366211		
+0	294.39999999999935	0.9276337623596191	Diese Slides visualisieren tatsächlich die Evolution der	
+0	295.6799999999993	0.8471677303314209	Zustände, wo wir	
+0	296.9599999999993	0.7773735523223877		
+0	298.23999999999927	0.44106435775756836	den Ausdruck kontinuierlich zum aktuellen Zustand hinzufügen.	
+0	299.51999999999924	0.6850271224975586		
+0	300.7999999999992	0.7765288352966309	In	
+0	302.0799999999992	0.9959673881530762	unseren Modellimplementierungen verwenden wir	
+0	303.35999999999916	1.0018653869628906		
+0	304.63999999999913	1.0936989784240723	zuerst ein vorgefertigtes Sprachmodell, das sein kann Birds oder	
+0	305.9199999999991	0.8511087894439697	Robot Heads, und dann	
+0	307.1999999999991	0.7963244915008545	kodieren wir einen Satz und	
+0	308.47999999999905	0.7222645282745361	erhalten	
+0	309.759999999999	0.7616496086120605	dann diese Größenrepräsentationen.	
+0	311.039999999999	0.7653639316558838	Sobald wir	
+0	312.31999999999897	0.8390166759490967	die	
+0	313.59999999999894	0.977609395980835	Größenrepräsentationen haben, können wir	
+0	314.8799999999989	0.9128029346466064	mit Inferenz beginnen. Hier zeigen wir	
+0	316.1599999999989	0.7296569347381592	ein Beispiel von	
+0	317.43999999999886	1.0423698425292969		
+0	318.71999999999883	1.1427521705627441	Q1, um die Repräsentation für Q1	
+0	319.9999999999988	0.9309477806091309	geteilt durch Q2	
+0	321.2799999999988	0.4297449588775635	und dann mal Q3 zu erhalten.	
+0	322.55999999999875	0.7335491180419922		
+0	323.8399999999987	0.9133081436157227	Zuerst erhalten wir das	
+0	325.1199999999987	0.8872334957122803		
+0	326.39999999999867	0.9742872714996338	Paar-Repräsentation, was im Wesentlichen nur die	
+0	327.67999999999864	0.8171975612640381	Kette	
+0	328.9599999999986	0.9226367473602295	zwischen Q1 und Q2	
+0	330.2399999999986	1.0024092197418213	ist, und dann wenden wir	
+0	331.51999999999856	0.948183536529541	ein Feed-Forward-Netzwerk an, das	
+0	332.79999999999853	0.8161032199859619	pr	
+0	334.0799999999985	0.8507988452911377		
+0	335.3599999999985	0.9936912059783936	ameterisiert ist durch den Operator. Und dann	
+0	336.63999999999845	1.1532223224639893	erhalten wir schließlich	
+0	337.9199999999984	1.0092921257019043	die Ausdruck-Repräsentation	
+0	339.1999999999984	0.9929945468902588	q1 geteilt durch q2.	
+0	340.47999999999837	0.6903865337371826	Aber	
+0	341.75999999999834	0.7906265258789062		
+0	343.0399999999983	0.8495237827301025	in der Praxis in der Inferenzphase	
+0	344.3199999999983	0.7172284126281738	könnten wir	
+0	345.59999999999826	0.8232431411743164	möglicherweise	
+0	346.87999999999823	0.9719533920288086	eine falsche Repräsentation	
+0	348.1599999999982	0.7707786560058594	oder	
+0	349.4399999999982	0.8163454532623291	auch einen falschen Ausdruck erhalten.	
+0	350.71999999999815	0.7677202224731445	Also hier	
+0	351.9999999999981	0.6501514911651611	alle möglichen	
+0	353.2799999999981	0.7692060470581055		
+0	354.55999999999807	0.9561574459075928	Ausdrücke sind gleich	
+0	355.83999999999804	0.8405458927154541	drei mal die Anzahl der Operatoren.	
+0	357.119999999998	0.6560792922973633		
+0	358.399999999998	0.7613370418548584	Das Gute hier	
+0	359.67999999999796	0.8275399208068848	ist, dass wir	
+0	360.95999999999793	0.8544795513153076	leicht	
+0	362.2399999999979	1.0655617713928223	Einschränkungen hinzufügen können, um diese	
+0	363.5199999999979	0.8766026496887207	Suche	
+0	364.79999999999785	0.9624857902526855	diesen Suchraum zu kontrollieren. Zum	
+0	366.0799999999978	0.9234359264373779	Beispiel, wenn dieser Ausdruck nicht	
+0	367.3599999999978	0.8392865657806396	erlaubt ist, können wir	
+0	368.63999999999777	0.8184752464294434	diesen Ausdruck einfach	
+0	369.91999999999774	0.8178272247314453	in unserem Suchraum entfernen.	
+0	371.1999999999977	0.713839054107666	Also	
+0	372.4799999999977	0.9849376678466797	im zweiten Schritt machen wir	
+0	373.75999999999766	0.9087071418762207	dasselbe, aber der einzige	
+0	375.03999999999763	0.7799978256225586	Unterschied ist, dass	
+0	376.3199999999976	0.7098181247711182	der einzige	
+0	377.5999999999976	0.7711923122406006	Unterschied	
+0	378.87999999999755	0.944739580154419	eine weitere Menge von	
+0	380.1599999999975	0.9888365268707275	Quantitäten ist. Diese Quantität kommt von	
+0	381.4399999999975	0.7416129112243652		
+0	382.71999999999747	0.8014750480651855	dem vorher berechneten Ausdruck.	
+0	383.99999999999744	0.6586804389953613		
+0	385.2799999999974	0.8454506397247314	Schließlich können wir	
+0	386.5599999999974	0.8796391487121582	diesen finalen Ausdruck	
+0	387.83999999999736	0.7546889781951904		
+0	389.11999999999733	0.9206109046936035	q3 mal q4 erhalten.	
+0	390.3999999999973	0.8464739322662354	Und wir können auch	
+0	391.6799999999973	0.8105134963989258	die Anzahl aller	
+0	392.95999999999725	0.9410903453826904	möglichen Ausdrücke	
+0	394.2399999999972	0.8453407287597656		
+0	395.5199999999972	1.0230216979980469	ist unterschiedlich vom vorherigen Schritt sehen.	
+0	396.79999999999717	0.8665134906768799	Also solch	
+0	398.07999999999714	0.9523828029632568	ein Unterschied macht es	
+0	399.3599999999971	1.1150972843170166	schwierig, Beam Search	
+0	400.6399999999971	1.0624730587005615	anzuwenden, weil die	
+0	401.91999999999706	0.9390897750854492	Wahrscheinlichkeitsverteilung zwischen diesen	
+0	403.19999999999703	0.8147721290588379	beiden Schritten	
+0	404.479999999997	0.3805861473083496	unbalanciert ist.	
+0	405.759999999997	0.712059736251831		
+0	407.03999999999695	0.9305193424224854	Also das	
+0	408.3199999999969	1.1132533550262451	Trainingsverfahren ist ähnlich zum Training	
+0	409.5999999999969	1.1491451263427734	eines	
+0	410.87999999999687	1.2110626697540283	sequenz-zu-sequenz-Modells, wo wir	
+0	412.15999999999684	1.0017333030700684	den Verlust an jedem Zeitpunkt	
+0	413.4399999999968	0.8732948303222656	optimieren, und hier verwenden wir auch	
+0	414.7199999999968	0.7759683132171631	dieses	
+0	415.99999999999676	0.7914242744445801	Tau, um	
+0	417.27999999999673	0.8678853511810303	darzustellen, wann wir	
+0	418.5599999999967	0.8084745407104492		
+0	419.8399999999967	0.4130072593688965	diesen Generierungsprozess beenden sollten.	
+0	421.11999999999665	0.6915137767791748		
+0	422.3999999999966	0.8898983001708984	Und hier ist der Raum	
+0	423.6799999999966	0.9745943546295166	unterschiedlich von	
+0	424.95999999999657	1.0585079193115234		
+0	426.23999999999654	1.1511690616607666	sequenz-zu-sequenz, weil der Raum	
+0	427.5199999999965	1.1814196109771729		
+0	428.7999999999965	1.2178263664245605	ist unterschiedlich an jedem Zeitpunkt, während in	
+0	430.07999999999646	1.2460122108459473	traditionellen sequenz-zu-sequenz-Modellen	
+0	431.35999999999643	0.5096149444580078	es die Anzahl des Vokabulars ist.	
+0	432.6399999999964	0.7062880992889404		
+0	433.9199999999964	0.7394344806671143	Und es	
+0	435.19999999999635	1.0342440605163574	erlaubt auch gewisse	
+0	436.4799999999963	1.0342440605163574	Einschränkungen von	
+0	437.7599999999963	0.9646365642547607	Prior von Prior-Wissen aufzuerlegen.	
+0	439.03999999999627	0.8150911331176758	Also	
+0	440.31999999999624	0.8940880298614502	führen wir Experimente	
+0	441.5999999999962	0.9003474712371826	auf	
+0	442.8799999999962	1.0543558597564697		
+0	444.15999999999616	1.2121977806091309	den	
+0	445.43999999999613	1.2890994548797607	gängig verwendeten	
+0	446.7199999999961	1.2532730102539062		
+0	447.9999999999961	0.8701555728912354	Methodenproblem-Datensätzen MAWPS, Math23K, MathQA und SWAM durch.	
+0	449.27999999999605	0.7938642501831055		
+0	450.559999999996	0.8687896728515625	Und hier zeigen wir kurz	
+0	451.839999999996	0.8584725856781006	die Ergebnisse im Vergleich	
+0	453.11999999999597	0.94053053855896		
+0	454.39999999999594	1.0039377212524414	zu den vorher besten Ansätzen. Also unser	
+0	455.6799999999959	0.9184350967407227	beste performierende	
+0	456.9599999999959	0.8429853916168213		
+0	458.23999999999586	0.975313663482666	Variante ist Roberta Deductive	
+0	459.51999999999583	0.9178495407104492		
+0	460.7999999999958	1.1560041904449463		
+0	462.0799999999958	1.2085371017456055	Reasoner, und tatsächlich verwenden wir kein Beam Search im Gegensatz, offensichtliche	
+0	463.35999999999575	0.8286621570587158	Ansätze, die	
+0	464.6399999999957	0.7670836448669434	Beamsearch verwenden.	
+0	465.9199999999957	0.7230420112609863		
+0	467.19999999999567	0.8607280254364014		
+0	468.47999999999564	1.0461246967315674	Okay. Also die besten Ansätze sind oft	
+0	469.7599999999956	0.7698264122009277	baumbasierte Modelle.	
+0	471.0399999999956	0.17432188987731934		
+0	472.31999999999556	0.17334651947021484		
+0	473.59999999999553	0.7596697807312012		
+0	474.8799999999955	0.9564673900604248	Also insgesamt ist unser Reasoner	
+0	476.1599999999955	0.7733604907989502	in der Lage,	
+0	477.43999999999545	0.8058979511260986		
+0	478.7199999999954	1.0057587623596191	signifikant besser	
+0	479.9999999999954	1.1755778789520264	als dieses baumbasierte Modell	
+0	481.27999999999537	0.9832534790039062	auszuwählen, aber wir können die	
+0	482.55999999999534	0.8056337833404541	absolute Zahl	
+0	483.8399999999953	0.8555185794830322	auf	
+0	485.1199999999953	0.9111301898956299		
+0	486.39999999999526	1.1453373432159424	Math oder SWAM sind nicht wirklich hoch sehen. Also	
+0	487.67999999999523	0.9199037551879883	untersuchen wir weiter die Ergebnisse	
+0	488.9599999999952	0.9093422889709473	auf SWAM und	
+0	490.2399999999952	0.9505152702331543	dieser Datensatz ist	
+0	491.51999999999515	1.0230600833892822	herausfordernd, weil der Autor versucht	
+0	492.7999999999951	0.7932908535003662	hat,	
+0	494.0799999999951	0.9985189437866211	manuell	
+0	495.35999999999507	1.2473804950714111	etwas hinzuzufügen, um	
+0	496.63999999999504	1.2126429080963135	das NLP-Modell zu verwirren, wie	
+0	497.919999999995	0.964587926864624	das Hinzufügen von	
+0	499.199999999995	0.8286070823669434		
+0	500.47999999999496	0.8844938278198242	Evaluierungsinformationen und zusätzlichen Quantitäten.	
+0	501.75999999999493	0.8832159042358398	Also in	
+0	503.0399999999949	0.9425582885742188	unserer Vorhersage finden wir	
+0	504.3199999999949	0.915374755859375		
+0	505.59999999999485	0.48815226554870605	, dass einige der Zwischenwerte tatsächlich negativ sind.	
+0	506.8799999999948	0.727839469909668		
+0	508.1599999999948	0.7895238399505615	Zum Beispiel, in	
+0	509.43999999999477	0.9126832485198975	dieser	
+0	510.71999999999474	1.070619821548462	Frage fragen wir, wie viele Äpfel	
+0	511.9999999999947	0.9552645683288574	Jake hat, aber wir haben	
+0	513.2799999999947	1.0086913108825684	einige zusätzliche	
+0	514.5599999999947	0.8829600811004639	Informationen wie	
+0	515.8399999999947	1.0168075561523438	17 wenige Pitch und	
+0	517.1199999999947	1.0091564655303955	Steven hat 8	
+0	518.3999999999946	0.8407611846923828	Pitch, was völlig	
+0	519.6799999999946	0.8866920471191406	irrelevant ist.	
+0	520.9599999999946	0.9762961864471436	Also	
+0	522.2399999999946	0.9863708019256592	macht unser Modell einige Vorhersage wie	
+0	523.5199999999945	0.889742374420166	diese, was	
+0	524.7999999999945	0.8539249897003174	pr produziert negative	
+0	526.0799999999945	0.8491330146789551	Werte, und wir	
+0	527.3599999999944	1.0032596588134766	beobachten diese zwei	
+0	528.6399999999944	0.8891100883483887	repräsentieren diese zwei	
+0	529.9199999999944	0.9063577651977539		
+0	531.1999999999944	0.9564743041992188	Ausdrücke tatsächlich ähnliche Scores. Also	
+0	532.4799999999943	0.7847414016723633	können wir tatsächlich	
+0	533.7599999999943	0.9679672718048096		
+0	535.0399999999943	1.0654828548431396	diesen Suchraum einschränken, indem wir	
+0	536.3199999999943	0.8809797763824463		
+0	537.5999999999942	0.9832854270935059	wie diese Ergebnisse sind	
+0	538.8799999999942	0.9391214847564697		
+0	540.1599999999942	1.0367100238800049	Negatives entfernen, so dass wir die	
+0	541.4399999999941	0.3319056034088135	Antwort korrekt machen können.	
+0	542.7199999999941	0.6640467643737793		
+0	543.9999999999941	0.71207594871521	Also	
+0	545.2799999999941	0.9225568771362305		
+0	546.559999999994	0.9247646331787109	finden wir	
+0	547.839999999994	0.957266092300415	weiter, dass solche Einschränkung tatsächlich verbessert	
+0	549.119999999994	0.8570563793182373		
+0	550.399999999994	0.9734914302825928	ziemlich viel für	
+0	551.6799999999939	1.053175449371338	einige Modelle. Zum	
+0	552.9599999999939	0.9939217567443848	Beispiel, für	
+0	554.2399999999939	1.1475718021392822		
+0	555.5199999999938	1.1256470680236816		
+0	556.7999999999938	1.3114852905273438	Birds verbessern wir sieben	
+0	558.0799999999938	1.3971149921417236		
+0	559.3599999999938	1.4782094955444336		
+0	560.6399999999937	1.5851473808288574	Punkte und dann für das Roberta-basierte Modell verbessern wir tatsächlich zwei Punkte. Also bessere Sprachmodell hat eine bessere Sprachverständnis	
+0	561.9199999999937	0.8482918739318848	Fähigkeit, so dass die	
+0	563.1999999999937	0.7903196811676025	Zahl hier	
+0	564.4799999999937	0.8731675148010254	ist höher für	
+0	565.7599999999936	0.9693455696105957	Roberta und niedriger für	
+0	567.0399999999936	1.0449042320251465	Birds. Und wir versuchen	
+0	568.3199999999936	1.0264043807983398	auch, die Schwierigkeit	
+0	569.5999999999935	0.9295377731323242	hinter	
+0	570.8799999999935	1.077587604522705	all diesem Datensatz zu analysieren.	
+0	572.1599999999935	1.1577613353729248	Wir gehen davon aus, dass	
+0	573.4399999999935	1.1234359741210938	die Anzahl der ungenutzten	
+0	574.7199999999934	1.0376973152160645	Quantität als	
+0	575.9999999999934	0.9560492038726807	irrelevante Information hier betrachtet werden kann.	
+0	577.2799999999934	0.8678743839263916	Also	
+0	578.5599999999934	0.8522365093231201	hier können wir sehen, dass	
+0	579.8399999999933	0.7583837509155273	wir	
+0	581.1199999999933	1.151055097579956	die	
+0	582.3999999999933	1.0299072265625	Anzahl der	
+0	583.6799999999932	1.2509469985961914	Proben mit ungenutzten Quantitäten	
+0	584.9599999999932	1.0640826225280762	haben und der SWAM-Datensatz hat	
+0	586.2399999999932	0.9042677879333496	den größten Anteil.	
+0	587.5199999999932	0.9347953796386719	Und hier zeigen wir auch	
+0	588.7999999999931	0.7983913421630859	die Gesamtleistung.	
+0	590.0799999999931	0.7926576137542725		
+0	591.3599999999931	1.0064067840576172	Für diese	
+0	592.639999999993	1.0320284366607666	Proben ohne ungenutzte	
+0	593.919999999993	1.0128703117370605	Quantitäten,	
+0	595.199999999993	0.88492751121521	ist die Gesamtleistung tatsächlich höher	
+0	596.479999999993	0.8860881328582764	als	
+0	597.7599999999929	1.0147321224212646	die Leistung ist tatsächlich höher	
+0	599.0399999999929	1.0466995239257812	als die	
+0	600.3199999999929	1.2800743579864502	Gesamtleistung. Aber mit diesen Proben, die	
+0	601.5999999999929	0.9660921096801758	mit	
+0	602.8799999999928	1.0556111335754395	ungenutzter Quantität ist tatsächlich	
+0	604.1599999999928	0.9041953086853027	viel schlechter als	
+0	605.4399999999928	0.8303654193878174	viel schlechter	
+0	606.7199999999928	0.8803038597106934	als	
+0	607.9999999999927	1.1086387634277344	die Gesamtleistung.	
+0	609.2799999999927	1.0813257694244385	Für	
+0	610.5599999999927	1.0892393589019775	MAWPS haben wir	
+0	611.8399999999926	1.05910062789917	nicht wirklich zu viele Desk Cases.	
+0	613.1199999999926	0.95957350730896	Also	
+0	614.3999999999926	0.4348316192626953	ignoriere ich diesen Teil einfach.	
+0	615.6799999999926	0.6684935092926025		
+0	616.9599999999925	0.8439476490020752		
+0	618.2399999999925	0.9919202327728271	Also endlich wollen wir	
+0	619.5199999999925	1.0915014743804932	die Interpretierbarkeit	
+0	620.7999999999925	0.9994947910308838	durch	
+0	622.0799999999924	1.0608177185058594	einen Crash und Partizipation Beispiel zeigen.	
+0	623.3599999999924	0.8697805404663086	Also hier	
+0	624.6399999999924	0.9619340896606445	macht unser Modell tatsächlich	
+0	625.9199999999923	0.9388012886047363	eine	
+0	627.1999999999923	0.9734961986541748	falsche Vorhersage	
+0	628.4799999999923	0.9402785301208496	im ersten Schritt.	
+0	629.7599999999923	0.9376099109649658	Also können wir tatsächlich	
+0	631.0399999999922	0.886760950088501		
+0	632.3199999999922	1.0314416885375977	diesen Ausdruck mit	
+0	633.5999999999922	1.0014252662658691	dem Satz hier korrelieren.	
+0	634.8799999999922	0.9587254524230957		
+0	636.1599999999921	1.143707036972046	Okay. Also denken wir, dieser Satz könnte	
+0	637.4399999999921	0.8972311019897461	das Modell	
+0	638.7199999999921	1.0338919162750244		
+0	639.999999999992	1.2452197074890137	zu einer falschen Vorhersage irreführen.	
+0	641.279999999992	1.013249397277832	Also hier	
+0	642.559999999992	1.0620052814483643		
+0	643.839999999992	1.1849472522735596	pflanzt ein	
+0	645.1199999999919	1.1737616062164307		
+0	646.3999999999919	1.2608048915863037	weiterer 35 macht das Modell denken, es sollte	
+0	647.6799999999919	1.1830756664276123	ein Addition Operatoren sein.	
+0	648.9599999999919	1.1470391750335693	Also versuchen wir, den Satz zu	
+0	650.2399999999918	1.18815016746521	überarbeiten, um etwas wie	
+0	651.5199999999918	1.1357033252716064	die Anzahl der Paarpalmen	
+0	652.7999999999918	1.1304986476898193	sind 35 weniger als	
+0	654.0799999999917	1.0869944095611572	die Apfelbäume zu sein.	
+0	655.3599999999917	1.1001660823822021	Also machen wir es zu	
+0	656.6399999999917	1.0149245262145996		
+0	657.9199999999917	1.1985299587249756	vermitteln genauere Semantik, so dass das Modell	
+0	659.1999999999916	1.0915546417236328	in der Lage ist, die	
+0	660.4799999999916	0.976085901260376	Vorhersage	
+0	661.7599999999916	0.9083452224731445	korrekt zu machen.	
+0	663.0399999999916	0.9643802642822266	Diese Studie	
+0	664.3199999999915	1.0088074207305908	zeigt, wie die interpretierbare	
+0	665.5999999999915	0.960158109664917		
+0	666.8799999999915	1.062079668045044	Vorhersagen uns helfen,	
+0	668.1599999999914	0.5881648063659668	das Modellverhalten zu verstehen.	
+0	669.4399999999914	0.17631006240844727		
+0	670.7199999999914	0.930473804473877		
+0	671.9999999999914	1.0593934059143066		
+0	673.2799999999913	1.1532273292541504	Um unsere Arbeit zu schließen,	
+0	674.5599999999913	1.1761353015899658	ist unser Modell tatsächlich ziemlich	
+0	675.8399999999913	1.0998601913452148	effizient und wir sind in der Lage,	
+0	677.1199999999913	0.9136509895324707	interpretierbare	
+0	678.3999999999912	0.8959589004516602		
+0	679.6799999999912	1.0076029300689697		
+0	680.9599999999912	1.3029870986938477	Lösungsverfahren zu bieten. Und wir können leicht einige	
+0	682.2399999999911	1.2168922424316406		
+0	683.5199999999911	1.171595573425293	Prior-Wissen als Einschränkung	
+0	684.7999999999911	1.098508596420288		
+0	686.0799999999911	1.2971892356872559	einfügen, was die Leistung verbessern kann. Und	
+0	687.359999999991	1.1862256526947021	die letzte Sache ist, dass	
+0	688.639999999991	1.0957603454589844	der zugrundeliegende Mechanismus nicht	
+0	689.919999999991	1.2203683853149414	nur auf	
+0	691.199999999991	1.2284350395202637		
+0	692.4799999999909	1.7046706676483154		
+0	693.7599999999909	1.6976735591888428	Mapwork Problem-Lösungsaufgaben anwendbar ist, sondern auch andere Aufgaben, die mehrstufiges Reasoning beinhalten.	
+0	695.0399999999909	0.9840788841247559		
+0	696.3199999999908	0.4371926784515381	Aber wir haben auch gewisse Limitationen.	
+0	697.5999999999908	1.057525396347046		
+0	698.8799999999908	1.1269948482513428	Wenn wir eine große Anzahl von	
+0	700.1599999999908	1.1564621925354004	Operatoren oder	
+0	701.4399999999907	1.0812160968780518		
+0	702.7199999999907	1.2217249870300293	Inhalt oder Konstanten haben,	
+0	703.9999999999907	1.0758368968963623	könnte der Speicherbedarf ziemlich hoch sein.	
+0	705.2799999999907	0.9436874389648438	Und die zweite	
+0	706.5599999999906	1.0519697666168213	Sache ist,	
+0	707.8399999999906	1.2064461708068848	dass, wie erwähnt, weil	
+0	709.1199999999906	1.0354132652282715	die Wahrscheinlichkeitsverteilung	
+0	710.3999999999905	1.1209285259246826	zwischen	
+0	711.6799999999905	1.1482555866241455	verschiedenen Zeitpunkten unbalanciert	
+0	712.9599999999905	1.100843906402588	ist, ist es	
+0	714.2399999999905	1.0307245254516602	auch ziemlich schwierig,	
+0	715.5199999999904	0.9989016056060791	Beam Search	
+0	716.7999999999904	0.8891894817352295		
+0	718.0799999999904	0.9755830764770508	Strategie anzuwenden.	
+0	719.3599999999904	0.953681468963623		
+0	720.6399999999903	1.1031591892242432	Das ist das Ende der	
+0	721.9199999999903	1.008061408996582	Rede, und Fragen sind willkommen.	
+0	723.0229374999903	0.36575794219970703	Danke.	
+1	1.28	0.20047259330749512	Hallo.	
+1	2.56	0.3580038547515869	Hallo, mein Name ist Antoine.	Hallo.
+1	3.84	0.7058722972869873	Antoine und ich komme von der Universität Maastricht.	Antoine.
+1	5.12	0.5850300788879395	Ich werde	
+1	6.4	0.3771708011627197	meine John Work präsentieren.	
+1	7.680000000000001	0.5016610622406006	John-Arbeit mit Jerry vorstellen, die über	John Work präsentieren.
+1	8.96	0.6337406635284424	ein neues Datensatz für das Statutory vorstellen.	John-Arbeit mit Jerry vorstellen, die über
+1	10.24	0.7500531673431396	Arbeit mit Jerry über ein neues Datensatz für Abrufung gesetzlicher Artikel vorstellen.	ein neues Datensatz für das Statutory vorstellen.
+1	11.52	0.4432361125946045	die	Abrufung gesetzlicher Artikel vorstellen.
+1	12.799999999999999	0.3671145439147949	Rechtliche Fragen sind ein	
+1	14.079999999999998	0.4810490608215332	integraler Bestandteil vieler.	Rechtliche Fragen sind ein
+1	15.359999999999998	0.5988297462463379	Lebens vieler Menschen.	integraler Bestandteil vieler.
+1	16.639999999999997	0.7313733100891113	Lebens vieler Menschen, doch die Mehrheit der Bürger	Lebens vieler Menschen.
+1	17.919999999999998	0.85017991065979	Rechtsfragen sind ein integraler Bestandteil des Lebens vieler Menschen, doch die Mehrheit der Bürger hat wenig bis nichts	Lebens vieler Menschen, doch die Mehrheit der Bürger
+1	19.2	0.5216925144195557	Lebens vieler Menschen, doch die Mehrheit der Bürger verfügt über wenig bis keine Kenntnisse über ihre eigenen Rechte.	Lebens vieler Menschen, doch die Mehrheit der Bürger hat wenig bis nichts
+1	20.48	0.6104781627655029	verfügt über wenig bis keine Kenntnisse über ihre Lebens vieler Menschen, doch die Mehrheit der Bürger verfügt über wenig bis keine Kenntnisse über ihre Rechte und Grundrechte.	Lebens vieler Menschen, doch die Mehrheit der Bürger verfügt über wenig bis keine Kenntnisse über ihre eigenen Rechte.
+1	21.76	0.46892690658569336	Rechte und grundlegenden rechtlichen Verfahren.	Lebens vieler Menschen, doch die Mehrheit der Bürger verfügt über wenig bis keine Kenntnisse über ihre Rechte und Grundrechte.
+1	23.040000000000003	0.45997095108032227		
+1	24.320000000000004	0.5250022411346436	viele verwundbare Bürger	grundlegenden rechtlichen Verfahren.
+1	25.600000000000005	0.7505176067352295	Infolgedessen haben viele verwundbare nicht leisten können,	viele verwundbare Bürger
+1	26.880000000000006	0.7232298851013184	Bürger, die sich die teure Unterstützung nicht leisten können, keinen Zugang zu	nicht leisten können,
+1	28.160000000000007	0.8169121742248535	Rechtsexperten nicht leisten können, keinen Zugang zu rechtlicher Beratung.	nicht leisten können, keinen Zugang zu
+1	29.44000000000001	0.5628244876861572	eines Rechtsexperten nicht leisten können, keinen Rechtsexperten nicht leisten können, keinen Schutz.	Rechtsexperten nicht leisten können, keinen Zugang zu rechtlicher Beratung.
+1	30.72000000000001	0.45674705505371094	können, keinen Schutz oder werden sogar ausgenutzt.	Rechtsexperten nicht leisten können, keinen Schutz.
+1	32.00000000000001	0.6048860549926758	Schutz oder ausgenutzt.	können, keinen Schutz oder werden sogar ausgenutzt.
+1	33.28000000000001	0.7871205806732178	im schlimmsten Fall werden sie Oder die Arbeit zielt darauf ab	ausgenutzt.
+1	34.56000000000001	0.560624361038208	Unsere Arbeit zielt darauf ab, die Lücke zwischen	Oder die Arbeit zielt darauf ab
+1	35.84000000000001	0.7934815883636475	Menschen und dem Recht zu schließen.	
+1	37.12000000000001	0.5713903903961182	Recht zu schließen, indem wir effektive	schließen.
+1	38.40000000000001	0.619957447052002	Retrieval-Systeme entwickeln.	Recht zu schließen, indem wir effektive
+1	39.680000000000014	0.5417971611022949	Retrieval-Systeme für gesetzliche Artikel entwickeln.	entwickeln.
+1	40.960000000000015	0.30458950996398926		Retrieval-Systeme für gesetzliche Artikel entwickeln.
+1	42.240000000000016	0.44030165672302246	Ein solches System könnte eine kostenlose	
+1	43.52000000000002	0.500694990158081	professionelle	
+1	44.80000000000002	0.3910536766052246	Rechtsberatungsleistung für	
+1	46.08000000000002	0.591684103012085	gesetzliche Artikel entwickeln. Ein solches System könnte eine kostenlose professionelle Rechtsberatungsleistung für unerfahrene Menschen bieten.	
+1	47.36000000000002	0.3727564811706543		gesetzliche Artikel entwickeln. Ein solches System könnte eine kostenlose professionelle Rechtsberatungsleistung für unerfahrene Menschen bieten.
+1	48.64000000000002	0.45670390129089355	Bevor wir zur Hauptbeiträge kommen,	
+1	49.92000000000002	0.5606803894042969	Arbeit kommen, las	kommen,
+1	51.200000000000024	0.5524907112121582	dieser Arbeit kommen, beschreiben wir zunächst das Problem.	Arbeit kommen, las
+1	52.480000000000025	0.5411376953125	Problem der gesetzlichen Artikel.	Problem.
+1	53.760000000000026	0.5126619338989258	Abrufung gesetzlicher Artikel.	gesetzlichen Artikel.
+1	55.04000000000003	0.6702218055725098	Gegeben ein einfacher Frage,	
+1	56.32000000000003	0.5934731960296631	Frage zu einem Rechtsfall.	ein einfacher Frage,
+1	57.60000000000003	0.6116158962249756	Rechtsproblem, wie zum Beispiel	Frage zu einem Rechtsfall.
+1	58.88000000000003	0.8822927474975586	ein einfacher Was riskiere ich, wenn ich	Rechtsproblem, wie zum Beispiel
+1	60.16000000000003	1.0027356147766113	Frage zu einem Rechtsproblem, wie verstoße?	Was riskiere ich, wenn ich
+1	61.44000000000003	0.8498926162719727	etwa: Was riskiere ich, wenn ich Verschwiegenheit verletze?	verstoße?
+1	62.720000000000034	0.7728521823883057	die berufliche Ist ein Modell erforderlich.	Verschwiegenheit verletze?
+1	64.00000000000003	0.7098429203033447	Schweigepflicht verletze? Ist ein Modell zu einem Rechtsproblem, wie etwa: Was riskiere ich, wenn ich die berufliche Schweigepflicht verletze? Ist ein Modell erforderlich, um alle	Ist ein Modell erforderlich.
+1	65.28000000000003	0.634631872177124	relevanten gesetzlichen Artikel abzurufen.	zu einem Rechtsproblem, wie etwa: Was riskiere ich, wenn ich die berufliche Schweigepflicht verletze? Ist ein Modell erforderlich, um alle
+1	66.56000000000003	0.6406116485595703	Artikel aus einer großen Menge abzurufen.	abzurufen.
+1	67.84000000000003	0.629202127456665	aus gesetzlicher Artikel. Gegeben ein einfacher Frage zu einem Rechtsproblem, wie etwa: Was riskiere ich, wenn ich die berufliche Schweigepflicht verletze? Ist ein Modell erforderlich, um alle relevanten gesetzlichen Artikel aus einem großen Korpus von Gesetzen abzurufen.	Artikel aus einer großen Menge abzurufen.
+1	69.12000000000003	0.6522891521453857	Diese Informationen	gesetzlicher Artikel. Gegeben ein einfacher Frage zu einem Rechtsproblem, wie etwa: Was riskiere ich, wenn ich die berufliche Schweigepflicht verletze? Ist ein Modell erforderlich, um alle relevanten gesetzlichen Artikel aus einem großen Korpus von Gesetzen abzurufen.
+1	70.40000000000003	0.4530034065246582	Aufgabe kommt	Informationen
+1	71.68000000000004	0.7181634902954102	Informationssuche eigene Reihe von Herausforderungen mit sich.	Aufgabe kommt
+1	72.96000000000004	0.5419454574584961	bringt ihre Herausforderungen mit sich.	eigene Reihe von Herausforderungen mit sich.
+1	74.24000000000004	0.5934200286865234	eigenen Erstens,	Herausforderungen mit sich.
+1	75.52000000000004	0.5149483680725098	geht es um zwei Arten von	Erstens,
+1	76.80000000000004	0.5837903022766113	Erstens geht es um zwei Sprachtypen.	geht es um zwei Arten von
+1	78.08000000000004	0.5929768085479736		Sprachtypen.
+1	79.36000000000004	0.745124101638794	Sprachtypen: für die Fragen	
+1	80.64000000000004	0.7950129508972168	gesetzlichen Artikel aus einem großen Korpus von Gesetzen abzurufen. Diese Informationssuche bringt ihre eigenen Herausforderungen mit sich. Erstens geht es um zwei Sprachtypen: umgängliche natürliche Sprache für die Fragen und komplexe juristische Sprache.	für die Fragen
+1	81.92000000000004	0.9138216972351074	umgängliche natürliche Sprache für die Fragen und komplexe juristische gesetzlichen Artikel aus einem großen Korpus von Gesetzen abzurufen. Diese Informationssuche bringt ihre eigenen Herausforderungen mit sich. Erstens geht es um zwei Sprachtypen: umgängliche natürliche Sprache für die Fragen und komplexe juristische Sprache für die Gesetze.	gesetzlichen Artikel aus einem großen Korpus von Gesetzen abzurufen. Diese Informationssuche bringt ihre eigenen Herausforderungen mit sich. Erstens geht es um zwei Sprachtypen: umgängliche natürliche Sprache für die Fragen und komplexe juristische Sprache.
+1	83.20000000000005	0.5083703994750977		
+1	84.48000000000005	0.5334067344665527	Diese Informationssuche bringt ihre eigenen Herausforderungen mit sich. Erstens geht es um zwei Sprachtypen: umgängliche natürliche Sprache für die Fragen und komplexe juristische Sprache für die Gesetze. Dieser Unterschied in der Sprache	gesetzlichen Artikel aus einem großen Korpus von Gesetzen abzurufen. Diese Informationssuche bringt ihre eigenen Herausforderungen mit sich. Erstens geht es um zwei Sprachtypen: umgängliche natürliche Sprache für die Fragen und komplexe juristische Sprache für die Gesetze.
+1	85.76000000000005	0.6246728897094727	Dieser Unterschied in Sprachtypen: umgängliche natürliche Sprache für die Fragen und komplexe juristische Sprache für die Gesetze. Dieser Unterschied in den Sprachverteilungen macht es	Diese Informationssuche bringt ihre eigenen Herausforderungen mit sich. Erstens geht es um zwei Sprachtypen: umgängliche natürliche Sprache für die Fragen und komplexe juristische Sprache für die Gesetze. Dieser Unterschied in der Sprache
+1	87.04000000000005	0.7207493782043457	für ein System schwieriger,	Sprachtypen: umgängliche natürliche Sprache für die Fragen und komplexe juristische Sprache für die Gesetze. Dieser Unterschied in den Sprachverteilungen macht es
+1	88.32000000000005	0.566007137298584	relevante	
+1	89.60000000000005	0.5745589733123779	Gesetze. Dieser Unterschied in den Sprachverteilungen macht es für ein System schwieriger, relevante Kandidaten abzurufen.	
+1	90.88000000000005	0.6545698642730713	Kandidaten Gesetze. Dieser Unterschied in den Sprachverteilungen macht es für ein System schwieriger, relevante Kandidaten abzurufen, da es indirekt	Gesetze. Dieser Unterschied in den Sprachverteilungen macht es für ein System schwieriger, relevante Kandidaten abzurufen.
+1	92.16000000000005	0.8524279594421387	abzurufen, da eine inhärente Fähigkeit erfordert,	Gesetze. Dieser Unterschied in den Sprachverteilungen macht es für ein System schwieriger, relevante Kandidaten abzurufen, da es indirekt
+1	93.44000000000005	0.8130254745483398	dies implizit Interpretationssystem erfordert.	eine inhärente Fähigkeit erfordert,
+1	94.72000000000006	0.705397367477417	ein inhärentes Interpretationssystem Interpretationssystem erfordert, das	Interpretationssystem erfordert.
+1	96.00000000000006	0.5411155223846436	natürliche Sprache	Interpretationssystem erfordert, das
+1	97.28000000000006	0.5044815540313721	eine natürliche Frage in eine	natürliche Sprache
+1	98.56000000000006	0.8066785335540771	Frage in eine juristische Frage übersetzen kann, die Bedeutung hat.	
+1	99.84000000000006	0.9116396903991699	juristische Frage Kandidaten abzurufen, da dies implizit ein inhärentes Interpretationssystem erfordert, das eine natürliche Frage in eine juristische Frage übersetzt, die mit der Terminologie des Status übereinstimmt.	Frage in eine juristische Frage übersetzen kann, die Bedeutung hat.
+1	101.12000000000006	0.8361921310424805	übersetzt, die mit der Terminologie übereinstimmt.	Kandidaten abzurufen, da dies implizit ein inhärentes Interpretationssystem erfordert, das eine natürliche Frage in eine juristische Frage übersetzt, die mit der Terminologie des Status übereinstimmt.
+1	102.40000000000006	0.9024214744567871	der Gesetze Gesetze keine sehr wichtige Frage.	übereinstimmt.
+1	103.68000000000006	0.7020375728607178	Darüber hinaus ein inhärentes Interpretationssystem erfordert, das eine natürliche Frage in eine juristische Frage übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht kein Stapel.	Gesetze keine sehr wichtige Frage.
+1	104.96000000000006	0.7767035961151123	ist das Statutrecht Artikel.	ein inhärentes Interpretationssystem erfordert, das eine natürliche Frage in eine juristische Frage übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht kein Stapel.
+1	106.24000000000007	0.6757895946502686	nicht ein Stapel unabhängiger das eine natürliche Frage in eine juristische Frage übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als	Artikel.
+1	107.52000000000007	0.7419710159301758	eine juristische Frage übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle behandelt werden können.	das eine natürliche Frage in eine juristische Frage übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als
+1	108.80000000000007	0.7213857173919678	vollständige Informationsquelle können.	eine juristische Frage übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle behandelt werden können.
+1	110.08000000000007	0.9384579658508301	übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle auf sich selbst behandelt werden können, im Gegensatz zu Nachrichten oder Rezepten aus der Welt.	können.
+1	111.36000000000007	0.8959128856658936	Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle für sich genommen behandelt werden können, im Gegensatz zu Nachrichten oder Rezepten zum Beispiel.	übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle auf sich selbst behandelt werden können, im Gegensatz zu Nachrichten oder Rezepten aus der Welt.
+1	112.64000000000007	0.9291775226593018	Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen ist es ein	Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle für sich genommen behandelt werden können, im Gegensatz zu Nachrichten oder Rezepten zum Beispiel.
+1	113.92000000000007	1.2164018154144287	einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen strukturierte Sammlung von	Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen ist es ein
+1	115.20000000000007	0.9209096431732178	handelt es sich um eine die als vollständige Informationsquelle einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen handelt es sich um eine strukturierte Sammlung von Rechtsvorschriften, die	strukturierte Sammlung von
+1	116.48000000000008	0.8103303909301758	vollständige Informationsquelle einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen handelt es sich um eine strukturierte Sammlung von Rechtsvorschriften, die nur für einen bestimmten Kontext Sinn ergeben.	die als vollständige Informationsquelle einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen handelt es sich um eine strukturierte Sammlung von Rechtsvorschriften, die
+1	117.76000000000008	0.8775100708007812	nur Sprachverteilungen macht es für ein System schwieriger, relevante Kandidaten abzurufen, da dies implizit ein inhärentes Interpretationssystem erfordert, das eine natürliche Frage in eine juristische Frage übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen handelt es sich um eine strukturierte Sammlung von Rechtsvorschriften, die nur dann eine ganze Bedeutung haben, wenn sie im Kontext betrachtet werden.	vollständige Informationsquelle einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen handelt es sich um eine strukturierte Sammlung von Rechtsvorschriften, die nur für einen bestimmten Kontext Sinn ergeben.
+1	119.04000000000008	0.8682851791381836	werden.	Sprachverteilungen macht es für ein System schwieriger, relevante Kandidaten abzurufen, da dies implizit ein inhärentes Interpretationssystem erfordert, das eine natürliche Frage in eine juristische Frage übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen handelt es sich um eine strukturierte Sammlung von Rechtsvorschriften, die nur dann eine ganze Bedeutung haben, wenn sie im Kontext betrachtet werden.
+1	120.32000000000008	1.0457673072814941	können, anders als Nachrichten oder Rezepte. Stattdessen handelt es sich um eine strukturierte Sammlung von Rechtsvorschriften, die nur im Gesamtkontext eine ganze Bedeutung haben. Das heißt, zusammen mit den Ergänzungen.	werden.
+1	121.60000000000008	1.0738561153411865	im Gesamtkontext eine ganze Bedeutung haben. Das heißt, zusammen mit den Informationen aus dem	können, anders als Nachrichten oder Rezepte. Stattdessen handelt es sich um eine strukturierte Sammlung von Rechtsvorschriften, die nur im Gesamtkontext eine ganze Bedeutung haben. Das heißt, zusammen mit den Ergänzungen.
+1	122.88000000000008	0.8073084354400635	ergänzenden Informationen aus Artikeln.	Informationen aus dem
+1	124.16000000000008	0.9030632972717285	den benachbarten Retrieval-Systeme für gesetzliche Artikel entwickeln. Ein solches System könnte eine kostenlose professionelle Rechtsberatungsleistung für unerfahrene Menschen bieten. Bevor wir zur Hauptbeiträge dieser Arbeit kommen, beschreiben wir zunächst das Problem der Abrufung gesetzlicher Artikel. Gegeben ein einfacher Frage zu einem Rechtsproblem, wie etwa: Was riskiere ich, wenn ich die berufliche Schweigepflicht verletze? Ist ein Modell erforderlich, um alle relevanten gesetzlichen Artikel aus einem großen Korpus von Gesetzen abzurufen. Diese Informationssuche bringt ihre eigenen Herausforderungen mit sich. Erstens geht es um zwei Sprachtypen: umgängliche natürliche Sprache für die Fragen und komplexe juristische Sprache für die Gesetze. Dieser Unterschied in den Sprachverteilungen macht es für ein System schwieriger, relevante Kandidaten abzurufen, da dies implizit ein inhärentes Interpretationssystem erfordert, das eine natürliche Frage in eine juristische Frage übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen handelt es sich um eine strukturierte Sammlung von Rechtsvorschriften, die nur im Gesamtkontext eine ganze Bedeutung haben. Das heißt, zusammen mit den ergänzenden Informationen aus den benachbarten Artikeln, den Feldern und Unterfeldern.	Artikeln.
+1	125.44000000000008	0.8831686973571777	Unterfeldern, denen sie angehören.	Retrieval-Systeme für gesetzliche Artikel entwickeln. Ein solches System könnte eine kostenlose professionelle Rechtsberatungsleistung für unerfahrene Menschen bieten. Bevor wir zur Hauptbeiträge dieser Arbeit kommen, beschreiben wir zunächst das Problem der Abrufung gesetzlicher Artikel. Gegeben ein einfacher Frage zu einem Rechtsproblem, wie etwa: Was riskiere ich, wenn ich die berufliche Schweigepflicht verletze? Ist ein Modell erforderlich, um alle relevanten gesetzlichen Artikel aus einem großen Korpus von Gesetzen abzurufen. Diese Informationssuche bringt ihre eigenen Herausforderungen mit sich. Erstens geht es um zwei Sprachtypen: umgängliche natürliche Sprache für die Fragen und komplexe juristische Sprache für die Gesetze. Dieser Unterschied in den Sprachverteilungen macht es für ein System schwieriger, relevante Kandidaten abzurufen, da dies implizit ein inhärentes Interpretationssystem erfordert, das eine natürliche Frage in eine juristische Frage übersetzt, die mit der Terminologie der Gesetze übereinstimmt. Darüber hinaus ist das Statutrecht nicht ein Stapel unabhängiger Artikel, die als vollständige Informationsquelle einzeln behandelt werden können, anders als Nachrichten oder Rezepte. Stattdessen handelt es sich um eine strukturierte Sammlung von Rechtsvorschriften, die nur im Gesamtkontext eine ganze Bedeutung haben. Das heißt, zusammen mit den ergänzenden Informationen aus den benachbarten Artikeln, den Feldern und Unterfeldern.
+1	126.72000000000008	1.041630744934082	angehören, und ihrer Position in der	Unterfeldern, denen sie angehören.
+1	128.00000000000009	1.1847074031829834	Artikeln, den Feldern und Unterfeldern, denen sie Struktur des Rechts.	angehören, und ihrer Position in der
+1	129.2800000000001	0.6076195240020752	Zuletzt,	
+1	130.5600000000001	0.5759551525115967		Zuletzt,
+1	131.8400000000001	0.7182068824768066	Schließlich sind gesetzliche Artikel Artikeln, den Feldern und Unterfeldern, denen sie angehören, und ihrer Position in der Struktur des Rechts. Schließlich sind gesetzliche Artikel keine kleinen Absätze.	
+1	133.1200000000001	0.9429099559783936	sind gesetzliche Artikel in kurzen Absätzen formuliert, was normalerweise der Fall ist, wenn es	Artikeln, den Feldern und Unterfeldern, denen sie angehören, und ihrer Position in der Struktur des Rechts. Schließlich sind gesetzliche Artikel keine kleinen Absätze.
+1	134.4000000000001	1.0052781105041504	in Retrieval-Einheit ist.	sind gesetzliche Artikel in kurzen Absätzen formuliert, was normalerweise der Fall ist, wenn es
+1	135.6800000000001	1.2202882766723633	kleinen Absätzen formuliert, was normalerweise die typische Retrieval-Einheit in den meisten Retrieval-Arbeiten ist.	Retrieval-Einheit ist.
+1	136.9600000000001	0.7856321334838867	Hier	
+1	138.2400000000001	0.6209418773651123	sie angehören, und ihrer Position in der Struktur des Rechts. Schließlich sind gesetzliche Artikel in kleinen Absätzen formuliert, was normalerweise die typische Retrieval-Einheit in den meisten Retrieval-Arbeiten ist. Hier sind sie lange Hunde.	
+1	139.5200000000001	0.9454631805419922	sind Dokumente, die bis zu derselben Länge gehen können.	sie angehören, und ihrer Position in der Struktur des Rechts. Schließlich sind gesetzliche Artikel in kleinen Absätzen formuliert, was normalerweise die typische Retrieval-Einheit in den meisten Retrieval-Arbeiten ist. Hier sind sie lange Hunde.
+1	140.8000000000001	1.0774991512298584	es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können.	Dokumente, die bis zu derselben Länge gehen können.
+1	142.0800000000001	0.5374901294708252		
+1	143.3600000000001	0.6427898406982422	Die jüngsten Fortschritte	6.000 Wörter umfassen können.
+1	144.6400000000001	0.9025099277496338	in kleinen Absätzen formuliert, was normalerweise die typische Retrieval-Einheit in den meisten Retrieval-Arbeiten ist. Hier sind es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben ausgelöst.	
+1	145.9200000000001	0.915095329284668	im Bereich NLP haben Schließlich sind gesetzliche Artikel in kleinen Absätzen formuliert, was normalerweise die typische Retrieval-Einheit in den meisten Retrieval-Arbeiten ist. Hier sind es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben großes Interesse in vielen Fachliteraturen geweckt.	in kleinen Absätzen formuliert, was normalerweise die typische Retrieval-Einheit in den meisten Retrieval-Arbeiten ist. Hier sind es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben ausgelöst.
+1	147.2000000000001	0.7921476364135742	großes Interesse formuliert, was normalerweise die typische Retrieval-Einheit in den meisten Retrieval-Arbeiten ist. Hier sind es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben großes Interesse bei vielen juristischen Aufgaben geweckt, wie	Schließlich sind gesetzliche Artikel in kleinen Absätzen formuliert, was normalerweise die typische Retrieval-Einheit in den meisten Retrieval-Arbeiten ist. Hier sind es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben großes Interesse in vielen Fachliteraturen geweckt.
+1	148.4800000000001	1.1587603092193604		formuliert, was normalerweise die typische Retrieval-Einheit in den meisten Retrieval-Arbeiten ist. Hier sind es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben großes Interesse bei vielen juristischen Aufgaben geweckt, wie
+1	149.7600000000001	1.173015832901001	z.B.	
+1	151.0400000000001	0.9393773078918457		
+1	152.3200000000001	0.6742560863494873	der Vorhersage von Gerichtsentscheidungen oder der automatisierten Vertragsprüfung.	
+1	153.6000000000001	0.7404158115386963	Retrieval-Arbeiten ist. Hier sind es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben großes Interesse bei vielen juristischen Aufgaben geweckt, wie z.B. der Vorhersage von Gerichtsentscheidungen oder der automatisierten Vertragsprüfung. Aber die Abrufung gesetzlicher Artikel.	
+1	154.8800000000001	0.8001093864440918		Retrieval-Arbeiten ist. Hier sind es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben großes Interesse bei vielen juristischen Aufgaben geweckt, wie z.B. der Vorhersage von Gerichtsentscheidungen oder der automatisierten Vertragsprüfung. Aber die Abrufung gesetzlicher Artikel.
+1	156.1600000000001	0.8945512771606445	Doch die Abrufung gesetzlicher Artikel ist Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben großes Interesse bei vielen juristischen Aufgaben geweckt, wie z.B. der Vorhersage von Gerichtsentscheidungen oder der automatisierten Vertragsprüfung. Doch die Abrufung gesetzlicher Artikel ist aufgrund des Mangels an	
+1	157.4400000000001	0.9883182048797607		Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben großes Interesse bei vielen juristischen Aufgaben geweckt, wie z.B. der Vorhersage von Gerichtsentscheidungen oder der automatisierten Vertragsprüfung. Doch die Abrufung gesetzlicher Artikel ist aufgrund des Mangels an
+1	158.7200000000001	0.9402933120727539	großen und hochwertigen Retrieval-Arbeiten ist. Hier sind es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben großes Interesse bei vielen juristischen Aufgaben geweckt, wie z.B. der Vorhersage von Gerichtsentscheidungen oder der automatisierten Vertragsprüfung. Doch die Abrufung gesetzlicher Artikel ist aufgrund des Mangels an großen und hochwertigen gelabelten Datensätzen hauptsächlich unberührt geblieben.	
+1	160.0000000000001	0.538851261138916		Retrieval-Arbeiten ist. Hier sind es jedoch lange Dokumente, die bis zu 6.000 Wörter umfassen können. Die jüngsten Fortschritte im Bereich NLP haben großes Interesse bei vielen juristischen Aufgaben geweckt, wie z.B. der Vorhersage von Gerichtsentscheidungen oder der automatisierten Vertragsprüfung. Doch die Abrufung gesetzlicher Artikel ist aufgrund des Mangels an großen und hochwertigen gelabelten Datensätzen hauptsächlich unberührt geblieben.
+1	161.28000000000011	0.6995735168457031	Bereich NLP haben großes Interesse bei vielen juristischen Aufgaben geweckt, wie z.B. der Vorhersage von Gerichtsentscheidungen oder der automatisierten Vertragsprüfung. Doch die Abrufung gesetzlicher Artikel ist aufgrund des Mangels an großen und hochwertigen gelabelten Datensätzen hauptsächlich unberührt geblieben. In dieser Arbeit präsentieren wir ein neues	
+1	162.56000000000012	0.802739143371582		Bereich NLP haben großes Interesse bei vielen juristischen Aufgaben geweckt, wie z.B. der Vorhersage von Gerichtsentscheidungen oder der automatisierten Vertragsprüfung. Doch die Abrufung gesetzlicher Artikel ist aufgrund des Mangels an großen und hochwertigen gelabelten Datensätzen hauptsächlich unberührt geblieben. In dieser Arbeit präsentieren wir ein neues
+1	163.84000000000012	0.8663623332977295		
+1	165.12000000000012	0.9052298069000244	französisch-sprachiges,	
+1	166.40000000000012	1.0509850978851318	bürgerzentriertes	
+1	167.68000000000012	1.0638563632965088	Datensatz, um zu untersuchen, ob	
+1	168.96000000000012	0.7713339328765869	ein Retrieval-Modell	
+1	170.24000000000012	0.779402494430542	die Effizienz und	
+1	171.52000000000012	0.8377799987792969	Zuverlässigkeit	
+1	172.80000000000013	0.8398001194000244		
+1	174.08000000000013	1.0424635410308838	eines Rechtsexperts für die Aufgabe	
+1	175.36000000000013	0.5047104358673096	der Abrufung gesetzlicher Artikel approximieren kann.	
+1	176.64000000000013	0.15268206596374512		
+1	177.92000000000013	0.1503617763519287		
+1	179.20000000000013	0.14959955215454102		
+1	180.48000000000013	1.0390589237213135		
+1	181.76000000000013	1.3156611919403076	Unser belgisches Datensatz zur Abrufung gesetzlicher Artikel besteht aus mehr als	
+1	183.04000000000013	0.7814197540283203	1.100	
+1	184.32000000000014	0.8897435665130615	Rechtsfragen, die von	
+1	185.60000000000014	0.4367539882659912	belgischen Bürgern gestellt wurden.	
+1	186.88000000000014	0.7684178352355957		
+1	188.16000000000014	1.0366246700286865	Diese Fragen decken	
+1	189.44000000000014	0.9650042057037354	ein breites Spektrum von Themen ab,	
+1	190.72000000000014	0.8386795520782471	von	
+1	192.00000000000014	0.8742959499359131	Familie, Wohnen, Geld bis hin zu	
+1	193.28000000000014	0.31658005714416504	Arbeit und Sozialversicherung.	
+1	194.56000000000014	0.667304277420044		
+1	195.84000000000015	0.9299635887145996	Jede davon wurde	
+1	197.12000000000015	0.6887953281402588	von erfahrenen	
+1	198.40000000000015	0.8471589088439941	Juristen mit	
+1	199.68000000000015	0.8236019611358643	Verweisen auf relevante Artikel	
+1	200.96000000000015	1.0246069431304932	aus einem Korpus von mehr als	
+1	202.24000000000015	0.7874398231506348		
+1	203.52000000000015	1.0101218223571777	22.600	
+1	204.80000000000015	0.9642372131347656		
+1	206.08000000000015	0.6655595302581787	juristischen Artikeln aus belgischen Gesetzbüchern gelabelt.	
+1	207.36000000000016	0.8243494033813477		
+1	208.64000000000016	0.9640700817108154	Lassen Sie uns nun darüber sprechen, wie wir	
+1	209.92000000000016	0.8695833683013916	diesen Datensatz gesammelt haben.	
+1	211.20000000000016	0.7728943824768066	Zuerst	
+1	212.48000000000016	0.8854098320007324	haben wir	
+1	213.76000000000016	0.9274137020111084	mit der Kompilierung eines großen Korpus von	
+1	215.04000000000016	0.811699628829956	juristischen Artikeln begonnen.	
+1	216.32000000000016	0.7836349010467529	Wir haben	
+1	217.60000000000016	1.1234033107757568	32 öffentlich verfügbare	
+1	218.88000000000017	0.9940636157989502	belgische Gesetzbücher berücksichtigt und	
+1	220.16000000000017	0.8105144500732422	alle ihre Artikel	
+1	221.44000000000017	0.8127284049987793	sowie die	
+1	222.72000000000017	0.45958828926086426	entsprechenden Abschnittsüberschriften extrahiert.	
+1	224.00000000000017	0.5522816181182861		
+1	225.28000000000017	0.7106912136077881	Anschließend haben wir	
+1	226.56000000000017	0.7158303260803223	Rechtsfragen	
+1	227.84000000000017	0.7711431980133057	mit Verweisen	
+1	229.12000000000018	0.9019560813903809	auf relevante Gesetze gesammelt.	
+1	230.40000000000018	0.9051053524017334		
+1	231.68000000000018	1.056060552597046	Dazu haben wir	
+1	232.96000000000018	1.0579841136932373	mit einer belgischen Anwaltskanzlei zusammengearbeitet, die	
+1	234.24000000000018	1.0048465728759766	jedes Jahr rund	
+1	235.52000000000018	1.0348320007324219	4.000 E-Mails	
+1	236.80000000000018	0.9208450317382812	von belgischen Bürgern	
+1	238.08000000000018	0.8484706878662109	erhält, die nach Beratung	
+1	239.36000000000018	0.3842616081237793	zu einem persönlichen Rechtsproblem fragen.	
+1	240.64000000000019	0.759077787399292		
+1	241.9200000000002	0.8583970069885254	Wir hatten das Glück, Zugang zu	
+1	243.2000000000002	0.8582653999328613	ihren Websites zu	
+1	244.4800000000002	0.8375809192657471	erhalten, wo ihr Team	
+1	245.7600000000002	1.1632187366485596	erfahrener Juristen	
+1	247.0400000000002	0.8696362972259521	die	
+1	248.3200000000002	1.003005027770996	häufigsten belgischen Rechtsprobleme behandelt.	
+1	249.6000000000002	0.804002046585083	Wir haben	
+1	250.8800000000002	0.9694719314575195	Tausende von Fragen	
+1	252.1600000000002	0.8284554481506348	gesammelt, die mit	
+1	253.4400000000002	0.9479339122772217	Kategorien,	
+1	254.7200000000002	0.9557108879089355	Unterkategorien und	
+1	256.00000000000017	0.8571114540100098	rechtlichen Verweisen auf relevante	
+1	257.28000000000014	0.3598785400390625	Gesetze annotiert wurden.	
+1	258.5600000000001	0.6677961349487305		
+1	259.8400000000001	0.766200065612793	Schließlich haben wir die rechtlichen	
+1	261.12000000000006	0.8205487728118896	Verweise	
+1	262.40000000000003	0.8015317916870117	übergeben und die Fragen	
+1	263.68	0.8587460517883301	gefiltert, deren	
+1	264.96	0.6675193309783936	Verweise	
+1	266.23999999999995	1.1194732189178467	keine Artikel	
+1	267.5199999999999	0.9401710033416748		
+1	268.7999999999999	1.1449108123779297	eines der von uns berücksichtigten Gesetzbücher waren.	
+1	270.07999999999987	0.8780519962310791	Die verbleibenden Verweise	
+1	271.35999999999984	0.7137951850891113	wurden	
+1	272.6399999999998	0.8603899478912354	abgeglichen und in	
+1	273.9199999999998	0.763115644454956	die entsprechenden	
+1	275.19999999999976	0.8271355628967285	Artikel-IDs	
+1	276.47999999999973	0.4861278533935547	von	
+1	277.7599999999997	0.8535277843475342	Allcorpus konvertiert.	
+1	279.0399999999997	0.8235681056976318	Schließlich	
+1	280.31999999999965	0.8271646499633789	kamen wir auf	
+1	281.5999999999996	1.0157809257507324	1.108	
+1	282.8799999999996	0.8496236801147461	Fragen,	
+1	284.15999999999957	1.1524503231048584		
+1	285.43999999999954	1.1957669258117676	die sorgfältig mit den IDs der relevanten Artikel aus	
+1	286.7199999999995	1.035043478012085	unserem großen Korpus	
+1	287.9999999999995	0.8781547546386719	von	
+1	289.27999999999946	0.9417073726654053	22.633	
+1	290.55999999999943	0.387037992477417	gesetzlichen Artikeln gelabelt wurden.	
+1	291.8399999999994	0.6052765846252441		
+1	293.1199999999994	0.7411894798278809	Darüber hinaus	
+1	294.39999999999935	0.9421486854553223	kommt jede Frage mit	
+1	295.6799999999993	0.8923952579498291	einer Hauptkategorie und	
+1	296.9599999999993	0.7492978572845459	einer Kette von Unterkategorien.	
+1	298.23999999999927	0.6040399074554443		
+1	299.51999999999924	0.725745677947998	Jeder Artikel kommt mit	
+1	300.7999999999992	0.8207621574401855	einer Kette	
+1	302.0799999999992	0.866584300994873	ihrer sequenziellen	
+1	303.35999999999916	0.4338831901550293	Überschriften in der Struktur des Rechts.	
+1	304.63999999999913	0.712303876876831		
+1	305.9199999999991	0.9587423801422119	Diese zusätzliche Information wird	
+1	307.1999999999991	1.0978100299835205	in der vorliegenden Arbeit nicht verwendet, könnte aber	
+1	308.47999999999905	0.8328142166137695	für zukünftige	
+1	309.759999999999	0.8911130428314209	Forschung im Bereich	
+1	311.039999999999	1.0200657844543457	der juristischen	
+1	312.31999999999897	0.578702449798584	Informationssuche oder juristischen Textklassifikation von Interesse sein.	
+1	313.59999999999894	0.6927032470703125		
+1	314.8799999999989	0.8500487804412842	Schauen wir uns	
+1	316.1599999999989	0.7590739727020264	einige	
+1	317.43999999999886	1.066880464553833	Merkmale unseres Datensatzes an.	
+1	318.71999999999883	0.9351859092712402	Die Fragen sind zwischen 5 und	
+1	319.9999999999988	1.1437110900878906	44	
+1	321.2799999999988	0.7192044258117676	Wörtern lang, mit einer Medianlänge von 40 Wörtern.	
+1	322.55999999999875	0.6867146492004395		
+1	323.8399999999987	0.870197057723999	Die Artikel sind viel	
+1	325.1199999999987	0.9442460536956787	länger, mit einer Medianlänge von	
+1	326.39999999999867	0.938058614730835	77	
+1	327.67999999999864	0.8705573081970215	Wörtern, wobei	
+1	328.9599999999986	0.9512956142425537	142 davon	
+1	330.2399999999986	0.9120826721191406		
+1	331.51999999999856	1.1730759143829346	mehr als 1.000 Wörter überschreiten.	
+1	332.79999999999853	0.7366204261779785	Die Länge	
+1	334.0799999999985	0.913020133972168	eines	
+1	335.3599999999985	1.084507703781128	davon beträgt bis zu	
+1	336.63999999999845	0.7969331741333008		
+1	337.9199999999984	0.7910432815551758	5.790 Wörter.	
+1	339.1999999999984	0.888181209564209		
+1	340.47999999999837	1.006150484085083	Wie zuvor erwähnt,	
+1	341.75999999999834	1.0118095874786377		
+1	343.0399999999983	1.191579818725586	decken die Fragen ein breites Spektrum von Themen ab,	
+1	344.3199999999983	0.8734965324401855	wobei rund 85 %	
+1	345.59999999999826	0.7470800876617432	entweder über	
+1	346.87999999999823	0.7986030578613281	Familie,	
+1	348.1599999999982	0.9570987224578857	Wohnen, Geld oder	
+1	349.4399999999982	1.002737045288086	Gerechtigkeit gehen, während	
+1	350.71999999999815	1.1036772727966309	die verbleibenden 15 %	
+1	351.9999999999981	0.7531828880310059	entweder soziale	
+1	353.2799999999981	0.8105378150939941	Sicherheit,	
+1	354.55999999999807	0.3918182849884033	Ausländer oder Arbeit betreffen.	
+1	355.83999999999804	0.6577348709106445		
+1	357.119999999998	0.8137564659118652	Die Artikel sind	
+1	358.399999999998	1.006688117980957	ebenfalls sehr	
+1	359.67999999999796	1.0837974548339844	vielfältig, da sie aus	
+1	360.95999999999793	0.9843518733978271	32 verschiedenen belgischen	
+1	362.2399999999979	1.2333424091339111	Gesetzbüchern stammen, die	
+1	363.5199999999979	0.8476903438568115	eine große Anzahl von illegalen	
+1	364.79999999999785	0.9378817081451416	Themen abdecken.	
+1	366.0799999999978	0.9499807357788086	Hier ist die Gesamtzahl der	
+1	367.3599999999978	1.0357084274291992	gesammelten Artikel aus	
+1	368.63999999999777	0.5156176090240479	jedem dieser belgischen Gesetzbücher.	
+1	369.91999999999774	0.8160824775695801		
+1	371.1999999999977	0.8540444374084473	Von den	
+1	372.4799999999977	0.8188118934631348	22.633	
+1	373.75999999999766	0.8446516990661621	Artikeln	
+1	375.03999999999763	0.789771556854248	sind nur	
+1	376.3199999999976	0.7607548236846924	1.612	
+1	377.5999999999976	0.6718859672546387	als	
+1	378.87999999999755	0.8618593215942383	relevant	
+1	380.1599999999975	0.8510348796844482	für mindestens eine Frage	
+1	381.4399999999975	0.325714111328125	im Datensatz bezeichnet.	
+1	382.71999999999747	0.893791913986206		
+1	383.99999999999744	1.0192630290985107	Und rund 80 % dieser	
+1	385.2799999999974	1.0092933177947998	zitierten Artikel stammen	
+1	386.5599999999974	1.2863998413085938	entweder aus dem	
+1	387.83999999999736	1.401167631149292	Zivilgesetzbuch, dem	
+1	389.11999999999733	1.4316275119781494	Justizgesetzbuch, dem	
+1	390.3999999999973	1.2814738750457764		
+1	391.6799999999973	1.5968828201293945	Strafuntersuchungsgesetzbuch oder dem Strafrechtsgesetzbuch.	
+1	392.95999999999725	1.206861972808838	Gleichzeitig	
+1	394.2399999999972	1.141706943511963	haben 18 von 32 Gesetzbüchern	
+1	395.5199999999972	1.1511683464050293	weniger als 5	
+1	396.79999999999717	0.924654483795166	Artikel, die als relevant für mindestens eine Frage	
+1	398.07999999999714	0.2564849853515625	bezeichnet werden.	
+1	399.3599999999971	0.859485387802124		
+1	400.6399999999971	1.0518975257873535	Dies kann durch die Tatsache erklärt werden, dass	
+1	401.91999999999706	1.065798044204712	diese Gesetzbücher weniger	
+1	403.19999999999703	0.9263401031494141	auf Einzelpersonen	
+1	404.479999999997	0.3918790817260742	und ihre Anliegen fokussieren.	
+1	405.759999999997	0.7098522186279297		
+1	407.03999999999695	0.8117313385009766		
+1	408.3199999999969	1.0373177528381348	Insgesamt	
+1	409.5999999999969	1.07466459274292	beträgt die Medianzahl der Zitate für diese zitierten	
+1	410.87999999999687	0.8984184265136719	Artikel	
+1	412.15999999999684	0.9879889488220215		
+1	413.4399999999968	1.0854532718658447	2, und weniger als 25 % davon	
+1	414.7199999999968	0.9024004936218262	werden	
+1	415.99999999999676	0.4545938968658447	mehr als 5 Mal zitiert.	
+1	417.27999999999673	0.7530512809753418		
+1	418.5599999999967	0.7618234157562256	Mit	
+1	419.8399999999967	0.9209825992584229	unseren Datensätzen bewerten wir	
+1	421.11999999999665	1.0074117183685303	mehrere	
+1	422.3999999999966	1.1222949028015137	Retrieval-Ansätze, einschließlich	
+1	423.6799999999966	0.5151467323303223	lexikaler und dichter Architekturen.	
+1	424.95999999999657	0.8695001602172852		
+1	426.23999999999654	1.2254459857940674	Gegeben eine Abfrage und einen Artikel,	
+1	427.5199999999965	0.9718081951141357		
+1	428.7999999999965	1.219721794128418	weist ein lexikales Modell	
+1	430.07999999999646	1.2433090209960938	einem Abfrage-Artikel-Paar eine Punktzahl	
+1	431.35999999999643	1.0879971981048584	zu, indem es die Summe	
+1	432.6399999999964	0.9193298816680908	über die	
+1	433.9199999999964	1.0147697925567627	Abfrageterme	
+1	435.19999999999635	0.9452512264251709	berechnet, die Gewichte jedes dieser Terme in	
+1	436.4799999999963	0.8287434577941895	diesem Artikel.	
+1	437.7599999999963	0.849226713180542	Wir	
+1	439.03999999999627	1.1079862117767334		
+1	440.31999999999624	1.1468544006347656	experimentieren mit	
+1	441.5999999999962	1.220576524734497	den Standard-Ranking-Funktionen TFIDF und BM25.	
+1	442.8799999999962	0.9414639472961426	Das Hauptproblem mit diesen	
+1	444.15999999999616	0.9748742580413818	Ansätzen ist, dass sie	
+1	445.43999999999613	0.8253679275512695	nur Artikel abrufen	
+1	446.7199999999961	0.4060647487640381	können, die	
+1	447.9999999999961	0.9849386215209961		
+1	449.27999999999605	1.2241158485412598	Schlüsselwörter enthalten, die in der Abfrage vorhanden sind.	
+1	450.559999999996	1.008336067199707	Um diese Einschränkung zu überwinden,	
+1	451.839999999996	0.874427080154419	experimentieren wir mit	
+1	453.11999999999597	0.9416799545288086	einer neuronalen	
+1	454.39999999999594	0.9352757930755615	Architektur, die	
+1	455.6799999999959	0.9945120811462402	semantische Beziehungen	
+1	456.9599999999959	0.458770751953125	zwischen Abfragen und Artikeln erfassen kann.	
+1	458.23999999999586	0.9178268909454346		
+1	459.51999999999583	1.0825514793395996	Wir verwenden ein	
+1	460.7999999999958	1.0233299732208252	BERT-Encoder-Modell, das Abfragen und	
+1	462.0799999999958	0.960676908493042	Artikel in	
+1	463.35999999999575	0.492962121963501	dichte Vektorrepräsentationen abbildet.	
+1	464.6399999999957	0.931337833404541		
+1	465.9199999999957	1.1564569473266602	und berechnen eine	
+1	467.19999999999567	1.1496477127075195	Relevanzpunktzahl zwischen	
+1	468.47999999999564	1.1597237586975098	einem Abfrage-Artikel-Paar	
+1	469.7599999999956	0.9206840991973877	basierend auf der Ähnlichkeit ihrer	
+1	471.0399999999956	0.9046509265899658	Embeddings.	
+1	472.31999999999556	0.9816982746124268	Diese Embeddings	
+1	473.59999999999553	1.015470266342163	resultieren typischerweise aus	
+1	474.8799999999955	1.0424084663391113	einer Pooling-Operation auf	
+1	476.1599999999955	0.8977837562561035	dem Ausgabe eines	
+1	477.43999999999545	0.870140552520752	Wortembedding-Modells.	
+1	478.7199999999954	0.9513142108917236		
+1	479.9999999999954	1.1386711597442627	Zuerst untersuchen wir die	
+1	481.27999999999537	1.2887444496154785	Wirksamkeit von	
+1	482.55999999999534	1.3046634197235107		
+1	483.8399999999953	1.57218337059021		
+1	485.1199999999953	1.7207791805267334	Siameschen B-Encodern in einem Zero-Shot-Bewertungseinstellung, was bedeutet, dass	
+1	486.39999999999526	0.9198882579803467	vortrainierte Wortembedding-Modelle	
+1	487.67999999999523	0.9042491912841797		
+1	488.9599999999952	0.9941737651824951	ohne weitere	
+1	490.2399999999952	1.0570743083953857	Feinabstimmung direkt angewendet werden.	
+1	491.51999999999515	0.8525204658508301	Wir experimentieren mit	
+1	492.7999999999951	0.8321883678436279		
+1	494.0799999999951	0.948603630065918		
+1	495.35999999999507	1.157360553741455	kontextunabhängigen	
+1	496.63999999999504	1.0481560230255127	Textencodern, nämlich	
+1	497.919999999995	1.0551111698150635	Word2Vec und	
+1	499.199999999995	1.095750093460083	FastText,	
+1	500.47999999999496	1.1009647846221924	und kontextabhängigen	
+1	501.75999999999493	1.0975186824798584	Embedding-Modellen, nämlich	
+1	503.0399999999949	1.1211230754852295		
+1	504.3199999999949	1.2336268424987793	Roberta und insbesondere	
+1	505.59999999999485	1.1964538097381592	CamemBERT, was ein französisches Roberta-Modell ist.	
+1	506.8799999999948	0.955535888671875	Zusätzlich trainieren wir	
+1	508.1599999999948	0.9488081932067871	unser eigenes	
+1	509.43999999999477	1.0344693660736084	CamemBERT-basiertes	
+1	510.71999999999474	1.0373682975769043	Modell,	
+1	511.9999999999947	0.942439079284668		
+1	513.2799999999947	1.3232548236846924		
+1	514.5599999999947	1.3188519477844238		
+1	515.8399999999947	1.5217962265014648		
+1	517.1199999999947	1.607818841934204	B, auf unseren Datensätzen. Beachten Sie, dass wir für das Training mit den beiden Varianten der	
+1	518.3999999999946	1.0537264347076416		
+1	519.6799999999946	1.2498304843902588		
+1	520.9599999999946	1.4729955196380615		
+1	522.2399999999946	1.5984725952148438	Beyond-Coder-Architektur experimentieren.	
+1	523.5199999999945	1.5061323642730713	Siamesisch, das ein einzigartiges Wortembedding-Modell verwendet, das die Abfrage und	
+1	524.7999999999945	1.0633893013000488	den Artikel	
+1	526.0799999999945	1.0883231163024902	gemeinsam in einem	
+1	527.3599999999944	1.129112958908081	geteilten dichten Vektorraum abbildet.	
+1	528.6399999999944	0.9751825332641602	Und Tutora, das	
+1	529.9199999999944	0.9376962184906006	zwei unabhängige	
+1	531.1999999999944	1.039722204208374	Wortembedding-Modelle	
+1	532.4799999999943	1.040224552154541	verwendet, die die Abfrage	
+1	533.7599999999943	1.05690336227417	und den Artikel separat	
+1	535.0399999999943	0.4513237476348877	in verschiedene Embedding-Räume kodieren.	
+1	536.3199999999943	0.810173511505127		
+1	537.5999999999942	1.094836711883545	Wir experimentieren mit	
+1	538.8799999999942	1.1042890548706055	Mean-, Max- und	
+1	540.1599999999942	1.0626001358032227	CLS-Pooling sowie	
+1	541.4399999999941	1.0927734375		
+1	542.7199999999941	0.6487178802490234	mit Punktprodukt und Kosinus zur Berechnung von Ähnlichkeiten.	
+1	543.9999999999941	0.17327404022216797		
+1	545.2799999999941	0.8800475597381592		
+1	546.559999999994	1.0542356967926025	Hier sind die Ergebnisse unserer	
+1	547.839999999994	1.1459708213806152	Baseline auf dem Testset mit	
+1	549.119999999994	1.1229491233825684	den oben genannten lexikalischen	
+1	550.399999999994	1.2294282913208008	Methoden,	
+1	551.6799999999939	1.5010929107666016	den Siameschen B-Encodern, die in	
+1	552.9599999999939	1.3222289085388184	einer Zero-Shot-Einstellung bewertet wurden, in der	
+1	554.2399999999939	1.0947151184082031	Mitte, und den	
+1	555.5199999999938	0.5350291728973389		
+1	556.7999999999938	1.4053659439086914		
+1	558.0799999999938	1.4793496131896973	feingestimmten Beyond-Codern unten. Insgesamt	
+1	559.3599999999938	1.2547259330749512		
+1	560.6399999999937	1.513007402420044	übertrifft die feingestellte	
+1	561.9199999999937	1.3928132057189941	Beyond-Coder alle anderen Baselines deutlich. Das Zwei-Türm-Modell verbessert	
+1	563.1999999999937	1.107743740081787	sich gegenüber	
+1	564.4799999999937	1.0977733135223389	seiner Siamese-Variante	
+1	565.7599999999936	1.1022181510925293	bei	
+1	567.0399999999936	1.1963787078857422		
+1	568.3199999999936	1.3369903564453125	Recall@100, performt aber ähnlich bei den anderen Metriken.	
+1	569.5999999999935	1.1024963855743408		
+1	570.8799999999935	1.1478667259216309	Obwohl BM25	
+1	572.1599999999935	1.1970500946044922	die trainierte Beyond-Coder	
+1	573.4399999999935	1.2985296249389648	signifikant unterlegen war,	
+1	574.7199999999934	1.2945153713226318	deutete seine Leistung darauf hin, dass es immer noch eine	
+1	575.9999999999934	1.1216683387756348	starke Baseline für	
+1	577.2799999999934	0.4556612968444824	domänenspezifische Abrufe ist.	
+1	578.5599999999934	0.9914636611938477		
+1	579.8399999999933	1.2216804027557373	Bezüglich der Zero-Shot-Bewertung	
+1	581.1199999999933	1.0933170318603516	von	
+1	582.3999999999933	1.0837764739990234	Siameschen Biencodern finden wir, dass	
+1	583.6799999999932	1.1448633670806885	das direkte	
+1	584.9599999999932	1.2041335105895996	Verwenden der Embeddings eines vortrainierten	
+1	586.2399999999932	1.0728404521942139	CamemBERT-Modells ohne	
+1	587.5199999999932	0.9525249004364014	Optimierung für die	
+1	588.7999999999931	1.005178451538086		
+1	590.0799999999931	0.5049662590026855	Informationssuchaufgabe schlechte Ergebnisse liefert.	
+1	591.3599999999931	0.9936542510986328		
+1	592.639999999993	0.4977855682373047	was mit vorherigen Befunden konsistent ist.	
+1	593.919999999993	0.8980119228363037		
+1	595.199999999993	1.1384289264678955	Darüber hinaus beobachten wir,	
+1	596.479999999993	1.0235280990600586	dass	
+1	597.7599999999929	1.0247387886047363	der	
+1	599.0399999999929	1.4398565292358398		
+1	600.3199999999929	1.457106113433838		
+1	601.5999999999929	1.7242889404296875	Word2Vec-B-Encoder signifikant besser abschneidet als der FastText- und Bird-basierte	
+1	602.8799999999928	1.1907544136047363	Modell, was darauf hindeutet, dass	
+1	604.1599999999928	1.055506944656372	vielleicht vortrainierte	
+1	605.4399999999928	1.0379440784454346	wortspezifische Embeddings	
+1	606.7199999999928	0.9571800231933594		
+1	607.9999999999927	1.1184725761413574	für die Aufgabe angemessener sind	
+1	609.2799999999927	1.0438940525054932	als	
+1	610.5599999999927	0.979783296585083		
+1	611.8399999999926	1.326488971710205		
+1	613.1199999999926	1.2208638191223145		
+1	614.3999999999926	0.7332375049591064	charakter- oder Subwort-Level-Embeddings, wenn diese direkt angewendet werden.	
+1	615.6799999999926	0.9700033664703369		
+1	616.9599999999925	1.1623895168304443	Obwohl vielversprechend,	
+1	618.2399999999925	1.0273818969726562	deuten diese Ergebnisse auf	
+1	619.5199999999925	1.2354989051818848	ample Möglichkeiten zur Verbesserung	
+1	620.7999999999925	1.121131420135498	im Vergleich zu einem	
+1	622.0799999999924	1.1508049964904785	qualifizierten Rechtsexperten hin, der schließlich	
+1	623.3599999999924	0.8782088756561279		
+1	624.6399999999924	1.0259404182434082	alle relevanten Artikel	
+1	625.9199999999923	1.0446479320526123	zu jeder Frage abrufen	
+1	627.1999999999923	0.4030287265777588	und somit perfekte Scores erzielen kann.	
+1	628.4799999999923	0.8104679584503174		
+1	629.7599999999923	1.0862367153167725	Lassen Sie uns mit	
+1	631.0399999999922	1.048719882965088	der Diskussion zweier Einschränkungen	
+1	632.3199999999922	0.9464919567108154	unserer Datensätze schließen.	
+1	633.5999999999922	0.921142578125		
+1	634.8799999999922	1.3047223091125488	Erstens ist das Artikel-Korpus	
+1	636.1599999999921	1.2549498081207275	auf diejenigen beschränkt, die	
+1	637.4399999999921	1.3024568557739258	aus den 32	
+1	638.7199999999921	1.3193044662475586	berücksichtigten belgischen Gesetzbüchern gesammelt	
+1	639.999999999992	1.0816750526428223	wurden, was	
+1	641.279999999992	1.1260521411895752	das gesamte	
+1	642.559999999992	1.1883246898651123	belgische Recht nicht abdeckt, da Artikel aus	
+1	643.839999999992	1.0430150032043457	Dekreten,	
+1	645.1199999999919	0.948784589767456	Richtlinien und Verordnungen fehlen.	
+1	646.3999999999919	0.9842863082885742		
+1	647.6799999999919	1.0886883735656738	Während der	
+1	648.9599999999919	1.1940217018127441	Datensatzkonstruktion wurden alle	
+1	650.2399999999918	1.1443264484405518	Verweise auf diese	
+1	651.5199999999918	1.2046194076538086	nicht gesammelten Artikel	
+1	652.7999999999918	1.2894501686096191	ignoriert, was	
+1	654.0799999999917	1.2661221027374268	dazu führte, dass einige Fragen nur	
+1	655.3599999999917	1.13651704788208	einen Bruchteil der ursprünglichen	
+1	656.6399999999917	0.36295247077941895	Anzahl relevanter Artikel haben.	
+1	657.9199999999917	1.13331937789917		
+1	659.1999999999916	1.0575523376464844		
+1	660.4799999999916	1.252683162689209		
+1	661.7599999999916	1.3523399829864502	Diese Information impliziert, dass die	
+1	663.0399999999916	1.2150840759277344	Antwort in den verbleibenden relevanten Artikeln	
+1	664.3199999999915	1.0611534118652344	unvollständig sein	
+1	665.5999999999915	1.0339183807373047	könnte, obwohl sie	
+1	666.8799999999915	0.38120031356811523	dennoch vollständig angemessen ist.	
+1	668.1599999999914	1.02054762840271		
+1	669.4399999999914	1.11515474319458	Zweitens sollten wir	
+1	670.7199999999914	1.1508996486663818	beachten, dass nicht alle	
+1	671.9999999999914	1.076892375946045	Rechtsfragen	
+1	673.2799999999913	1.144601821899414	allein mit Gesetzen beantwortet werden können.	
+1	674.5599999999913	1.1744544506072998	Zum	
+1	675.8399999999913	1.1734516620635986	Beispiel, die Frage: Kann ich	
+1	677.1199999999913	1.136488676071167	meine Mieter kündigen, wenn sie	
+1	678.3999999999912	1.1695444583892822	zu viel Lärm	
+1	679.6799999999912	1.1656432151794434	machen, hat möglicherweise keine detaillierte	
+1	680.9599999999912	1.1388871669769287	Antwort innerhalb des	
+1	682.2399999999911	0.9824707508087158	Statutrechts, die	
+1	683.5199999999911	1.176654577255249	eine spezifische	
+1	684.7999999999911	1.2164552211761475	Lärmschwelle quantifiziert, bei der	
+1	686.0799999999911	1.0305907726287842	eine Kündigung erlaubt ist.	
+1	687.359999999991	0.9868006706237793	Stattdessen	
+1	688.639999999991	1.2178003787994385	sollte der Vermieter wahrscheinlich	
+1	689.919999999991	1.2755556106567383	eher auf	
+1	691.199999999991	1.4752647876739502	die Rechtsprechung zurückgreifen und	
+1	692.4799999999909	1.4776480197906494	Präzedenzfälle finden, die seiner aktuellen Situation ähneln.	
+1	693.7599999999909	1.0976152420043945	Zum Beispiel, der	
+1	695.0399999999909	1.1370623111724854	Mieter macht zwei Parteien pro	
+1	696.3199999999908	1.020484209060669	Woche bis 2 Uhr morgens.	
+1	697.5999999999908	0.9566271305084229		
+1	698.8799999999908	1.0177102088928223	Daher sind	
+1	700.1599999999908	1.2999119758605957		
+1	701.4399999999907	1.3401782512664795	einige Fragen besser geeignet als andere für die	
+1	702.7199999999907	1.2683191299438477	Aufgabe der Abrufung gesetzlicher Artikel, und	
+1	703.9999999999907	1.026076316833496	das Feld der weniger	
+1	705.2799999999907	0.9350957870483398	geeigneten bleibt	
+1	706.5599999999906	0.9670729637145996	zu bestimmen.	
+1	707.8399999999906	1.0410101413726807	Wir hoffen, dass	
+1	709.1199999999906	1.0997288227081299	alle Arbeiten	
+1	710.3999999999905	0.9299125671386719	Interesse wecken,	
+1	711.6799999999905	1.0185825824737549	praktische und	
+1	712.9599999999905	1.181938886642456	zuverlässige	
+1	714.2399999999905	1.1538722515106201	Modelle	
+1	715.5199999999904	1.3695251941680908		
+1	716.7999999999904	1.6244893074035645	für die Abrufung gesetzlicher Artikel zu entwickeln, die dazu	
+1	718.0799999999904	1.2937214374542236	beitragen können, den Zugang zur Gerechtigkeit für alle zu verbessern.	
+1	719.3599999999904	0.9537301063537598	Sie können	
+1	720.6399999999903	1.2333297729492188	unsere	
+1	721.9199999999903	1.2313878536224365	Publikation,	
+1	722.0012499999903	0.7164225578308105	Datensatz und Code an den folgenden Links überprüfen. Vielen Dank.	
+2	1.28	0.20682835578918457	Hallo!	
+2	2.56	0.4367191791534424	Hallo, wir freuen uns, Ihnen vorzustellen	Hallo!
+2	3.84	0.5796384811401367	unsere Arbeit über vorzustellen.	vorzustellen
+2	5.12	0.4370753765106201	Vokale vorzustellen.	vorzustellen.
+2	6.4	0.4979212284088135	Vokale vorzustellen, eine unabhängige Aufgabe.	vorzustellen.
+2	7.680000000000001	0.4957549571990967	vorzustellen, eine unabhängige unabhängige Benchmark-Aufgabe.	Vokale vorzustellen, eine unabhängige Aufgabe.
+2	8.96	0.30609822273254395	Test-Benchmark.	unabhängige Benchmark-Aufgabe.
+2	10.24	0.4043905735015869	Bewertung von Vision und Sprache.	Test-Benchmark.
+2	11.52	0.5239958763122559	Aufgabe zur Bewertung von Sprachmodellen mit	Bewertung von Vision und Sprache.
+2	12.799999999999999	0.5572395324707031	Vision- und spezifischen Link.	Sprachmodellen mit
+2	14.079999999999998	0.44432997703552246	linguistischen Phänomenen.	spezifischen Link.
+2	15.359999999999998	0.4917178153991699	spezifischen Warum	linguistischen Phänomenen.
+2	16.639999999999997	0.4515247344970703	wir uns diese Mühe gemacht?	
+2	17.919999999999998	0.6139826774597168	haben wir uns diesen Benchmark aufzubauen?	wir uns diese Mühe gemacht?
+2	19.2	0.4776465892791748	die Mühe gemacht,	diesen Benchmark aufzubauen?
+2	20.48	0.3453705310821533	Nun, während der letzten	
+2	21.76	0.436021089553833	Jahren haben wir	während der letzten
+2	23.040000000000003	0.5321304798126221	in den letzten haben wir uns die Mühe gemacht, diesen Benchmark aufzubauen? Nun, in den letzten Jahren haben wir eine Explosion beobachtet.	Jahren haben wir
+2	24.320000000000004	0.43831777572631836	eine Explosion Explosion von Transformationen beobachtet.	haben wir uns die Mühe gemacht, diesen Benchmark aufzubauen? Nun, in den letzten Jahren haben wir eine Explosion beobachtet.
+2	25.600000000000005	0.5738520622253418	von Transformer-basierten Vision-Modellen beobachtet.	Explosion von Transformationen beobachtet.
+2	26.880000000000006	0.5786960124969482	Transformer-basierten Vision- und Sprachmodellen beobachtet.	Vision-Modellen beobachtet.
+2	28.160000000000007	0.5375900268554688	Vision- und Sprachmodellen Transformer-basierten Vision- und Sprachmodellen beobachtet, die auf	Transformer-basierten Vision- und Sprachmodellen beobachtet.
+2	29.44000000000001	0.6769185066223145	großen Mengen an Bildern vortrainiert wurden.	Transformer-basierten Vision- und Sprachmodellen beobachtet, die auf
+2	30.72000000000001	0.6491363048553467	Bild-Text-Paaren vortrainiert wurden.	Bildern vortrainiert wurden.
+2	32.00000000000001	0.6905639171600342	Jedes dieser Modelle	
+2	33.28000000000001	0.5347790718078613	voran.	
+2	34.56000000000001	0.3827497959136963	Stand der Technik bei	voran.
+2	35.84000000000001	0.5995893478393555	setzt den Stand der Technik Stand der Technik in den Bereichen Vision und Sprache neu.	Stand der Technik bei
+2	37.12000000000001	0.7129034996032715	Aufgaben des Sehens und der Sprache weiter voran, wie zum Beispiel.	Stand der Technik in den Bereichen Vision und Sprache neu.
+2	38.40000000000001	0.8444302082061768	bei Aufgaben wie Vision und Sprache, beispielsweise bei visuellen Frage-Antwort-Systemen, weiter.	Aufgaben des Sehens und der Sprache weiter voran, wie zum Beispiel.
+2	39.680000000000014	0.6397204399108887	visueller Frage-Antwort oder visueller Kommentierung weiter.	Vision und Sprache, beispielsweise bei visuellen Frage-Antwort-Systemen, weiter.
+2	40.960000000000015	0.6616437435150146	Technik bei Aufgaben wie visueller Frage-Antwort oder visuellem Alltagsverständnis weiter.	visueller Kommentierung weiter.
+2	42.240000000000016	0.6479794979095459	visuellem Alltagsverständnis vortrainiert wurden. Jedes dieser Modelle setzt den Stand der Technik bei Aufgaben wie visueller Frage-Antwort oder visuellem Alltagsverständnis weiter, Bildabruf und Framework.	Technik bei Aufgaben wie visueller Frage-Antwort oder visuellem Alltagsverständnis weiter.
+2	43.52000000000002	0.6247572898864746	weiter, Alltagsverständnis weiter, bei der Bildsuche und beim Phrase-Grounding.	vortrainiert wurden. Jedes dieser Modelle setzt den Stand der Technik bei Aufgaben wie visueller Frage-Antwort oder visuellem Alltagsverständnis weiter, Bildabruf und Framework.
+2	44.80000000000002	0.8711717128753662	Daher haben wir eine Botschaft erhalten.	Alltagsverständnis weiter, bei der Bildsuche und beim Phrase-Grounding.
+2	46.08000000000002	0.5129141807556152	Botschaft: Die Genauigkeiten	haben wir eine Botschaft erhalten.
+2	47.36000000000002	0.6516015529632568	lautet diesen Aufgaben speziell.	Botschaft: Die Genauigkeiten
+2	48.64000000000002	0.8057472705841064	sind	diesen Aufgaben speziell.
+2	49.92000000000002	0.8703124523162842	die Botschaft: Die Genauigkeiten auf diesen aufgabenbezogenen Benchmarks Phrase-Grounding. Daher lautet die Botschaft: Die Genauigkeiten auf diesen aufgabenbezogenen Benchmarks steigen stetig.	sind
+2	51.200000000000024	0.2693042755126953		Phrase-Grounding. Daher lautet die Botschaft: Die Genauigkeiten auf diesen aufgabenbezogenen Benchmarks steigen stetig.
+2	52.480000000000025	0.4003276824951172	Aber wissen wir das wirklich?	
+2	53.760000000000026	0.5637743473052979	wissen wir wirklich, was die Modelle tatsächlich können?	das wirklich?
+2	55.04000000000003	0.4909329414367676	wirklich, was die Modelle tatsächlich tatsächlich gelernt haben?	wissen wir wirklich, was die Modelle tatsächlich können?
+2	56.32000000000003	0.24811100959777832		tatsächlich gelernt haben?
+2	57.60000000000003	0.37149739265441895	Was ist es, das	
+2	58.88000000000003	0.5310766696929932	aufgabenbezogenen Benchmarks steigen stetig. Aber wissen wir wirklich, was die Modelle tatsächlich gelernt haben? Was lernen Vision- und Sprachmodelle?	ist es, das
+2	60.16000000000003	0.5445644855499268	verstanden?	aufgabenbezogenen Benchmarks steigen stetig. Aber wissen wir wirklich, was die Modelle tatsächlich gelernt haben? Was lernen Vision- und Sprachmodelle?
+2	61.44000000000003	0.8147571086883545	hat ein Transformer für Vision und Sprache wenn ihm eine Aufgabe zugewiesen wurde?	verstanden?
+2	62.720000000000034	0.6289622783660889	verstanden, wenn eine hohe Punktzahl vergibt?	wenn ihm eine Aufgabe zugewiesen wurde?
+2	64.00000000000003	0.5534558296203613	er für Vision und Sprache verstanden, wenn er diesem Bild eine hohe Punktzahl zuweist?	eine hohe Punktzahl vergibt?
+2	65.28000000000003	0.617180585861206	diesem Bild Bild und diesem Satz eine hohe Punktzahl zuweist?	für Vision und Sprache verstanden, wenn er diesem Bild eine hohe Punktzahl zuweist?
+2	66.56000000000003	0.6009836196899414	und diesem Satz eine hohe zuordnet?	Bild und diesem Satz eine hohe Punktzahl zuweist?
+2	67.84000000000003	0.6306366920471191	Übereinstimmung zuweist?	zuordnet?
+2	69.12000000000003	0.5100805759429932	und für Vision und Sprache verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist?	zuweist?
+2	70.40000000000003	0.396653413772583		für Vision und Sprache verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist?
+2	71.68000000000004	0.5068957805633545	Modelle tatsächlich gelernt haben? Was hat ein Transformer für Vision und Sprache verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist? Übereinstimmungen zwischen Vision und Sprache	
+2	72.96000000000004	0.6880075931549072	konzentrieren sich Vision- und Sprachmodelle?	Modelle tatsächlich gelernt haben? Was hat ein Transformer für Vision und Sprache verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist? Übereinstimmungen zwischen Vision und Sprache
+2	74.24000000000004	0.7267394065856934	auf das Richtige?	konzentrieren sich Vision- und Sprachmodelle?
+2	75.52000000000004	0.930729866027832	Konzentrieren sich Vision- und Sprachmodelle auf das verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist? Konzentrieren sich Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich	auf das Richtige?
+2	76.80000000000004	0.48673343658447266	Richtige oder Verzerrungen?	verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist? Konzentrieren sich Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich
+2	78.08000000000004	0.7828624248504639	niedrige zuweist? Konzentrieren sich Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie zuvor gezeigt wurden?	Verzerrungen?
+2	79.36000000000004	0.8524985313415527	konzentrieren sie sich auf Verzerrungen, wie sie Arbeiten gezeigt wurden?	niedrige zuweist? Konzentrieren sich Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie zuvor gezeigt wurden?
+2	80.64000000000004	0.6782889366149902	in früheren Um mehr Licht zu werfen,	Arbeiten gezeigt wurden?
+2	81.92000000000004	0.5710630416870117	auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie in früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen?	zu werfen,
+2	83.20000000000005	0.6346423625946045	dieses Thema zu	das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie in früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen?
+2	84.48000000000005	0.5825455188751221	werfen, schlagen wir vor.	
+2	85.76000000000005	0.5472264289855957	einen Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie in früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen, schlagen wir einen aufgabenagnostischeren Ansatz vor.	vor.
+2	87.04000000000005	0.6510183811187744	aufgabenagnostischeren Ansatz und stellen vor.	Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie in früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen, schlagen wir einen aufgabenagnostischeren Ansatz vor.
+2	88.32000000000005	0.5214612483978271	vor und stellen Valves vor, die	und stellen vor.
+2	89.60000000000005	0.6239852905273438	spezifischen linguistischen Phänomenen. Warum haben wir uns die Mühe gemacht, diesen Benchmark aufzubauen? Nun, in den letzten Jahren haben wir eine Explosion von Transformer-basierten Vision- und Sprachmodellen beobachtet, die auf großen Mengen an Bild-Text-Paaren vortrainiert wurden. Jedes dieser Modelle setzt den Stand der Technik bei Aufgaben wie visueller Frage-Antwort oder visuellem Alltagsverständnis weiter, bei der Bildsuche und beim Phrase-Grounding. Daher lautet die Botschaft: Die Genauigkeiten auf diesen aufgabenbezogenen Benchmarks steigen stetig. Aber wissen wir wirklich, was die Modelle tatsächlich gelernt haben? Was hat ein Transformer für Vision und Sprache verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist? Konzentrieren sich Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie in früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen, schlagen wir einen aufgabenagnostischeren Ansatz vor und stellen Valves vor, die die Sensitivität testen.	
+2	90.88000000000005	0.7021000385284424	die Sensitivität von Vision- und Sprachmodellen mit spezifischen linguistischen Phänomenen. Warum haben wir uns die Mühe gemacht, diesen Benchmark aufzubauen? Nun, in den letzten Jahren haben wir eine Explosion von Transformer-basierten Vision- und Sprachmodellen beobachtet, die auf großen Mengen an Bild-Text-Paaren vortrainiert wurden. Jedes dieser Modelle setzt den Stand der Technik bei Aufgaben wie visueller Frage-Antwort oder visuellem Alltagsverständnis weiter, bei der Bildsuche und beim Phrase-Grounding. Daher lautet die Botschaft: Die Genauigkeiten auf diesen aufgabenbezogenen Benchmarks steigen stetig. Aber wissen wir wirklich, was die Modelle tatsächlich gelernt haben? Was hat ein Transformer für Vision und Sprache verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist? Konzentrieren sich Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie in früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen, schlagen wir einen aufgabenagnostischeren Ansatz vor und stellen Valves vor, die die Sensitivität von Vision- und Sprachmodellen testen.	spezifischen linguistischen Phänomenen. Warum haben wir uns die Mühe gemacht, diesen Benchmark aufzubauen? Nun, in den letzten Jahren haben wir eine Explosion von Transformer-basierten Vision- und Sprachmodellen beobachtet, die auf großen Mengen an Bild-Text-Paaren vortrainiert wurden. Jedes dieser Modelle setzt den Stand der Technik bei Aufgaben wie visueller Frage-Antwort oder visuellem Alltagsverständnis weiter, bei der Bildsuche und beim Phrase-Grounding. Daher lautet die Botschaft: Die Genauigkeiten auf diesen aufgabenbezogenen Benchmarks steigen stetig. Aber wissen wir wirklich, was die Modelle tatsächlich gelernt haben? Was hat ein Transformer für Vision und Sprache verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist? Konzentrieren sich Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie in früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen, schlagen wir einen aufgabenagnostischeren Ansatz vor und stellen Valves vor, die die Sensitivität testen.
+2	92.16000000000005	0.6044340133666992	Sprache verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist? Konzentrieren sich Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie in früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen, schlagen wir einen aufgabenagnostischeren Ansatz vor und stellen Valves vor, die die Sensitivität von Vision- und Sprachmodellen testen.	mit spezifischen linguistischen Phänomenen. Warum haben wir uns die Mühe gemacht, diesen Benchmark aufzubauen? Nun, in den letzten Jahren haben wir eine Explosion von Transformer-basierten Vision- und Sprachmodellen beobachtet, die auf großen Mengen an Bild-Text-Paaren vortrainiert wurden. Jedes dieser Modelle setzt den Stand der Technik bei Aufgaben wie visueller Frage-Antwort oder visuellem Alltagsverständnis weiter, bei der Bildsuche und beim Phrase-Grounding. Daher lautet die Botschaft: Die Genauigkeiten auf diesen aufgabenbezogenen Benchmarks steigen stetig. Aber wissen wir wirklich, was die Modelle tatsächlich gelernt haben? Was hat ein Transformer für Vision und Sprache verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist? Konzentrieren sich Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie in früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen, schlagen wir einen aufgabenagnostischeren Ansatz vor und stellen Valves vor, die die Sensitivität von Vision- und Sprachmodellen testen.
+2	93.44000000000005	0.33510518074035645	Sprachmodellen testen.	Sprache verstanden, wenn er diesem Bild und diesem Satz eine hohe Übereinstimmung und diesem anderen eine niedrige zuweist? Konzentrieren sich Vision- und Sprachmodelle auf das Richtige oder konzentrieren sie sich auf Verzerrungen, wie sie in früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen, schlagen wir einen aufgabenagnostischeren Ansatz vor und stellen Valves vor, die die Sensitivität von Vision- und Sprachmodellen testen.
+2	94.72000000000006	0.33151841163635254	testen.	Sprachmodellen testen.
+2	96.00000000000006	1.258899211883545	Phänomene reagieren, die beide Domänen betreffen.	testen.
+2	97.28000000000006	1.2280051708221436	Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die	Phänomene reagieren, die beide Domänen betreffen.
+2	98.56000000000006	0.724144697189331	Sprachmodellen testen. Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl für linguistische als auch für visuelle Modelle relevant sind.	die linguistische als auch die
+2	99.84000000000006	0.720693826675415	Modalität betreffen.	Sprachmodellen testen. Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl für linguistische als auch für visuelle Modelle relevant sind.
+2	101.12000000000006	0.8836236000061035	die linguistische als auch die visuelle	Modalität betreffen.
+2	102.40000000000006	0.6894609928131104	Unser schlagen wir einen aufgabenagnostischeren Ansatz vor und stellen Valves vor, die die Sensitivität von Vision- und Sprachmodellen testen. Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz und Pluralität.	
+2	103.68000000000006	0.9284379482269287	Fokus liegt auf Pluralität, Zählen und räumlichen Beziehungen.	schlagen wir einen aufgabenagnostischeren Ansatz vor und stellen Valves vor, die die Sensitivität von Vision- und Sprachmodellen testen. Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz und Pluralität.
+2	104.96000000000006	0.9140138626098633	Existenz, Pluralität, Sensitivität von Vision- und Sprachmodellen testen. Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen und Aktionen.	Pluralität, Zählen und räumlichen Beziehungen.
+2	106.24000000000007	0.9282166957855225	Zählen, räumlichen Aktionen und Korrekturen von Entitäten.	Sensitivität von Vision- und Sprachmodellen testen. Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen und Aktionen.
+2	107.52000000000007	0.679997444152832	Beziehungen, Aktionen und Entitätskoreferenz.	Aktionen und Korrekturen von Entitäten.
+2	108.80000000000007	0.7090394496917725	Aber wie testen wir?	
+2	110.08000000000007	0.8048639297485352	und Sprachmodellen testen. Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle	wir?
+2	111.36000000000007	0.8178434371948242	Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle dies erfasst haben?	und Sprachmodellen testen. Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle
+2	112.64000000000007	0.615551233291626	diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben?	Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle dies erfasst haben?
+2	113.92000000000007	0.41488170623779297		Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben?
+2	115.20000000000007	0.541297435760498	Durch FOILing.	
+2	116.48000000000008	0.8230242729187012	früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen, schlagen wir einen aufgabenagnostischeren Ansatz vor und stellen Valves vor, die die Sensitivität von Vision- und Sprachmodellen testen. Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor angewendet wurde.	FOILing.
+2	117.76000000000008	1.0180113315582275	FOILing, eine Methode, die zuvor für Vision- und Sprachaufgaben angewendet wurde.	früheren Arbeiten gezeigt wurden? Um mehr Licht auf dieses Thema zu werfen, schlagen wir einen aufgabenagnostischeren Ansatz vor und stellen Valves vor, die die Sensitivität von Vision- und Sprachmodellen testen. Diese Valves prüfen, wie stark diese Modelle auf spezifische linguistische Phänomene reagieren, die sowohl die linguistische als auch die visuelle Modalität betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor angewendet wurde.
+2	119.04000000000008	0.730865478515625	betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor ausschließlich für Vision- und Sprachmodelle angewendet wurde.	für Vision- und Sprachaufgaben angewendet wurde.
+2	120.32000000000008	0.9279844760894775	Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen angewendet wurde.	betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor ausschließlich für Vision- und Sprachmodelle angewendet wurde.
+2	121.60000000000008	1.143237829208374	nur für Nomenphrasen bei Vision- und Sprachmodellen Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar angewendet wurde.	Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen angewendet wurde.
+2	122.88000000000008	0.7732880115509033	von Ravi Shekhar betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern angewendet wurde.	Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar angewendet wurde.
+2	124.16000000000008	0.7615032196044922	und Mitarbeitern auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen angewendet wurde.	betreffen. Unser Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern angewendet wurde.
+2	125.44000000000008	0.881709098815918	sowie uns bei Zählproblemen in früheren Arbeiten angewendet wurde.	auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen angewendet wurde.
+2	126.72000000000008	0.7663121223449707	früheren Arbeiten zum Zählen angewendet wurde.	uns bei Zählproblemen in früheren Arbeiten angewendet wurde.
+2	128.00000000000009	1.044997215270996	bedeutet im Wesentlichen.	früheren Arbeiten zum Zählen angewendet wurde.
+2	129.2800000000001	1.1317052841186523	für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir das	bedeutet im Wesentlichen.
+2	130.5600000000001	0.7922582626342773	Wesentlichen, dass wir Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen.	wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir das
+2	131.8400000000001	0.7490088939666748	die Bildunterschrift eine	Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen.
+2	133.1200000000001	0.8917257785797119	Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und daraus ein Gegenstück (Foil) erstellen, indem wir	eine
+2	134.4000000000001	1.0294747352600098	nehmen und verändern.	Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und daraus ein Gegenstück (Foil) erstellen, indem wir
+2	135.6800000000001	0.8701226711273193	eine Folie	verändern.
+2	136.9600000000001	0.9934043884277344	nicht	
+2	138.2400000000001	1.1282362937927246	(Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht beschreibt.	nicht
+2	139.5200000000001	0.5961098670959473	das Bild nicht Bild nicht mehr beschreibt.	erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht beschreibt.
+2	140.8000000000001	0.812302827835083	wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Und wir führen diese Phrasen durch.	Bild nicht mehr beschreibt.
+2	142.0800000000001	0.8352525234222412	FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch Fokussierung durch.	wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Und wir führen diese Phrasen durch.
+2	143.3600000000001	0.9100115299224854	Wir führen diese Phraseänderungen Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische	FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch Fokussierung durch.
+2	144.6400000000001	0.891124963760376	spezifische Aspekte konzentrieren.	Fokus liegt auf Existenz, Pluralität, Zählen, räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische
+2	145.9200000000001	0.7951111793518066	Aspekte räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, beispielsweise auf die Existenz.	spezifische Aspekte konzentrieren.
+2	147.2000000000001	0.9412894248962402	konzentrieren, Existenz, Pluralität und Zählen.	räumlichen Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, beispielsweise auf die Existenz.
+2	148.4800000000001	0.933455228805542	wie Existenz, Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen und räumliche Beziehungen.	Existenz, Pluralität und Zählen.
+2	149.7600000000001	0.887772798538208	Pluralität, Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen und Aktionen.	Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen und räumliche Beziehungen.
+2	151.0400000000001	0.9350483417510986	Zählen, räumliche Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz.	Beziehungen, Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen und Aktionen.
+2	152.3200000000001	0.8805043697357178	Beziehungen, Aktionen und erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt	Aktionen und Entitätskoreferenz. Aber wie testen wir, ob die Vision- und Sprachmodelle diese Phänomene erfasst haben? Durch FOILing, eine Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz.
+2	153.6000000000001	0.865297794342041	Entitätskoreferenz, wobei jeder	erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt
+2	154.8800000000001	0.6106467247009277		
+2	156.1600000000001	0.7773227691650391	Aspekt aus einem oder mehreren Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann.	
+2	157.4400000000001	0.7456581592559814	mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr finden.	Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann.
+2	158.7200000000001	0.7234840393066406	Falls wir mehr eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als ein Instrument gefunden haben.	mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr finden.
+2	160.0000000000001	0.7711737155914307	als	eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als ein Instrument gefunden haben.
+2	161.28000000000011	0.9631285667419434	einen interessanten Weg gefunden haben, um (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um Folie-Instrumente zu erstellen.	
+2	162.56000000000012	0.772385835647583	erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen.	(Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um Folie-Instrumente zu erstellen.
+2	163.84000000000012	0.8742842674255371		erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen.
+2	165.12000000000012	0.5909233093261719	Zum von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des	
+2	166.40000000000012	0.7496345043182373	wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir	von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des
+2	167.68000000000012	0.7632670402526855	beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente.	wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir
+2	168.96000000000012	0.7256569862365723	zwei Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente, eines davon, in dem	beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente.
+2	170.24000000000012	0.8454859256744385	verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb geändert wird.	Methode, die zuvor nur für Nomenphrasen bei Vision- und Sprachmodellen von Ravi Shekhar und Mitarbeitern sowie für das Zählen in unserer früheren Arbeit angewendet wurde. FOILing bedeutet im Wesentlichen, dass wir die Bildunterschrift nehmen und eine Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente, eines davon, in dem
+2	171.52000000000012	1.0054740905761719	Instrumente: eines, bei dem das Aktionsverb Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird.	verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb geändert wird.
+2	172.80000000000013	0.8544266223907471	durch ein anderes Aktionsverb ersetzt indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem	Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird.
+2	174.08000000000013	0.8847970962524414		indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem
+2	175.36000000000013	0.7659206390380859	die Akteure konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden.	
+2	176.64000000000013	0.8390653133392334	und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Zählen und Koreferenz.	konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden.
+2	177.92000000000013	0.7431447505950928	Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Auch Zählen und Koreferenz sind Aspekte.	und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Zählen und Koreferenz.
+2	179.20000000000013	0.955855131149292	Auch Zählen und Koreferenz sind Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Auch Zählen und Koreferenz sind Aspekte, die mehrere Instrumente aufweisen.	Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Auch Zählen und Koreferenz sind Aspekte.
+2	180.48000000000013	0.7643125057220459	Aspekte, die Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Auch Zählen und Koreferenz sind Aspekte, die mehr als ein Instrument aufweisen.	Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Auch Zählen und Koreferenz sind Aspekte, die mehrere Instrumente aufweisen.
+2	181.76000000000013	0.8840970993041992	Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Auch Zählen und Koreferenz sind Aspekte, die mehr als ein Instrument aufweisen. Und wir erstellen diese Folien.	Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Auch Zählen und Koreferenz sind Aspekte, die mehr als ein Instrument aufweisen.
+2	183.04000000000013	0.8264634609222412	Und wir erstellen diese	Folie (Foil) erzeugen, indem wir die Unterschrift so verändern, dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Auch Zählen und Koreferenz sind Aspekte, die mehr als ein Instrument aufweisen. Und wir erstellen diese Folien.
+2	184.32000000000014	0.9313428401947021	Folien, indem wir dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Auch Zählen und Koreferenz sind Aspekte, die mehr als ein Instrument aufweisen. Und wir erstellen diese Folien, indem wir sicherstellen, dass sie nicht mehr beschreiben.	
+2	185.60000000000014	0.8708570003509521	sicherstellen, dass sie	dass sie das Bild nicht mehr beschreibt. Wir führen diese Phraseänderungen durch, indem wir uns auf sechs spezifische Aspekte konzentrieren, wie Existenz, Pluralität, Zählen, räumliche Beziehungen, Aktionen und Entitätskoreferenz, wobei jeder Aspekt aus einem oder mehreren Instrumenten bestehen kann. Falls wir mehr als einen interessanten Weg gefunden haben, um FOIL-Instanzen zu erstellen. Zum Beispiel im Fall des Aspekts Aktionen haben wir zwei Instrumente: eines, bei dem das Aktionsverb durch ein anderes Aktionsverb ersetzt wird, und eines, bei dem die Akteure ausgetauscht werden. Auch Zählen und Koreferenz sind Aspekte, die mehr als ein Instrument aufweisen. Und wir erstellen diese Folien, indem wir sicherstellen, dass sie nicht mehr beschreiben.
+2	186.88000000000014	0.9155795574188232	das Bild nicht beschreiben, dass sie	
+2	188.16000000000014	0.8610734939575195	grammatikalisch korrekt sind und	
+2	189.44000000000014	0.6969985961914062	sonst	
+2	190.72000000000014	0.8379988670349121	gültige Sätze darstellen.	
+2	192.00000000000014	0.7273221015930176	Das ist nicht	
+2	193.28000000000014	0.77410888671875	einfach zu tun,	
+2	194.56000000000014	0.755061149597168	da eine	
+2	195.84000000000015	0.863804817199707	gefolgte Unterschrift	
+2	197.12000000000015	0.7437176704406738		
+2	198.40000000000015	0.8141329288482666	weniger wahrscheinlich sein könnte als die ursprüngliche.	
+2	199.68000000000015	0.775493860244751	Zum Beispiel,	
+2	200.96000000000015	0.8332724571228027	obwohl es nicht unmöglich	
+2	202.24000000000015	0.7938635349273682	ist, ist es	
+2	203.52000000000015	0.79604172706604	statistisch	
+2	204.80000000000015	0.797175407409668	unwahrscheinlicher, dass Pflanzen	
+2	206.08000000000015	0.8642101287841797	einen Mann	
+2	207.36000000000016	0.8301494121551514	schneiden, als dass ein Mann Pflanzen	
+2	208.64000000000016	0.8578283786773682		
+2	209.92000000000016	0.9596767425537109	schneidet, und große Vision- und	
+2	211.20000000000016	0.6731677055358887	Sprachmodelle könnten dies erkennen.	
+2	212.48000000000016	0.6643297672271729		
+2	213.76000000000016	0.8644239902496338		
+2	215.04000000000016	0.9634530544281006	Daher müssen	
+2	216.32000000000016	0.6168627738952637	wir Maßnahmen ergreifen, um gültige Folien zu erhalten.	
+2	217.60000000000016	0.573134183883667		
+2	218.88000000000017	0.739940881729126	Erstens nutzen wir	
+2	220.16000000000017	0.840656042098999	starke	
+2	221.44000000000017	0.5216443538665771	Sprachmodelle, um Folien vorzuschlagen.	
+2	222.72000000000017	0.6133899688720703		
+2	224.00000000000017	0.732396125793457	Zweitens verwenden wir natürliche	
+2	225.28000000000017	0.7215008735656738		
+2	226.56000000000017	0.9010782241821289		
+2	227.84000000000017	0.8578352928161621		
+2	229.12000000000018	1.0450384616851807	Sprachinferenz, um Folien zu filtern, die	
+2	230.40000000000018	0.7473797798156738	das Bild möglicherweise noch	
+2	231.68000000000018	0.8337926864624023	beschreiben, da	
+2	232.96000000000018	0.8666887283325195	wir bei der Konstruktion von Folien	
+2	234.24000000000018	0.8340291976928711	sicherstellen müssen, dass	
+2	235.52000000000018	0.38250136375427246	sie das Bild nicht beschreiben.	
+2	236.80000000000018	0.64249587059021		
+2	238.08000000000018	0.8012750148773193	Um dies automatisch zu testen,	
+2	239.36000000000018	0.7438278198242188	wenden wir natürliche	
+2	240.64000000000019	0.7896533012390137	Sprachinferenz mit	
+2	241.9200000000002	0.8179483413696289	folgendem Rationale an.	
+2	243.2000000000002	0.6524941921234131	Wir betrachten ein	
+2	244.4800000000002	0.6494972705841064	Bild als	
+2	245.7600000000002	0.8241517543792725		
+2	247.0400000000002	0.9188451766967773	Prämisse und seine Unterschrift als	
+2	248.3200000000002	0.3999190330505371	die daraus folgende Hypothese.	
+2	249.6000000000002	0.7263779640197754		
+2	250.8800000000002	0.8543517589569092	Zusätzlich betrachten wir die	
+2	252.1600000000002	0.8429896831512451	Unterschrift als	
+2	253.4400000000002	0.8817791938781738	Prämisse und die Folie als deren	
+2	254.7200000000002	0.7179410457611084	Hypothese.	
+2	256.00000000000017	0.8808856010437012	Wenn	
+2	257.28000000000014	0.9832193851470947	ein NLI-Modell	
+2	258.5600000000001	0.9198222160339355	vorhersagt, dass die	
+2	259.8400000000001	0.8709666728973389	FOI	
+2	261.12000000000006	0.8713231086730957	im Widerspruch zur Unterschrift steht oder neutral dazu ist,	
+2	262.40000000000003	0.6495866775512695	nehmen wir	
+2	263.68	0.834073543548584	dies als	
+2	264.96	0.7141342163085938	Indikator für eine gültige	
+2	266.23999999999995	0.90570068359375	FOIL.	
+2	267.5199999999999	0.8153736591339111	Wenn ein NLI-Modell	
+2	268.7999999999999	1.0224924087524414		
+2	270.07999999999987	1.0788202285766602	vorhersagt, dass die FOI von der Unterschrift abgeleitet ist,	
+2	271.35999999999984	0.7371819019317627	kann	
+2	272.6399999999998	0.9696779251098633	sie keine gute Folie	
+2	273.9199999999998	1.1215527057647705	sein, da	
+2	275.19999999999976	0.9680328369140625	sie	
+2	276.47999999999973	1.061030626296997		
+2	277.7599999999997	1.2880568504333496	aufgrund der Transitivität eine wahrheitsgemäße Beschreibung des Bildes liefern würde und	
+2	279.0399999999997	0.6816096305847168	wir diese Folien	
+2	280.31999999999965	0.758338212966919	ausschließen.	
+2	281.5999999999996	0.8384287357330322		
+2	282.8799999999996	0.9160130023956299	Dieses Verfahren ist jedoch nicht perfekt; es ist	
+2	284.15999999999957	0.8098459243774414	lediglich ein	
+2	285.43999999999954	0.9722905158996582	Indikator für gültige Folien.	
+2	286.7199999999995	0.8724205493927002		
+2	287.9999999999995	0.9762101173400879	Daher	
+2	289.27999999999946	1.128847599029541	verwenden wir als dritte Maßnahme zur Generierung gültiger Folien	
+2	290.55999999999943	0.7661738395690918	menschliche	
+2	291.8399999999994	0.9307692050933838		
+2	293.1199999999994	0.9603683948516846	Annotatoren, um die in	
+2	294.39999999999935	0.9688966274261475	Valves verwendeten Daten zu validieren.	
+2	295.6799999999993	0.8106191158294678	Also, nach	
+2	296.9599999999993	0.8095138072967529	Filterung und menschlicher Evaluation	
+2	298.23999999999927	0.7834675312042236	haben wir	
+2	299.51999999999924	0.8035397529602051	so viele	
+2	300.7999999999992	0.8525123596191406	Testinstanzen, wie	
+2	302.0799999999992	0.3193225860595703	in dieser Tabelle beschrieben.	
+2	303.35999999999916	0.8756294250488281		
+2	304.63999999999913	0.9556262493133545	Beachten Sie, dass	
+2	305.9199999999991	0.8424561023712158		
+2	307.1999999999991	0.9146296977996826	Valve keine Trainingsdaten liefert, sondern nur	
+2	308.47999999999905	0.9054639339447021	Testdaten, da es	
+2	309.759999999999	0.8637690544128418		
+2	311.039999999999	0.9066576957702637	sich um einen Zero-Shot-Test-Benchmark handelt.	
+2	312.31999999999897	0.6727211475372314		
+2	313.59999999999894	0.7286863327026367	Es wurde entwickelt, um die	
+2	314.8799999999989	0.7224826812744141	bestehenden	
+2	316.1599999999989	0.8393330574035645	Fähigkeiten	
+2	317.43999999999886	0.9865477085113525	von Vision- und Sprachmodellen	
+2	318.71999999999883	0.4541797637939453	nach dem Vortraining zu nutzen.	
+2	319.9999999999988	0.7449820041656494		
+2	321.2799999999988	1.0008623600006104	Feinabstimmung würde	
+2	322.55999999999875	1.0231738090515137	den Modellen lediglich ermöglichen,	
+2	323.8399999999987	1.0056476593017578	Artefakte oder	
+2	325.1199999999987	1.0201268196105957	statistische Verzerrungen in den Daten	
+2	326.39999999999867	0.8871891498565674		
+2	327.67999999999864	1.2066385746002197	auszunutzen. Und wir wissen alle, dass diese Modelle gerne	
+2	328.9599999999986	0.8041956424713135		
+2	330.2399999999986	1.0289192199707031	kurzschließen und Tricks	
+2	331.51999999999856	1.0043013095855713		
+2	332.79999999999853	1.014681339263916	spielen. Und wie gesagt, wir sind daran interessiert,	
+2	334.0799999999985	0.8434710502624512	welche Fähigkeiten die	
+2	335.3599999999985	0.9353213310241699	Vision- und Sprachmodelle	
+2	336.63999999999845	0.4354438781738281	nach dem Vortraining besitzen.	
+2	337.9199999999984	0.6865501403808594		
+2	339.1999999999984	0.7179403305053711	Wir	
+2	340.47999999999837	0.8423268795013428		
+2	341.75999999999834	1.0016968250274658	haben fünf Vision- und Sprachmodelle	
+2	343.0399999999983	0.8518977165222168	in Valves getestet, nämlich	
+2	344.3199999999983	0.7599380016326904	Clip,	
+2	345.59999999999826	0.9308865070343018		
+2	346.87999999999823	1.0318882465362549	AlexMert,	
+2	348.1599999999982	1.0416216850280762	Vilbert, Vilbert12in1 und VisualBird.	
+2	349.4399999999982	0.7311062812805176	Zwei unserer	
+2	350.71999999999815	0.7691295146942139	wichtigsten	
+2	351.9999999999981	0.9105286598205566	Evaluationsmetriken	
+2	353.2799999999981	0.8899827003479004	sind die Genauigkeit	
+2	354.55999999999807	0.9748921394348145	der Modelle bei der	
+2	355.83999999999804	1.0065217018127441	Klassifizierung von	
+2	357.119999999998	0.9404280185699463	Bild-Satz-Paaren in	
+2	358.399999999998	0.9058804512023926	Unterschriften und Folien.	
+2	359.67999999999796	0.8036909103393555	Vielleicht	
+2	360.95999999999793	0.8206222057342529	relevanter für dieses Video werden wir	
+2	362.2399999999979	0.7791039943695068	unsere	
+2	363.5199999999979	0.9727532863616943	tolerantere	
+2	364.79999999999785	1.0132315158843994	Metrik, die paarweise Genauigkeit,	
+2	366.0799999999978	0.7419159412384033	vorstellen, die	
+2	367.3599999999978	0.9942920207977295	misst, ob	
+2	368.63999999999777	0.9119393825531006		
+2	369.91999999999774	1.162834882736206		
+2	371.1999999999977	1.1984760761260986		
+2	372.4799999999977	1.3755218982696533	der Bild-Satz-Alignment-Score für das korrekte Bild-Text-Paar höher	
+2	373.75999999999766	0.8053536415100098	ist als für das	
+2	375.03999999999763	0.936983585357666	gefolgte Paar.	
+2	376.3199999999976	1.0438549518585205	Für weitere Metriken und	
+2	377.5999999999976	0.8334808349609375	Ergebnisse zu	
+2	378.87999999999755	1.1615464687347412		
+2	380.1599999999975	1.2256312370300293	diesen, schauen Sie sich bitte unsere Publikation an. Die Ergebnisse mit der paarweisen	
+2	381.4399999999975	0.9171333312988281	Genauigkeit sind hier	
+2	382.71999999999747	1.0815849304199219	zu sehen und sie	
+2	383.99999999999744	1.1492445468902588		
+2	385.2799999999974	1.3029379844665527		
+2	386.5599999999974	1.4922597408294678	stimmen mit den Ergebnissen überein, die wir	
+2	387.83999999999736	1.331279993057251		
+2	389.11999999999733	1.5889685153961182		
+2	390.3999999999973	1.924342393875122		
+2	391.6799999999973	2.0829548835754395		
+2	392.95999999999725	2.1363046169281006	mit den anderen Metriken erzielt haben. Ist das	
+2	394.2399999999972	1.7315351963043213		
+2	395.5199999999972	2.042778968811035	die beste Zero-Shot-Leistung, die von Vilbert 12 in 1 erreicht wird, gefolgt von Vilbert,	
+2	396.79999999999717	1.5046577453613281	AlexMurt, Clip und schließlich Visual Bird. Es ist bemerkenswert, wie	
+2	398.07999999999714	1.0976812839508057	Instrumente, die sich auf einzelne Objekte	
+2	399.3599999999971	0.9899642467498779	wie Existenz	
+2	400.6399999999971	0.9563705921173096	und Nomenphrasen	
+2	401.91999999999706	0.9859507083892822	konzentrieren, fast	
+2	403.19999999999703	0.999293327331543	vollständig von	
+2	404.479999999997	1.1533479690551758	Vilbert	
+2	405.759999999997	1.3694021701812744	12-in-1 gelöst werden, was darauf hinweist, dass Modelle	
+2	407.03999999999695	0.9622523784637451	in der Lage sind,	
+2	408.3199999999969	0.9627323150634766	benannte Objekte	
+2	409.5999999999969	0.8953819274902344	und deren Anwesenheit	
+2	410.87999999999687	0.7859013080596924	in Bildern zu identifizieren.	
+2	412.15999999999684	0.8197438716888428	Allerdings	
+2	413.4399999999968	0.9834935665130615	können keine der verbleibenden	
+2	414.7199999999968	0.9401671886444092	Teile zuverlässig	
+2	415.99999999999676	0.975933313369751	in	
+2	417.27999999999673	1.2402427196502686	unseren adversarischen Folie-Einstellungen gelöst werden.	
+2	418.5599999999967	0.9661226272583008	Wir sehen dies an	
+2	419.8399999999967	1.0669655799865723	den Instrumenten Pluralität und	
+2	421.11999999999665	0.9670724868774414	Zählen, dass Vision- und Sprachmodelle	
+2	422.3999999999966	0.7742233276367188	Schwierigkeiten	
+2	423.6799999999966	0.8453426361083984	haben,	
+2	424.95999999999657	0.9124445915222168	Referenzen auf	
+2	426.23999999999654	0.9287195205688477	einzelne versus mehrere	
+2	427.5199999999965	0.9647085666656494	Objekte	
+2	428.7999999999965	0.9653689861297607	zu unterscheiden oder diese in einem Bild zu zählen.	
+2	430.07999999999646	0.8103861808776855		
+2	431.35999999999643	0.9610588550567627	Der Teil Beziehungen zeigt, dass sie	
+2	432.6399999999964	1.028864860534668	Schwierigkeiten haben,	
+2	433.9199999999964	1.025470495223999		
+2	435.19999999999635	1.0798685550689697		
+2	436.4799999999963	1.6270802021026611	räumliche Beziehungen zwischen Objekten in einem Bild korrekt zu klassifizieren.	
+2	437.7599999999963	0.8633191585540771	Sie haben auch	
+2	439.03999999999627	0.8131976127624512	Schwierigkeiten,	
+2	440.31999999999624	0.90053391456604	Aktionen zu unterscheiden und	
+2	441.5999999999962	0.8258349895477295	ihre Teilnehmer zu	
+2	442.8799999999962	0.8812518119812012	identifizieren, selbst wenn	
+2	444.15999999999616	1.0055861473083496		
+2	445.43999999999613	1.2044250965118408		
+2	446.7199999999961	1.212982416152954	sie durch Plausibilitätsverzerrungen unterstützt werden, wie wir	
+2	447.9999999999961	0.9463808536529541	am Teil Aktionen sehen.	
+2	449.27999999999605	0.8640995025634766	Aus dem Teil	
+2	450.559999999996	1.031770944595337	Koreferenz erfahren wir, dass	
+2	451.839999999996	0.9827649593353271	das Verfolgen mehrerer Referenzen	
+2	453.11999999999597	0.8859701156616211	auf dasselbe Objekt	
+2	454.39999999999594	0.941875696182251	in einem Bild durch	
+2	455.6799999999959	0.8595936298370361	den Einsatz von Pronomen	
+2	456.9599999999959	0.9348208904266357		
+2	458.23999999999586	1.0160555839538574	auch für Vision- und Sprachmodelle schwierig ist.	
+2	459.51999999999583	0.725163459777832	Als	
+2	460.7999999999958	0.9024643898010254	Sanity Check und weil	
+2	462.0799999999958	0.9706485271453857	es ein interessantes Experiment ist,	
+2	463.35999999999575	0.9352622032165527		
+2	464.6399999999957	1.1545252799987793		
+2	465.9199999999957	1.3457002639770508	haben wir auch zwei rein textbasierte	
+2	467.19999999999567	1.2672460079193115		
+2	468.47999999999564	1.4423363208770752	Modelle, GPT-1 und GPT-2, benchmarkt, um zu	
+2	469.7599999999956	1.1584336757659912	beurteilen, ob Volse	
+2	471.0399999999956	1.1475858688354492	von diesen unimodalen Modellen lösbar	
+2	472.31999999999556	0.9616732597351074	ist, indem wir	
+2	473.59999999999553	1.1190309524536133	die Perplexität	
+2	474.8799999999955	1.0072124004364014	der korrekten und	
+2	476.1599999999955	1.0317718982696533	Standardunterschrift	
+2	477.43999999999545	1.042870044708252		
+2	478.7199999999954	1.216775894165039	ohne Bild berechnen und	
+2	479.9999999999954	0.6172339916229248	das Eintrag mit der niedrigsten Perplexität vorhersagen.	
+2	481.27999999999537	0.8336334228515625		
+2	482.55999999999534	0.9689366817474365	Wenn die Perplexität	
+2	483.8399999999953	0.9931864738464355	für die	
+2	485.1199999999953	1.000654697418213	FOI höher ist, nehmen wir dies als	
+2	486.39999999999526	0.9465606212615967	Hinweis, dass die	
+2	487.67999999999523	0.9622719287872314	gefolgte Unterschrift	
+2	488.9599999999952	1.052396535873413	unter	
+2	490.2399999999952	1.174607515335083	Plausibilitätsverzerrung oder anderen	
+2	491.51999999999515	1.0042142868041992	linguistischen Verzerrungen leiden könnte.	
+2	492.7999999999951	0.8706538677215576	Und	
+2	494.0799999999951	0.9509222507476807	es ist interessant zu sehen,	
+2	495.35999999999507	0.9966557025909424	dass in einigen Fällen die	
+2	496.63999999999504	0.9250631332397461	rein	
+2	497.919999999995	1.2067809104919434	textbasierten GPT-Modelle die	
+2	499.199999999995	1.0067660808563232	Plausibilität	
+2	500.47999999999496	1.0404694080352783	der Welt besser erfasst haben als die	
+2	501.75999999999493	0.39897918701171875	Vision- und Sprachmodelle.	
+2	503.0399999999949	0.8618524074554443		
+2	504.3199999999949	1.0332081317901611	Also, um	
+2	505.59999999999485	1.0135526657104492	zusammenzufassen, ist	
+2	506.8799999999948	1.1821131706237793		
+2	508.1599999999948	1.2653543949127197		
+2	509.43999999999477	1.4664866924285889	Valve ein Benchmark, der die Linse linguistischer Konstruktionen	
+2	510.71999999999474	1.1765789985656738		
+2	511.9999999999947	1.3055412769317627	nutzt, um der Gemeinschaft zu helfen, Vision- und Sprachmodelle	
+2	513.2799999999947	1.0403404235839844		
+2	514.5599999999947	1.1437571048736572	zu verbessern, indem er ihre visuellen	
+2	515.8399999999947	0.44399380683898926	Grounding-Fähigkeiten hart testet.	
+2	517.1199999999947	0.9049725532531738		
+2	518.3999999999946	1.0123069286346436	Unsere Experimente zeigen, dass Vision- und	
+2	519.6799999999946	0.9445655345916748	Sprachmodelle	
+2	520.9599999999946	1.0647485256195068	benannte Objekte	
+2	522.2399999999946	1.0968599319458008		
+2	523.5199999999945	1.2257084846496582	gut identifizieren, solange sie in Bildern vorhanden sind, wie	
+2	524.7999999999945	1.0407323837280273	am Teil Existenz gezeigt	
+2	526.0799999999945	0.9352178573608398	wird, aber sie	
+2	527.3599999999944	1.2671270370483398		
+2	528.6399999999944	1.2590982913970947	haben Schwierigkeiten, ihre Interdependenz	
+2	529.9199999999944	1.4219155311584473	und Beziehungen in visuellen Szenen zu	
+2	531.1999999999944	1.2994554042816162	verankern, wenn sie gezwungen	
+2	532.4799999999943	0.5589520931243896		
+2	533.7599999999943	1.2741637229919434		
+2	535.0399999999943	1.3534200191497803	sind, linguistische Indikatoren zu respektieren. Wir würden	
+2	536.3199999999943	1.0331344604492188	die Gemeinschaft sehr gerne ermutigen,	
+2	537.5999999999942	1.1423101425170898	Valves zur Messung	
+2	538.8799999999942	1.0524897575378418	des Fortschritts in Richtung	
+2	540.1599999999942	0.9774436950683594		
+2	541.4399999999941	1.0593249797821045	sprachlichem Grounding mit	
+2	542.7199999999941	1.242541790008545	Vision- und Sprachmodellen zu verwenden.	
+2	543.9999999999941	1.1037819385528564	Und noch mehr,	
+2	545.2799999999941	1.0260467529296875		
+2	546.559999999994	1.2063567638397217	Valves könnten als indirekte Bewertung von Datensätzen verwendet	
+2	547.839999999994	0.9586410522460938	werden, da Modelle	
+2	549.119999999994	0.9978547096252441		
+2	550.399999999994	1.1830041408538818	vor und nach dem Training	
+2	551.6799999999939	1.2790470123291016	oder Feinabstimmung evaluiert werden	
+2	552.9599999999939	1.086862325668335	können, um zu sehen, ob ein Datensatz	
+2	554.2399999999939	0.9810266494750977		
+2	555.5199999999938	1.1786634922027588	hilft, Modelle in	
+2	556.7999999999938	1.048583984375	irgendeinem der	
+2	558.0799999999938	1.1129372119903564	von Valves getesteten Aspekte zu verbessern.	
+2	559.3599999999938	1.0125627517700195	Wenn Sie interessiert sind,	
+2	560.6399999999937	1.0237503051757812	schauen Sie sich bitte	
+2	561.9199999999937	1.0895838737487793	die Valve-Daten auf GitHub an.	
+2	563.1999999999937	1.037961483001709	Und wenn Sie Fragen haben,	
+2	564.4799999999937	0.9724178314208984	zögern Sie bitte	
+2	565.7599999999936	0.37371397018432617	nicht, uns zu kontaktieren.	
+2	567.0399999999936	0.17535758018493652		
+2	567.8079999999936	0.29026317596435547		
