@@ -197,6 +197,21 @@ experiments:
       ssbd_bias_beta: 0.0
       ssbd_mask_k: 0
 
+  - id: ssbd_batched_lacp080
+    group: baseline
+    label: SSBD batched verify (beta=0), LACP 0.80s
+    description: Single-call greedy draft verification (Option A); one vLLM generate per step instead of per-token prefills.
+    base_config: speech_processor_qwen35_9b_bnb4_baselines.yaml
+    overrides:
+      speech_chunk_size: 0.80
+      sfm_chunk_secs: 0.80
+      sfm_policy: LACP
+      sfm_lacp_threshold: 2.0
+      mt_lookahead_mode: ssbd
+      ssbd_batched_verify: true
+      ssbd_bias_beta: 0.0
+      ssbd_mask_k: 0
+
   - id: ssbd_batched_bias_lacp096
     group: baseline
     label: SSBD batched biased verify (beta=0.2), LACP 0.96s
