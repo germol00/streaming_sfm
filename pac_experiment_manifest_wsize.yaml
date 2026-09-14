@@ -1,0 +1,316 @@
+# Provisional ASR Context (PAC) decoding experiments.
+#
+# Run all enabled experiments:
+#   python3 scripts/run_pac_experiments.py
+#
+# Generate configs without running inference:
+#   python3 scripts/run_pac_experiments.py --generate-only
+#
+# Re-score existing metrics and refresh the aggregate report:
+#   python3 scripts/run_pac_experiments.py --score-only
+
+output_root: output/pac_experiments_wsize
+#directions: [en-de, en-fr, en-nl, en-pt, en-ru, en-tr]
+#directions: [en-nl, en-ru, en-tr]
+directions: [en-de, en-fr, en-pt]
+#directions: [en-de, en-fr]
+base_config: speech_processor_wsize.yaml
+
+experiments:
+  - id: pac_lacp064
+    group: main
+    label: PAC, LCP 0.64s
+    description: Primary PAC condition paired with committed_asr_lacp064 (central comparison).
+    overrides:
+      speech_chunk_size: 0.64
+      sfm_chunk_secs: 0.64
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp072
+    group: main
+    label: PAC, LCP 0.72s
+    description: Primary PAC condition paired with committed_asr_lacp072 (central comparison).
+    overrides:
+      speech_chunk_size: 0.72
+      sfm_chunk_secs: 0.72
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp080
+    group: main
+    label: PAC, LCP 0.80s
+    description: Primary PAC condition paired with committed_asr_lacp080 (central comparison).
+    overrides:
+      speech_chunk_size: 0.80
+      sfm_chunk_secs: 0.80
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp088
+    group: main
+    label: PAC, LCP 0.88s
+    description: Primary PAC condition paired with committed_asr_lacp088 (central comparison).
+    overrides:
+      speech_chunk_size: 0.88
+      sfm_chunk_secs: 0.88
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp096
+    group: main
+    label: PAC, LCP 0.96s
+    description: Primary PAC condition paired with committed_asr_lacp096 (central comparison).
+    overrides:
+      speech_chunk_size: 0.96
+      sfm_chunk_secs: 0.96
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp104
+    group: main
+    label: PAC, LCP 1.04s
+    description: Primary PAC condition paired with committed_asr_lacp104 (central comparison).
+    overrides:
+      speech_chunk_size: 1.04
+      sfm_chunk_secs: 1.04
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp112
+    group: main
+    label: PAC, LCP 1.12s
+    description: Primary PAC condition paired with committed_asr_lacp112 (central comparison).
+    overrides:
+      speech_chunk_size: 1.12
+      sfm_chunk_secs: 1.12
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp120
+    group: main
+    label: PAC, LCP 1.20s
+    description: Primary PAC condition paired with committed_asr_lacp120 (central comparison).
+    overrides:
+      speech_chunk_size: 1.20
+      sfm_chunk_secs: 1.20
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp128
+    group: main
+    label: PAC, LCP 1.28s
+    description: Primary PAC condition paired with committed_asr_lacp128 (central comparison).
+    overrides:
+      speech_chunk_size: 1.28
+      sfm_chunk_secs: 1.28
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp136
+    group: main
+    label: PAC, LCP 1.36s
+    description: Primary PAC condition paired with committed_asr_lacp136 (central comparison).
+    overrides:
+      speech_chunk_size: 1.36
+      sfm_chunk_secs: 1.36
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp144
+    group: main
+    label: PAC, LCP 1.44s
+    description: Primary PAC condition paired with committed_asr_lacp144 (central comparison).
+    overrides:
+      speech_chunk_size: 1.44
+      sfm_chunk_secs: 1.44
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp064_10
+    group: main
+    label: PAC, LCP 0.64s 10s
+    description: Primary PAC condition paired with committed_asr_lacp064 10s (central comparison).
+    overrides:
+      speech_chunk_size: 0.64
+      sfm_chunk_secs: 0.64
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp072_10
+    group: main
+    label: PAC, LCP 0.72s 10s
+    description: Primary PAC condition paired with committed_asr_lacp072 10s (central comparison).
+    overrides:
+      speech_chunk_size: 0.72
+      sfm_chunk_secs: 0.72
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp080_10
+    group: main
+    label: PAC, LCP 0.80s 10s
+    description: Primary PAC condition paired with committed_asr_lacp080 10s (central comparison).
+    overrides:
+      speech_chunk_size: 0.80
+      sfm_chunk_secs: 0.80
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp088_10
+    group: main
+    label: PAC, LCP 0.88s 10s
+    description: Primary PAC condition paired with committed_asr_lacp088 10s (central comparison).
+    overrides:
+      speech_chunk_size: 0.88
+      sfm_chunk_secs: 0.88
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp096_10
+    group: main
+    label: PAC, LCP 0.96s 10s
+    description: Primary PAC condition paired with committed_asr_lacp096 10s (central comparison).
+    overrides:
+      speech_chunk_size: 0.96
+      sfm_chunk_secs: 0.96
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp104_10
+    group: main
+    label: PAC, LCP 1.04s 10s
+    description: Primary PAC condition paired with committed_asr_lacp104 10s (central comparison).
+    overrides:
+      speech_chunk_size: 1.04
+      sfm_chunk_secs: 1.04
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp112_10
+    group: main
+    label: PAC, LCP 1.12s 10s
+    description: Primary PAC condition paired with committed_asr_lacp112 10s (central comparison).
+    overrides:
+      speech_chunk_size: 1.12
+      sfm_chunk_secs: 1.12
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp120_10
+    group: main
+    label: PAC, LCP 1.20s 10s
+    description: Primary PAC condition paired with committed_asr_lacp120 10s (central comparison).
+    overrides:
+      speech_chunk_size: 1.20
+      sfm_chunk_secs: 1.20
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp128_10
+    group: main
+    label: PAC, LCP 1.28s 10s
+    description: Primary PAC condition paired with committed_asr_lacp128 10s (central comparison).
+    overrides:
+      speech_chunk_size: 1.28
+      sfm_chunk_secs: 1.28
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp136_10
+    group: main
+    label: PAC, LCP 1.36s 10s
+    description: Primary PAC condition paired with committed_asr_lacp136 10s (central comparison).
+    overrides:
+      speech_chunk_size: 1.36
+      sfm_chunk_secs: 1.36
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
+  - id: pac_lacp144_10
+    group: main
+    label: PAC, LCP 1.44s 10s
+    description: Primary PAC condition paired with committed_asr_lacp144 10s (central comparison).
+    overrides:
+      speech_chunk_size: 1.44
+      sfm_chunk_secs: 1.44
+      sfm_left_context_secs: 10.0
+      sfm_policy: LCP
+      sfm_lacp_threshold: 2.0
+      sfm_speculative: true
+      pac_use_alignment_boundary: true
+      pac_emit_provisional_target: true
+
