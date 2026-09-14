@@ -42,6 +42,7 @@ L_MAX_MARKERS = {20: "s", 10: "o"}
 QUALITY_LINEWIDTH = 2.5
 LATENCY_LINEWIDTH = 1.25
 LEGEND_INSET = 0.04
+LEGEND_FONTSIZE = 11
 
 
 def repo_root() -> Path:
@@ -383,10 +384,15 @@ def padded_limits(values: pd.Series, pad_frac: float = 0.08) -> tuple[float, flo
     return vmin - pad, vmax + pad
 
 
-def plot_window_size(df: pd.DataFrame, output_path: Path, series_label: str = "EAC") -> None:
-    fig, ax1 = plt.subplots(figsize=(9, 9))
+def plot_window_size(
+    df: pd.DataFrame,
+    output_path: Path,
+    series_label: str = "EAC",
+    legend_fontsize: float | str = LEGEND_FONTSIZE,
+) -> None:
+    fig, ax1 = plt.subplots(figsize=(9, 6))
     ax2 = ax1.twinx()
-    ax1.set_box_aspect(1)
+    #ax1.set_box_aspect(1)
 
     legend_handles = []
     legend_labels = []
@@ -432,7 +438,7 @@ def plot_window_size(df: pd.DataFrame, output_path: Path, series_label: str = "E
 
     ax1.text(
         0.02,
-        0.97,
+        0.95,
         "YAAL (s)",
         transform=ax1.transAxes,
         fontweight="bold",
@@ -440,7 +446,7 @@ def plot_window_size(df: pd.DataFrame, output_path: Path, series_label: str = "E
     )
     ax1.text(
         0.88,
-        0.97,
+        0.95,
         QUALITY_METRIC,
         transform=ax1.transAxes,
         fontweight="bold",
@@ -462,7 +468,7 @@ def plot_window_size(df: pd.DataFrame, output_path: Path, series_label: str = "E
             legend_labels,
             loc="lower right",
             bbox_to_anchor=(1.0 - LEGEND_INSET, LEGEND_INSET),
-            fontsize="x-large",
+            fontsize=legend_fontsize,
         )
 
     plt.tight_layout()
@@ -511,6 +517,11 @@ def parse_args() -> argparse.Namespace:
         default="EAC",
         help="Legend prefix for the plotted condition.",
     )
+    parser.add_argument(
+        "--legend-fontsize",
+        default=LEGEND_FONTSIZE,
+        help="Legend font size in points, or a matplotlib size name (e.g. medium, large).",
+    )
     return parser.parse_args()
 
 
@@ -545,7 +556,12 @@ def main() -> None:
             f"for L_max={', '.join(str(int(v)) for v in l_max_values)}"
         )
 
-    plot_window_size(df, args.output.resolve(), series_label=args.series_label)
+    plot_window_size(
+        df,
+        args.output.resolve(),
+        series_label=args.series_label,
+        legend_fontsize=args.legend_fontsize,
+    )
 
 
 if __name__ == "__main__":
